@@ -1,4 +1,4 @@
-import { Application, Container, TilingSprite, Texture } from 'pixi.js';
+import { Application, Container, TilingSprite } from 'pixi.js';
 import { gsap } from 'gsap';
 
 import { loadReelTextures } from './loadTextures';
@@ -227,32 +227,31 @@ async function main() {
   const REEL_W = segLen * (SCREENSHOT_W / SCREENSHOT_H);
 
   /* ---------------------------------------------------------------- *
-   *  3. Build the ribbon: one screenshot per segment, head-to-tail
+   *  3. Build the ribbon: ONE shared feed texture, cumulative phase
    * ---------------------------------------------------------------- */
+
+  // Every segment samples ONE shared strip texture (720×8060 = 5 stacked reels).
+  // Sharing a single texture is what makes the chain seamless: the 50 cells form
+  // one continuous coordinate system, and the texture's 5-reel period divides
+  // SEGMENT_COUNT (50), so the loop closes on itself with no break anywhere.
+  const feedTexture = textures[0];
+  const feedPeriod = SCREENSHOTS_PER_STRIP; // 5 reels per wrap
+
   const worldContainer = new Container();
   app.stage.addChild(worldContainer);
 
-  // Each segment carries a fixed "phase" so neighbours show CONSECUTIVE
-  // screenshots. A single shared scroll value then slides the whole feed along
-  // the path as one body (not 200 independent loops).
+  // Every segment shares ONE texture and a CUMULATIVE offset (i·segLen), so the
+  // 50 cells form one continuous coordinate system. Content flows seamlessly
+  // across every joint; the texture repeats every `feedPeriod` reels and, because
+  // feedPeriod divides SEGMENT_COUNT, the loop closes with no break anywhere.
   const segments: { sprite: TilingSprite; phaseY: number }[] = [];
-
-  // One full texture = SCREENSHOTS_PER_STRIP screenshots; in local sprite units
-  // a single screenshot spans exactly `segLen`, so the texture repeats every:
-  const stripPeriod = segLen * SCREENSHOTS_PER_STRIP;
+  const texturePeriod = segLen * feedPeriod; // local-px length of one wrap
 
   for (let i = 0; i < SEGMENT_COUNT; i++) {
     const point = points[i];
 
-    // Lay the global feed down in order: 5 screenshots per stitched strip, so
-    // segments 0-4 are strip A's reels in order, 5-9 strip B's, etc. This makes
-    // the whole loop a coherent, varied feed (≈195 distinct reels).
-    const stripIndex = Math.floor(i / SCREENSHOTS_PER_STRIP) % textures.length;
-    const screenshotInStrip = i % SCREENSHOTS_PER_STRIP;
-    const texture: Texture = textures[stripIndex];
-
     const sprite = new TilingSprite({
-      texture,
+      texture: feedTexture,
       width: REEL_W * SEAM_OVERLAP,
       height: segLen * SEAM_OVERLAP,
     });
@@ -260,21 +259,22 @@ async function main() {
     // Anchor at the centre so position + rotation pivot about the segment middle.
     sprite.anchor.set(0.5);
 
-    // STATIC position on the logo — the segment never moves; only its texture
-    // scrolls. Raw SVG coords; the camera container handles all scaling/centring.
+    // STATIC position on the logo — the segment never moves; only the texture
+    // offset scrolls. Raw SVG coords; the camera handles all scaling/centring.
     sprite.position.set(point.x, point.y);
 
     // Rotate so the feed's scroll axis (local Y) runs ALONG the curve tangent,
     // i.e. the ribbon flows around the loop.
     sprite.rotation = point.angle - Math.PI / 2;
 
-    // Undistorted mapping: one 720×1612 screenshot fills one REEL_W×segLen cell.
+    // Undistorted mapping: one 720×1612 reel fills one REEL_W×segLen cell.
     sprite.tileScale.set(REEL_W / SCREENSHOT_W, segLen / SCREENSHOT_H);
 
-    // Phase: park this segment on its assigned screenshot. Because neighbours
-    // are one screenshot apart, the static frame already looks like a stacked
-    // feed; scrolling then translates that feed bodily along the path.
-    const phaseY = -screenshotInStrip * segLen;
+    // Cumulative phase: segment i sits `i` reels further along the shared strip
+    // than segment 0. Neighbours are therefore exactly one reel apart and the
+    // content is continuous across joints. A single shared `scroll` (below) then
+    // slides the entire strip along the path as one rigid body.
+    const phaseY = -i * segLen;
     sprite.tilePosition.y = phaseY;
 
     worldContainer.addChild(sprite);
@@ -358,11 +358,12 @@ async function main() {
   const feed = { screenshotsPerSec: SCROLL_SPEED * 0.12 };
   app.ticker.add((ticker) => {
     const dt = ticker.deltaMS / 1000;
-    // Advance the single shared scroll value, wrapping every strip period so the
-    // floats never grow unbounded. ONE value drives ALL segments → the entire
-    // stacked feed translates along the path as a body. (segLen = one screenshot
-    // in local px, so speed is in screenshots/sec.)
-    scroll = (scroll + feed.screenshotsPerSec * segLen * dt) % stripPeriod;
+    // Advance the single shared scroll value, wrapping every texture period so
+    // the floats never grow unbounded (and the wrap is invisible because the
+    // texture repeats exactly there). ONE value drives ALL segments → the entire
+    // strip translates along the path as a rigid body. (segLen = one reel in
+    // local px, so speed is in reels/sec.)
+    scroll = (scroll + feed.screenshotsPerSec * segLen * dt) % texturePeriod;
     for (const { sprite, phaseY } of segments) {
       sprite.tilePosition.y = phaseY - scroll;
     }
