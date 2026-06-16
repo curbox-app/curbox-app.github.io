@@ -24,6 +24,17 @@
     <!-- The single WebGL canvas is injected here by Pixi. Zero DOM imagery. -->
     <div id="app"></div>
 
+    <!--
+      Hero overlay — pure DOM, sitting ABOVE the canvas. It is hidden until the
+      cinematic pull-back finishes, so it never interferes with the opening
+      close-up, the camera zoom, or the figure-8 reveal. main.ts adds the
+      `.revealed` class in the zoom's onComplete handler.
+    -->
+    <div id="hero" aria-hidden="true">
+      <h1 class="hero__title">Break the loop</h1>
+      <a class="hero__cta" href="#install">Install</a>
+    </div>
+
     <script type="module" src="/main.ts"></script>
   </body>
 </html>

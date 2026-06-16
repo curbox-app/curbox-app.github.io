@@ -30,8 +30,15 @@ const SCREENSHOTS_PER_STRIP = 5; // each combined_***.jpg stacks 5 reels (8060px
  */
 const SEAM_OVERLAP = 1.04;
 
-/** Vertical feed scroll speed, in screenshots-per-second. */
+/** Vertical feed scroll speed at the opening close-up, in screenshots-per-second. */
 const SCROLL_SPEED = 0.4;
+
+/**
+ * The feed accelerates as the camera pulls back: at full zoom-out the scroll
+ * runs this many times faster than the slow opening speed. Tied to the zoom
+ * progress, so the feed speeds up exactly as the loop is revealed.
+ */
+const SCROLL_SPEED_GAIN = 3;
 
 /**
  * Opening overscan. 1.0 = a single reel exactly COVERS the screen (edge-to-edge,
@@ -43,6 +50,16 @@ const OPENING_FILL = 1.03;
 /** Fraction of the viewport the finished logo should occupy. */
 const FIT_FRACTION_PORTRAIT = 0.9; // 90% of width on phones
 const FIT_FRACTION_LANDSCAPE = 0.6; // 60% of width on desktop
+
+/**
+ * Horizontal re-centre, reached only at full pull-back. The camera pivots on
+ * the focus reel (the loop's bottom-right), so pinning it to screen-centre
+ * leaves the figure-8 hanging to the left. This blends the world point that
+ * lands on screen-centre from the focus reel (0) toward the loop's bounding-box
+ * centre (1). The shift is back-loaded into the zoom, so the opening close-up
+ * stays locked on the reel and the loop only slides to centre as it pulls back.
+ */
+const RECENTER_X = 1.0;
 
 /* ------------------------------------------------------------------ *
  *  TYPES
@@ -296,6 +313,10 @@ async function main() {
   // is what removes the "camera slightly moves right" drift.
   worldContainer.pivot.set(focus.x, focus.y);
 
+  // World-space x that should sit on screen-centre once fully pulled back.
+  // RECENTER_X blends from the focus reel (no shift) to the loop's true centre.
+  const finalCenterX = focus.x + RECENTER_X * (bounds.centerX - focus.x);
+
   /** Compute the opening + fitted scales for the current viewport. */
   function computeLayout(): Layout {
     const { width: vw, height: vh } = app.screen;
@@ -307,7 +328,10 @@ async function main() {
     // the two distances from the focus to the bounding-box edges (+ ribbon
     // thickness). Fitting that half-extent guarantees the whole loop is visible
     // with the focus reel at screen-centre.
-    const reachX = Math.max(focus.x - bounds.minX, bounds.maxX - focus.x) + REEL_W / 2;
+    // Horizontal reach is measured from the CENTRED point (finalCenterX), since
+    // that's what ends up on screen-centre; vertical still reaches from the
+    // focus reel (we only re-centre horizontally).
+    const reachX = Math.max(finalCenterX - bounds.minX, bounds.maxX - finalCenterX) + REEL_W / 2;
     const reachY = Math.max(focus.y - bounds.minY, bounds.maxY - focus.y) + REEL_W / 2;
     const targetScale = Math.min(
       (fitFraction * vw) / (2 * reachX),
@@ -323,21 +347,53 @@ async function main() {
 
   let layout = computeLayout();
 
+  // Publish the loop's bottom edge (screen px, at the fitted view) to CSS so the
+  // hero overlay can centre itself between the loop and the bottom of the
+  // viewport. The lowest visible point sits ~half a ribbon-thickness below the
+  // bounding box; map that world-y through the fitted camera (vertical pivot =
+  // focus.y, vertical position = vh/2, scale = targetScale). app.screen is in
+  // CSS px (autoDensity), so this lines up 1:1 with the CSS layout.
+  function publishLoopBottom() {
+    const { height: vh } = app.screen;
+    const loopBottomWorldY = bounds.maxY + REEL_W / 2;
+    const loopBottomY = vh / 2 + (loopBottomWorldY - focus.y) * layout.targetScale;
+    document.documentElement.style.setProperty('--loop-bottom', `${loopBottomY}px`);
+  }
+  publishLoopBottom();
+
   // `camera.scale` is the single source of truth for zoom. GSAP animates it; the
   // ticker reads it every frame, so the zoom is fully decoupled from the scroll
   // (the feed never pauses) and resize can re-fit without fighting GSAP.
   const camera = { scale: layout.startScale };
   let zoomComplete = false;
 
+  // Normalised pull-back progress for a given scale: 0 at the opening close-up,
+  // 1 at the fitted view. Shared by the camera re-centre and the feed speed so
+  // both ramp on exactly the same curve.
+  const zoomProgress = (scale: number): number => {
+    const range = layout.startScale - layout.targetScale;
+    if (range <= 0) return 1;
+    return Math.min(Math.max((layout.startScale - scale) / range, 0), 1);
+  };
+
   function applyCamera() {
     const { width: vw, height: vh } = app.screen;
     const S = zoomComplete ? layout.targetScale : camera.scale;
     if (zoomComplete) camera.scale = S;
 
-    // Pure zoom about the focus reel: scale changes, the pivoted focus point
-    // stays pinned to screen-centre. No rotation, no pan — never a blank corner.
     worldContainer.scale.set(S);
-    worldContainer.position.set(vw / 2, vh / 2);
+
+    // Horizontal re-centre, back-loaded into the pull-back. `t` runs 0 → 1 as
+    // the scale travels from the opening close-up to the fitted view; squaring
+    // it keeps the shift ~0 through the close-up (so the camera stays locked on
+    // the reel — no early lurch) and slides the loop to centre only as it pulls
+    // back. The FINAL pixel shift uses the constant targetScale, NOT the live S,
+    // so the huge opening scale can't amplify a tiny ramp into a big jump.
+    // Vertical centring is untouched — pure horizontal nudge, no blank corners.
+    const ramp = zoomProgress(S) ** 2;
+    const offsetX = ramp * (focus.x - finalCenterX) * layout.targetScale;
+
+    worldContainer.position.set(vw / 2 + offsetX, vh / 2);
   }
 
   // Custom resize handler: re-fit and re-centre. (Pixi's resizeTo handles the
@@ -346,24 +402,25 @@ async function main() {
     layout = computeLayout();
     if (!zoomComplete) camera.scale = Math.min(camera.scale, layout.startScale);
     applyCamera();
+    publishLoopBottom();
   });
 
   /* ---------------------------------------------------------------- *
    *  5. The render ticker — runs forever, independent of the zoom
    * ---------------------------------------------------------------- */
   let scroll = 0; // shared feed offset (local px); advances the whole ribbon
-  // Feed speed ramps up over time (see the GSAP tween below): it starts gently
-  // and eases into full speed, so the opening reel drifts slowly before the feed
-  // gets going. `screenshotsPerSec` is animated; the ticker just reads it.
-  const feed = { screenshotsPerSec: SCROLL_SPEED * 0.12 };
   app.ticker.add((ticker) => {
     const dt = ticker.deltaMS / 1000;
+    // Feed speed is tied to the pull-back: slow at the opening close-up and
+    // SCROLL_SPEED_GAIN× faster once fully zoomed out. Same progress curve as
+    // the camera, so the feed accelerates exactly as the loop is revealed.
+    const speed = SCROLL_SPEED * (1 + (SCROLL_SPEED_GAIN - 1) * zoomProgress(camera.scale));
     // Advance the single shared scroll value, wrapping every texture period so
     // the floats never grow unbounded (and the wrap is invisible because the
     // texture repeats exactly there). ONE value drives ALL segments → the entire
     // strip translates along the path as a rigid body. (segLen = one reel in
     // local px, so speed is in reels/sec.)
-    scroll = (scroll + feed.screenshotsPerSec * segLen * dt) % texturePeriod;
+    scroll = (scroll + speed * segLen * dt) % texturePeriod;
     for (const { sprite, phaseY } of segments) {
       sprite.tilePosition.y = phaseY - scroll;
     }
@@ -376,15 +433,8 @@ async function main() {
   loaderEl.classList.add('hidden');
   setTimeout(() => loaderEl.remove(), 700);
 
-  // Feed scroll: start slow, then ease IN up to full speed.
-  gsap.to(feed, {
-    screenshotsPerSec: SCROLL_SPEED,
-    duration: 5,
-    ease: 'power2.in', // accelerate gently from the slow opening drift
-    delay: 0.3,
-  });
-
-  // Camera: the cinematic pull-back.
+  // Camera: the cinematic pull-back. (The feed speed follows this zoom via
+  // zoomProgress() in the ticker, so there's no separate scroll tween.)
   gsap.to(camera, {
     scale: layout.targetScale,
     duration: 9, // 8–10s slow, hypnotic reveal
@@ -392,6 +442,14 @@ async function main() {
     delay: 1.2, // let the viewer "settle" into the feed before pulling back
     onComplete: () => {
       zoomComplete = true; // hand scale ownership to the resize-aware ticker
+      // Reveal the tagline + install CTA only now — the opening close-up,
+      // camera zoom, and figure-8 reveal have all finished, so the overlay
+      // never competes with them.
+      const hero = document.getElementById('hero');
+      if (hero) {
+        hero.classList.add('revealed');
+        hero.setAttribute('aria-hidden', 'false');
+      }
     },
   });
 }
