@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!--
+      Mobile-first viewport.
+      `viewport-fit=cover` lets the canvas bleed into the notch/safe areas on
+      modern OLED phones, and `user-scalable=no` stops the browser pinch-zoom
+      from fighting our own WebGL camera zoom.
+    -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/website/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/website/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/website/icons/favicon-16x16.png">
+    <link rel="manifest" href="/website/manifest.json">
+    <link rel="shortcut icon" href="/website/icons/favicon.ico">
+
+    <title>Curbox · Break the loop</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/website/assets/main-vkMLxfuH.js"></script>
+    <link rel="stylesheet" crossorigin href="/website/assets/main-CjzLf6vI.css">
+  </head>
+  <body>
+    <!-- The single WebGL canvas is injected here by Pixi. Zero DOM imagery. -->
+    <div id="app"></div>
+
+    <!--
+      Navigation — a hamburger toggle (top-right, clear of the notch) that
+      reveals a full-screen overlay menu. Lives above the canvas; everything
+      else on the page ignores pointer events, so the button/menu opt back in.
+    -->
+    <button
+      id="nav-toggle"
+      class="nav-toggle"
+      aria-label="Open navigation menu"
+      aria-controls="nav-menu"
+      aria-expanded="false"
+    >
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+    <nav id="nav-menu" class="nav-menu" aria-hidden="true">
+      <ul class="nav-menu__list">
+        <li><a class="nav-menu__link" href="/about.html">About</a></li>
+        <li><a class="nav-menu__link" href="/features.html">Features</a></li>
+        <li><a class="nav-menu__link" href="/docs">Documentation</a></li>
+        <li><a class="nav-menu__link" href="/donate.html">Donate</a></li>
+        <li>
+          <a
+            class="nav-menu__link"
+            href="https://github.com/nethical6/curbox"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <!--
+      Scrollable content stack, layered ABOVE the fixed WebGL canvas.
+
+      Screen 1: the hero (tagline + install CTA + a minimal feature row).
+        Pure DOM, hidden until the cinematic pull-back finishes so it never
+        competes with the opening close-up, the camera zoom, or the figure-8
+        reveal. main.ts adds `.revealed` in the zoom's onComplete handler.
+      Screen 2: a deadpan nudge that only surfaces if you start scrolling,
+        because this is, after all, an anti-doomscroll project.
+    -->
+    <main class="scroll">
+      <section class="screen screen--hero">
+        <div id="hero" aria-hidden="true">
+          <h1 class="hero__title">Break the loop</h1>
+          <a class="hero__cta" href="#install">Install Curbox</a>
+
+          <ul class="hero__features">
+            <li>Granular blocking</li>
+            <li>Open source</li>
+            <li>Privacy first</li>
+            <li>Community built</li>
+          </ul>
+        </div>
+
+        <!-- Quiet hint that there's (just barely) more below. -->
+        <div class="scroll-cue" aria-hidden="true">
+          <span class="scroll-cue__line"></span>
+        </div>
+      </section>
+
+      <section class="screen screen--doom">
+        <p class="doom__text">I hope you don't plan to doomscroll here too</p>
+      </section>
+    </main>
+
+    <!--
+      Hamburger toggle logic. Self-contained: flips a `.open` class on <body>,
+      keeps ARIA state in sync, and closes on link-click or Escape.
+    -->
+    <script>
+      (() => {
+        const toggle = document.getElementById('nav-toggle');
+        const menu = document.getElementById('nav-menu');
+        if (!toggle || !menu) return;
+
+        const setOpen = (open) => {
+          document.body.classList.toggle('nav-open', open);
+          toggle.setAttribute('aria-expanded', String(open));
+          toggle.setAttribute(
+            'aria-label',
+            open ? 'Close navigation menu' : 'Open navigation menu'
+          );
+          menu.setAttribute('aria-hidden', String(!open));
+        };
+
+        toggle.addEventListener('click', () => {
+          setOpen(!document.body.classList.contains('nav-open'));
+        });
+
+        // Close after picking a destination.
+        menu.querySelectorAll('a').forEach((link) =>
+          link.addEventListener('click', () => setOpen(false))
+        );
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') setOpen(false);
+        });
+      })();
+    </script>
+
+    <!--
+      Scroll choreography: reveal the deadpan line once its screen comes into
+      view, and retire the scroll cue the moment the user takes the hint.
+    -->
+    <script>
+      (() => {
+        const scroller = document.querySelector('.scroll');
+        const doom = document.querySelector('.doom__text');
+
+        if (doom && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) =>
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  doom.classList.add('in-view');
+                  io.disconnect();
+                }
+              }),
+            { root: scroller, threshold: 0.35 }
+          );
+          io.observe(doom);
+        } else if (doom) {
+          doom.classList.add('in-view');
+        }
+
+        const cue = document.querySelector('.scroll-cue');
+        if (cue && scroller) {
+          const onScroll = () => {
+            if (scroller.scrollTop > 8) {
+              cue.classList.add('gone');
+              scroller.removeEventListener('scroll', onScroll);
+            }
+          };
+          scroller.addEventListener('scroll', onScroll, { passive: true });
+        }
+      })();
+    </script>
+
+  </body>
+</html>
