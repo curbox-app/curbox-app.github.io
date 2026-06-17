@@ -6,6 +6,11 @@
 
 :root {
   color-scheme: dark;
+
+  /* Type roles — shared with the content pages (see content.css). */
+  --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
 * {
@@ -16,15 +21,29 @@
 
 html,
 body {
-  width: 100vw;
-  height: 100vh;
-  /* Lock the viewport: no scrolling, no rubber-banding, no pinch-zoom. */
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
   background: #000;
-  /* Critical for a canvas app — the browser must not intercept touches. */
-  touch-action: none;
   -webkit-tap-highlight-color: transparent;
-  overscroll-behavior: none;
+  /* The document itself never scrolls — the .scroll container below does,
+     layered over the fixed canvas. This keeps Pixi's full-screen canvas from
+     ever fighting the page for touch/wheel gestures. */
+  overflow: hidden;
+}
+
+/* The one true scroller: a fixed, full-viewport pane that scrolls its own
+   content (the two screens) above the fixed canvas backdrop. Explicit
+   touch-action means touch + wheel scrolling work regardless of whatever
+   inline styles Pixi stamps onto the canvas. */
+.scroll {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
 }
 
 #app,
@@ -37,10 +56,20 @@ body {
   height: 100dvh;
 }
 
+/* The canvas is a fixed, passive backdrop: the reveal is fully automatic
+   (no camera interaction), so it must never sit in flow or eat scroll. */
+#app {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
 #app canvas {
   position: fixed;
   inset: 0;
-  touch-action: none;
+  z-index: 0;
+  touch-action: pan-y;
+  pointer-events: none;
 }
 
 /* Lightweight loading veil shown until textures finish decoding. */
@@ -51,7 +80,7 @@ body {
   place-items: center;
   background: #000;
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-mono);
   font-size: 13px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -73,7 +102,9 @@ body {
  *  (and non-interactive) until main.ts flips `.revealed`.
  * ------------------------------------------------------------------ */
 #hero {
-  position: fixed;
+  /* Absolute within the first full-height screen — visually identical to the
+     old fixed placement at scroll 0, but it now scrolls away with the page. */
+  position: absolute;
   left: 0;
   right: 0;
   /* Span from the loop's bottom edge down to the viewport bottom... */
@@ -92,7 +123,7 @@ body {
   /* Don't steal touches from the canvas until we're actually shown. */
   pointer-events: none;
   text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-body);
 
   /* Reveal state: fade + rise. */
   opacity: 0;
@@ -110,10 +141,11 @@ body {
 .hero__title {
   margin: 0;
   color: #fff;
-  font-weight: 700;
-  font-size: clamp(2rem, 7vw, 4rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.25rem, 7.5vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
   /* Lift the text off the bright reel imagery behind it. */
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
 }
@@ -126,9 +158,11 @@ body {
   border-radius: 999px;
   background: #fff;
   color: #000;
-  font-size: clamp(0.95rem, 2.4vw, 1.05rem);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   text-decoration: none;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
   transition:
@@ -143,6 +177,152 @@ body {
 
 .hero__cta:active {
   transform: translateY(0);
+}
+
+/* ------------------------------------------------------------------ *
+ *  Feature row — an extremely minimal, mono-caps strip under the CTA.
+ *  Four labels, each prefixed with a faint dot; wraps gracefully on
+ *  narrow screens. Inherits the hero's reveal fade/rise via the parent.
+ * ------------------------------------------------------------------ */
+.hero__features {
+  list-style: none;
+  margin: 0.2rem 0 0;
+  padding: 0;
+  /* Stay within the headline's footprint: a compact 2x2 block rather than a
+     single row that runs past "Break the loop"'s left/right edges. */
+  width: max-content;
+  max-width: min(86vw, 22rem);
+
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: center;
+  column-gap: 1.6rem;
+  row-gap: 0.55rem;
+}
+
+.hero__features li {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hero__features li::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  margin-right: 0.6rem;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+/* ------------------------------------------------------------------ *
+ *  The scroll stack — full-height screens layered over the fixed canvas.
+ * ------------------------------------------------------------------ */
+.screen {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Quiet downward cue: a 1px line that breathes, then bows out on first
+   scroll. Only shown once the hero has actually been revealed. */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+  transform: translateX(-50%);
+  z-index: 21;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease 0.6s;
+}
+
+#hero.revealed ~ .scroll-cue {
+  opacity: 0.5;
+}
+
+.scroll-cue.gone {
+  opacity: 0 !important;
+  transition-delay: 0s;
+}
+
+.scroll-cue__line {
+  display: block;
+  width: 1px;
+  height: 2.2rem;
+  transform-origin: top;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+  animation: scroll-cue-pulse 1.9s ease-in-out infinite;
+}
+
+@keyframes scroll-cue-pulse {
+  0%,
+  100% {
+    transform: scaleY(0.55);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ *  The doomscroll punch-line — a darkening curtain drops over the feed
+ *  as you scroll in, and the line fades up once the screen is in view.
+ * ------------------------------------------------------------------ */
+.screen--doom {
+  display: grid;
+  place-items: center;
+  padding: 2rem clamp(1.5rem, 6vw, 2.5rem);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.85) 32%,
+    rgba(0, 0, 0, 0.94) 100%
+  );
+}
+
+.doom__text {
+  max-width: 22ch;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 5.5vw, 2.6rem);
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 1s ease,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.doom__text.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue__line {
+    animation: none;
+  }
+  .doom__text {
+    transition: opacity 0.4s ease;
+    transform: none;
+  }
 }
 
 /* ------------------------------------------------------------------ *
@@ -246,10 +426,10 @@ body.nav-open .nav-menu {
 
 .nav-menu__link {
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(1.6rem, 6vw, 2.6rem);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 6.5vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
   text-decoration: none;
 
   /* Stagger-in each link as the menu opens. */

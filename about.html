@@ -3,54 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
-    <link rel="stylesheet" href="/src/style.css">
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: sans-serif;
-            background-color: #000;
-            color: #fff;
-        }
-        .container {
-            text-align: center;
-            padding: 2rem;
-        }
-        a {
-            color: #fff;
-        }
-    </style>
+    <title>About · Curbox</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
 </head>
 <body>
-    <div class="container">
-        <h3>About Curbox</h3>
-        <p>Started by nethical in April 2024, Curbox is an open source initiative addressing the growing challenge of internet and social media overconsumption. Since living a normal life today requires being online, we build software to help you stay grounded and focused in an increasingly distracting digital landscape.</p>
-        <h3>Our Mission</h3>
-        <p>Our mission is to build and distribute tools that curb screen time and digital addiction for people of all ages. We believe that as internet usage grows, staying connected to reality should not be a luxury. The founding principle of our project is simple: software designed to reduce digital distraction must remain open and accessible to everyone, empowering you to maintain a perfect balance between the virtual and the real world.</p>
-        <h3>Why Use Curbox?</h3>
-        <ul>
-            <li>Extensive blocking capabilities with extreme granularity</li>
-            <li>Free and open source</li>
-            <li>Privacy friendly</li>
-            <li>Built by the community, for the community</li>
-        </ul>
-        <h3>How It Works</h3>
-        <p>Curbox uses Android's accessibility permissions to analyze your app usage patterns and block them based on your settings. While other apps might compromise your data, Curbox guarantees your usage analytics remain completely on your device. Our open source codebase ensures total transparency and privacy.</p>
-        <h3>Get Started</h3>
-        <p>Read the documentation to begin your curbing journey!</p>
-        <h3>Contact and Support</h3>
-        <p><strong>Community</strong></p>
-        <ul>
-            <li>Discord: <a href="https://discord.com/invite/Vs9mwUtuCN" target="_blank" rel="noopener noreferrer">https://discord.com/invite/Vs9mwUtuCN</a></li>
-            <li>Telegram: <a href="https://t.me/curboxapp" target="_blank" rel="noopener noreferrer">https://t.me/curboxapp</a></li>
-        </ul>
-        <p><strong>Consulting and Commercial Support</strong></p>
-        <p>Want to add custom features to Curbox specifically for your organization? Reach out to nethical directly at <a href="mailto:questphone@proton.me">questphone@proton.me</a>.</p>
-        <a href="/">Home</a>
-    </div>
+    <main class="page">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/">← Home</a>
+        </nav>
+
+        <header>
+            <span class="kicker">About · Est. 2024</span>
+            <h1 class="page__title">Stay grounded while you live online.</h1>
+            <p class="lead">Curbox is an open-source initiative against internet and social-media overconsumption.</p>
+        </header>
+
+        <section class="section">
+            <h2 class="section__title">The origin</h2>
+            <p>Started by Nethical in April 2024, Curbox grew out of a simple observation: living a normal life today means being online, but being online shouldn't mean losing yourself to the feed. We build tools to help you stay focused and present.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Our mission</h2>
+            <p>We build and distribute tools that curb screen time and digital addiction for people of all ages. As internet usage grows, staying connected to reality should not be a luxury.</p>
+            <p>Our founding principle is simple: software designed to reduce digital distraction must remain open and accessible to everyone so you can keep a balance between the virtual and the real.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Why use Curbox</h2>
+            <ul>
+                <li>Extensive blocking capabilities with extreme granularity</li>
+                <li>Free and open source</li>
+                <li>Privacy friendly</li>
+                <li>Built by the community, for the community</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">How it works</h2>
+            <p>Curbox uses Android's accessibility permissions to analyze your app-usage patterns and block apps based on your settings. Where other apps might compromise your data, Curbox keeps your usage analytics entirely on your device and the open-source codebase keeps that promise verifiable.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Get started</h2>
+            <p>Read the <a href="/docs">documentation</a> to begin your curbing journey.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Contact &amp; support</h2>
+
+            <p class="label">Community</p>
+            <ul>
+                <li>Discord — <a href="https://discord.com/invite/Vs9mwUtuCN" target="_blank" rel="noopener noreferrer">discord.com/invite/Vs9mwUtuCN</a></li>
+                <li>Telegram — <a href="https://t.me/curboxapp" target="_blank" rel="noopener noreferrer">t.me/curboxapp</a></li>
+            </ul>
+
+            <p class="label">Consulting &amp; commercial support</p>
+            <p>Want custom features built for your organization? Reach out to nethical directly at <a href="mailto:questphone@proton.me">questphone@proton.me</a>.</p>
+        </section>
+    </main>
 </body>
 </html>

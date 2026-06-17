@@ -23,7 +23,14 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="shortcut icon" href="/icons/favicon.ico">
 
-    <title>Infinity · Reels</title>
+    <title>Curbox · Break the loop</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
@@ -65,15 +72,39 @@
     </nav>
 
     <!--
-      Hero overlay — pure DOM, sitting ABOVE the canvas. It is hidden until the
-      cinematic pull-back finishes, so it never interferes with the opening
-      close-up, the camera zoom, or the figure-8 reveal. main.ts adds the
-      `.revealed` class in the zoom's onComplete handler.
+      Scrollable content stack, layered ABOVE the fixed WebGL canvas.
+
+      Screen 1 — the hero (tagline + install CTA + a minimal feature row).
+        Pure DOM, hidden until the cinematic pull-back finishes so it never
+        competes with the opening close-up, the camera zoom, or the figure-8
+        reveal. main.ts adds `.revealed` in the zoom's onComplete handler.
+      Screen 2 — a deadpan nudge that only surfaces if you start scrolling,
+        because this is, after all, an anti-doomscroll project.
     -->
-    <div id="hero" aria-hidden="true">
-      <h1 class="hero__title">Break the loop</h1>
-      <a class="hero__cta" href="#install">Install</a>
-    </div>
+    <main class="scroll">
+      <section class="screen screen--hero">
+        <div id="hero" aria-hidden="true">
+          <h1 class="hero__title">Break the loop</h1>
+          <a class="hero__cta" href="#install">Install Curbox</a>
+
+          <ul class="hero__features">
+            <li>Granular blocking</li>
+            <li>Open source</li>
+            <li>Privacy first</li>
+            <li>Community built</li>
+          </ul>
+        </div>
+
+        <!-- Quiet hint that there's (just barely) more below. -->
+        <div class="scroll-cue" aria-hidden="true">
+          <span class="scroll-cue__line"></span>
+        </div>
+      </section>
+
+      <section class="screen screen--doom">
+        <p class="doom__text">I hope you don't plan to doomscroll here too</p>
+      </section>
+    </main>
 
     <!--
       Hamburger toggle logic. Self-contained: flips a `.open` class on <body>,
@@ -107,6 +138,44 @@
         document.addEventListener('keydown', (e) => {
           if (e.key === 'Escape') setOpen(false);
         });
+      })();
+    </script>
+
+    <!--
+      Scroll choreography: reveal the deadpan line once its screen comes into
+      view, and retire the scroll cue the moment the user takes the hint.
+    -->
+    <script>
+      (() => {
+        const scroller = document.querySelector('.scroll');
+        const doom = document.querySelector('.doom__text');
+
+        if (doom && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) =>
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  doom.classList.add('in-view');
+                  io.disconnect();
+                }
+              }),
+            { root: scroller, threshold: 0.35 }
+          );
+          io.observe(doom);
+        } else if (doom) {
+          doom.classList.add('in-view');
+        }
+
+        const cue = document.querySelector('.scroll-cue');
+        if (cue && scroller) {
+          const onScroll = () => {
+            if (scroller.scrollTop > 8) {
+              cue.classList.add('gone');
+              scroller.removeEventListener('scroll', onScroll);
+            }
+          };
+          scroller.addEventListener('scroll', onScroll, { passive: true });
+        }
       })();
     </script>
 

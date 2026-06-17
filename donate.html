@@ -3,33 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donate</title>
-    <link rel="stylesheet" href="/src/style.css">
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: sans-serif;
-            background-color: #000;
-            color: #fff;
-        }
-        .container {
-            text-align: center;
-            padding: 2rem;
-        }
-        a {
-            color: #fff;
-        }
-    </style>
+    <title>Donate · Curbox</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Donate</h1>
-        <p>This is a minimal donate page.</p>
-        <a href="/">Home</a>
-    </div>
+    <main class="page page--center">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/">← Home</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Donate</span>
+            <h1 class="page__title">Keep it open, keep it free.</h1>
+            <p class="lead">Curbox is free and open source. Support is on the way — for now, the best way to help is to use it, share it, and contribute on GitHub.</p>
+        </header>
+    </main>
 </body>
 </html>

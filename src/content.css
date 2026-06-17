@@ -1,0 +1,216 @@
+/*
+  Content pages (About, Donate).
+
+  These are *reading* pages, so they deliberately do NOT load style.css —
+  that stylesheet locks the viewport (overflow:hidden, height:100vh,
+  touch-action:none) for the WebGL canvas, which would clip any text that
+  runs past one screen. Here we want a normal, scrollable, editorial column.
+*/
+
+:root {
+  color-scheme: dark;
+
+  /* Type roles */
+  --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Monochrome palette — boldness is spent on the type, not colour. */
+  --bg: #000;
+  --fg: #f5f5f3;
+  --muted: #8a8a87;
+  --line: rgba(255, 255, 255, 0.12);
+
+  /* Reading measure — ~62ch keeps lines comfortable. */
+  --measure: 40rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.96rem + 0.3vw, 1.125rem);
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+/* ------------------------------------------------------------------ *
+ *  Layout — a single editorial column, left-aligned for readability.
+ * ------------------------------------------------------------------ */
+.page {
+  width: 100%;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: clamp(4rem, 12vh, 8rem) clamp(1.5rem, 6vw, 2.5rem) 6rem;
+}
+
+/* A back-link rail that doubles as the page's wordmark. */
+.page__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: clamp(3.5rem, 12vh, 6rem);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.page__wordmark {
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.page__back {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.page__back:hover {
+  color: var(--fg);
+}
+
+/* ------------------------------------------------------------------ *
+ *  Type scale.
+ * ------------------------------------------------------------------ */
+.kicker {
+  display: block;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.page__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.75rem, 1.5rem + 6vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin-bottom: 1.5rem;
+}
+
+/* Standfirst — the one large statement under the title. */
+.lead {
+  font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.5rem);
+  line-height: 1.45;
+  color: var(--fg);
+  max-width: 34rem;
+}
+
+/* Section blocks, separated by a hairline rather than just whitespace. */
+.section {
+  margin-top: clamp(3rem, 8vh, 4.5rem);
+  padding-top: clamp(2rem, 5vh, 3rem);
+  border-top: 1px solid var(--line);
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 1.15rem + 1vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+.section p + p {
+  margin-top: 1rem;
+}
+
+/* Lists read as a tidy, mono-bulleted set. */
+.section ul {
+  list-style: none;
+  margin-top: 0.5rem;
+}
+
+.section li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-top: 0.6rem;
+}
+
+.section li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+
+.section .label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Links — underlined, no colour change; this is a monochrome page. */
+a:not(.page__wordmark):not(.page__back) {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--muted);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.2s ease;
+}
+
+a:not(.page__wordmark):not(.page__back):hover {
+  text-decoration-color: var(--fg);
+}
+
+/* ------------------------------------------------------------------ *
+ *  Centred variant — for short pages (Donate) the column sits mid-screen.
+ * ------------------------------------------------------------------ */
+.page--center {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 4rem;
+}
+
+.page--center .page__nav {
+  position: fixed;
+  top: clamp(1.5rem, 6vh, 2.5rem);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-width: var(--measure);
+  padding: 0 clamp(1.5rem, 6vw, 2.5rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
