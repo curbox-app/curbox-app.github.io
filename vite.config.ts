@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 
 // The project root is this directory.
 export default defineConfig({
-  base: '/website/',
+  base: '/',
   server: {
     host: true, // expose on the LAN so you can open it on a real phone
     port: 5173,
