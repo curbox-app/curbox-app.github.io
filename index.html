@@ -57,6 +57,7 @@
     <nav id="nav-menu" class="nav-menu" aria-hidden="true">
       <ul class="nav-menu__list">
         <li><a class="nav-menu__link" href="/about.html">About</a></li>
+        <li><a class="nav-menu__link" href="/features.html">Features</a></li>
         <li><a class="nav-menu__link" href="/docs">Documentation</a></li>
         <li><a class="nav-menu__link" href="/donate.html">Donate</a></li>
         <li>
@@ -74,11 +75,11 @@
     <!--
       Scrollable content stack, layered ABOVE the fixed WebGL canvas.
 
-      Screen 1 — the hero (tagline + install CTA + a minimal feature row).
+      Screen 1: the hero (tagline + install CTA + a minimal feature row).
         Pure DOM, hidden until the cinematic pull-back finishes so it never
         competes with the opening close-up, the camera zoom, or the figure-8
         reveal. main.ts adds `.revealed` in the zoom's onComplete handler.
-      Screen 2 — a deadpan nudge that only surfaces if you start scrolling,
+      Screen 2: a deadpan nudge that only surfaces if you start scrolling,
         because this is, after all, an anti-doomscroll project.
     -->
     <main class="scroll">

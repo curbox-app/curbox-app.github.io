@@ -25,7 +25,7 @@ body {
   height: 100%;
   background: #000;
   -webkit-tap-highlight-color: transparent;
-  /* The document itself never scrolls — the .scroll container below does,
+  /* The document itself never scrolls; the .scroll container below does,
      layered over the fixed canvas. This keeps Pixi's full-screen canvas from
      ever fighting the page for touch/wheel gestures. */
   overflow: hidden;
@@ -102,7 +102,7 @@ body {
  *  (and non-interactive) until main.ts flips `.revealed`.
  * ------------------------------------------------------------------ */
 #hero {
-  /* Absolute within the first full-height screen — visually identical to the
+  /* Absolute within the first full-height screen, visually identical to the
      old fixed placement at scroll 0, but it now scrolls away with the page. */
   position: absolute;
   left: 0;
@@ -180,7 +180,7 @@ body {
 }
 
 /* ------------------------------------------------------------------ *
- *  Feature row — an extremely minimal, mono-caps strip under the CTA.
+ *  Feature row: an extremely minimal, mono-caps strip under the CTA.
  *  Four labels, each prefixed with a faint dot; wraps gracefully on
  *  narrow screens. Inherits the hero's reveal fade/rise via the parent.
  * ------------------------------------------------------------------ */
@@ -223,7 +223,7 @@ body {
 }
 
 /* ------------------------------------------------------------------ *
- *  The scroll stack — full-height screens layered over the fixed canvas.
+ *  The scroll stack: full-height screens layered over the fixed canvas.
  * ------------------------------------------------------------------ */
 .screen {
   position: relative;
@@ -277,7 +277,7 @@ body {
 }
 
 /* ------------------------------------------------------------------ *
- *  The doomscroll punch-line — a darkening curtain drops over the feed
+ *  The doomscroll punch-line: a darkening curtain drops over the feed
  *  as you scroll in, and the line fades up once the screen is in view.
  * ------------------------------------------------------------------ */
 .screen--doom {
@@ -461,4 +461,7 @@ body.nav-open .nav-menu__list li:nth-child(3) .nav-menu__link {
 }
 body.nav-open .nav-menu__list li:nth-child(4) .nav-menu__link {
   transition-delay: 0.26s;
+}
+body.nav-open .nav-menu__list li:nth-child(5) .nav-menu__link {
+  transition-delay: 0.32s;
 }
