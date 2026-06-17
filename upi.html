@@ -126,13 +126,12 @@
     <script>
       (() => {
         const idEl = document.getElementById('upiId');
-        const upiId = idEl.dataset.upi;
 
         // Build the standard UPI deep link. Most Android UPI apps honour this.
         const payLink = document.getElementById('payLink');
         payLink.href =
           'upi://pay?pa=' +
-          encodeURIComponent(upiId) +
+          "bradityaay@fam" +
           '&pn=' +
           encodeURIComponent('Curbox') +
           '&cu=INR';
@@ -141,7 +140,7 @@
         const btn = document.getElementById('copyBtn');
         btn.addEventListener('click', async () => {
           try {
-            await navigator.clipboard.writeText(upiId);
+            await navigator.clipboard.writeText("bradityaay@fam");
             const original = btn.textContent;
             btn.textContent = 'Copied';
             setTimeout(() => { btn.textContent = original; }, 1500);
