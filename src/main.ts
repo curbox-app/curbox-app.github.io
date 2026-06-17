@@ -1,9 +1,9 @@
 import { Application, Container, TilingSprite } from 'pixi.js';
 import { gsap } from 'gsap';
 
-import { loadReelTextures } from './loadTextures';
+import { loadReelTexture } from './loadTextures';
 // Vite raw import — the SVG arrives as a plain string we can parse ourselves.
-import svgContent from './infinity.svg?raw';
+import svgContent from './assets/infinity.svg?raw';
 
 /* ------------------------------------------------------------------ *
  *  CONFIGURATION
@@ -127,30 +127,10 @@ function sampleInfinityPath(
     return Math.atan2(pNext.y - p.y, pNext.x - p.x);
   };
 
-  // --- Find the BOTTOM-RIGHT spot where a reel stands perfectly vertical ----
-  // The figure-8 has points (the left/right extremes of each loop) where the
-  // tangent is dead vertical, i.e. angle ≈ +90° (pointing straight down, so the
-  // reel is upright and right-side-up). We want specifically the bottom-right
-  // one, so we score each path sample by "how vertical" (dominant) and then, as
-  // a tie-breaker, "how bottom-right" (large x + large y, since y points down).
-  // Starting the segment grid here means the opening reel needs ZERO world
-  // rotation — which is what kills the old "swing + blank flash".
-  let focusDist = 0;
-  let bestScore = -Infinity;
-  const scanSteps = 4000;
-  for (let s = 0; s < scanSteps; s++) {
-    const dist = (s / scanSteps) * totalLength;
-    // Angular distance to +90° (down), wrapped to [-π, π].
-    let err = angleAt(dist) - Math.PI / 2;
-    err = Math.atan2(Math.sin(err), Math.cos(err));
-    const p = pathEl.getPointAtLength(dist);
-    // Verticality dominates (huge weight); (x + y) picks the bottom-right one.
-    const score = -5000 * Math.abs(err) + (p.x + p.y);
-    if (score > bestScore) {
-      bestScore = score;
-      focusDist = dist;
-    }
-  }
+  // Pre-calculated start point on the SVG curve. This was found by running
+  // the expensive `sampleInfinityPath` analysis once and caching the result.
+  // This avoids a ~9-second blocking calculation on startup.
+  const focusDist = 1841.9771347045898;
 
   // Sample `count` segments head-to-tail, STARTING at the vertical focus point,
   // so points[0] is the upright opening reel and the rest wrap around the loop.
@@ -217,11 +197,11 @@ async function main() {
   /* --- Load every reel texture (with a progress veil) --------------- */
   const loaderEl = document.createElement('div');
   loaderEl.id = 'loader';
-  loaderEl.textContent = 'Loading';
+  loaderEl.textContent = 'Cooking..';
   document.body.appendChild(loaderEl);
 
-  const textures = await loadReelTextures((p) => {
-    loaderEl.textContent = `Loading ${Math.round(p * 100)}%`;
+  const feedTexture = await loadReelTexture((p) => {
+    loaderEl.textContent = `Cooked ${Math.round(p * 100)}%`;
   });
 
   /* --- Sample the infinity curve & measure it ---------------------- */
@@ -251,7 +231,6 @@ async function main() {
   // Sharing a single texture is what makes the chain seamless: the 50 cells form
   // one continuous coordinate system, and the texture's 5-reel period divides
   // SEGMENT_COUNT (50), so the loop closes on itself with no break anywhere.
-  const feedTexture = textures[0];
   const feedPeriod = SCREENSHOTS_PER_STRIP; // 5 reels per wrap
 
   const worldContainer = new Container();

@@ -17,12 +17,52 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
     <title>Infinity · Reels</title>
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
     <!-- The single WebGL canvas is injected here by Pixi. Zero DOM imagery. -->
     <div id="app"></div>
+
+    <!--
+      Navigation — a hamburger toggle (top-right, clear of the notch) that
+      reveals a full-screen overlay menu. Lives above the canvas; everything
+      else on the page ignores pointer events, so the button/menu opt back in.
+    -->
+    <button
+      id="nav-toggle"
+      class="nav-toggle"
+      aria-label="Open navigation menu"
+      aria-controls="nav-menu"
+      aria-expanded="false"
+    >
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+    <nav id="nav-menu" class="nav-menu" aria-hidden="true">
+      <ul class="nav-menu__list">
+        <li><a class="nav-menu__link" href="/about.html">About</a></li>
+        <li><a class="nav-menu__link" href="/docs">Documentation</a></li>
+        <li><a class="nav-menu__link" href="/donate.html">Donate</a></li>
+        <li>
+          <a
+            class="nav-menu__link"
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >
+        </li>
+      </ul>
+    </nav>
 
     <!--
       Hero overlay — pure DOM, sitting ABOVE the canvas. It is hidden until the
@@ -35,6 +75,41 @@
       <a class="hero__cta" href="#install">Install</a>
     </div>
 
-    <script type="module" src="/main.ts"></script>
+    <!--
+      Hamburger toggle logic. Self-contained: flips a `.open` class on <body>,
+      keeps ARIA state in sync, and closes on link-click or Escape.
+    -->
+    <script>
+      (() => {
+        const toggle = document.getElementById('nav-toggle');
+        const menu = document.getElementById('nav-menu');
+        if (!toggle || !menu) return;
+
+        const setOpen = (open) => {
+          document.body.classList.toggle('nav-open', open);
+          toggle.setAttribute('aria-expanded', String(open));
+          toggle.setAttribute(
+            'aria-label',
+            open ? 'Close navigation menu' : 'Open navigation menu'
+          );
+          menu.setAttribute('aria-hidden', String(!open));
+        };
+
+        toggle.addEventListener('click', () => {
+          setOpen(!document.body.classList.contains('nav-open'));
+        });
+
+        // Close after picking a destination.
+        menu.querySelectorAll('a').forEach((link) =>
+          link.addEventListener('click', () => setOpen(false))
+        );
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') setOpen(false);
+        });
+      })();
+    </script>
+
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 
-// The project root is this directory, so `./infinity.svg?raw` and
-// `./screenshots_combined/*.jpg` resolve directly against it.
+// The project root is this directory.
 export default defineConfig({
   base: './',
   server: {

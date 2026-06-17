@@ -144,3 +144,141 @@ body {
 .hero__cta:active {
   transform: translateY(0);
 }
+
+/* ------------------------------------------------------------------ *
+ *  Navigation — hamburger toggle + full-screen overlay menu.
+ *  The toggle sits top-right, clear of the notch via the safe-area
+ *  insets. Sizes are clamp()'d so it scales smoothly from phone to
+ *  desktop without any media queries.
+ * ------------------------------------------------------------------ */
+.nav-toggle {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + clamp(0.9rem, 2.5vw, 1.5rem));
+  right: calc(env(safe-area-inset-right, 0px) + clamp(0.9rem, 2.5vw, 1.5rem));
+  z-index: 40;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+
+  width: clamp(2.6rem, 8vw, 3rem);
+  height: clamp(2.6rem, 8vw, 3rem);
+  padding: 0.7rem;
+
+  border: none;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  /* Opt back into pointer events above the touch-locked canvas. */
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease;
+}
+
+.nav-toggle:hover {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.nav-toggle__bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: #fff;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s ease;
+}
+
+/* Morph the three bars into an X while the menu is open. */
+body.nav-open .nav-toggle__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+body.nav-open .nav-toggle__bar:nth-child(2) {
+  opacity: 0;
+}
+
+body.nav-open .nav-toggle__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Full-screen overlay menu. Hidden + non-interactive until `.nav-open`. */
+.nav-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.82);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
+}
+
+body.nav-open .nav-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.nav-menu__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.4rem, 4vh, 2.4rem);
+  padding: 0;
+  margin: 0;
+}
+
+.nav-menu__link {
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(1.6rem, 6vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+
+  /* Stagger-in each link as the menu opens. */
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s ease;
+}
+
+.nav-menu__link:hover {
+  color: #bbb;
+}
+
+body.nav-open .nav-menu__link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.nav-open .nav-menu__list li:nth-child(1) .nav-menu__link {
+  transition-delay: 0.08s;
+}
+body.nav-open .nav-menu__list li:nth-child(2) .nav-menu__link {
+  transition-delay: 0.14s;
+}
+body.nav-open .nav-menu__list li:nth-child(3) .nav-menu__link {
+  transition-delay: 0.2s;
+}
+body.nav-open .nav-menu__list li:nth-child(4) .nav-menu__link {
+  transition-delay: 0.26s;
+}
