@@ -1,17 +1,17 @@
 # Curbox
 
-> Curbox is a free, open-source (FOSS) Android app for reducing screentime and building healthier digital habits. It blocks or slows down distracting apps, short-form video (Reels/Shorts), and websites using Android's Accessibility Service. Curbox has no INTERNET permission and stores all data locally — nothing ever leaves the device.
+> Curbox is an open-source Android app for reducing screentime and building healthier digital habits. It blocks or slows down distracting apps, short-form video (Reels/Shorts), and websites using Android's Accessibility Service. Curbox is open source under the GPL v3, developed in the open with the complete source on GitHub so anyone can audit exactly what it does.
 
 Curbox is organized into three areas: **Usage** (see where your time goes), **Focus** (timed deep-work sessions that block distractions), and **Reducers** (the toolbox of limits and nudges). Reducers split into *Focus Boundaries* that actively block (App Pause, Short-Form Video, Keyword/Website blocker) and *Mindful Nudges* that gently slow you down (Auto DND, UI Hider, Mindful Messages, Short-Form Video Counter, Grayscale Filter). When you hit a limit, Curbox shows a configurable "pause"/warning screen whose difficulty you control via Unlock Challenges.
 
 - Platform: Android. License: GNU GPL v3. Source: https://github.com/nethical6/curbox
 - Install: F-Droid (https://f-droid.org/) or official GitHub releases (https://github.com/nethical6/curbox/releases/latest)
-- Privacy: no internet permission, no telemetry, no accounts, no data collection — 100% on-device.
+- Open source: GPL v3, complete source on GitHub, no accounts — auditable by anyone.
 
 ## Getting Started
 
-- [What Is Curbox](https://curbox.app/docs/getting-started/what-is-curbox/): Introduction to Curbox, its three areas (Usage, Focus, Reducers), how it uses the Accessibility Service to show a pause screen, and its on-device, no-internet privacy model.
-- [Set Up Curbox](https://curbox.app/docs/getting-started/setup/): Installation via F-Droid, why antivirus/Play Protect may false-flag a deep-control app that has no internet access, and how to grant the five permissions (Screen Overlay, Notifications, Do Not Disturb, App Blocker Accessibility, Usage Tracker Accessibility), optionally all at once via Shizuku.
+- [What Is Curbox](https://curbox.app/docs/getting-started/what-is-curbox/): Introduction to Curbox, its three areas (Usage, Focus, Reducers), how it uses the Accessibility Service to show a pause screen, and its open-source (GPL v3) model.
+- [Set Up Curbox](https://curbox.app/docs/getting-started/setup/): Installation via F-Droid, why antivirus/Play Protect may false-flag a deep-control app, and how to grant the five permissions (Screen Overlay, Notifications, Do Not Disturb, App Blocker Accessibility, Usage Tracker Accessibility), optionally all at once via Shizuku.
 
 ## Focus
 
@@ -40,7 +40,7 @@ Curbox is organized into three areas: **Usage** (see where your time goes), **Fo
 ## Optional
 
 - [Full LLM corpus (llms-full.txt)](https://curbox.app/llms-full.txt): Every feature documented in depth in a single self-contained file, written for LLM ingestion.
-- [About Curbox](https://curbox.app/about.html): The FOSS mission and philosophy behind the project.
+- [About Curbox](https://curbox.app/about.html): The open-source mission and philosophy behind the project.
 - [Features](https://curbox.app/features.html): Full breakdown of blocking, schedules, unlock challenges, focus mode, and insights.
 - [Install Curbox](https://curbox.app/install-android/): How to get Curbox on Android via F-Droid or GitHub releases.
 - [Donate](https://curbox.app/donate.html): Support the project via Patreon, GitHub Sponsors, PayPal, UPI, or crypto.

@@ -1,7 +1,7 @@
 {
   "name": "Curbox",
   "short_name": "Curbox",
-  "description": "Free, open-source Android app that curbs screen time and doomscrolling.",
+  "description": "Open-source Android app that curbs screen time and doomscrolling.",
   "start_url": "/",
   "scope": "/",
   "lang": "en",

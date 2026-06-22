@@ -5,7 +5,7 @@
     "role": "owner",
     "name": "Curbox",
     "email": "questphone@proton.me",
-    "description": "Curbox is an open-source project that builds tools to help people cut down on screen time and digital addiction. Everything is free, ships under the GPL v3 license, and is developed in the open by its community.",
+    "description": "Curbox is an open-source project that builds tools to help people cut down on screen time and digital addiction. Everything ships under the GPL v3 license and is developed in the open by its community.",
     "webpageUrl": {
       "url": "https://curbox.app",
       "wellKnown": "https://curbox.app/.well-known/funding-manifest-urls"
@@ -15,7 +15,7 @@
     {
       "guid": "curbox",
       "name": "Curbox",
-      "description": "A screen-time and app blocker for Android that gives you your attention back without taking your data. You pick the apps, sites, and short-form feeds to watch, and Curbox shows a pause screen when you hit a limit. It can block a whole app or just one feature like Reels or Shorts, run focus sessions, and add a bit of friction (a cooldown, a QR scan, or typing out why you want to open something) before you can keep scrolling. No accounts, no telemetry, nothing leaves your phone.",
+      "description": "A screen-time and app blocker for Android that gives you your attention back without taking your data. You pick the apps, sites, and short-form feeds to watch, and Curbox shows a pause screen when you hit a limit. It can block a whole app or just one feature like Reels or Shorts, run focus sessions, and add a bit of friction (a cooldown, a QR scan, or typing out why you want to open something) before you can keep scrolling. It is open source under the GPL v3, with no accounts.",
       "webpageUrl": {
         "url": "https://curbox.app",
         "wellKnown": "https://curbox.app/.well-known/funding-manifest-urls"
@@ -33,13 +33,13 @@
         "app-blocker",
         "focus",
         "privacy",
-        "foss"
+        "open-source"
       ]
     },
     {
       "guid": "curbox-extension",
       "name": "Curbox Browser Extension",
-      "description": "The free screen-time browser extension for Chrome, Brave, and Firefox. It tracks how long you actually spend on sites (counting only active viewing time), blocks sites in groups with usage-based, time-based, or per-visit rules, and uses keyword and pattern matching to block feeds like Reels or Shorts while leaving the rest of a site usable. When you reach a blocked page it shows a customizable breathing warning screen with no-unlock, effort-based, or timer-based options. Built with WXT, React, and TypeScript.",
+      "description": "The open-source screen-time browser extension for Chrome, Brave, and Firefox. It tracks how long you actually spend on sites (counting only active viewing time), blocks sites in groups with usage-based, time-based, or per-visit rules, and uses keyword and pattern matching to block feeds like Reels or Shorts while leaving the rest of a site usable. When you reach a blocked page it shows a customizable breathing warning screen with no-unlock, effort-based, or timer-based options. Built with WXT, React, and TypeScript.",
       "webpageUrl": {
         "url": "https://curbox.app",
         "wellKnown": "https://curbox.app/.well-known/funding-manifest-urls"
@@ -59,7 +59,7 @@
         "website-blocker",
         "focus",
         "privacy",
-        "foss"
+        "open-source"
       ]
     }
   ],
@@ -107,7 +107,7 @@
         "guid": "keep-it-running",
         "status": "active",
         "name": "Keep Curbox running",
-        "description": "Covers the day-to-day work of building, fixing, and shipping Curbox so it stays free and ad-free for everyone. Give what feels right.",
+        "description": "Covers the day-to-day work of building, fixing, and shipping Curbox so it stays open and actively maintained for everyone. Give what feels right.",
         "amount": 5,
         "currency": "USD",
         "frequency": "monthly",

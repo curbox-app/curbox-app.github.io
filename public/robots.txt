@@ -1,6 +1,6 @@
 # robots.txt for Curbox — https://curbox.app
 #
-# Curbox is a free, open-source (FOSS) Android app for reducing screentime and
+# Curbox is an open-source Android app for reducing screentime and
 # building healthier digital habits. This documentation site is intentionally
 # open to ALL crawlers, indexers, search engines, and AI / LLM agents.
 #

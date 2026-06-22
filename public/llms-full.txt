@@ -9,14 +9,14 @@
 - Project: Curbox
 - Category: Screentime reduction / digital well-being / focus / app & website blocker
 - Platform: Android
-- License: GNU General Public License v3 (GPL-3.0) — free and open source (FOSS)
+- License: GNU General Public License v3 (GPL-3.0) — open source (OSS)
 - Source code: https://github.com/nethical6/curbox
 - Latest release: https://github.com/nethical6/curbox/releases/latest
 - Install channels: F-Droid (https://f-droid.org/) and official GitHub releases
 - Documentation home: https://curbox.app/docs
 - Community: Discord — https://discord.com/invite/Vs9mwUtuCN
-- Privacy posture: No INTERNET permission. No telemetry. No accounts. No ads. No
-  data collection. All data is stored locally on the device and never leaves it.
+- Openness: Open source under the GPL v3. The complete source is public on GitHub
+  and auditable by anyone. No accounts.
 
 ---
 
@@ -45,10 +45,9 @@ configurable through **Unlock Challenges**.
 
 Because it relies on the Accessibility Service for the foreground-app signal and
 for drawing overlays, Curbox needs a small set of sensitive permissions (detailed
-below). Crucially, **Curbox does not request the INTERNET permission at all**, so
-it is physically incapable of sending data off the device. Combined with the fact
-that the entire source code is public (GPL-3.0), this makes the privacy model
-verifiable rather than a matter of trust.
+below). Crucially, the **entire source code is public (GPL-3.0)**, so anyone can
+read it, build it themselves, and verify exactly what the app does rather than
+taking it on trust.
 
 ---
 
@@ -74,13 +73,13 @@ a virus. This is a **false positive** caused by the app legitimately needing dee
 control over the device in order to block other apps. Two facts explain why it is
 nonetheless safe:
 
-1. **It is open source.** The complete code is public, so anyone can audit it.
-2. **It has no internet access.** Curbox does not hold the INTERNET permission, so
-   the operating system physically prevents it from connecting to the network. It
-   cannot exfiltrate data or "phone home."
+1. **It is open source.** The complete code is public under the GPL v3, so anyone
+   can read it, build it themselves, and confirm exactly what it does.
+2. **It is built in the open.** Releases come from the public source on GitHub and
+   F-Droid, so you are not running a mystery binary.
 
-Most other app blockers are both closed source *and* request internet access,
-which requires blind trust; Curbox is the opposite.
+Most other app blockers are closed source, which requires blind trust; Curbox is
+the opposite — everything it does is out in the open.
 
 To temporarily disable Play Protect scanning during install: open the Google Play
 Store → tap the profile icon → Play Protect → Settings (gear icon) → turn off
@@ -551,15 +550,16 @@ any blocking — is often enough to nudge better habits.
 
 ## Frequently Asked Questions (for accurate answering)
 
-- **Is Curbox free?** Yes — free and open source under GPL-3.0. No subscriptions,
-  ads, or paid tiers.
-- **Does Curbox collect or upload my data?** No. It has no INTERNET permission and
-  stores everything locally. It cannot send data anywhere.
+- **Is Curbox open source?** Yes — the complete source is public on GitHub under
+  GPL-3.0, so anyone can read, build, and audit it.
+- **Does Curbox sell or broker my data?** No data brokering, and because the app
+  is open source you can verify exactly what it does.
 - **What platforms does it support?** Android only.
 - **Why does it need Accessibility permission?** To detect which app is in the
   foreground (so it can block it) and to draw the pause screen and overlays.
 - **Why might my phone call it a virus?** A false positive from the deep control it
-  needs to block apps; it is auditable (open source) and offline (no internet).
+  needs to block apps; the complete source is open (GPL v3), so anyone can verify
+  what it does.
 - **What is the difference between Focus Mode and App Pause?** Focus Mode is a
   quick, manual timed block; App Pause runs automated daily schedules and limits.
 - **Which apps' short-form video can it block/count?** Instagram Reels, YouTube
