@@ -21,7 +21,7 @@
         "wellKnown": "https://curbox.app/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
-        "url": "https://github.com/nethical6/curbox"
+        "url": "https://github.com/curbox-app/curbox-android"
       },
       "licenses": [
         "spdx:GPL-3.0-or-later"
@@ -63,6 +63,7 @@
       ]
     }
   ],
+  
   "funding": {
     "channels": [
       {
@@ -168,6 +169,19 @@
         "channels": [
           "invoice",
           "github-sponsors"
+        ]
+      },
+      {
+        "guid": "floss-project-grant",
+        "status": "active",
+        "name": "Project grant: sustain + expand access",
+        "description": "A one-time grant funding a year of active maintenance, an iOS port to reach users currently locked out on iPhone. Curbox is used by 100k+ people, many of them students with ADHD who cannot afford the paid blockers that cost around $100 a year.",
+        "amount": 25000,
+        "currency": "USD",
+        "frequency": "one-time",
+        "channels": [
+          "github-sponsors",
+          "invoice"
         ]
       }
     ],

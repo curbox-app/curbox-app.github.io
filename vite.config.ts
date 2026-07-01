@@ -1,8 +1,10 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'node:path';
+import sitemap from 'vite-plugin-sitemap';
 
 // The project root is this directory.
 export default defineConfig({
+  plugins: [sitemap({ hostname: 'https://curbox.app' })],
   base: '/',
   server: {
     host: true, // expose on the LAN so you can open it on a real phone
