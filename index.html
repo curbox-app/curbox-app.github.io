@@ -166,6 +166,56 @@
       .home-footer__legal {
         line-height: 1.6;
       }
+
+      /* FAQ accordion — native <details>, no JS required. */
+      .faq-list {
+        margin-top: 0.5rem;
+      }
+
+      .faq-item {
+        border-top: 1px solid var(--line);
+      }
+
+      .faq-item:last-child {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .faq-item summary {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1.5rem;
+        padding: 1.15rem 0;
+        cursor: pointer;
+        list-style: none;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.05rem;
+        letter-spacing: -0.01em;
+      }
+
+      .faq-item summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq-item summary::after {
+        content: '+';
+        flex-shrink: 0;
+        font-family: var(--font-mono);
+        color: var(--muted);
+        transition: transform 0.2s ease;
+      }
+
+      .faq-item[open] summary::after {
+        transform: rotate(45deg);
+      }
+
+      .faq-item p {
+        max-width: var(--measure);
+        padding-bottom: 1.35rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
     </style>
 
     <script
@@ -186,6 +236,7 @@
                 <li><a href="/features.html">Features</a></li>
                 <li><a href="/about.html">About</a></li>
                 <li><a href="/docs">Docs</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="/donate.html">Donate</a></li>
             </ul>
         </nav>
@@ -281,11 +332,50 @@
             </div>
         </section>
 
+        <section class="section" id="faq">
+            <h2 class="section__title">Frequently asked questions</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>Is Curbox free to use?</summary>
+                    <p>Yes. Curbox is completely free and open source under the GNU GPL v3. Install it from F-Droid or download the APK directly from the official GitHub releases — there are no subscriptions, ads, or paid tiers.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Does Curbox collect any of my data?</summary>
+                    <p>No. Curbox never requests internet access, so it has no way to send your usage data anywhere. Everything — usage stats, blocked-app rules, focus sessions — stays on your device. There are no accounts and nothing to sign up for.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How is Curbox different from Android's built-in Digital Wellbeing?</summary>
+                    <p>Curbox goes deeper: it can block a single feature inside an app, like Instagram Reels or YouTube Shorts, without blocking the whole app, filter specific keywords and URLs in your browser, and let you choose your own unlock friction, such as a cooldown, a QR scan, or typing out why you want back in.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Is there a Curbox app for iOS?</summary>
+                    <p>Not yet. Building for iOS requires a physical Apple device the maintainer doesn't currently own, so there's no iOS release. Curbox does have a companion browser extension for Chrome, Brave, and Firefox that works on any desktop OS.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can I still get around a block if I really need to?</summary>
+                    <p>Yes, on purpose. Every block in Curbox uses an unlock challenge you configure yourself: a timed cooldown, scanning a QR or barcode you've placed somewhere inconvenient, or typing out your reason for opening the app. The goal is friction, not a hard lock you can't escape.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What permissions does Curbox need, and is it safe to grant them?</summary>
+                    <p>Curbox uses Android's Accessibility Service to detect which app or website is in the foreground, which is why Play Protect sometimes flags it. Two things make it safe: it never requests internet access, so it can't transmit anything even if it wanted to, and its full source code is public, so anyone can verify what it does.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Where can I safely download Curbox?</summary>
+                    <p>Only from F-Droid or the official GitHub releases page. Because Curbox needs deep system permissions to block other apps, never install it from anywhere else.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can Curbox block specific websites, or only whole apps?</summary>
+                    <p>Both. Reducers can block whole apps on a schedule, target one feature inside an app like Reels or Shorts, or watch your browser's address bar and block any page whose URL contains a keyword or path you've chosen.</p>
+                </details>
+            </div>
+        </section>
+
         <footer class="home-footer">
             <ul>
                 <li><a href="/features.html">Features</a></li>
                 <li><a href="/about.html">About</a></li>
                 <li><a href="/docs">Documentation</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="/donate.html">Donate</a></li>
                 <li><a href="/privacy.html">Privacy Policy</a></li>
                 <li><a href="/terms.html">Terms &amp; Conditions</a></li>
@@ -322,6 +412,80 @@
           "https://t.me/curboxapp"
         ]
       }
+    }
+    </script>
+
+    <!-- Structured data: mirrors the on-page FAQ for rich results and AI answer engines. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Curbox free to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Curbox is completely free and open source under the GNU GPL v3. Install it from F-Droid or download the APK directly from the official GitHub releases — there are no subscriptions, ads, or paid tiers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Curbox collect any of my data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Curbox never requests internet access, so it has no way to send your usage data anywhere. Everything — usage stats, blocked-app rules, focus sessions — stays on your device. There are no accounts and nothing to sign up for."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is Curbox different from Android's built-in Digital Wellbeing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Curbox goes deeper: it can block a single feature inside an app, like Instagram Reels or YouTube Shorts, without blocking the whole app, filter specific keywords and URLs in your browser, and let you choose your own unlock friction, such as a cooldown, a QR scan, or typing out why you want back in."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a Curbox app for iOS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not yet. Building for iOS requires a physical Apple device the maintainer doesn't currently own, so there's no iOS release. Curbox does have a companion browser extension for Chrome, Brave, and Firefox that works on any desktop OS."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I still get around a block if I really need to?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, on purpose. Every block in Curbox uses an unlock challenge you configure yourself: a timed cooldown, scanning a QR or barcode you've placed somewhere inconvenient, or typing out your reason for opening the app. The goal is friction, not a hard lock you can't escape."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What permissions does Curbox need, and is it safe to grant them?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Curbox uses Android's Accessibility Service to detect which app or website is in the foreground, which is why Play Protect sometimes flags it. Two things make it safe: it never requests internet access, so it can't transmit anything even if it wanted to, and its full source code is public, so anyone can verify what it does."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I safely download Curbox?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only from F-Droid or the official GitHub releases page. Because Curbox needs deep system permissions to block other apps, never install it from anywhere else."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Curbox block specific websites, or only whole apps?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both. Reducers can block whole apps on a schedule, target one feature inside an app like Reels or Shorts, or watch your browser's address bar and block any page whose URL contains a keyword or path you've chosen."
+          }
+        }
+      ]
     }
     </script>
 </body>
