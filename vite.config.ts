@@ -1,10 +1,14 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'node:path';
-import sitemap from 'vite-plugin-sitemap';
 
 // The project root is this directory.
 export default defineConfig({
-  plugins: [sitemap({ hostname: 'https://curbox.app' })],
+  // robots.txt and sitemap.xml are hand-maintained in public/ — they cover
+  // pages that live outside this build (e.g. /docs/*, served from a separate
+  // repo cascaded onto this custom domain). vite-plugin-sitemap used to run
+  // here, but it auto-generates both files from scratch and overwrites these
+  // on every build, silently dropping the AI-crawler rules and the /docs/
+  // sitemap entry.
   base: '/',
   server: {
     host: true, // expose on the LAN so you can open it on a real phone
