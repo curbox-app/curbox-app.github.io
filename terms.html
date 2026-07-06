@@ -54,7 +54,7 @@
         </nav>
 
         <header>
-            <span class="kicker">Terms &amp; Conditions · Last updated June 18, 2026</span>
+            <span class="kicker">Terms &amp; Conditions · Last updated July 6, 2026</span>
             <h1 class="page__title">Terms &amp; Conditions</h1>
             <p class="lead">Welcome, and thanks for installing Curbox. These terms are the agreement between you and the people who make Curbox ("we", "us", "the developers"). By installing or using the app, you agree to what is written here.</p>
             <p style="margin-top: 1.5rem; color: var(--muted);">If you do not agree, please do not use the app. We have tried to keep this readable, because terms you cannot understand are not worth much.</p>
@@ -62,12 +62,36 @@
 
         <section class="section">
             <h2 class="section__title">What Curbox is</h2>
-            <p>Curbox is a screen time and digital wellbeing app for Android. It helps you block apps and websites, run focus sessions, reduce distractions, and see your own usage. It is a personal tool that runs on your own phone. It is not a medical product, a parental control service, or a guarantee of any outcome.</p>
+            <p>Curbox is a screen time and digital wellbeing tool. On Android it is an app that helps you block apps and websites, run focus sessions, reduce distractions, and see your own usage. It is also available as a browser extension that blocks websites on schedules and runs focus mode. It is a personal tool that runs on your own devices. It is not a medical product, a parental control service, or a guarantee of any outcome.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">App variants</h2>
+            <p>The Curbox app comes in three variants. They share the same core but differ in a few features:</p>
+            <div class="matrix-wrap">
+                <table class="matrix">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Playstore</th>
+                            <th>F-Droid</th>
+                            <th>Full (website)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sync</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+                        <tr><td>Anti-uninstall</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td>UI hider</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td>Internet permission</td><td>Sync only</td><td>None</td><td>Sync only</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top: 1.25rem;">There is also a Curbox browser extension, covered in its own section below. These terms apply to every variant and to the extension. Where a section covers a feature your variant does not include, that section simply does not apply to you.</p>
         </section>
 
         <section class="section">
             <h2 class="section__title">How Curbox works, in short</h2>
-            <p>Curbox uses Android's Accessibility service to see what is on your screen so it can block, count, or warn. Everything happens on your device. The app does not connect to the internet, and it does not send your information anywhere. For the full details on data, please read the <a href="/privacy.html">Privacy Policy</a> that ships alongside these terms.</p>
+            <p>Curbox uses Android's Accessibility service to see what is on your screen so it can block, count, or warn. Everything happens on your device. The F-Droid variant does not connect to the internet at all, and the Playstore and full variants use the internet only for the optional Sync feature, which is end-to-end encrypted. For the full details on data, please read the <a href="/privacy.html">Privacy Policy</a> that ships alongside these terms.</p>
         </section>
 
         <section class="section">
@@ -79,12 +103,8 @@
         <section class="section">
             <h2 class="section__title">Permissions you grant and what they do</h2>
             <p>Curbox needs strong permissions to work. By turning them on, you are giving the app permission to act on your behalf. Here is what each one is for, so you know exactly what you are agreeing to. You can turn off any permission at any time in your phone's settings. If you do, the related feature will stop working, and that is normal and expected.</p>
-            <p><strong>The two Accessibility services.</strong> Curbox runs two Accessibility services, and they are the foundation of the whole app.</p>
-            <ul>
-                <li>The <strong>App Blocker service</strong> watches which app or website is open and acts on it in the moment. It powers app blocking, website and keyword blocking, short video (reel) blocking, focus mode, and the warning and mindful message screens. To stop you from opening something on your block list, it can press back or home for you or show a block screen on top. By enabling it, you are allowing the app to take these actions for you.</li>
-                <li>The <strong>Usage Tracking service</strong> measures how long you spend in apps and on websites and counts short videos, so the app can show you your usage. It reads screen information for this purpose only and stores the results on your device.</li>
-            </ul>
-            <p style="margin-top: 1rem;">Both services read screen content while they run. They do this only to block and to measure, only on your device, and never to send anything anywhere. Without Accessibility access, Curbox cannot function.</p>
+            <p><strong>The Accessibility service.</strong> Curbox runs one Accessibility service, the App Blocker service, and it is the foundation of the whole app. It watches which app or website is open and acts on it in the moment. It powers app blocking, website and keyword blocking, short video (reel) blocking, focus mode, and the warning and mindful message screens. To stop you from opening something on your block list, it can press back or home for you or show a block screen on top. The same service also measures how long you spend in apps and on websites and counts short videos, so the app can show you your usage, and stores the results on your device. By enabling it, you are allowing the app to take these actions for you.</p>
+            <p style="margin-top: 1rem;">The service reads screen content while it runs. It does this only to block and to measure, and only on your device. Without Accessibility access, Curbox cannot function.</p>
             <p><strong>Run as a foreground service.</strong> Curbox keeps its blocking and tracking running in the background as a foreground service with a visible notification, so the system does not shut it down while you are relying on it. By using the app you accept that it runs in the background to keep your blocks and tracking active.</p>
             <p><strong>Display over other apps.</strong> Curbox draws block screens, warnings, mindful messages, and the reel counter on top of other apps. This is how a block actually appears in front of you.</p>
             <p><strong>See other apps installed.</strong> The app lists your installed apps so you can choose what to block, track, or focus on, and so it can match the app in front of you against your block list.</p>
@@ -92,7 +112,42 @@
             <p><strong>Do Not Disturb access.</strong> Used by the Auto DND feature to switch Do Not Disturb on and off on your schedule. It changes nothing else.</p>
             <p><strong>Vibrate.</strong> Used for small haptic feedback inside the app.</p>
             <p><strong>Camera.</strong> Used only for QR or barcode unlocks, if you set one up. The camera runs live only while scanning and turns off right after. No photos are taken, saved, or sent.</p>
+            <p><strong>Internet (Playstore and full variants).</strong> Used only for the optional Sync feature, described below. The F-Droid variant does not include this permission.</p>
+            <p><strong>Device administrator (F-Droid and full variants).</strong> Used only to make the app harder to uninstall when you turn on anti-uninstall protection, described below. The Playstore variant never asks for it.</p>
             <p style="margin-top: 1rem;">You are responsible for choosing which of these permissions to grant and for the way you set up the features that rely on them.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Sync (Playstore and full variants)</h2>
+            <p>The Playstore and full variants, and the browser extension, include an optional Sync feature that keeps your Curbox configurations and usage stats the same across devices you own. If you use Sync, you agree to the following:</p>
+            <ul>
+                <li><strong>Sync needs an account.</strong> Sync is the only part of Curbox that requires you to create an account and log in. Everything else in the app and the extension works without one. You are responsible for keeping your login secure and for what happens under your account.</li>
+                <li><strong>Your phrase is your key.</strong> On top of your login, synced data is end-to-end encrypted with the phrase you choose when you first set up Sync. We never have your phrase, so we cannot read, reset, or recover your synced data. If you lose the phrase, the synced data cannot be recovered by anyone, including us. Keeping the phrase safe is your responsibility.</li>
+                <li><strong>Focus follows you.</strong> When you start a focus session on one device, it automatically starts on all your phones and browsers where Curbox is installed and logged in to your Sync account. That is the point of the feature, and by using Sync you accept it: a focus session you start in your browser will also block things on your phone, and the other way around.</li>
+                <li><strong>Cloud retention.</strong> Usage stats stay in the cloud for 28 days and are then deleted. Sync is a convenience for keeping your own devices in step, not a permanent backup service.</li>
+                <li><strong>Your own devices.</strong> Sync is meant for devices that you own and use yourself.</li>
+                <li><strong>Availability.</strong> The sync service is provided as is. It may be interrupted, changed, or discontinued. If your data matters to you, keep your own backups.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">The browser extension</h2>
+            <p>Curbox is also available as a browser extension. It blocks websites on the schedules you set, runs focus mode, and includes the optional Sync feature. These terms apply to the extension the same way they apply to the app, and the Sync section above covers the extension's sync too.</p>
+            <p>Through cross-device focus, a session started anywhere starts everywhere that is logged in to your Sync account. You are responsible for the block lists, schedules, and focus setups you create, on every device they reach.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Anti-uninstall and the UI hider</h2>
+            <p>The F-Droid and full variants include two features that add friction on purpose. The Playstore variant has neither.</p>
+            <p><strong>Anti-uninstall protection</strong> uses Android's device administrator access to make Curbox harder to remove while your blocks are active. By turning it on, you are asking the app to resist being uninstalled, including by you in a moment of impulse. To uninstall, first deactivate Curbox's device administrator access in your phone's settings, which on some phones may require restarting into safe mode, then uninstall normally. That extra effort is the feature working as intended, and by turning it on you accept it. Device administrator access is used for this alone. It does not lock your device, wipe anything, or collect data.</p>
+            <p><strong>The UI hider</strong> hides interface elements inside other apps, so the distracting parts of an app, like a feed or a recommendations row, stay out of sight while the rest keeps working. Hiding parts of an app can make it look or behave unexpectedly. You choose what to hide, and you accept the quirks that can come with it.</p>
+            <p>You choose whether to turn these features on, and you accept the friction they create when you do.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">The Curbox API</h2>
+            <p>Curbox includes an API that lets other apps on your device work with Curbox, but only after you grant them permission. An app you approve can read all of your usage stats, read your configurations, and change your configurations on your behalf.</p>
+            <p>Granting access is your decision. We do not control other apps and are not responsible for what an app you approve does with your data or your settings, including changes it makes to your blocks and schedules. Only approve apps you trust, review what you have granted from time to time, and revoke access when you no longer want it.</p>
         </section>
 
         <section class="section">
@@ -119,7 +174,7 @@
 
         <section class="section">
             <h2 class="section__title">Your data is your responsibility</h2>
-            <p>Curbox stores your data on your device only. We never receive it, so we cannot recover it for you. If your phone is lost, reset, or damaged, or if you uninstall the app, your Curbox data may be gone for good. If your data matters to you, keep your own backups using your phone's tools.</p>
+            <p>Curbox stores your data on your device. If you use Sync, an end-to-end encrypted copy also passes through the cloud, but usage stats there are deleted after 28 days and we cannot decrypt any of it, so we cannot recover your data for you either way. If your phone is lost, reset, or damaged, if you uninstall the app, or if you forget your sync phrase, your Curbox data may be gone for good. If your data matters to you, keep your own backups using your phone's tools.</p>
         </section>
 
         <section class="section">
@@ -135,12 +190,12 @@
 
         <section class="section">
             <h2 class="section__title">Changes to these terms</h2>
-            <p>We may update these terms as the app changes. When we do, we will update the date at the top. If you keep using Curbox after an update, that means you accept the new terms. Because the app has no internet access, the best way to see the latest version is to check this document in the app's listing or its public repository.</p>
+            <p>We may update these terms as the app changes. When we do, we will update the date at the top. If you keep using Curbox after an update, that means you accept the new terms. The best way to see the latest version is to check this page, the app's listing, or its public repository.</p>
         </section>
 
         <section class="section">
             <h2 class="section__title">Ending use</h2>
-            <p>You can stop using Curbox at any time by turning off its permissions or uninstalling it. These terms stop applying to you once you uninstall the app, except for the parts that by their nature should continue, such as the limits on our responsibility.</p>
+            <p>You can stop using Curbox at any time by turning off its permissions or uninstalling it. If you turned on anti-uninstall protection, deactivate Curbox's device administrator access in your phone's settings first (on some phones this may require restarting into safe mode), then uninstall normally. These terms stop applying to you once you uninstall the app, except for the parts that by their nature should continue, such as the limits on our responsibility.</p>
         </section>
 
         <section class="section">

@@ -225,6 +225,50 @@ a:not(.page__wordmark):not(.page__back):not(.btn):not(.upi__pay):hover {
   padding: 0 clamp(1.5rem, 6vw, 2.5rem);
 }
 
+/* ------------------------------------------------------------------ *
+ *  Comparison table — variant matrix on the Privacy & Terms pages.
+ * ------------------------------------------------------------------ */
+.matrix-wrap {
+  overflow-x: auto;
+  margin-top: 1.25rem;
+}
+
+.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.matrix th,
+.matrix td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.matrix th:not(:first-child),
+.matrix td:not(:first-child) {
+  text-align: center;
+}
+
+.matrix thead th {
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.matrix td:first-child {
+  color: var(--fg);
+}
+
+.matrix td:not(:first-child) {
+  color: var(--muted);
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
