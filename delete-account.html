@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Delete Account · Curbox</title>
+    <meta name="description" content="Request deletion of your Curbox account and associated data.">
+    <link rel="canonical" href="https://curbox.app/delete-account.html">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="Delete Account · Curbox">
+    <meta property="og:description" content="Request deletion of your Curbox account and associated data.">
+    <meta property="og:url" content="https://curbox.app/delete-account.html">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .delete-form {
+        margin-top: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        max-width: 26rem;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .field label {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .field input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        color: var(--fg);
+        font-family: var(--font-body);
+        font-size: 1rem;
+        padding: 0.65rem 0.875rem;
+        outline: none;
+        transition: border-color 0.2s ease;
+        width: 100%;
+      }
+
+      .field input:focus {
+        border-color: rgba(255, 255, 255, 0.35);
+      }
+
+      .field input::placeholder {
+        color: rgba(255, 255, 255, 0.22);
+      }
+
+      .delete-btn {
+        margin-top: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: #fff;
+        color: #000;
+        border: none;
+        border-radius: 6px;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+        align-self: flex-start;
+        transition: opacity 0.2s ease;
+      }
+
+      .delete-btn:hover {
+        opacity: 0.85;
+      }
+
+      .confirmation {
+        display: none;
+        margin-top: 2.5rem;
+        padding: 1.5rem;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.04);
+        max-width: 26rem;
+      }
+
+      .confirmation p {
+        line-height: 1.6;
+        color: var(--fg);
+      }
+
+      .confirmation p + p {
+        margin-top: 0.75rem;
+        color: var(--muted);
+        font-size: 0.9em;
+      }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/">← Home</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Account · Data deletion</span>
+            <h1 class="page__title">Delete My Account</h1>
+            <p class="lead">Enter your email and password to submit a deletion request. We'll verify your identity and remove your account and all associated data.</p>
+        </header>
+
+        <section class="section">
+            <h2 class="section__title">Submit a deletion request</h2>
+            <p>Once verified, your account and sync data will be permanently deleted. This cannot be undone.</p>
+
+            <form class="delete-form" id="deleteForm" novalidate>
+                <div class="field">
+                    <label for="email">Email address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Your account password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+                <button type="submit" class="delete-btn">Request deletion</button>
+            </form>
+
+            <div class="confirmation" id="confirmation">
+                <p>If you entered your correct email and password, we'll delete your account in <strong>5 working days</strong>.</p>
+                <p>You'll receive a confirmation email once the deletion is complete. If you don't hear from us within 5 working days, please contact us at <a href="mailto:support@curbox.app">support@curbox.app</a>.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">What gets deleted</h2>
+            <ul>
+                <li>Your account credentials and profile</li>
+                <li>All synced usage data and settings</li>
+                <li>Any stored session or focus history tied to your account</li>
+            </ul>
+            <p style="margin-top: 1.25rem;">Data stored locally on your device is not affected — you can clear that from within the app at any time.</p>
+        </section>
+    </main>
+
+    <script>
+      document.getElementById('deleteForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (!email || !password) return;
+
+        this.style.display = 'none';
+        document.getElementById('confirmation').style.display = 'block';
+      });
+    </script>
+</body>
+</html>
