@@ -31,6 +31,7 @@ export default defineConfig({
         features: resolve(__dirname, 'features.html'),
         donate: resolve(__dirname, 'donate.html'),
         upi: resolve(__dirname, 'upi.html'),
+        deleteAccount: resolve(__dirname, 'delete-account.html'),
         privacy: resolve(__dirname, 'privacy.html'),
         terms: resolve(__dirname, 'terms.html'),
       },
