@@ -2,7 +2,7 @@ import { Application, Container, TilingSprite } from 'pixi.js';
 import { gsap } from 'gsap';
 
 import { loadReelTexture } from './loadTextures';
-// Vite raw import — the SVG arrives as a plain string we can parse ourselves.
+// Vite raw import - the SVG arrives as a plain string we can parse ourselves.
 import svgContent from './assets/infinity.svg?raw';
 
 /* ------------------------------------------------------------------ *
@@ -18,14 +18,14 @@ import svgContent from './assets/infinity.svg?raw';
 const SEGMENT_COUNT = 50;
 
 /** Geometry of a single source screenshot inside the stitched strip. */
-const SCREENSHOT_W = 720; // px — one vertical reel's width
-const SCREENSHOT_H = 1612; // px — one vertical reel's height (5 of these = 8060)
+const SCREENSHOT_W = 720; // px - one vertical reel's width
+const SCREENSHOT_H = 1612; // px - one vertical reel's height (5 of these = 8060)
 const SCREENSHOTS_PER_STRIP = 5; // combined.webp stacks 5 reels (720×8060)
 
 /**
  * Tiny overlap between consecutive segments. The curve bends between segments,
  * so perfectly abutting rectangles would leave hairline wedge-gaps on the outer
- * edge. A few % overlap closes them invisibly — this is NOT the old "stacked on
+ * edge. A few % overlap closes them invisibly - this is NOT the old "stacked on
  * top of each other" bug, just anti-seam insurance.
  */
 const SEAM_OVERLAP = 1.04;
@@ -209,7 +209,7 @@ async function main() {
   const bounds = boundsOf(points);
 
   /**
-   * Ribbon geometry — this is what makes it read as one continuous feed.
+   * Ribbon geometry - this is what makes it read as one continuous feed.
    *
    * The loop is sliced into SEGMENT_COUNT equal arc-length pieces. Each segment
    * shows EXACTLY ONE screenshot, so consecutive segments stack head-to-tail
@@ -255,7 +255,7 @@ async function main() {
     // Anchor at the centre so position + rotation pivot about the segment middle.
     sprite.anchor.set(0.5);
 
-    // STATIC position on the logo — the segment never moves; only the texture
+    // STATIC position on the logo - the segment never moves; only the texture
     // offset scrolls. Raw SVG coords; the camera handles all scaling/centring.
     sprite.position.set(point.x, point.y);
 
@@ -278,7 +278,7 @@ async function main() {
   }
 
   /* ---------------------------------------------------------------- *
-   *  4. Camera: pivot ON the focus reel — pure zoom, no pan
+   *  4. Camera: pivot ON the focus reel - pure zoom, no pan
    * ---------------------------------------------------------------- */
 
   // Opening focus reel = segment 0, which the sampler placed exactly on the
@@ -288,7 +288,7 @@ async function main() {
 
   // PIVOT ON THE FOCUS REEL and keep the container pinned to screen-centre.
   // Scaling now happens entirely AROUND the focus reel, so it stays dead-centre
-  // from the opening close-up all the way out — a pure zoom, never a pan. This
+  // from the opening close-up all the way out - a pure zoom, never a pan. This
   // is what removes the "camera slightly moves right" drift.
   worldContainer.pivot.set(focus.x, focus.y);
 
@@ -365,10 +365,10 @@ async function main() {
     // Horizontal re-centre, back-loaded into the pull-back. `t` runs 0 → 1 as
     // the scale travels from the opening close-up to the fitted view; squaring
     // it keeps the shift ~0 through the close-up (so the camera stays locked on
-    // the reel — no early lurch) and slides the loop to centre only as it pulls
+    // the reel - no early lurch) and slides the loop to centre only as it pulls
     // back. The FINAL pixel shift uses the constant targetScale, NOT the live S,
     // so the huge opening scale can't amplify a tiny ramp into a big jump.
-    // Vertical centring is untouched — pure horizontal nudge, no blank corners.
+    // Vertical centring is untouched - pure horizontal nudge, no blank corners.
     const ramp = zoomProgress(S) ** 2;
     const offsetX = ramp * (focus.x - finalCenterX) * layout.targetScale;
 
@@ -385,7 +385,7 @@ async function main() {
   });
 
   /* ---------------------------------------------------------------- *
-   *  5. The render ticker — runs forever, independent of the zoom
+   *  5. The render ticker - runs forever, independent of the zoom
    * ---------------------------------------------------------------- */
   let scroll = 0; // shared feed offset (local px); advances the whole ribbon
   app.ticker.add((ticker) => {
@@ -421,7 +421,7 @@ async function main() {
     delay: 1.2, // let the viewer "settle" into the feed before pulling back
     onComplete: () => {
       zoomComplete = true; // hand scale ownership to the resize-aware ticker
-      // Reveal the tagline + install CTA only now — the opening close-up,
+      // Reveal the tagline + install CTA only now - the opening close-up,
       // camera zoom, and figure-8 reveal have all finished, so the overlay
       // never competes with them.
       const hero = document.getElementById('hero');
@@ -436,5 +436,5 @@ async function main() {
 main().catch((err) => {
   console.error(err);
   const el = document.getElementById('loader');
-  if (el) el.textContent = 'Failed to load — check the console.';
+  if (el) el.textContent = 'Failed to load - check the console.';
 });

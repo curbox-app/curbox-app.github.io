@@ -6,7 +6,7 @@ Curbox is organized into three areas: **Usage** (see where your time goes), **Fo
 
 - Platform: Android. License: GNU GPL v3. Source: https://github.com/nethical6/curbox
 - Install: F-Droid (https://f-droid.org/) or official GitHub releases (https://github.com/nethical6/curbox/releases/latest)
-- Open source: GPL v3, complete source on GitHub, no accounts — auditable by anyone.
+- Open source: GPL v3, complete source on GitHub, no accounts - auditable by anyone.
 
 ## Getting Started
 
@@ -20,9 +20,9 @@ Curbox is organized into three areas: **Usage** (see where your time goes), **Fo
 ## Reducers
 
 - [Reducers Overview](https://curbox.app/docs/reducers/overview/): The full reducer toolbox, split into Focus Boundaries (active blocking) and Mindful Nudges (gentle friction), plus advice to start small with one app limit.
-- [App Pause](https://curbox.app/docs/reducers/app-pause/): Per-app limits with three modes — Usage Based (daily time cap), Time Based (allowed only inside a time window), and On Each Open (block every launch). Includes how to stack multiple groups on one app to build powerful combined rules (e.g. "only 6–9 PM, and only 1 hour").
+- [App Pause](https://curbox.app/docs/reducers/app-pause/): Per-app limits with three modes - Usage Based (daily time cap), Time Based (allowed only inside a time window), and On Each Open (block every launch). Includes how to stack multiple groups on one app to build powerful combined rules (e.g. "only 6–9 PM, and only 1 hour").
 - [Short-Form Video Content](https://curbox.app/docs/reducers/short-form-video/): Block Reels/Shorts after a daily time limit or a video count, combined across Instagram Reels, YouTube Shorts, and Facebook Reels (plus community mod support).
-- [Keywords and Websites](https://curbox.app/docs/reducers/keyword-blocker/): Block websites by watching the browser address bar. Full keyword syntax — domains, paths, path-only matches, `*`/`?` wildcards, single-word domain matches, and raw `r:` regex — plus supported browsers and list import.
+- [Keywords and Websites](https://curbox.app/docs/reducers/keyword-blocker/): Block websites by watching the browser address bar. Full keyword syntax - domains, paths, path-only matches, `*`/`?` wildcards, single-word domain matches, and raw `r:` regex - plus supported browsers and list import.
 - [UI Hider (Hide UI Elements)](https://curbox.app/docs/reducers/hide-ui-elements/): Hide distracting parts of apps (YouTube recommendations, Instagram feed, X "For You") while keeping the app usable. Ships ready-made rules and a full sandboxed scripting language for writing custom accessibility-driven overlays.
 - [Auto DND](https://curbox.app/docs/reducers/auto-dnd/): Automatically enable Do Not Disturb on a time schedule.
 - [Mindful Messages (Gentle Prompts)](https://curbox.app/docs/reducers/mindful-messages/): Overlay a personal reflection message on chosen apps, with live placeholders for today's app usage, total screen time, current session length, and reel count.
@@ -31,17 +31,18 @@ Curbox is organized into three areas: **Usage** (see where your time goes), **Fo
 
 ## Unlock Challenges
 
-- [Unlock Challenges (Warning Screen)](https://curbox.app/docs/unlock-challenges/overview/): Decide what happens on the pause screen — Never Unlock, Require Effort (QR/barcode scan, type a sentence, state your intent), or Wait to Unlock (fixed/dynamic) — plus a vibrating delay timer, proceed limits, and custom messages.
+- [Unlock Challenges (Warning Screen)](https://curbox.app/docs/unlock-challenges/overview/): Decide what happens on the pause screen - Never Unlock, Require Effort (QR/barcode scan, type a sentence, state your intent), or Wait to Unlock (fixed/dynamic) - plus a vibrating delay timer, proceed limits, and custom messages.
 
 ## Usage
 
-- [Usage Stats](https://curbox.app/docs/usage/usage-stats/): Read your screen-time data — daily total, weekly chart, per-app breakdown, per-browser website stats — and ignore noisy apps, export to CSV, or pin home-screen widgets.
+- [Usage Stats](https://curbox.app/docs/usage/usage-stats/): Read your screen-time data - daily total, weekly chart, per-app breakdown, per-browser website stats - and ignore noisy apps, export to CSV, or pin home-screen widgets.
 
 ## Optional
 
 - [Full LLM corpus (llms-full.txt)](https://curbox.app/llms-full.txt): Every feature documented in depth in a single self-contained file, written for LLM ingestion.
 - [About Curbox](https://curbox.app/about.html): The open-source mission and philosophy behind the project.
 - [Features](https://curbox.app/features.html): Full breakdown of blocking, schedules, unlock challenges, focus mode, and insights.
+- [Comparison](https://curbox.app/comparison.html): Feature matrix comparing Curbox with leading Android app blockers using their publicly documented capabilities.
 - [Install Curbox](https://curbox.app/install-android/): How to get Curbox on Android via F-Droid or GitHub releases.
 - [Donate](https://curbox.app/donate.html): Support the project via Patreon, GitHub Sponsors, PayPal, UPI, or crypto.
 - [Contribute](https://github.com/nethical6/curbox): How to translate, report bugs, write code, or otherwise help.

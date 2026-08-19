@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#000000" />
 
-    <title>Curbox · Open-Source Screen Time &amp; App Blocker for Android</title>
+    <title>Curbox · Take Back Your Screen Time</title>
     <meta
       name="description"
-      content="Curbox is an open-source Android app that curbs screen time and doomscrolling. Block apps, websites, Reels and Shorts, set focus sessions, and build real focus. Open source under the GPL v3 with code you can audit."
+      content="Curbox helps you spend less time on distracting apps, websites, Reels, and Shorts. Set limits, start focus sessions, and choose thoughtful unlock challenges that work for you."
     />
     <link rel="canonical" href="https://curbox.app/" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Instructions" />
@@ -22,18 +22,18 @@
     <!-- Open Graph / Twitter: rich link previews on social and chat apps. -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Curbox" />
-    <meta property="og:title" content="Curbox · Break the doomscroll loop" />
+    <meta property="og:title" content="Curbox · Take back your screen time" />
     <meta
       property="og:description"
-      content="Open-source Android app that curbs screen time and blocks doomscrolling. Built in the open under the GPL v3."
+      content="Spend less time scrolling and more time on what matters. Curbox helps you block distractions, focus, and build healthier phone habits."
     />
     <meta property="og:url" content="https://curbox.app/" />
     <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Curbox · Break the doomscroll loop" />
+    <meta name="twitter:title" content="Curbox · Take back your screen time" />
     <meta
       name="twitter:description"
-      content="Open-source Android app that curbs screen time and blocks doomscrolling. Built in the open under the GPL v3."
+      content="Spend less time scrolling and more time on what matters. Curbox helps you block distractions, focus, and build healthier phone habits."
     />
     <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png" />
 
@@ -93,6 +93,7 @@
 
       .btn {
         display: inline-block;
+        max-width: 100%;
         padding: 0.85rem 1.8rem;
         border-radius: 999px;
         font-family: var(--font-mono);
@@ -167,7 +168,7 @@
         line-height: 1.6;
       }
 
-      /* FAQ accordion — native <details>, no JS required. */
+      /* FAQ accordion - native <details>, no JS required. */
       .faq-list {
         margin-top: 0.5rem;
       }
@@ -216,6 +217,26 @@
         color: var(--muted);
         line-height: 1.6;
       }
+
+      @media (max-width: 30rem) {
+        .home-nav,
+        .home-nav__links {
+          width: 100%;
+        }
+
+        .home-nav__links {
+          gap: 0.75rem 1rem;
+        }
+
+        .cta-row .btn {
+          width: 100%;
+          text-align: center;
+        }
+
+        .feature-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
     </style>
 
     <script>
@@ -232,98 +253,105 @@
         <nav class="home-nav" aria-label="Primary">
             <ul class="home-nav__links">
                 <li><a href="/features.html">Features</a></li>
+                <li><a href="/comparison.html">Compare</a></li>
                 <li><a href="/about.html">About</a></li>
-                <li><a href="/docs">Docs</a></li>
+                <li><a href="/docs">Help</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="/donate.html">Donate</a></li>
             </ul>
         </nav>
 
         <header>
-            <span class="kicker">Open Source</span>
+            <span class="kicker">Less scrolling · More living</span>
             <h1 class="page__title">Break the doomscroll loop.</h1>
             <p class="lead">
-                Curbox is an open-source Android app that curbs screen time and
-                digital addiction. Block the apps, websites, and short-form feeds that
-                hijack your attention and build real focus. Every line of code is open,
-                so you can see exactly what it does.
+                Curbox helps you stop opening distracting apps on autopilot. Choose
+                what gets in your way, set limits that fit your day, and add a pause
+                before you can continue. You stay in control of what is blocked and
+                what it takes to unlock it.
             </p>
             <div class="cta-row">
                 <a class="btn btn--primary" href="https://f-droid.org/en/packages/neth.iecal.curbox/" target="_blank" rel="noopener noreferrer">Install for Android</a>
-                <a class="btn btn--ghost" href="https://github.com/nethical6/curbox" target="_blank" rel="noopener noreferrer">View source on GitHub</a>
+                <a class="btn btn--ghost" href="#features">See what it can do</a>
             </div>
         </header>
 
         <section class="section">
-            <h2 class="section__title">What is Curbox?</h2>
+            <h2 class="section__title">A simple pause before the scroll</h2>
             <p>
-                Curbox is a screen-time and app-blocker for Android built for people who
-                want their attention back. It uses Android's Accessibility Service to
-                watch for the apps and websites you choose and show a configurable pause
-                screen when you reach a limit. The app ships under the GNU GPL v3 license
-                and is built in the open by its community, so anyone can read, audit, and
-                improve the code.
+                Curbox puts a small, useful gap between the urge to open something and
+                the moment you get pulled in. That gap gives you time to decide whether
+                you really want to keep going.
             </p>
             <p>
-                It is organised into three areas: <strong>Usage</strong> (see where your
-                time goes), <strong>Focus</strong> (timed deep-work sessions that block
-                distractions), and <strong>Reducers</strong> (a toolbox of limits and
-                gentle nudges).
+                Pick the apps, websites, Reels, or Shorts that distract you. Choose when
+                Curbox should step in, then decide how easy or difficult it should be to
+                continue. You can stay fully blocked, wait before continuing, or complete
+                a challenge that makes you stop and think.
             </p>
         </section>
 
-        <section class="section">
+        <section class="section" id="features">
             <h2 class="section__title">What you can do</h2>
             <div class="feature-grid">
                 <div>
-                    <h3>Granular blocking</h3>
-                    <p>Block a whole app, a single feature like Instagram Reels or YouTube Shorts, or one URL path while leaving the rest usable.</p>
+                    <h3>Block distracting apps and websites</h3>
+                    <p>Choose the apps and websites that take too much of your time, then decide when they should pause.</p>
                 </div>
                 <div>
-                    <h3>Smart rules &amp; schedules</h3>
-                    <p>Set usage limits, time windows, and unlock caps so a block applies only when you actually need it.</p>
+                    <h3>Stop Reels and Shorts</h3>
+                    <p>Block endless short-video feeds while keeping the useful parts of apps like Instagram and YouTube available.</p>
                 </div>
                 <div>
-                    <h3>Unlock challenges</h3>
-                    <p>Choose your friction in advance: a cooldown, a QR or barcode scan, or typing out your intent before an app opens.</p>
+                    <h3>Choose how you unlock</h3>
+                    <p>Stay fully blocked, wait for access, or earn it with a challenge. Scan a QR code or barcode, tap an NFC tag, solve adaptive math, type a sentence, or state why you want to continue. <a href="/docs/unlock-challenges/overview/">See every unlock option.</a></p>
                 </div>
                 <div>
-                    <h3>Focus mode</h3>
-                    <p>Pause distractions on demand for deep work and watch your focused time add up across sessions.</p>
+                    <h3>Add extra guardrails</h3>
+                    <p>Add a countdown before unlocking, limit how often you can continue, require daily focus time, or show yourself a message that brings your goal back to mind.</p>
                 </div>
                 <div>
-                    <h3>Insights &amp; live awareness</h3>
-                    <p>See per-app and per-website usage, plus a live count of how much short-form content you have scrolled today.</p>
+                    <h3>Set limits that fit your day</h3>
+                    <p>Use daily limits, schedules, cooldowns, or a cap on how many times you can continue. Make rules strict when you need them and relaxed when you do not.</p>
                 </div>
                 <div>
-                    <h3>Mindful nudges</h3>
-                    <p>Per-app grayscale, auto Do Not Disturb, and reflection messages that quietly tilt your habits the right way.</p>
+                    <h3>Start a focus session</h3>
+                    <p>Temporarily pause distractions while you study, work, read, exercise, or spend time with people you care about.</p>
+                </div>
+                <div>
+                    <h3>See where your time goes</h3>
+                    <p>Check how long you spend in apps and on websites, see how many short videos you have watched, and track your attention span while scrolling them.</p>
+                </div>
+                <div>
+                    <h3>Make your phone less tempting</h3>
+                    <p>Turn distracting apps grayscale, hide the parts you do not want to see, quiet notifications, and show reminders that bring you back to your intention.</p>
                 </div>
             </div>
             <p style="margin-top: 1.75rem;">
-                See the <a href="/features.html">full feature breakdown</a> for every option in depth.
+                Explore <a href="/features.html">all Curbox features</a> and find the setup that feels right for you.
             </p>
         </section>
 
         <section class="section">
-            <h2 class="section__title">Open source</h2>
+            <h2 class="section__title">Your phone stays yours</h2>
             <p>
-                Curbox is released under the <strong>GNU GPL v3</strong> with the entire
-                codebase public on GitHub. Because anyone can read, build, and audit the
-                source, you never have to take our word for what the app does.
+                Curbox is free, has no ads, and does not require an account for its core
+                features. Your blocking rules and usage history stay on your phone by
+                default. Optional Sync is there if you want it, so your Curbox setup can
+                follow you across your devices.
             </p>
         </section>
 
         <section class="section" id="install">
             <h2 class="section__title">Get Curbox</h2>
-            <p>Install Curbox from either source:</p>
+            <p>Curbox is available for Android. Choose either official download:</p>
             <ul>
-                <li><a href="https://f-droid.org/" target="_blank" rel="noopener noreferrer">F-Droid</a> for automatic updates through the open-source app store</li>
-                <li><a href="https://github.com/nethical6/curbox/releases/latest" target="_blank" rel="noopener noreferrer">The latest GitHub release</a> for a direct APK download</li>
+                <li><a href="https://f-droid.org/en/packages/neth.iecal.curbox/" target="_blank" rel="noopener noreferrer">Install with F-Droid</a> to receive updates through the F-Droid app</li>
+                <li><a href="https://github.com/nethical6/curbox/releases/latest" target="_blank" rel="noopener noreferrer">Download directly</a> from the official Curbox release page</li>
             </ul>
             <p style="margin-top: 1.25rem;">
-                New to the app? Read the <a href="/docs">documentation</a> to set up your
-                first block, or learn more <a href="/about.html">about why Curbox exists</a>.
+                Need a hand? Follow the <a href="/docs">step-by-step guides</a> to create
+                your first limit, or learn more <a href="/about.html">about Curbox</a>.
             </p>
             <div class="cta-row">
                 <a class="btn btn--primary" href="https://f-droid.org/en/packages/neth.iecal.curbox/" target="_blank" rel="noopener noreferrer">Install for Android</a>
@@ -335,35 +363,35 @@
             <div class="faq-list">
                 <details class="faq-item">
                     <summary>Is Curbox free to use?</summary>
-                    <p>Yes. Curbox is completely free and open source under the GNU GPL v3. Install it from F-Droid or download the APK directly from the official GitHub releases — there are no subscriptions, ads, or paid tiers.</p>
+                    <p>Yes. Curbox is free, with no ads, subscriptions, or paid tiers.</p>
                 </details>
                 <details class="faq-item">
-                    <summary>Does Curbox collect any of my data?</summary>
-                    <p>No. Curbox never requests internet access, so it has no way to send your usage data anywhere. Everything — usage stats, blocked-app rules, focus sessions — stays on your device. There are no accounts and nothing to sign up for.</p>
+                    <summary>What can Curbox block?</summary>
+                    <p>Curbox can pause whole apps and websites, or just distracting parts such as Instagram Reels and YouTube Shorts. You choose exactly what you want help avoiding.</p>
                 </details>
                 <details class="faq-item">
-                    <summary>How is Curbox different from Android's built-in Digital Wellbeing?</summary>
-                    <p>Curbox goes deeper: it can block a single feature inside an app, like Instagram Reels or YouTube Shorts, without blocking the whole app, filter specific keywords and URLs in your browser, and let you choose your own unlock friction, such as a cooldown, a QR scan, or typing out why you want back in.</p>
+                    <summary>What happens when I reach a limit?</summary>
+                    <p>Curbox shows a pause screen instead of letting you fall straight back into the app or website. What happens next is your choice: remain blocked, wait before continuing, or complete a challenge that adds some effort.</p>
                 </details>
                 <details class="faq-item">
-                    <summary>Is there a Curbox app for iOS?</summary>
-                    <p>Not yet. Building for iOS requires a physical Apple device the maintainer doesn't currently own, so there's no iOS release. Curbox does have a companion browser extension for Chrome, Brave, and Firefox that works on any desktop OS.</p>
+                    <summary>What unlock choices are available?</summary>
+                    <p>You can remove the unlock option completely, wait for a fixed or changing amount of time, or require some effort. Effort challenges include scanning a saved QR code or barcode, tapping an NFC tag, solving adaptive math, typing a sentence exactly, or writing down what you intend to do.</p>
                 </details>
                 <details class="faq-item">
-                    <summary>Can I still get around a block if I really need to?</summary>
-                    <p>Yes, on purpose. Every block in Curbox uses an unlock challenge you configure yourself: a timed cooldown, scanning a QR or barcode you've placed somewhere inconvenient, or typing out your reason for opening the app. The goal is friction, not a hard lock you can't escape.</p>
+                    <summary>Can I make an unlock stricter?</summary>
+                    <p>Yes. Add a countdown before the unlock choice appears, limit how many times you can continue within a period, require a certain amount of focus time each day, or display a personal message that reminds you why you set the block.</p>
                 </details>
                 <details class="faq-item">
-                    <summary>What permissions does Curbox need, and is it safe to grant them?</summary>
-                    <p>Curbox uses Android's Accessibility Service to detect which app or website is in the foreground, which is why Play Protect sometimes flags it. Two things make it safe: it never requests internet access, so it can't transmit anything even if it wanted to, and its full source code is public, so anyone can verify what it does.</p>
+                    <summary>Does Curbox keep my information private?</summary>
+                    <p>Your rules and usage history stay on your phone by default, and you do not need an account for the core features. If you choose to use Sync, your synced information is protected with end-to-end encryption. See the <a href="/privacy.html">privacy policy</a> for full details.</p>
                 </details>
                 <details class="faq-item">
-                    <summary>Where can I safely download Curbox?</summary>
-                    <p>Only from F-Droid or the official GitHub releases page. Because Curbox needs deep system permissions to block other apps, never install it from anywhere else.</p>
+                    <summary>Is Curbox available for iPhone?</summary>
+                    <p>Not yet. Curbox is currently available for Android.</p>
                 </details>
                 <details class="faq-item">
-                    <summary>Can Curbox block specific websites, or only whole apps?</summary>
-                    <p>Both. Reducers can block whole apps on a schedule, target one feature inside an app like Reels or Shorts, or watch your browser's address bar and block any page whose URL contains a keyword or path you've chosen.</p>
+                    <summary>Where should I download Curbox?</summary>
+                    <p>Use the official Curbox page on F-Droid or the official Curbox release page on GitHub. Avoid downloads from unfamiliar websites.</p>
                 </details>
             </div>
         </section>
@@ -371,8 +399,9 @@
         <footer class="home-footer">
             <ul>
                 <li><a href="/features.html">Features</a></li>
+                <li><a href="/comparison.html">Compare</a></li>
                 <li><a href="/about.html">About</a></li>
-                <li><a href="/docs">Documentation</a></li>
+                <li><a href="/docs">Help &amp; guides</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="/donate.html">Donate</a></li>
                 <li><a href="/privacy.html">Privacy Policy</a></li>
@@ -382,8 +411,8 @@
                 <li><a href="https://t.me/curboxapp" target="_blank" rel="noopener noreferrer">Telegram</a></li>
             </ul>
             <p class="home-footer__legal">
-                Curbox is open-source software released under the GNU GPL v3.
-                Built by the community since 2024.
+                Made to help you use your phone with intention. Free and open source
+                since 2024.
             </p>
         </footer>
     </main>
@@ -396,7 +425,7 @@
       "name": "Curbox",
       "operatingSystem": "Android",
       "applicationCategory": "UtilitiesApplication",
-      "description": "Curbox is an open-source Android app that curbs screen time and doomscrolling. It blocks distracting apps, websites, and short-form video, offers focus sessions, and is fully open source under the GNU GPL v3 so anyone can audit the code.",
+      "description": "Curbox helps Android users spend less time on distracting apps, websites, Reels, and Shorts. It offers flexible limits, focus sessions, usage insights, and a choice of full blocks, timed waits, or effort-based unlock challenges.",
       "url": "https://curbox.app/",
       "downloadUrl": "https://github.com/nethical6/curbox/releases/latest",
       "softwareLicense": "https://www.gnu.org/licenses/gpl-3.0.html",
@@ -424,63 +453,63 @@
           "name": "Is Curbox free to use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Curbox is completely free and open source under the GNU GPL v3. Install it from F-Droid or download the APK directly from the official GitHub releases — there are no subscriptions, ads, or paid tiers."
+            "text": "Yes. Curbox is free, with no ads, subscriptions, or paid tiers."
           }
         },
         {
           "@type": "Question",
-          "name": "Does Curbox collect any of my data?",
+          "name": "What can Curbox block?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Curbox never requests internet access, so it has no way to send your usage data anywhere. Everything — usage stats, blocked-app rules, focus sessions — stays on your device. There are no accounts and nothing to sign up for."
+            "text": "Curbox can pause whole apps and websites, or just distracting parts such as Instagram Reels and YouTube Shorts. You choose exactly what you want help avoiding."
           }
         },
         {
           "@type": "Question",
-          "name": "How is Curbox different from Android's built-in Digital Wellbeing?",
+          "name": "What happens when I reach a limit?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Curbox goes deeper: it can block a single feature inside an app, like Instagram Reels or YouTube Shorts, without blocking the whole app, filter specific keywords and URLs in your browser, and let you choose your own unlock friction, such as a cooldown, a QR scan, or typing out why you want back in."
+            "text": "Curbox shows a pause screen. What happens next is your choice: remain blocked, wait before continuing, or complete a challenge that adds some effort."
           }
         },
         {
           "@type": "Question",
-          "name": "Is there a Curbox app for iOS?",
+          "name": "What unlock choices are available?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Not yet. Building for iOS requires a physical Apple device the maintainer doesn't currently own, so there's no iOS release. Curbox does have a companion browser extension for Chrome, Brave, and Firefox that works on any desktop OS."
+            "text": "You can remove the unlock option completely, wait for a fixed or changing amount of time, or require some effort. Effort challenges include scanning a saved QR code or barcode, tapping an NFC tag, solving adaptive math, typing a sentence exactly, or writing down what you intend to do."
           }
         },
         {
           "@type": "Question",
-          "name": "Can I still get around a block if I really need to?",
+          "name": "Can I make an unlock stricter?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, on purpose. Every block in Curbox uses an unlock challenge you configure yourself: a timed cooldown, scanning a QR or barcode you've placed somewhere inconvenient, or typing out your reason for opening the app. The goal is friction, not a hard lock you can't escape."
+            "text": "Yes. Add a countdown before the unlock choice appears, limit how many times you can continue within a period, require a certain amount of focus time each day, or display a personal message that reminds you why you set the block."
           }
         },
         {
           "@type": "Question",
-          "name": "What permissions does Curbox need, and is it safe to grant them?",
+          "name": "Does Curbox keep my information private?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Curbox uses Android's Accessibility Service to detect which app or website is in the foreground, which is why Play Protect sometimes flags it. Two things make it safe: it never requests internet access, so it can't transmit anything even if it wanted to, and its full source code is public, so anyone can verify what it does."
+            "text": "Your rules and usage history stay on your phone by default, and you do not need an account for the core features. If you choose to use Sync, your synced information is protected with end-to-end encryption."
           }
         },
         {
           "@type": "Question",
-          "name": "Where can I safely download Curbox?",
+          "name": "Is Curbox available for iPhone?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Only from F-Droid or the official GitHub releases page. Because Curbox needs deep system permissions to block other apps, never install it from anywhere else."
+            "text": "Not yet. Curbox is currently available for Android."
           }
         },
         {
           "@type": "Question",
-          "name": "Can Curbox block specific websites, or only whole apps?",
+          "name": "Where should I download Curbox?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Both. Reducers can block whole apps on a schedule, target one feature inside an app like Reels or Shorts, or watch your browser's address bar and block any page whose URL contains a keyword or path you've chosen."
+            "text": "Use the official Curbox page on F-Droid or the official Curbox release page on GitHub. Avoid downloads from unfamiliar websites."
           }
         }
       ]

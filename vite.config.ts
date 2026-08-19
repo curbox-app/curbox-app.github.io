@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 
 // The project root is this directory.
 export default defineConfig({
-  // robots.txt and sitemap.xml are hand-maintained in public/ — they cover
+  // robots.txt and sitemap.xml are hand-maintained in public/ - they cover
   // pages that live outside this build (e.g. /docs/*, served from a separate
   // repo cascaded onto this custom domain). vite-plugin-sitemap used to run
   // here, but it auto-generates both files from scratch and overwrites these
@@ -29,6 +29,7 @@ export default defineConfig({
         installAndroid: resolve(__dirname, 'install-android/index.html'),
         about: resolve(__dirname, 'about.html'),
         features: resolve(__dirname, 'features.html'),
+        comparison: resolve(__dirname, 'comparison.html'),
         donate: resolve(__dirname, 'donate.html'),
         upi: resolve(__dirname, 'upi.html'),
         deleteAccount: resolve(__dirname, 'delete-account.html'),

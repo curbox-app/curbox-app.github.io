@@ -7,7 +7,7 @@
 :root {
   color-scheme: dark;
 
-  /* Type roles — shared with the content pages (see content.css). */
+  /* Type roles - shared with the content pages (see content.css). */
   --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'Space Mono', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -94,9 +94,9 @@ body {
 }
 
 /* ------------------------------------------------------------------ *
- *  Hero overlay — tagline + install CTA.
+ *  Hero overlay - tagline + install CTA.
  *  Occupies the gap between the loop's bottom edge and the bottom of the
- *  viewport, and centres its content there — so the text sits exactly
+ *  viewport, and centres its content there - so the text sits exactly
  *  midway between the loop and the screen bottom. `--loop-bottom` is the
  *  loop's bottom edge in px, published every layout by main.ts. Hidden
  *  (and non-interactive) until main.ts flips `.revealed`.
@@ -326,7 +326,7 @@ body {
 }
 
 /* ------------------------------------------------------------------ *
- *  Navigation — hamburger toggle + full-screen overlay menu.
+ *  Navigation - hamburger toggle + full-screen overlay menu.
  *  The toggle sits top-right, clear of the notch via the safe-area
  *  insets. Sizes are clamp()'d so it scales smoothly from phone to
  *  desktop without any media queries.
@@ -395,6 +395,8 @@ body.nav-open .nav-toggle__bar:nth-child(3) {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 4.5rem) 1.25rem calc(env(safe-area-inset-bottom, 0px) + 2rem);
 
   background: rgba(0, 0, 0, 0.82);
   -webkit-backdrop-filter: blur(16px);
@@ -464,4 +466,24 @@ body.nav-open .nav-menu__list li:nth-child(4) .nav-menu__link {
 }
 body.nav-open .nav-menu__list li:nth-child(5) .nav-menu__link {
   transition-delay: 0.32s;
+}
+body.nav-open .nav-menu__list li:nth-child(6) .nav-menu__link {
+  transition-delay: 0.38s;
+}
+body.nav-open .nav-menu__list li:nth-child(7) .nav-menu__link {
+  transition-delay: 0.44s;
+}
+
+@media (max-height: 42rem) {
+  .nav-menu {
+    align-items: flex-start;
+  }
+
+  .nav-menu__list {
+    gap: 0.9rem;
+  }
+
+  .nav-menu__link {
+    font-size: clamp(1.35rem, 5.5vh, 2rem);
+  }
 }

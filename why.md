@@ -6,8 +6,8 @@ Curbox is an open-source screen-time and app blocker. It helps people cut down o
 
 Today Curbox runs on two platforms:
 
-- **Android app** ([github.com/nethical6/curbox](https://github.com/nethical6/curbox)) — blocks whole apps, single features like Reels or Shorts, or specific URL paths. It has focus sessions, usage limits, schedules, and unlock mechanisms like QR-scan and type-to-unlock.
-- **Browser extension** for Chrome, Brave, and Firefox ([github.com/curbox-app/web-extension](https://github.com/curbox-app/web-extension)) — tracks active viewing time, blocks sites in groups by usage or time, and filters feeds like Reels and Shorts with keyword and pattern matching, leaving the rest of a site usable.
+- **Android app** ([github.com/nethical6/curbox](https://github.com/nethical6/curbox)) - blocks whole apps, single features like Reels or Shorts, or specific URL paths. It has focus sessions, usage limits, schedules, and unlock mechanisms like QR-scan and type-to-unlock.
+- **Browser extension** for Chrome, Brave, and Firefox ([github.com/curbox-app/web-extension](https://github.com/curbox-app/web-extension)) - tracks active viewing time, blocks sites in groups by usage or time, and filters feeds like Reels and Shorts with keyword and pattern matching, leaving the rest of a site usable.
 
 Both are built and shipped in the open by one maintainer with help from the community.
 

@@ -19,7 +19,7 @@ export async function loadReelTexture(
 
   // Repeat addressing is what makes the "infinite reel" scroll wrap cleanly.
   source.addressMode = 'repeat';
-  // Smooth scaling — these strips get drawn at wildly different zoom levels.
+  // Smooth scaling - these strips get drawn at wildly different zoom levels.
   source.scaleMode = 'linear';
   source.autoGenerateMipmaps = false;
   source.update();

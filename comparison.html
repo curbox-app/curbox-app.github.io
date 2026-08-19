@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Android App Blocker Comparison · Curbox</title>
+    <meta
+      name="description"
+      content="Compare Curbox with Digital Wellbeing, Reef, DetoxDroid, Freedom, AppBlock, Stay Focused, ScreenZen, and Lock Me Out across blocking, schedules, unlock challenges, short-video tools, and privacy."
+    >
+    <link rel="canonical" href="https://curbox.app/comparison.html">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="Compare Android app blockers">
+    <meta property="og:description" content="See how leading Android app blockers compare and where Curbox goes further.">
+    <meta property="og:url" content="https://curbox.app/comparison.html">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Compare Android app blockers">
+    <meta name="twitter:description" content="See how leading Android app blockers compare and where Curbox goes further.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--comparison {
+        max-width: 82rem;
+      }
+
+      .page--comparison .lead {
+        max-width: 52rem;
+      }
+
+      .comparison-intro {
+        max-width: var(--measure);
+      }
+
+      .comparison-table {
+        min-width: 76rem;
+        font-size: 0.78rem;
+        line-height: 1.35;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 0.9rem 0.75rem;
+        white-space: normal;
+        vertical-align: middle;
+      }
+
+      .comparison-table thead th {
+        min-width: 7.5rem;
+      }
+
+      .comparison-table thead th:first-child {
+        min-width: 9rem;
+      }
+
+      .comparison-table tbody th {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        text-align: left;
+      }
+
+      .comparison-table tbody tr.curbox-row,
+      .comparison-table tbody tr.curbox-row th {
+        background: #151515;
+      }
+
+      .comparison-table tbody tr.curbox-row td {
+        color: var(--fg);
+        font-weight: 600;
+      }
+
+      .comparison-table .mark {
+        display: block;
+        margin-bottom: 0.15rem;
+        color: var(--fg);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .comparison-table .not-listed {
+        color: #5f5f5c;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+      }
+
+      .comparison-table .product-note {
+        display: block;
+        margin-top: 0.15rem;
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        font-weight: 400;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .legend {
+        max-width: var(--measure);
+        margin-top: 1rem;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .verdict-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .verdict {
+        padding-top: 1rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .verdict h3 {
+        margin-bottom: 0.45rem;
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        line-height: 1.2;
+      }
+
+      .verdict p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.55;
+      }
+
+      .comparison-cta {
+        display: inline-block;
+        margin-top: 1.5rem;
+        padding: 0.85rem 1.8rem;
+        border-radius: 999px;
+        background: var(--fg);
+        color: var(--bg);
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: transform 0.2s ease;
+      }
+
+      .comparison-cta:hover {
+        transform: translateY(-2px);
+      }
+
+      @media (max-width: 48rem) {
+        .matrix-wrap {
+          overflow: visible;
+        }
+
+        .comparison-table {
+          display: block;
+          min-width: 0;
+        }
+
+        .comparison-table thead {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+
+        .comparison-table tbody,
+        .comparison-table tr,
+        .comparison-table th,
+        .comparison-table td {
+          display: block;
+          width: 100%;
+        }
+
+        .comparison-table tbody tr {
+          margin-top: 1rem;
+          overflow: hidden;
+          border: 1px solid var(--line);
+          border-radius: 10px;
+          background: #080808;
+        }
+
+        .comparison-table tbody th {
+          position: static;
+          padding: 1rem;
+          border-bottom: 1px solid var(--line);
+          background: #0d0d0d;
+        }
+
+        .comparison-table tbody td {
+          display: block;
+          padding: 0.8rem 1rem;
+          border-bottom: 1px solid var(--line);
+          text-align: left;
+        }
+
+        .comparison-table tbody td:last-child {
+          border-bottom: 0;
+        }
+
+        .comparison-table tbody td::before {
+          display: block;
+          margin-bottom: 0.3rem;
+          color: var(--muted);
+          font-family: var(--font-mono);
+          font-size: 0.62rem;
+          line-height: 1.4;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+        }
+
+        .comparison-table tbody td:nth-child(2)::before { content: 'Apps & websites'; }
+        .comparison-table tbody td:nth-child(3)::before { content: 'Schedules & limits'; }
+        .comparison-table tbody td:nth-child(4)::before { content: 'Reels / Shorts'; }
+        .comparison-table tbody td:nth-child(5)::before { content: 'Hide app parts'; }
+        .comparison-table tbody td:nth-child(6)::before { content: 'Unlock friction'; }
+        .comparison-table tbody td:nth-child(7)::before { content: 'Video insights'; }
+        .comparison-table tbody td:nth-child(8)::before { content: 'Across devices'; }
+        .comparison-table tbody td:nth-child(9)::before { content: 'Open source'; }
+
+        .comparison-table .mark {
+          display: inline;
+          margin: 0 0.25rem 0 0;
+        }
+
+        .verdict-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--comparison">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/">← Home</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Comparison · Android app blockers</span>
+            <h1 class="page__title">More than a timer with a lock on it.</h1>
+            <p class="lead">Most blockers can stop an app. Curbox can remove only the addictive part, let you choose meaningful friction, and show what short-form scrolling is doing to your attention. The best tools are not locked behind a subscription.</p>
+        </header>
+
+        <section class="section">
+            <div class="comparison-intro">
+                <h2 class="section__title">Feature comparison</h2>
+                <p>This chart compares publicly documented Android capabilities. "Not listed" means we could not find the feature in the cited product materials when this page was checked. It does not mean the product could never add it.</p>
+            </div>
+            <div class="matrix-wrap" tabindex="0" aria-label="Android app blocker comparison">
+                <table class="matrix comparison-table">
+                    <caption style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Comparison of Curbox and popular Android app blockers</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">App</th>
+                            <th scope="col">Apps &amp; websites</th>
+                            <th scope="col">Schedules &amp; limits</th>
+                            <th scope="col">Reels / Shorts inside apps</th>
+                            <th scope="col">Hide parts of apps</th>
+                            <th scope="col">Unlock friction</th>
+                            <th scope="col">Short-video insights</th>
+                            <th scope="col">Across devices</th>
+                            <th scope="col">Open source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="curbox-row">
+                            <th scope="row">Curbox<span class="product-note">Free</span></th>
+                            <td><span class="mark">✓</span>Apps, sites, and page sections</td>
+                            <td><span class="mark">✓</span>Schedules, allowances, and focus</td>
+                            <td><span class="mark">✓</span>Native feeds</td>
+                            <td><span class="mark">✓</span>Feeds, tabs, recommendations</td>
+                            <td><span class="mark">✓</span>Waits, intent, math, NFC, QR, and more</td>
+                            <td><span class="mark">✓</span>Count and attention span</td>
+                            <td><span class="mark">✓</span>Optional Sync</td>
+                            <td><span class="mark">✓</span>GPL v3</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Digital Wellbeing<span class="product-note">Built into Android</span></th>
+                            <td>Apps and Chrome sites</td>
+                            <td>Daily timers and Focus schedule</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td>PIN and temporary breaks</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="not-listed">Not listed</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Reef<span class="product-note">Free · Open source</span></th>
+                            <td>Apps and websites</td>
+                            <td>Daily limits, routines, and a focus timer</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td>Mindful Launch plus flexible and strict modes</td>
+                            <td>General usage charts</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="mark">✓</span>MIT</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">DetoxDroid<span class="product-note">Free · Open source</span></th>
+                            <td>Apps</td>
+                            <td>Daily budgets and always-on protection</td>
+                            <td><span class="mark">✓</span>Doomscroll detection and cooldown</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td>Pause cooldown and commitment password</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="mark">✓</span>GPL v3</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Freedom<span class="product-note">Premium</span></th>
+                            <td>Apps, sites, and internet</td>
+                            <td>One-off and recurring schedules</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td>Locked Mode</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="mark">✓</span>Strong multi-platform sync</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">AppBlock<span class="product-note">Free + Premium</span></th>
+                            <td>Apps, sites, URLs, and keywords</td>
+                            <td>Usage, time, location, and Wi-Fi</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td>Cooldown and third-party approval</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td>Android, iOS, and browsers</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Stay Focused</th>
+                            <td>Apps and websites</td>
+                            <td>Profiles and screen-time limits</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td>Strict Mode and Lock Mode</td>
+                            <td>General usage statistics</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="not-listed">Not listed</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">ScreenZen<span class="product-note">Donation-supported</span></th>
+                            <td>Apps and websites</td>
+                            <td>Schedules and daily limits</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td>Pauses, prompts, tasks, and unlock caps</td>
+                            <td>General screen-time tracking</td>
+                            <td>Available on multiple platforms</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Lock Me Out<span class="product-note">Free + Premium</span></th>
+                            <td>Apps, sites, allowlists</td>
+                            <td>Time, usage, opens, unlocks, location</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td>Breaks, emergency access, and password</td>
+                            <td>General usage statistics</td>
+                            <td><span class="not-listed">Not listed</span></td>
+                            <td><span class="not-listed">Not listed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="legend"><strong>✓</strong> means the capability is directly documented. Descriptive cells show a narrower or different approach. "Not listed" means we could not find it in the sources below.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Why Curbox wins on Android</h2>
+            <div class="verdict-grid">
+                <div class="verdict">
+                    <h3>Keep the useful part</h3>
+                    <p>Block Reels or Shorts without losing messages, search, subscriptions, or the rest of the app.</p>
+                </div>
+                <div class="verdict">
+                    <h3>Friction that fits you</h3>
+                    <p>Choose a complete lock, a wait, adaptive math, written intent, NFC, QR/barcode scanning, or another challenge.</p>
+                </div>
+                <div class="verdict">
+                    <h3>Understand the scroll</h3>
+                    <p>See not only how many short videos you watched, but also how that scrolling affects your attention span.</p>
+                </div>
+                <div class="verdict">
+                    <h3>No premium wall</h3>
+                    <p>Curbox is free and open source. Its strongest blocking and unlock tools are available without a subscription.</p>
+                </div>
+            </div>
+            <p style="max-width:var(--measure);margin-top:1.75rem;">No blocker is best for every person. Reef is a clean choice for classic blocking and focus timers. DetoxDroid is excellent for grayscale and interrupting doomscrolling. Curbox stands out by putting feed controls, app-part hiding, flexible unlock challenges, and short-video attention insights together in one free Android app.</p>
+            <a class="btn comparison-cta" href="https://f-droid.org/en/packages/neth.iecal.curbox/" target="_blank" rel="noopener noreferrer">Try Curbox for free</a>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Sources &amp; methodology</h2>
+            <p>Compared on 19 August 2026 using each product's public feature pages and help documentation. Features may change after that date.</p>
+            <ul>
+                <li><a href="/features.html">Curbox features</a>, <a href="/docs/unlock-challenges/overview/">unlock challenges</a>, and <a href="/docs/reducers/app-pause/">App Pause</a></li>
+                <li><a href="https://support.google.com/android/answer/9346420" target="_blank" rel="noopener noreferrer">Google Digital Wellbeing help</a></li>
+                <li><a href="https://github.com/aload0/Reef" target="_blank" rel="noopener noreferrer">Reef source and feature list</a></li>
+                <li><a href="https://f-droid.org/en/packages/com.flx_apps.digitaldetox/" target="_blank" rel="noopener noreferrer">DetoxDroid on F-Droid</a></li>
+                <li><a href="https://freedom.to/features" target="_blank" rel="noopener noreferrer">Freedom features</a></li>
+                <li><a href="https://appblock.app/" target="_blank" rel="noopener noreferrer">AppBlock features</a></li>
+                <li><a href="https://www.stayfocused.me/" target="_blank" rel="noopener noreferrer">Stay Focused features</a></li>
+                <li><a href="https://screenzen.co/" target="_blank" rel="noopener noreferrer">ScreenZen features</a></li>
+                <li><a href="https://www.teqtic.com/lock-me-out" target="_blank" rel="noopener noreferrer">Lock Me Out features</a></li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

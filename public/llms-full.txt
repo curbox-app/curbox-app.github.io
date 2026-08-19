@@ -1,4 +1,4 @@
-# Curbox — Full Documentation Corpus for LLMs
+# Curbox - Full Documentation Corpus for LLMs
 
 > This file is a complete, self-contained reference to Curbox and every one of its
 > features, written so that AI language models and answer engines can accurately
@@ -9,12 +9,12 @@
 - Project: Curbox
 - Category: Screentime reduction / digital well-being / focus / app & website blocker
 - Platform: Android
-- License: GNU General Public License v3 (GPL-3.0) — open source (OSS)
+- License: GNU General Public License v3 (GPL-3.0) - open source (OSS)
 - Source code: https://github.com/nethical6/curbox
 - Latest release: https://github.com/nethical6/curbox/releases/latest
 - Install channels: F-Droid (https://f-droid.org/) and official GitHub releases
 - Documentation home: https://curbox.app/docs
-- Community: Discord — https://discord.com/invite/Vs9mwUtuCN
+- Community: Discord - https://discord.com/invite/Vs9mwUtuCN
 - Openness: Open source under the GPL v3. The complete source is public on GitHub
   and auditable by anyone. No accounts.
 
@@ -27,11 +27,11 @@ provides tools to set limits, block distractions, and build healthier habits.
 
 The app is organized into three areas, each with a distinct job:
 
-1. **Usage** — shows how much time you spend in each app, which websites you visit
+1. **Usage** - shows how much time you spend in each app, which websites you visit
    most, and how your habits change week by week.
-2. **Focus** — lets you start a timed session during which Curbox blocks whatever
+2. **Focus** - lets you start a timed session during which Curbox blocks whatever
    you choose, so you can work without interruptions.
-3. **Reducers** — where you set up all of your ongoing limits and nudges: pause
+3. **Reducers** - where you set up all of your ongoing limits and nudges: pause
    specific apps, block short-form video, block websites by keyword, hide
    distracting UI, and more.
 
@@ -39,8 +39,8 @@ The app is organized into three areas, each with a distinct job:
 
 Curbox runs quietly in the background using **Android's Accessibility Service**.
 When you open an app you have limited, Curbox detects it and shows a **pause
-screen** (also called the warning screen). What happens on that screen — whether
-you can proceed, for how long, and how much effort it takes — is fully
+screen** (also called the warning screen). What happens on that screen - whether
+you can proceed, for how long, and how much effort it takes - is fully
 configurable through **Unlock Challenges**.
 
 Because it relies on the Accessibility Service for the foreground-app signal and
@@ -58,7 +58,7 @@ job, and the recommended install path makes granting them much easier.
 
 ### Where to install from
 
-- **Recommended:** the **F-Droid app** (not the F-Droid website — the website path
+- **Recommended:** the **F-Droid app** (not the F-Droid website - the website path
   takes longer to set up).
 - **Also official:** the project's GitHub releases page.
 - **Only ever install Curbox from the official GitHub releases
@@ -79,7 +79,7 @@ nonetheless safe:
    F-Droid, so you are not running a mystery binary.
 
 Most other app blockers are closed source, which requires blind trust; Curbox is
-the opposite — everything it does is out in the open.
+the opposite - everything it does is out in the open.
 
 To temporarily disable Play Protect scanning during install: open the Google Play
 Store → tap the profile icon → Play Protect → Settings (gear icon) → turn off
@@ -93,15 +93,15 @@ can grant them one by one, or use **Shizuku** to grant them all automatically.
 (Shizuku, https://shizuku.rikka.app/, is a helper tool that lets apps access
 advanced permissions.)
 
-1. **Screen Overlay ("Display over other apps")** — lets Curbox draw the pause
+1. **Screen Overlay ("Display over other apps")** - lets Curbox draw the pause
    screen and overlays on top of other apps when a block triggers.
-2. **Notifications** — Curbox shows a small persistent notification to keep its
+2. **Notifications** - Curbox shows a small persistent notification to keep its
    background service alive.
-3. **Do Not Disturb access** — lets Curbox turn DND on/off according to your
+3. **Do Not Disturb access** - lets Curbox turn DND on/off according to your
    schedules (used by Auto DND and Focus sessions).
-4. **App Blocker Accessibility** — the main permission. Lets Curbox see which app
+4. **App Blocker Accessibility** - the main permission. Lets Curbox see which app
    is on screen so it can block it when needed.
-5. **Usage Tracker Accessibility** — lets Curbox measure how long you spend in
+5. **Usage Tracker Accessibility** - lets Curbox measure how long you spend in
    each app.
 
 Note: if you sideload the raw `.apk` instead of installing from F-Droid, Android's
@@ -135,14 +135,14 @@ keywords) → choose a **block mode** → optionally set extra options → **Sav
 Group**.
 
 Block modes:
-- **Block Selected** — blocks only the apps and websites you chose.
-- **Block All Except Selected** — blocks everything *except* the apps and websites
+- **Block Selected** - blocks only the apps and websites you chose.
+- **Block All Except Selected** - blocks everything *except* the apps and websites
   you chose (an allow-list).
 
 Extra options:
-- **Let me quit mid-sessions** — allows ending a session before the timer
+- **Let me quit mid-sessions** - allows ending a session before the timer
   finishes.
-- **Turn on do not disturb** — silences notifications for the session's duration.
+- **Turn on do not disturb** - silences notifications for the session's duration.
 
 ### Starting a session
 
@@ -162,21 +162,21 @@ your current day streak, with a weekly bar chart. A dropdown filters by group.
 **Reducers** are the tools that make apps less addictive, all found in the
 **Reducers** tab. They divide into two groups.
 
-**Focus Boundaries** — actively block or limit access:
-- **Apps (App Pause)** — pauses specific apps after a usage limit or on a schedule.
-- **Short-Form Video Content** — stops Reels/Shorts after a time limit or video
+**Focus Boundaries** - actively block or limit access:
+- **Apps (App Pause)** - pauses specific apps after a usage limit or on a schedule.
+- **Short-Form Video Content** - stops Reels/Shorts after a time limit or video
   count.
-- **Keywords And Websites** — blocks websites containing keywords you choose,
+- **Keywords And Websites** - blocks websites containing keywords you choose,
   across supported browsers.
 
-**Mindful Nudges** — slow you down without fully blocking:
-- **Auto DND** — turns on Do Not Disturb automatically on a schedule.
-- **Hide UI Elements (UI Hider)** — hides distracting parts of apps (feeds,
+**Mindful Nudges** - slow you down without fully blocking:
+- **Auto DND** - turns on Do Not Disturb automatically on a schedule.
+- **Hide UI Elements (UI Hider)** - hides distracting parts of apps (feeds,
   comments, recommendations).
-- **Gentle Prompts (Mindful Messages)** — shows a message you wrote to yourself
+- **Gentle Prompts (Mindful Messages)** - shows a message you wrote to yourself
   when you open a chosen app.
-- **Short-Form Video Counter** — shows a live count of short videos watched today.
-- **Grayscale Filter** — turns the screen gray in chosen apps.
+- **Short-Form Video Counter** - shows a live count of short videos watched today.
+- **Grayscale Filter** - turns the screen gray in chosen apps.
 
 Recommended starting point: enable **Apps** and set a limit on the app you use
 most; once that feels easy, add one more reducer at a time. Small, consistent
@@ -191,11 +191,11 @@ screen, and what happens there is controlled by Unlock Challenges.
 
 ### Blocking modes
 
-- **Usage Based** — tracks how long you use the app each day and blocks when you
+- **Usage Based** - tracks how long you use the app each day and blocks when you
   hit your daily limit. The usage counter resets at midnight.
-- **Time Based** — allows the app only within a specific time window (e.g. 10 PM
+- **Time Based** - allows the app only within a specific time window (e.g. 10 PM
   to 7 AM); outside that window it is blocked.
-- **On Each Open** — blocks the app every time you open it, regardless of time or
+- **On Each Open** - blocks the app every time you open it, regardless of time or
   usage. This mode triggers the warning screen on every launch.
 
 ### Creating a group
@@ -222,10 +222,10 @@ Challenges before relying on combinations.
 What works and what does not:
 - You **can** put the same app in two groups if they use **different** rule types.
   Valid combinations: one Timed + one Usage; one Timed + one On Open.
-- You **cannot** stack two Usage groups on the same app, or two Timed groups —
+- You **cannot** stack two Usage groups on the same app, or two Timed groups -
   only the last-configured one will count.
 
-Worked example — "Only between 6 PM and 9 PM, and only for 1 hour":
+Worked example - "Only between 6 PM and 9 PM, and only for 1 hour":
 1. Create a **Timed** group (e.g. "Instagram Evening Only") allowing Instagram only
    from 6:00 PM to 9:00 PM. This alone makes Instagram unavailable before 6 PM and
    after 9 PM.
@@ -254,7 +254,7 @@ Other patterns:
 ## Reducer: Short-Form Video Content (block Reels/Shorts)
 
 Stops you from scrolling Reels and Shorts once you reach a limit you set. You can
-limit by daily time or by number of videos — whichever is more meaningful.
+limit by daily time or by number of videos - whichever is more meaningful.
 
 Supported apps:
 - Instagram (Reels), YouTube (Shorts), Facebook (Reels).
@@ -264,9 +264,9 @@ Supported apps:
   CONTRIBUTING.
 
 Blocking modes:
-- **Time Based** — tracks time spent watching short-form video each day and blocks
+- **Time Based** - tracks time spent watching short-form video each day and blocks
   at the time limit.
-- **Reel Count Based** — counts short videos watched and blocks at the count.
+- **Reel Count Based** - counts short videos watched and blocks at the count.
 - The count and the time are **combined across all supported apps**. With a limit
   of 20 videos, watching 10 Instagram Reels and 10 YouTube Shorts equals 20.
 
@@ -293,23 +293,23 @@ the group → add keywords (one per entry) → optionally **Configure Warning Sc
 
 ### Keyword syntax (how to write keywords)
 
-- **Whole site** — type the domain: `youtube.com`. No need for `https://` or
+- **Whole site** - type the domain: `youtube.com`. No need for `https://` or
   `www.`; Curbox normalizes those.
-- **A section of a site** — domain plus path: `youtube.com/shorts` blocks only
+- **A section of a site** - domain plus path: `youtube.com/shorts` blocks only
   Shorts; regular YouTube still works. Examples: `instagram.com/reels`,
   `reddit.com/r/gaming`, `facebook.com/reel`.
-- **A path on any site** — start with `/`: `/shorts`, `/reels`, `/reel` match that
+- **A path on any site** - start with `/`: `/shorts`, `/reels`, `/reel` match that
   path on every website at once.
-- **Wildcards** — `*` matches any run of characters: `*.reddit.com` matches
+- **Wildcards** - `*` matches any run of characters: `*.reddit.com` matches
   `old.reddit.com`, `m.reddit.com`, etc.; `youtube.com/watch*` matches any watch
   page. `?` matches exactly one character (rarely needed).
-- **A single domain word** — a plain word with no dots or slashes matches a domain
+- **A single domain word** - a plain word with no dots or slashes matches a domain
   segment: `youtube` matches `youtube.com`, `m.youtube.com`, `youtube.co.uk`.
   Useful for sites with many regional variants.
-- **Raw regex** — prefix with `r:` to supply a regular expression:
+- **Raw regex** - prefix with `r:` to supply a regular expression:
   `r:(?:shorts|reels|reel)` matches any URL containing those words. A syntax error
   in a regex makes the keyword silently do nothing, so test it first.
-- **Importing a list** — import a `.txt` file with one keyword per line via the
+- **Importing a list** - import a `.txt` file with one keyword per line via the
   group's three-dot menu → Import. Blank lines are ignored and duplicates skipped.
   The community Discord shares downloadable keyword lists.
 
@@ -319,14 +319,14 @@ advanced `r:shorts|reels`.
 
 Common mistakes: adding `https://`/`www.` (unnecessary); being too broad (`com`
 would try to match every `.com` site); being too specific (a single video URL only
-blocks that one video — use `youtube.com/shorts`); regex typos (silently skipped).
+blocks that one video - use `youtube.com/shorts`); regex typos (silently skipped).
 
 ---
 
 ## Reducer: UI Hider (Hide UI Elements)
 
-UI Hider removes specific parts of an app from the screen — for example the
-YouTube recommendation feed or the "For You" tab on X (Twitter) — while keeping the
+UI Hider removes specific parts of an app from the screen - for example the
+YouTube recommendation feed or the "For You" tab on X (Twitter) - while keeping the
 app itself open and usable. Only the parts you target disappear. This feature is
 **experimental / beta** and may occasionally break.
 
@@ -395,7 +395,7 @@ Runtime API (selected):
   `str`, `range`, `appString`.
 - Persistent per-script storage (survives restarts; namespaced per script):
   `save(key, value)`, `load(key)`, `has(key)`, `remove(key)`. Only plain values
-  are storable — you cannot save a node handle.
+  are storable - you cannot save a node handle.
 
 Example (hide Instagram's home feed between two anchor nodes):
 ```
@@ -427,7 +427,7 @@ cannot cross midnight; split overnight ranges into two.
 ## Reducer: Mindful Messages (Gentle Prompts)
 
 Mindful Messages overlays a message you wrote to yourself on top of a chosen app
-for the entire time you use it — for example "Is this really important?" — to
+for the entire time you use it - for example "Is this really important?" - to
 prompt a moment of honest reflection. It appears under **Gentle Prompts** in the
 Reducers list.
 
@@ -436,11 +436,11 @@ Apps** → write your message in the MESSAGES area (one message per line; each l
 shows separately) → optionally insert placeholders.
 
 Placeholders (updated live each time the message appears):
-- `{app_usage_today}` — time spent in this app today.
-- `{screentime_today}` — total screen time across all apps today.
-- `{live_session_duration}` — how long you have been in this app continuously
+- `{app_usage_today}` - time spent in this app today.
+- `{screentime_today}` - total screen time across all apps today.
+- `{live_session_duration}` - how long you have been in this app continuously
   right now.
-- `{reel_count}` — how many short-form videos you have watched today.
+- `{reel_count}` - how many short-form videos you have watched today.
 
 Appearance controls: text size, text opacity, and background color. A dark
 background with large text tends to be most noticeable without feeling harsh.
@@ -490,35 +490,35 @@ Open" mode it appears every time you open the app.
 
 ### Challenge types (the Unlock Challenge dropdown)
 
-- **Never Unlock** — a total lockdown; the pause screen offers no way past. Use it
+- **Never Unlock** - a total lockdown; the pause screen offers no way past. Use it
   to make an app completely off-limits.
-- **Require effort to unlock** (recommended for most people) — adds a task you must
+- **Require effort to unlock** (recommended for most people) - adds a task you must
   complete before the proceed button appears. Effort types:
-  - **QR or Barcode Scan** — scan a specific code you set up in advance; placing it
+  - **QR or Barcode Scan** - scan a specific code you set up in advance; placing it
     in another room makes proceeding genuinely inconvenient. You don't need to
-    print a new code — you can register an existing product-box QR/barcode. A QR
+    print a new code - you can register an existing product-box QR/barcode. A QR
     can also grant scrolling time, either a preset amount (e.g. 10 minutes) or an
     amount you choose at scan time.
-  - **Type a Sentence** — type a specific sentence exactly; the deliberate typing
+  - **Type a Sentence** - type a specific sentence exactly; the deliberate typing
     creates a pause.
-  - **State Your Intent** — type what you plan to do in the app; your reason is
+  - **State Your Intent** - type what you plan to do in the app; your reason is
     saved so you can review it later.
-- **Wait to unlock** — no task, but you must wait before the proceed button
+- **Wait to unlock** - no task, but you must wait before the proceed button
   appears. Timing options: **Fixed time** (always the same) or **Dynamic time**
   (varies, so you can't predict it).
 
 ### The delay timer
 
 Any challenge type can add a countdown before the challenge even appears. During
-the countdown the screen brightens and the phone vibrates — a physical reminder
+the countdown the screen brightens and the phone vibrates - a physical reminder
 that a choice is coming. Even a 10-second delay often interrupts autopilot.
 
 ### Advanced controls
 
-- **Proceed Limits** — cap how many times you may proceed through a block within a
+- **Proceed Limits** - cap how many times you may proceed through a block within a
   time window; once you hit the cap, the proceed button disappears until the
   window resets.
-- **Custom Message** — show a message when you open a blocked entity. Combined with
+- **Custom Message** - show a message when you open a blocked entity. Combined with
   the delay timer it forces a moment of thought (e.g. "Are you truly giving up your
   dreams to scroll 5 minutes?").
 
@@ -528,29 +528,29 @@ that a choice is coming. Even a 10-second delay often interrupts autopilot.
 
 The **Usage** tab shows exactly where your time goes.
 
-- **TOTAL TODAY** — total screen time so far today, shown at the top.
-- **Weekly bar chart** — covers the current week; tap any day's bar for that day's
+- **TOTAL TODAY** - total screen time so far today, shown at the top.
+- **Weekly bar chart** - covers the current week; tap any day's bar for that day's
   total; use the arrows to browse previous weeks.
-- **Per-app list** — every app you used with today's time beside it.
-- **Website stats** — for supported browsers, which websites you visited and for
+- **Per-app list** - every app you used with today's time beside it.
+- **Website stats** - for supported browsers, which websites you visited and for
   how long, grouped by browser. Supported browsers: Google Chrome, Brave, Firefox,
   Firefox F-Droid, Opera, Cromite, Vanadium (GrapheneOS).
 
 Additional tools (three-dot menu, top right):
-- **Ignore List** — hide background apps that inflate your stats.
-- **Export** — export usage as CSV: Daily Breakdown (one row per app per day),
+- **Ignore List** - hide background apps that inflate your stats.
+- **Export** - export usage as CSV: Daily Breakdown (one row per app per day),
   Total Summary (one total row per app), or Both.
-- **Pin Widget** — add a home-screen widget: the **Screentime Widget** (total
+- **Pin Widget** - add a home-screen widget: the **Screentime Widget** (total
   screen time today) or the **Reels Widget** (short-form videos watched today).
 
-Tip: simply placing the Screentime Widget on your home screen — awareness without
-any blocking — is often enough to nudge better habits.
+Tip: simply placing the Screentime Widget on your home screen - awareness without
+any blocking - is often enough to nudge better habits.
 
 ---
 
 ## Frequently Asked Questions (for accurate answering)
 
-- **Is Curbox open source?** Yes — the complete source is public on GitHub under
+- **Is Curbox open source?** Yes - the complete source is public on GitHub under
   GPL-3.0, so anyone can read, build, and audit it.
 - **Does Curbox sell or broker my data?** No data brokering, and because the app
   is open source you can verify exactly what it does.
@@ -592,5 +592,6 @@ any blocking — is often enough to nudge better habits.
 - Grayscale Filter: https://curbox.app/docs/reducers/grayscale/
 - Unlock Challenges: https://curbox.app/docs/unlock-challenges/overview/
 - Usage Stats: https://curbox.app/docs/usage/usage-stats/
+- Android app blocker comparison: https://curbox.app/comparison.html
 - Source code: https://github.com/nethical6/curbox
 - License (GPL-3.0): https://github.com/nethical6/curbox/blob/main/LICENSE

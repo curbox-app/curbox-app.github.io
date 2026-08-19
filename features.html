@@ -7,7 +7,7 @@
     <title>Features · Curbox</title>
     <meta
       name="description"
-      content="Explore Curbox features: granular app and website blocking, Reels and Shorts limits, smart schedules, unlock challenges, focus mode, usage insights, and mindful nudges. Open source for Android."
+      content="See how Curbox helps you block distracting apps, websites, Reels, and Shorts, build focus time, understand your habits, and choose an unlock challenge that works for you."
     >
     <link rel="canonical" href="https://curbox.app/features.html">
 
@@ -20,12 +20,12 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Curbox">
     <meta property="og:title" content="Curbox Features">
-    <meta property="og:description" content="Granular blocking, smart schedules, unlock challenges, focus mode, and usage insights. Open source for Android.">
+    <meta property="og:description" content="Block distractions, build focus time, understand your habits, and choose what happens when you reach a limit.">
     <meta property="og:url" content="https://curbox.app/features.html">
     <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Curbox Features">
-    <meta name="twitter:description" content="Granular blocking, smart schedules, unlock challenges, focus mode, and usage insights. Open source for Android.">
+    <meta name="twitter:description" content="Block distractions, build focus time, understand your habits, and choose what happens when you reach a limit.">
     <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,84 +53,86 @@
         </nav>
 
         <header>
-            <span class="kicker">Features · In-depth analysis</span>
-            <h1 class="page__title">Beyond simple app timers.</h1>
-            <p class="lead">Curbox targets the specific triggers that lead to mindless scrolling, not just the clock.</p>
+            <span class="kicker">Features · Built for real life</span>
+            <h1 class="page__title">Choose how Curbox helps you stop.</h1>
+            <p class="lead">Block only what distracts you, set limits around your day, and decide what should happen when you feel tempted to continue.</p>
         </header>
 
-        <!--
-          The raw feature list is reorganised into six themes that follow a
-          natural arc: WHAT you block → WHEN it blocks → the FRICTION when you
-          try anyway → tools to focus → seeing your own habits → smaller extras.
-        -->
-
         <section class="section">
-            <h2 class="section__title">Granular blocking</h2>
-            <p>Block at whatever level you need: a whole app, a single feature inside it, or one URL path. The point is precision; keep what you use, cut what hijacks you.</p>
+            <h2 class="section__title">Block only what distracts you</h2>
+            <p>You do not always need to block an entire app. Curbox lets you remove the part that pulls you in while keeping the useful parts available.</p>
             <ul>
-                <li>Block any app or website</li>
-                <li>Block the parts that hook you, like Instagram Reels and YouTube Shorts</li>
-                <li>Block sections of an app's UI, e.g. hide the entire YouTube home feed while still allowing search</li>
-                <li>Block specific URL paths only, e.g. block <code>m.youtube.com/shorts/*</code> but allow <code>m.youtube.com</code></li>
-                <li>Auto-redirect to a different site when you open a blocked one</li>
+                <li>Pause any distracting app or website</li>
+                <li>Block Instagram Reels, YouTube Shorts, and other endless short-video feeds</li>
+                <li>Hide distracting sections, such as the YouTube home feed, while keeping search available</li>
+                <li>Block one part of a website without losing the rest. For example, block YouTube Shorts pages while keeping regular videos and search available</li>
             </ul>
         </section>
 
         <section class="section">
-            <h2 class="section__title">Smart rules &amp; schedules</h2>
-            <p>Decide <em>when</em> a block applies instead of blocking everything, always. Rules can follow your usage, the time of day, or a set routine.</p>
+            <h2 class="section__title">Set limits around your day</h2>
+            <p>Choose the days and hours when a group of apps should be limited, then decide whether they stay blocked for that whole schedule or remain available for a set amount of use.</p>
             <ul>
-                <li>Usage limits: block an app once you cross a threshold (e.g. block WhatsApp after 1 hour)</li>
-                <li>Time windows: allow an app only inside set hours (e.g. WhatsApp from 7am to 9pm)</li>
-                <li>Schedule Do Not Disturb to turn on automatically</li>
-                <li>Cap how many unlocks you're allowed within a given window of hours</li>
+                <li><strong>Full scheduled block:</strong> block selected apps for the entire chosen period</li>
+                <li><strong>Usage allowance:</strong> allow a chosen amount of use during that period, then block the apps</li>
+                <li><strong>All-day schedule:</strong> apply a block or allowance across an entire day</li>
+                <li><strong>Different weekday and weekend limits:</strong> give the same apps separate allowances on different days</li>
+            </ul>
+            <p>The same app can appear in more than one group, as long as those schedules do not overlap.</p>
+            <p>See the <a href="/docs/reducers/app-pause/">App Pause guide</a> for setup examples.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Choose what happens when you reach a limit</h2>
+            <p>When a block starts, Curbox shows a pause screen. You decide in advance whether there is no way through, whether you need to wait, or whether you must complete a challenge.</p>
+            <ul>
+                <li><strong>Stay blocked:</strong> remove the option to continue completely</li>
+                <li><strong>Wait:</strong> use the same wait each time or a changing wait that you cannot predict</li>
+                <li><strong>Scan a QR code or barcode:</strong> place your chosen code away from where you usually scroll, then walk over to scan it</li>
+                <li><strong>Tap an NFC tag:</strong> use a saved physical tag as your key</li>
+                <li><strong>Solve adaptive math:</strong> complete a quick problem that adjusts to your level</li>
+                <li><strong>Type a sentence:</strong> carefully type the sentence shown on screen</li>
+                <li><strong>State your intent:</strong> write down what you plan to do before you continue, then review those reasons later</li>
+            </ul>
+            <p>You can make any choice stronger with a countdown before it appears, a limit on how often you can continue, a daily focus-time requirement, or a personal message that reminds you why you set the block.</p>
+            <p>See the <a href="/docs/unlock-challenges/overview/">complete unlock-challenges guide</a> for examples and setup instructions.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Protect time for what matters</h2>
+            <p>Start a focus session when you want to study, work, read, exercise, or simply be present without distractions.</p>
+            <ul>
+                <li>Temporarily pause the apps and websites that tend to interrupt you</li>
+                <li>See how your focused time adds up across your sessions</li>
+                <li>Require yourself to complete a chosen amount of focus time before an app can be unlocked</li>
             </ul>
         </section>
 
         <section class="section">
-            <h2 class="section__title">Unlock mechanisms</h2>
-            <p>When you try to open something out of its schedule, you choose the friction in advance. From a gentle pause to a hard wall, each option makes the impulsive tap a deliberate one.</p>
+            <h2 class="section__title">See your habits clearly</h2>
+            <p>Curbox helps you notice where your time goes without making you dig through complicated reports.</p>
             <ul>
-                <li>Complete blockade: no access at all</li>
-                <li>Fixed cooldown: a preset pause (say 5 minutes) before each unlock</li>
-                <li>Dynamic time: pick the duration yourself, every time you unlock</li>
-                <li>QR / barcode unlock: register codes from everyday product boxes (books, packaging), scatter them around your home, and physically walk to one to unlock</li>
-                <li>Type-to-unlock: type out a sentence to proceed, e.g. <em>“I am giving up on my goals to use this app right now”</em></li>
+                <li>See how much time you spend in each app and on each website</li>
+                <li>Watch your short-video count update while you scroll</li>
+                <li>Track your attention span while scrolling short-form videos</li>
+                <li>See how long the current app has been open</li>
             </ul>
         </section>
 
         <section class="section">
-            <h2 class="section__title">Focus mode</h2>
-            <p>Need to get real work done? Pause your distractions on demand and see how your focused time adds up.</p>
+            <h2 class="section__title">Make your phone less tempting</h2>
+            <p>Sometimes a gentle reminder is enough. These smaller changes make distracting apps easier to leave.</p>
             <ul>
-                <li>Temporarily pause apps and websites to focus on the task at hand</li>
-                <li>Focus statistics that track your sessions over time</li>
-            </ul>
-        </section>
-
-        <section class="section">
-            <h2 class="section__title">Insights &amp; live awareness</h2>
-            <p>You can't curb what you can't see. Curbox surfaces your habits, both in summary and in the moment you're scrolling.</p>
-            <ul>
-                <li>App usage insights</li>
-                <li>Website usage insights</li>
-                <li>A live count of how much short-form content you've scrolled, shown as you scroll</li>
-                <li>A live timer on the app itself, showing how long it's been since you opened it</li>
-            </ul>
-        </section>
-
-        <section class="section">
-            <h2 class="section__title">Nudges &amp; extras</h2>
-            <p>Smaller touches that quietly tilt your habits in the right direction.</p>
-            <ul>
-                <li>Per-app grayscale: drain the colour from Instagram while leaving the camera in full colour</li>
-                <li>Home screen widgets for quick glances and controls</li>
+                <li>Turn selected apps grayscale while leaving the rest of your phone in colour</li>
+                <li>Hide distracting feeds, tabs, and other parts of an app</li>
+                <li>Show a personal reminder when you open something you meant to avoid</li>
+                <li>Use home-screen widgets for quick checks and controls</li>
             </ul>
         </section>
 
         <section class="section">
             <h2 class="section__title">Get started</h2>
-            <p>Read the <a href="/docs">documentation</a> to set up your first block, or learn more <a href="/about.html">about why Curbox exists</a>.</p>
+            <p>Follow the <a href="/docs">step-by-step guides</a> to set up your first limit, <a href="/comparison.html">compare Curbox with other Android blockers</a>, or learn more <a href="/about.html">about why Curbox exists</a>.</p>
         </section>
     </main>
 </body>

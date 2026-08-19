@@ -22,6 +22,8 @@
  * ------------------------------------------------------------------ */
 .donate__loop {
   display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
   margin: 0 0 clamp(1.6rem, 5vh, 2.6rem);
   font-family: var(--font-mono);
   font-size: clamp(0.62rem, 2.6vw, 1rem);
@@ -221,6 +223,18 @@
 
 /* Tighten the menu on small screens: drop the metadata, keep name + arrow. */
 @media (max-width: 30rem) {
+  .donate {
+    padding-inline: 1.1rem;
+  }
+
+  .donate__loop {
+    font-size: clamp(0.42rem, 2.25vw, 0.62rem);
+  }
+
+  .method {
+    gap: 0.65rem;
+  }
+
   .method__meta {
     display: none;
   }
