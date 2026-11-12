@@ -53,10 +53,10 @@
         </nav>
 
         <header>
-            <span class="kicker">Privacy Policy · Last updated October 27, 2026</span>
+            <span class="kicker">Privacy Policy · Last updated November 12, 2026</span>
             <h1 class="page__title">Privacy Policy</h1>
             <p class="lead">Thanks for using Curbox. This policy explains, in plain words, what the app does with your information. The short version is easy to remember: Curbox keeps your data on your phone.</p>
-            <p style="margin-top: 1.5rem; color: var(--muted);">Curbox is a screen time and digital wellbeing app. It helps you block apps and websites, focus, and understand your own habits. To do that, the app needs to look at what is happening on your screen. We know that sounds sensitive, so we built Curbox so that your data stays yours: it lives on your device and never leaves it.</p>
+            <p style="margin-top: 1.5rem; color: var(--muted);">Curbox is a screen time and digital wellbeing app. It helps you block apps and websites, focus, and understand your own habits. To do that, the app needs to look at what is happening on your screen. We know that sounds sensitive, so we built Curbox so that your data stays yours: it lives on your own devices and never reaches us.</p>
         </header>
 
         <section class="section">
@@ -91,9 +91,32 @@
 
         <section class="section">
             <h2 class="section__title">The Curbox browser extension</h2>
-            <p>Curbox is also available as a browser extension. It blocks websites on the schedules you set and runs focus mode. This policy applies to the extension the same way it applies to the app.</p>
-            <p><strong>What it uses.</strong> To block websites and follow your schedules, the extension looks at the address of the page you are on and matches it against your block lists. This matching happens inside your browser as you browse; the extension does not keep a history of the pages you visit. Your block lists, schedules, and focus sessions are stored locally in your browser.</p>
-            <p><strong>Internet.</strong> Unlike the Android app, the extension may use the internet. It does not use it to collect your data or send your browsing to us.</p>
+            <p>Curbox is also available as a browser extension for Chrome, Firefox and other browsers. It tracks how long you spend on websites, blocks websites on the schedules and limits you set, and runs focus mode. Everything in this policy about the app applies to the extension too, with the differences below.</p>
+
+            <p><strong>What it stores.</strong> The extension keeps everything in your browser's own local storage, on your computer:</p>
+            <ul>
+                <li><strong>Website usage.</strong> How long you spend on each website, by day, so it can show your screen time. It keeps the domain and the rest of the page address (for example, <code>youtube.com/watch?v=…</code>), so you can see which videos or sections took your time. Usage is kept for four weeks and then deleted automatically. Time is only counted while the page is in front of you.</li>
+                <li><strong>Your settings.</strong> Block lists, schedules, limits, focus groups, warning messages, Gentle Prompts, and any lists you import.</li>
+                <li><strong>Focus sessions and unlocks.</strong> When focus sessions ran, whether you finished them, and the unlocks you used on the warning screen.</li>
+            </ul>
+            <p>To decide what to block, the extension reads the address of the page you are on and matches it against your rules inside your browser. It does not collect or store the text, images or forms on the pages you visit.</p>
+
+            <p><strong>When it uses the internet.</strong> The extension never sends your data to us, and it has no analytics or tracking. It only connects to something in these cases:</p>
+            <ul>
+                <li><strong>Website packs.</strong> If you choose to import a community list of websites to block, the extension downloads it from GitHub (<code>github.com/curbox-app/website_packs</code>). Nothing about you is sent, though, as with any download, GitHub can see your IP address.</li>
+                <li><strong>Terms and this policy.</strong> On first run, the extension can show the Terms and this Privacy Policy, loaded from curbox.app.</li>
+                <li><strong>Sync with your phone,</strong> if you turn it on. See below.</li>
+            </ul>
+
+            <p><strong>Sync with your phone.</strong> Sync is optional and off until you set it up. It connects the extension to Curbox Sync, a small companion app on your Android phone, so focus mode and your screen time line up across both.</p>
+            <ul>
+                <li><strong>How it starts.</strong> Nothing is shared until you pair. You pair by typing a code that Curbox Sync shows on your phone, while both are on the same WiFi.</li>
+                <li><strong>What is shared.</strong> Whether focus is on, how much time is left and your Pomodoro rounds; your focus groups, including their names and websites; and your daily time per website (the domain and how long, for your top 40 sites a day over the last four weeks). The extension also sends a short name for itself, such as "Chrome on Mac", so your phone can tell your devices apart. Full page addresses are never shared.</li>
+                <li><strong>Where it goes.</strong> Straight to your own phone. There is no Curbox server in between, so we never receive or see any of it. On your home WiFi, the data travels only over your local network. To find your phone, the extension briefly checks addresses on your local network for Curbox Sync; it does not collect anything about other devices it finds.</li>
+                <li><strong>Encryption.</strong> Once paired, everything sent between the extension and your phone is encrypted with a key that only your two devices hold. The key is created when you pair, and the pairing code itself is never sent over the network. The pairing step only exchanges public keys and the short device name.</li>
+                <li><strong>Away from home.</strong> If you choose to install Tailscale on both devices, Sync can reach your phone from any network through Tailscale. The data stays encrypted by Curbox the whole way, and Tailscale's own privacy policy covers its service.</li>
+                <li><strong>Turning it off.</strong> Tap Unpair in the extension under Reducers, then Sync. The extension forgets your phone and its key and stops sharing. Anything already sent stays on your phone until you remove it there.</li>
+            </ul>
         </section>
 
         <section class="section">
@@ -169,6 +192,7 @@
                 <li>You can clear or reset data inside the app.</li>
                 <li>You can revoke any permission in your phone's settings.</li>
                 <li>If you gave another app access through the Curbox API, you can revoke that access at any time in Curbox.</li>
+                <li>In the browser extension, you can unpair Sync at any time. Removing the extension deletes everything it stored in your browser.</li>
                 <li>You can uninstall Curbox at any time. If you turned on anti-uninstall protection, deactivate Curbox's device administrator access in your phone's settings first (on some phones this may require restarting into safe mode), then uninstall normally. Uninstalling removes the app's local database and settings from your device. (If you have made your own separate backups through your phone or another tool, those are outside our control.)</li>
             </ul>
         </section>
