@@ -28,6 +28,7 @@ export default defineConfig({
         // The cinematic WebGL canvas page, served at /install-android/.
         installAndroid: resolve(__dirname, 'install-android/index.html'),
         about: resolve(__dirname, 'about.html'),
+        download: resolve(__dirname, 'download.html'),
         features: resolve(__dirname, 'features.html'),
         comparison: resolve(__dirname, 'comparison.html'),
         donate: resolve(__dirname, 'donate.html'),
