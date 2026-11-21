@@ -5,7 +5,7 @@
 Curbox is organized into three areas: **Usage** (see where your time goes), **Focus** (timed deep-work sessions that block distractions), and **Reducers** (the toolbox of limits and nudges). Reducers split into *Focus Boundaries* that actively block (App Pause, Short-Form Video, Keyword/Website blocker) and *Mindful Nudges* that gently slow you down (Auto DND, UI Hider, Mindful Messages, Short-Form Video Counter, Grayscale Filter). When you hit a limit, Curbox shows a configurable "pause"/warning screen whose difficulty you control via Unlock Challenges.
 
 - Platform: Android. License: GNU GPL v3. Source: https://github.com/nethical6/curbox
-- Install: F-Droid (https://f-droid.org/en/packages/neth.iecal.curbox/) or official GitHub releases (https://github.com/nethical6/curbox/releases/latest)
+- Install: Google Play (https://play.google.com/store/apps/details?id=neth.iecal.curbox), F-Droid (https://f-droid.org/en/packages/neth.iecal.curbox/) or official GitHub releases (https://github.com/nethical6/curbox/releases/latest)
 - Browser extension: Chrome Web Store (https://chromewebstore.google.com/detail/curbox/pibbkglphadkglpndilhefjkjpojmlie) and Firefox Add-ons (https://addons.mozilla.org/en-US/firefox/addon/curbox/). Website blocking with schedules and limits, website usage tracking, and focus mode.
 - All downloads: https://curbox.app/download.html
 - Open source: GPL v3, complete source on GitHub, no accounts - auditable by anyone.
@@ -45,8 +45,8 @@ Curbox is organized into three areas: **Usage** (see where your time goes), **Fo
 - [About Curbox](https://curbox.app/about.html): The open-source mission and philosophy behind the project.
 - [Features](https://curbox.app/features.html): Full breakdown of blocking, schedules, unlock challenges, focus mode, and insights.
 - [Comparison](https://curbox.app/comparison.html): Feature matrix comparing Curbox with leading Android app blockers using their publicly documented capabilities.
-- [Download Curbox](https://curbox.app/download.html): Every official download: Android app (F-Droid, GitHub releases) and browser extension (Chrome Web Store, Firefox Add-ons).
-- [Install Curbox](https://curbox.app/install-android/): How to get Curbox on Android via F-Droid or GitHub releases.
+- [Download Curbox](https://curbox.app/download.html): Every official download: Android app (Google Play, F-Droid, GitHub releases) and browser extension (Chrome Web Store, Firefox Add-ons).
+- [Install Curbox](https://curbox.app/install-android/): How to get Curbox on Android via Google Play, F-Droid, or GitHub releases.
 - [Donate](https://curbox.app/donate.html): Support the project via Patreon, GitHub Sponsors, PayPal, UPI, or crypto.
 - [Contribute](https://github.com/nethical6/curbox): How to translate, report bugs, write code, or otherwise help.
 - [Source code on GitHub](https://github.com/nethical6/curbox): The complete, auditable source (GNU GPL v3).

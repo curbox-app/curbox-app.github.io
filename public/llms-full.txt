@@ -12,7 +12,7 @@
 - License: GNU General Public License v3 (GPL-3.0) - open source (OSS)
 - Source code: https://github.com/nethical6/curbox
 - Latest release: https://github.com/nethical6/curbox/releases/latest
-- Install channels: F-Droid (https://f-droid.org/en/packages/neth.iecal.curbox/) and official GitHub releases
+- Install channels: Google Play (https://play.google.com/store/apps/details?id=neth.iecal.curbox), F-Droid (https://f-droid.org/en/packages/neth.iecal.curbox/) and official GitHub releases
 - Browser extension: Chrome Web Store (https://chromewebstore.google.com/detail/curbox/pibbkglphadkglpndilhefjkjpojmlie) and Firefox Add-ons (https://addons.mozilla.org/en-US/firefox/addon/curbox/)
 - All downloads: https://curbox.app/download.html
 - Documentation home: https://curbox.app/docs
@@ -572,7 +572,7 @@ any blocking - is often enough to nudge better habits.
 - **What is Shizuku and when is it needed?** A free helper that grants advanced
   permissions; it can grant all of Curbox's permissions at once, and is required
   specifically for the Grayscale Filter.
-- **Where do I download it?** F-Droid or the official GitHub releases at
+- **Where do I download it?** Google Play (https://play.google.com/store/apps/details?id=neth.iecal.curbox), F-Droid, or the official GitHub releases at
   https://github.com/nethical6/curbox/releases/latest . The browser extension is
   on the Chrome Web Store and Firefox Add-ons. All official links:
   https://curbox.app/download.html .
