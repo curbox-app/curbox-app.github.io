@@ -414,13 +414,25 @@ async function main() {
 
   // Camera: the cinematic pull-back. (The feed speed follows this zoom via
   // zoomProgress() in the ticker, so there's no separate scroll tween.)
-  gsap.to(camera, {
+  // Skip button: jumps the pull-back straight to its end state. Setting the
+  // tween's progress to 1 fires onComplete, so the hero reveal and the
+  // ticker hand-off run exactly as they would after the full animation.
+  const skipBtn = document.createElement('button');
+  skipBtn.type = 'button';
+  skipBtn.id = 'skip-intro';
+  skipBtn.textContent = 'Skip animation';
+  document.body.appendChild(skipBtn);
+  skipBtn.addEventListener('click', () => intro.progress(1));
+
+  const intro = gsap.to(camera, {
     scale: layout.targetScale,
     duration: 9, // 8–10s slow, hypnotic reveal
     ease: 'power2.inOut',
     delay: 1.2, // let the viewer "settle" into the feed before pulling back
     onComplete: () => {
       zoomComplete = true; // hand scale ownership to the resize-aware ticker
+      skipBtn.classList.add('gone');
+      setTimeout(() => skipBtn.remove(), 400);
       // Reveal the tagline + install CTA only now - the opening close-up,
       // camera zoom, and figure-8 reveal have all finished, so the overlay
       // never competes with them.
