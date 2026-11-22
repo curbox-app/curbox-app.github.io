@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>NFC App Blocker for Android: Tap a Tag to Focus · Curbox</title>
+    <meta
+      name="description"
+      content="Use NFC tags as a physical key for blocked apps, or tap a tag on your desk to start Focus Mode. How it works, which tags to buy, and where to stick them."
+    >
+    <link rel="canonical" href="https://curbox.app/nfc-app-blocker/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="NFC app blocker: tap a tag to unlock apps or start focus">
+    <meta property="og:description" content="Use NFC tags as a physical key for blocked apps, or tap a tag on your desk to start Focus Mode. How it works, which tags to buy, and where to stick them.">
+    <meta property="og:url" content="https://curbox.app/nfc-app-blocker/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NFC app blocker: tap a tag to unlock apps or start focus">
+    <meta name="twitter:description" content="Use NFC tags as a physical key for blocked apps, or tap a tag on your desk to start Focus Mode. How it works, which tags to buy, and where to stick them.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+
+      .nfc-pulse { position: relative; width: 6rem; height: 6rem; margin-bottom: 2rem; }
+      .nfc-pulse span { position: absolute; inset: 0; border: 1px solid var(--fg); border-radius: 50%; opacity: 0; animation: ring 2.4s ease-out infinite; }
+      .nfc-pulse span:nth-child(2) { animation-delay: 0.8s; }
+      .nfc-pulse span:nth-child(3) { animation-delay: 1.6s; }
+      .nfc-pulse b { position: absolute; inset: 1.8rem; border-radius: 6px; background: var(--fg); }
+      @keyframes ring { 0% { transform: scale(0.4); opacity: 0.9; } 100% { transform: scale(1.2); opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) { .nfc-pulse span { animation: none; opacity: 0.3; } }
+
+      .jobs { display: grid; grid-template-columns: 1fr 1fr; margin-top: 1.5rem; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+      .job { padding: 1.5rem 1.4rem; }
+      .job + .job { border-left: 1px solid var(--line); background: #0b0b0b; }
+      .job__tag { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+      .job h3 { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.1; margin: 0.4rem 0 0.75rem; }
+      .job p { font-size: 0.93rem; }
+      .job ol { margin: 0.9rem 0 0 1.1rem; font-size: 0.9rem; }
+      .job ol li { margin-top: 0.4rem; }
+      @media (max-width: 40rem) { .jobs { grid-template-columns: 1fr; } .job + .job { border-left: 0; border-top: 1px solid var(--line); } }
+
+      .act-wrap { overflow-x: auto; margin-top: 1.25rem; }
+      .act { width: 100%; min-width: 30rem; border-collapse: collapse; font-size: 0.92rem; }
+      .act th, .act td { text-align: left; padding: 0.8rem 0.7rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+      .act thead th { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+      .act tbody th { font-family: var(--font-mono); font-size: 0.85rem; white-space: nowrap; }
+
+      .spec { margin-top: 1.25rem; border: 2px solid var(--fg); border-radius: 4px; font-family: var(--font-mono); font-size: 0.82rem; }
+      .spec__head { padding: 0.7rem 0.9rem; background: var(--fg); color: var(--bg); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+      .spec__row { display: grid; grid-template-columns: 9rem 1fr; gap: 0.75rem; padding: 0.7rem 0.9rem; border-top: 1px solid var(--line); }
+      .spec__row span:first-child { color: var(--muted); text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.06em; padding-top: 0.1rem; }
+      .spec__row span:last-child { font-family: var(--font-body); font-size: 0.92rem; }
+      @media (max-width: 30rem) { .spec__row { grid-template-columns: 1fr; gap: 0.2rem; } }
+
+      .spots { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+      .spot { padding: 1rem 1.1rem; border-left: 2px solid var(--fg); background: #0b0b0b; }
+      .spot b { display: block; font-family: var(--font-display); margin-bottom: 0.3rem; }
+      .spot span { font-size: 0.9rem; color: var(--muted); }
+
+      /* Shared FAQ + related (kept per page so each file stands alone). */
+      .faq__item { border-top: 1px solid var(--line); padding: 1rem 0; }
+      .faq__item:last-child { border-bottom: 1px solid var(--line); }
+      .faq__item summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; list-style: none; position: relative; padding-right: 2rem; }
+      .faq__item summary::-webkit-details-marker { display: none; }
+      .faq__item summary::after { content: '+'; position: absolute; right: 0; top: 0; font-family: var(--font-mono); color: var(--muted); }
+      .faq__item[open] summary::after { content: '\2212'; }
+      .faq__item p { margin-top: 0.6rem; color: var(--muted); }
+      .related { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+      .related a { padding: 0.5rem 0.9rem; border: 1px solid var(--line); border-radius: 999px; font-size: 0.85rem; text-decoration: none !important; }
+      .related a:hover { border-color: var(--fg); }
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "An NFC app blocker: one tap to focus, one walk to unlock",
+      "description": "Use NFC tags as a physical key for blocked apps, or tap a tag on your desk to start Focus Mode. How it works, which tags to buy, and where to stick them.",
+      "url": "https://curbox.app/nfc-app-blocker/",
+      "mainEntityOfPage": "https://curbox.app/nfc-app-blocker/",
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "inLanguage": "en",
+      "image": "https://curbox.app/icons/android-chrome-512x512.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://curbox.app/icons/android-chrome-512x512.png"
+        }
+      },
+      "about": {
+        "@id": "https://curbox.app/#app"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://curbox.app/#app",
+      "name": "Curbox",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "url": "https://curbox.app/download.html",
+      "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://curbox.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Features",
+          "item": "https://curbox.app/features.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "NFC tags",
+          "item": "https://curbox.app/nfc-app-blocker/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use an NFC tag to block apps on Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Curbox supports NFC in two ways. As an unlock challenge, a blocked app only opens after you tap a tag you registered. As a focus tag, tapping a tag starts, stops or toggles a Focus Mode session with the group and duration you chose."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What NFC tags work with Curbox?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Focus tags need a writable tag, because Curbox writes the focus action onto it. Common, inexpensive NFC sticker tags such as the NTAG213, NTAG215 and NTAG216 types are widely used with Android phones. For unlocking, you register a tag you already have."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I stop a focus session early by tapping the tag?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only if the session allows it. If you set a session so it cannot be quit early, the tag cannot end it either. That keeps the tag from becoming an easy way out."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does my phone need NFC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Most mid-range and flagship Android phones include NFC, but some budget models do not. Check for an NFC toggle in your phone's connection settings before you buy tags."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is an NFC tag better than a QR code for unlocking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They do the same job. NFC is faster and works in the dark; a QR code or barcode costs nothing because you can use one you already own. Both work best when the key is in another room."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/features.html">← All features</a>
+        </nav>
+
+        <header>
+            <div class="nfc-pulse" aria-hidden="true"><span></span><span></span><span></span><b></b></div>
+            <span class="kicker">Feature · NFC tags</span>
+            <h1 class="page__title">An NFC app blocker that lives on a sticker.</h1>
+            <p class="lead">Curbox turns a cheap NFC tag into a physical switch for your attention. Tap a tag on your desk to start Focus Mode, or make a tag in another room the only key to Instagram. It is a free, open source NFC app blocker for Android, and it works with tags you can buy by the dozen.</p>
+        </header>
+
+        <section class="section">
+            <h2 class="section__title">One NFC tag, two different jobs</h2>
+            <p>People search for "NFC app blocker" meaning one of two things, and Curbox does both. They are set up in different places and you can use both at once.</p>
+            <div class="jobs">
+                <div class="job">
+                    <span class="job__tag">Job 1 · the key</span>
+                    <h3>Tap to unlock a blocked app</h3>
+                    <p>NFC is one of the unlock challenges on the Curbox pause screen. When a blocked app is opened, the proceed button only appears after you tap the tag you registered.</p>
+                    <ol>
+                        <li><strong>Reducers → Apps</strong>, open or create a group.</li>
+                        <li><strong>Configure Warning Screen</strong>.</li>
+                        <li>Unlock Challenge: <strong>Require effort to unlock</strong>, then <strong>NFC Tag</strong>.</li>
+                        <li>Register your tag by tapping it, then save.</li>
+                    </ol>
+                </div>
+                <div class="job">
+                    <span class="job__tag">Job 2 · the switch</span>
+                    <h3>Tap to start or stop Focus Mode</h3>
+                    <p>Curbox can write a Focus Mode action onto a writable tag. Tapping the tag against your phone then runs that action, no app opening required.</p>
+                    <ol>
+                        <li>Pick a <strong>Focus Group</strong>: the apps and sites to block.</li>
+                        <li>Pick a <strong>duration</strong> for the session.</li>
+                        <li>Pick the action: <strong>Start</strong>, <strong>Stop</strong> or <strong>Toggle</strong>.</li>
+                        <li>Hold a blank tag to the phone to write it.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">What do Start, Stop and Toggle do on an NFC focus tag?</h2>
+            <p>Each focus tag holds one action. Choosing the right one depends on how you want the tag to fit into your day.</p>
+            <div class="act-wrap" tabindex="0">
+                <table class="act">
+                    <thead><tr><th scope="col">Action</th><th scope="col">What a tap does</th><th scope="col">Good for</th></tr></thead>
+                    <tbody>
+                        <tr><th scope="row">Start focus</th><td>Starts a session with the group and duration on the tag.</td><td>A tag on your desk or library card holder. Sit down, tap, work.</td></tr>
+                        <tr><th scope="row">Stop focus</th><td>Ends the current session, if the session allows quitting.</td><td>A tag by the front door, so leaving work mode is a deliberate act.</td></tr>
+                        <tr><th scope="row">Toggle focus</th><td>Starts a session if none is running, stops it if one is.</td><td>One tag that does both, when you trust yourself with it.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top:1rem;">One rule matters here: if a session is set so it cannot be quit early, a tag cannot end it either. Tapping Stop or Toggle during a locked session does nothing. That keeps the tag from becoming a cheat code on a hard afternoon. Read more about session options in the <a href="/docs/focus/focus-mode/">Focus Mode guide</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Which NFC tags should you buy?</h2>
+            <p>You do not need anything special. Here is what to look for, based on what is commonly sold and widely used with Android phones.</p>
+            <div class="spec">
+                <div class="spec__head">Shopping label · NFC tags for Curbox</div>
+                <div class="spec__row"><span>Form</span><span>Stickers or small round discs. Keyring fobs and cards also work.</span></div>
+                <div class="spec__row"><span>Chip</span><span>NTAG213, NTAG215 or NTAG216 are common, inexpensive and readable by most Android phones. Any of them holds far more than a focus action needs.</span></div>
+                <div class="spec__row"><span>Writable</span><span>Required for focus tags, because Curbox writes the action to the tag. Do not lock the tag with another app, or it cannot be rewritten later.</span></div>
+                <div class="spec__row"><span>Surface</span><span>Tags on metal often read poorly. Buy "on-metal" tags if you plan to stick one on a fridge or laptop.</span></div>
+                <div class="spec__row"><span>Quantity</span><span>Buy a pack. You will want one for the desk, one for the door, and a spare for when you change your mind.</span></div>
+                <div class="spec__row"><span>Phone</span><span>Your phone needs NFC. Look for an NFC toggle in connection settings before ordering.</span></div>
+            </div>
+            <p style="margin-top:1rem;">Already have a transit card, a work badge or a payment card with NFC? Those can be fine as an unlock key, but they are not writable, so they cannot be focus tags. And a key you carry everywhere adds no distance, which is the whole point.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Where to stick your tags</h2>
+            <p>The tag is only as useful as its location. A few setups that fit real routines:</p>
+            <div class="spots">
+                <div class="spot"><b>Under the desk</b><span>A Start tag where your hand rests. Sitting down to work becomes one tap.</span></div>
+                <div class="spot"><b>On the front door</b><span>A Stop tag, so ending focus means standing up and leaving the desk.</span></div>
+                <div class="spot"><b>In the kitchen</b><span>An unlock tag for social apps. Every scroll session starts with a short walk.</span></div>
+                <div class="spot"><b>On your study bag</b><span>A Start tag for library days. Arrive, tap, and the phone goes quiet.</span></div>
+                <div class="spot"><b>By the bed, for mornings</b><span>A Start tag with a short session, so the first 30 minutes of the day stay off the feed.</span></div>
+                <div class="spot"><b>At your partner's desk</b><span>An unlock tag someone else holds. Asking out loud is a strong pause.</span></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Why a physical tag helps you focus</h2>
+            <p>Starting focus in an app takes several taps, and every tap is a chance to notice a notification and drift off. A tag compresses the decision into one physical gesture you can attach to a place. Over a few weeks, sitting at the desk and tapping the tag tends to feel like one action, the same way putting your keys in a bowl does.</p>
+            <p>Unlocking works the other way round. A button on the pause screen is right under your thumb. A tag in the kitchen is not. The extra walk gives a craving time to pass, and when it does not, you have still made a real choice.</p>
+            <p>Prefer a code you already own? <a href="/qr-code-app-blocker/">QR and barcode unlock</a> works the same way. Want focus sessions on a rhythm? See the <a href="/pomodoro-app-blocker/">Pomodoro app blocker</a>. Everything else is on the <a href="/features.html">features page</a>, and Curbox itself is on the <a href="/download.html">downloads page</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">NFC app blocker questions</h2>
+                <details class="faq__item">
+                    <summary>Can I use an NFC tag to block apps on Android?</summary>
+                    <p>Yes. Curbox supports NFC in two ways. As an unlock challenge, a blocked app only opens after you tap a tag you registered. As a focus tag, tapping a tag starts, stops or toggles a Focus Mode session with the group and duration you chose.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>What NFC tags work with Curbox?</summary>
+                    <p>Focus tags need a writable tag, because Curbox writes the focus action onto it. Common, inexpensive NFC sticker tags such as the NTAG213, NTAG215 and NTAG216 types are widely used with Android phones. For unlocking, you register a tag you already have.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Can I stop a focus session early by tapping the tag?</summary>
+                    <p>Only if the session allows it. If you set a session so it cannot be quit early, the tag cannot end it either. That keeps the tag from becoming an easy way out.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Does my phone need NFC?</summary>
+                    <p>Yes. Most mid-range and flagship Android phones include NFC, but some budget models do not. Check for an NFC toggle in your phone's connection settings before you buy tags.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Is an NFC tag better than a QR code for unlocking?</summary>
+                    <p>They do the same job. NFC is faster and works in the dark; a QR code or barcode costs nothing because you can use one you already own. Both work best when the key is in another room.</p>
+                </details>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <div class="related">
+                <a href="/qr-code-app-blocker/">QR code unlock</a>
+                <a href="/pomodoro-app-blocker/">Pomodoro app blocker</a>
+                <a href="/block-all-apps-except/">Block all apps except a few</a>
+                <a href="/app-blocker-for-studying/">App blocker for studying</a>
+                <a href="/math-unlock-app-blocker/">Math to unlock apps</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Break Reminder App for Android That You Can&#x27;t Ignore</title>
+    <meta
+      name="description"
+      content="Most break reminders are notifications you swipe away. Curbox pauses your apps for a few minutes so you actually drink water and stretch. Free, Android."
+    >
+    <link rel="canonical" href="https://curbox.app/break-reminder-app-android/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="A break reminder for Android that you can&#x27;t just swipe away">
+    <meta property="og:description" content="Most break reminders are notifications you swipe away. Curbox pauses your apps for a few minutes so you actually drink water and stretch. Free, Android.">
+    <meta property="og:url" content="https://curbox.app/break-reminder-app-android/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A break reminder for Android that you can&#x27;t just swipe away">
+    <meta name="twitter:description" content="Most break reminders are notifications you swipe away. Curbox pauses your apps for a few minutes so you actually drink water and stretch. Free, Android.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+      .vs__card { padding: 1.25rem; border-radius: 14px; border: 1px solid var(--line); }
+      .vs__card--on { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+      .vs__tag { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.65; }
+      .vs__note { margin-top: 0.9rem; padding: 0.7rem 0.8rem; border-radius: 10px; font-size: 0.85rem; line-height: 1.4; background: #1b1b1b; }
+      .vs__card--on .vs__note { background: #000; color: var(--fg); text-align: center; padding: 1.4rem 0.8rem; }
+      .vs__note small { display: block; margin-top: 0.4rem; opacity: 0.6; font-family: var(--font-mono); font-size: 0.68rem; }
+      .vs__card p.vs__out { margin-top: 0.9rem; font-size: 0.92rem; }
+      .vs__card--on a { color: var(--bg) !important; }
+
+      .track { margin-top: 1.5rem; }
+      .track__row { display: flex; height: 2.6rem; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
+      .seg { display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.66rem; white-space: nowrap; overflow: hidden; }
+      .seg--use { background: #2a2a2a; }
+      .seg--away { background: repeating-linear-gradient(45deg, #0b0b0b 0 6px, #161616 6px 12px); color: var(--muted); }
+      .seg--break { background: var(--fg); color: var(--bg); font-weight: 700; }
+      .track__meter { position: relative; height: 1.4rem; margin-top: 0.35rem; font-family: var(--font-mono); font-size: 0.62rem; color: var(--muted); }
+      .track__meter span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+      .track__legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); }
+      .track__legend i { display: inline-block; width: 0.9rem; height: 0.9rem; border-radius: 2px; vertical-align: -0.15rem; margin-right: 0.35rem; border: 1px solid var(--line); }
+      .story { list-style: none; margin-top: 1.25rem; }
+      .story li { padding-left: 4.5rem !important; }
+      .story li::before { content: attr(data-t) !important; font-size: 0.72rem; top: 0.25rem; }
+
+      .spec { margin-top: 1.25rem; border: 1px solid var(--line); border-radius: 12px; }
+      .spec__row { display: grid; grid-template-columns: 10rem 1fr; gap: 1rem; padding: 1rem 1.1rem; }
+      .spec__row + .spec__row { border-top: 1px solid var(--line); }
+      .spec__k { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; }
+      .spec__v { font-size: 0.94rem; color: #cfcfcc; }
+
+      .kinds { width: 100%; border-collapse: collapse; margin-top: 1.25rem; font-size: 0.9rem; }
+      .kinds th, .kinds td { padding: 0.8rem 0.6rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+      .kinds thead th { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+      .kinds tbody th { font-family: var(--font-display); }
+
+      .faq__item { border-top: 1px solid var(--line); padding: 1rem 0; }
+      .faq__item summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
+      .faq__item p { margin-top: 0.6rem; color: #cfcfcc; }
+
+      .rel-line { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+      .rel-line a { padding: 0.5rem 0.9rem; border: 1px solid var(--line); border-radius: 6px; font-size: 0.9rem; text-decoration: none !important; }
+      .rel-line a:hover { border-color: var(--fg); }
+
+      @media (max-width: 40rem) {
+        .vs { grid-template-columns: 1fr; }
+        .spec__row { grid-template-columns: 1fr; gap: 0.3rem; }
+        .kinds thead { display: none; }
+        .kinds, .kinds tbody, .kinds tr, .kinds th, .kinds td { display: block; width: 100%; }
+        .kinds tr { padding: 0.6rem 0; border-bottom: 1px solid var(--line); }
+        .kinds th, .kinds td { border: 0; padding: 0.25rem 0; }
+        .kinds td[data-l]::before { content: attr(data-l) ": "; font-family: var(--font-mono); font-size: 0.66rem; text-transform: uppercase; color: var(--muted); }
+        .seg { font-size: 0.55rem; }
+      }
+
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "A break reminder app for Android that you can't swipe away",
+      "description": "Most break reminders are notifications you swipe away. Curbox pauses your apps for a few minutes so you actually drink water and stretch. Free, Android.",
+      "url": "https://curbox.app/break-reminder-app-android/",
+      "mainEntityOfPage": "https://curbox.app/break-reminder-app-android/",
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "inLanguage": "en",
+      "image": "https://curbox.app/icons/android-chrome-512x512.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://curbox.app/icons/android-chrome-512x512.png"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is there an app that makes me take a break from my phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Curbox's Sip & Stretch blocks all apps for a short break once you have used your chosen apps for a set time. The break ends on its own after the length you picked."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I dismiss the break?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not like a notification. Apps stay blocked until the break ends. If you need your phone, keep the break short; a few minutes is enough."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does time away from my phone count?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Time away from the chosen apps counts as rest. If you stay away for as long as one break, the timer starts over, so you are not forced into a break you already took."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is this different from Pomodoro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pomodoro breaks are planned gaps between focus rounds that you start on purpose. Sip & Stretch kicks in when you have been scrolling too long without meaning to. Curbox has both."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Curbox is free and open source under GPL v3, with no ads and no subscription."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://curbox.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Features",
+          "item": "https://curbox.app/features.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Break reminders",
+          "item": "https://curbox.app/break-reminder-app-android/"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Curbox",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "url": "https://curbox.app/download.html",
+      "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  ]
+}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--break">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/features.html">← All features</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Feature · Sip &amp; Stretch</span>
+            <h1 class="page__title">A break reminder app you can't swipe away.</h1>
+            <p class="lead">Most break reminder apps for Android send a notification telling you to take a break from your phone. You swipe it away and keep scrolling. Curbox does the opposite: when you have spent long enough in the apps you chose, it pauses them for a few minutes, so the break actually happens.</p>
+        </header>
+
+        <div class="vs" role="group" aria-label="Notification reminder compared with an enforced break">
+            <div class="vs__card">
+                <span class="vs__tag">A typical reminder</span>
+                <div class="vs__note">Time for a break! Stand up and stretch.<small>Swipe to dismiss</small></div>
+                <p class="vs__out">Easy to ignore, especially in the exact moment you most need it: deep in a feed with no plan to stop.</p>
+            </div>
+            <div class="vs__card vs__card--on">
+                <span class="vs__tag">Curbox Sip &amp; Stretch</span>
+                <div class="vs__note">Break time. Drink some water and move.<small>Apps return in 4:12</small></div>
+                <p class="vs__out">Apps stay blocked until the break ends. There is nothing to dismiss, so you get up.</p>
+            </div>
+        </div>
+
+        <section class="section" aria-labelledby="why">
+            <h2 class="section__title" id="why">Why "remind me to take a break" rarely works</h2>
+            <p>A reminder asks you to make a decision at the worst possible time. When you are thirty minutes into a scroll, the part of you that wanted a break is not the one holding the phone. The notification arrives, you mean to act on it, and a minute later it is gone.</p>
+            <p>An enforced break removes the decision. You chose the rule earlier, while you were calm, and the phone simply follows it. That is the same idea behind every tool in Curbox: decide in a calm moment, let the app hold the line in the impulsive one.</p>
+            <p>It also helps your body, not only your screen time. Long sessions bent over a phone usually mean no water, no movement and a stiff neck. Sip &amp; Stretch is built around a short, physical break: drink some water, stand up, stretch.</p>
+        </section>
+
+        <section class="section" aria-labelledby="count">
+            <h2 class="section__title" id="count">How the break timer counts your phone time</h2>
+            <p>Here is one evening with a rule of <strong>a 5 minute break after 30 minutes</strong> of use. The minutes are an example, not a recommendation.</p>
+            <div class="track" aria-hidden="true">
+                <div class="track__row">
+                    <span class="seg seg--use" style="flex:12">12m</span>
+                    <span class="seg seg--away" style="flex:2"></span>
+                    <span class="seg seg--use" style="flex:18">18m</span>
+                    <span class="seg seg--break" style="flex:5">5m</span>
+                    <span class="seg seg--use" style="flex:10">10m</span>
+                    <span class="seg seg--away" style="flex:6">6m</span>
+                    <span class="seg seg--use" style="flex:4"></span>
+                </div>
+                <div class="track__meter">
+                    <span style="left:0%;transform:none">7:00</span>
+                    <span style="left:56%">break</span>
+                    <span style="left:84%">reset</span>
+                </div>
+                <div class="track__legend"><span><i style="background:#2a2a2a"></i>Using chosen apps</span><span><i style="background:#141414"></i>Away from them</span><span><i style="background:#f5f5f3"></i>Enforced break</span></div>
+            </div>
+            <ol class="story">
+                <li data-t="12 min">You scroll for 12 minutes, then put the phone down for 2. That short gap is not a full break, so the timer does not start over.</li>
+                <li data-t="30 min">Another 18 minutes brings you to 30. The break starts: your apps are blocked for 5 minutes.</li>
+                <li data-t="break">You get water and stretch. When the break ends, everything works again.</li>
+                <li data-t="reset">Later you step away for 6 minutes. Because that is at least as long as one break, the timer starts over from zero. Time away from the chosen apps counts as rest.</li>
+            </ol>
+            <p>That last rule matters. If you already took a real break on your own, Curbox does not force another one on you.</p>
+        </section>
+
+        <section class="section" aria-labelledby="set">
+            <h2 class="section__title" id="set">Set up Sip &amp; Stretch</h2>
+            <p>Install Curbox from the <a href="/download.html">downloads page</a>, then open <strong>Sip &amp; Stretch</strong> in the Reducers tab. There are only two settings plus the list of apps it watches.</p>
+            <div class="spec">
+                <div class="spec__row"><span class="spec__k">Apps</span><span class="spec__v">The apps whose use counts toward a break. Usually your feeds and video apps, not maps or messages.</span></div>
+                <div class="spec__row"><span class="spec__k">Break after</span><span class="spec__v">How much use of those apps triggers a break. Pick a number slightly shorter than your usual "how did an hour go by" session.</span></div>
+                <div class="spec__row"><span class="spec__k">Break length</span><span class="spec__v">How long the break lasts. All apps are blocked until it ends. A few minutes is enough to drink water and stand up; long breaks tend to get switched off.</span></div>
+            </div>
+            <p class="label">Picking your numbers</p>
+            <p>Look at your <a href="/screen-time-tracker-android/">screen time stats</a> first. If your longest sessions in a feed usually run 45 minutes, a break after 30 catches them before they turn into an hour, without interrupting a quick check. Start a little looser than you think you need. A rule you keep for a month does more than a strict one you turn off on day two, and you can always tighten it once breaks feel normal.</p>
+            <p style="margin-top:1rem">Sip &amp; Stretch sits with the other mindful nudges in the <a href="/docs/reducers/overview/">Reducers overview</a>.</p>
+        </section>
+
+        <section class="section" aria-labelledby="kinds">
+            <h2 class="section__title" id="kinds">Three kinds of break in Curbox</h2>
+            <p>Sip &amp; Stretch is for unplanned scrolling. If you work in planned sessions, or just want a moment of pause before an app, the other two fit better.</p>
+            <table class="kinds">
+                <thead><tr><th>Break</th><th>When it starts</th><th>Best for</th></tr></thead>
+                <tbody>
+                    <tr><th scope="row">Sip &amp; Stretch</th><td data-l="Starts">After a set amount of use in chosen apps</td><td data-l="Best for">Evenings that disappear into feeds</td></tr>
+                    <tr><th scope="row">Pomodoro breaks</th><td data-l="Starts">Between rounds of a focus session; you set the break minutes, and a sound marks each start and end</td><td data-l="Best for">Study and deep work. See the <a href="/docs/focus/focus-mode/">Focus Mode docs</a></td></tr>
+                    <tr><th scope="row">Delay timer</th><td data-l="Starts">Every time a blocked app is opened: a countdown while the screen brightens and the phone vibrates</td><td data-l="Best for">A few seconds of pause before a habit tap. See <a href="/docs/unlock-challenges/overview/">unlock challenges</a></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section" aria-labelledby="honest">
+            <h2 class="section__title" id="honest">When a simple reminder app is the better choice</h2>
+            <p>An enforced break is not for everyone. If you want a nudge to drink water every hour regardless of what you are doing, a plain reminder or your phone's clock app does that with no special permissions. Sip &amp; Stretch only counts time in the apps you pick, and it needs Curbox's accessibility service to see which app is open.</p>
+            <p>It is also the wrong tool for work you cannot pause. Leave navigation, calls and anything you need on call off the list. The point is to interrupt scrolling, not your life.</p>
+        </section>
+
+        <section class="section" aria-labelledby="faq">
+            <h2 class="section__title" id="faq">Break reminder FAQ</h2>
+            <details class="faq__item">
+                <summary>Is there an app that makes me take a break from my phone?</summary>
+                <p>Yes. Curbox's Sip &amp; Stretch blocks all apps for a short break once you have used your chosen apps for a set time. The break ends on its own after the length you picked.</p>
+            </details>
+            <details class="faq__item">
+                <summary>Can I dismiss the break?</summary>
+                <p>Not like a notification. Apps stay blocked until the break ends. If you need your phone, keep the break short; a few minutes is enough.</p>
+            </details>
+            <details class="faq__item">
+                <summary>Does time away from my phone count?</summary>
+                <p>Yes. Time away from the chosen apps counts as rest. If you stay away for as long as one break, the timer starts over, so you are not forced into a break you already took.</p>
+            </details>
+            <details class="faq__item">
+                <summary>How is this different from Pomodoro?</summary>
+                <p>Pomodoro breaks are planned gaps between focus rounds that you start on purpose. Sip &amp; Stretch kicks in when you have been scrolling too long without meaning to. Curbox has both.</p>
+            </details>
+            <details class="faq__item">
+                <summary>Is it free?</summary>
+                <p>Yes. Curbox is free and open source under GPL v3, with no ads and no subscription.</p>
+            </details>
+        </section>
+
+        <section class="section" aria-labelledby="rel">
+            <h2 class="section__title" id="rel">Related</h2>
+            <div class="rel-line">
+                <a href="/mindful-reminder-when-opening-apps/">Reminders when opening apps</a>
+                <a href="/screen-time-tracker-android/">Screen time tracker</a>
+                <a href="/app-blocker-for-studying/">App blocker for studying</a>
+                <a href="/app-blocker-for-adhd/">App blocker for ADHD</a>
+                <a href="/features.html">All features</a>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

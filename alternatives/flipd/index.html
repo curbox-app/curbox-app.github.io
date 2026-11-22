@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Flipd Alternative for Android Focus Sessions · Curbox</title>
+    <meta
+      name="description"
+      content="Looking for a Flipd alternative on Android? Compare a study session step by step, see what Curbox adds for free, and what you would miss from Flipd."
+    >
+    <link rel="canonical" href="https://curbox.app/alternatives/flipd/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="A Flipd alternative for studying on Android">
+    <meta property="og:description" content="Looking for a Flipd alternative on Android? Compare a study session step by step, see what Curbox adds for free, and what you would miss from Flipd.">
+    <meta property="og:url" content="https://curbox.app/alternatives/flipd/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Flipd alternative for studying on Android">
+    <meta name="twitter:description" content="Looking for a Flipd alternative on Android? Compare a study session step by step, see what Curbox adds for free, and what you would miss from Flipd.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--fl { max-width: 68rem; }
+      .page--fl .lead { max-width: 40rem; }
+      .page--fl .narrow { max-width: var(--measure); }
+
+      .session { margin-top: 1.75rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .session__grid {
+        display: grid;
+        grid-template-columns: 6.5rem repeat(5, minmax(10.5rem, 1fr));
+        min-width: 60rem;
+        border-top: 1px solid var(--line);
+      }
+      .session__grid > div { padding: 0.9rem 0.8rem; border-bottom: 1px solid var(--line); font-size: 0.88rem; line-height: 1.45; }
+      .session__grid > div:not(.rowhead) { border-left: 1px solid var(--line); }
+      .stage {
+        font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+        position: relative;
+      }
+      .stage strong { display: block; margin-top: 0.25rem; font-family: var(--font-display); font-size: 1.05rem; letter-spacing: -0.01em; text-transform: none; color: var(--fg); }
+      .rowhead { font-family: var(--font-display); font-weight: 700; align-self: stretch; }
+      .row--curbox { background: #101010; }
+      .tag-limit {
+        display: inline-block; margin-top: 0.4rem; padding: 0.1rem 0.4rem; border-radius: 4px;
+        font-family: var(--font-mono); font-size: 0.66rem; border: 1px dashed #666; color: var(--muted);
+      }
+      .scroll-hint { margin-top: 0.6rem; font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); }
+
+      .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+      .tier { padding: 1.3rem 1.2rem; border: 1px solid var(--line); border-radius: 14px; display: flex; flex-direction: column; gap: 0.6rem; }
+      .tier h3 { font-family: var(--font-display); font-size: 1.15rem; }
+      .tier .price { font-family: var(--font-display); font-weight: 800; font-size: 2rem; line-height: 1; letter-spacing: -0.03em; }
+      .tier .price small { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.04em; color: var(--muted); }
+      .tier ul { margin-top: 0 !important; }
+      .tier li { font-size: 0.88rem; margin-top: 0.35rem !important; }
+      .tier--curbox { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+      .tier--curbox li::before { color: #666 !important; }
+      .tier--curbox a { color: var(--bg) !important; }
+
+      .miss { margin-top: 1rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.25rem 2rem; }
+      .miss div { padding: 0.8rem 0; border-top: 1px solid var(--line); }
+      .miss h3 { font-family: var(--font-display); font-size: 1rem; }
+      .miss p { font-size: 0.9rem; color: var(--muted); margin-top: 0.2rem; }
+
+      .recipe { margin-top: 1rem; padding: 1.3rem 1.4rem; border-radius: 14px; background: #0c0c0c; border: 1px solid var(--line); }
+      .recipe ol { margin: 0.5rem 0 0 1.2rem; }
+      .recipe li { padding-left: 0.3rem; margin-top: 0.55rem; }
+
+      @media (max-width: 52rem) {
+        .tiers { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 40rem) {
+        .miss { grid-template-columns: 1fr; }
+      }
+
+      .faq details { border-top: 1px solid var(--line); padding: 1rem 0; }
+      .faq details:last-child { border-bottom: 1px solid var(--line); }
+      .faq summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.3; list-style: none; }
+      .faq summary::-webkit-details-marker { display: none; }
+      .faq summary::after { content: '+'; float: right; margin-left: 1rem; font-family: var(--font-mono); color: var(--muted); }
+      .faq details[open] summary::after { content: '-'; }
+      .faq details p { margin-top: 0.6rem; color: var(--muted); }
+      .sources li { font-size: 0.9rem; color: var(--muted); }
+      .related { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+      .related a { padding: 0.5rem 0.9rem; border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-mono); font-size: 0.75rem; text-decoration: none !important; }
+      .related a:hover { border-color: var(--fg); }
+    </style>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "headline": "A Flipd alternative for studying on Android", "description": "Looking for a Flipd alternative on Android? Compare a study session step by step, see what Curbox adds for free, and what you would miss from Flipd.", "datePublished": "2026-11-22", "dateModified": "2026-11-22", "mainEntityOfPage": "https://curbox.app/alternatives/flipd/", "author": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/"}, "publisher": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/", "logo": {"@type": "ImageObject", "url": "https://curbox.app/icons/android-chrome-512x512.png"}}, "image": "https://curbox.app/icons/android-chrome-512x512.png"}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is there a free Flipd alternative for Android?", "acceptedAnswer": {"@type": "Answer", "text": "Curbox is free and open source. Its Focus Mode blocks the apps and websites you choose for a timed session, with a Pomodoro option, Do Not Disturb, and stats on sessions, total focus time and your day streak. There is no paid tier."}}, {"@type": "Question", "name": "Does Flipd still block apps on Android?", "acceptedAnswer": {"@type": "Answer", "text": "According to Flipd's website, Android users can lock distracting apps by turning on Focus Lock mode inside the Flipd Android app. On iOS that feature moved to a separate app called Focus Lock."}}, {"@type": "Question", "name": "Does Curbox have study rooms or lofi music like Flipd?", "acceptedAnswer": {"@type": "Answer", "text": "No. Curbox has no social features and no music. It focuses on blocking, focus sessions and usage stats. If studying alongside others or the built-in music keeps you going, Flipd covers that and Curbox does not."}}, {"@type": "Question", "name": "Can Curbox do Pomodoro timers?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. In a Focus Group you can turn on the Pomodoro timer, which repeats your focus time for a number of rounds with a break of the length you choose in between. Each round counts as a session in Focus Stats, and Curbox plays a sound when a session or break starts and ends."}}, {"@type": "Question", "name": "Can I stop myself from quitting a focus session early in Curbox?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Leave the Let me quit mid-sessions option off in your Focus Group and the session runs until the timer ends."}}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Alternatives", "item": "https://curbox.app/alternatives/"}, {"@type": "ListItem", "position": 3, "name": "Flipd alternative", "item": "https://curbox.app/alternatives/flipd/"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Curbox", "operatingSystem": "Android", "applicationCategory": "LifestyleApplication", "url": "https://curbox.app/download.html", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+
+    <main class="page page--fl">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/alternatives/">← All alternatives</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Alternatives · Flipd</span>
+            <h1 class="page__title">A Flipd alternative for studying on Android.</h1>
+            <p class="lead">Flipd is a focus and study timer with a strong community side: live study rooms, lofi music, stats and milestones. People look for a Flipd alternative when they want stricter blocking during a session, or when the free tier's limits get in the way. Here is a session compared stage by stage, so you can see exactly what changes if you switch to Curbox.</p>
+        </header>
+
+        <section class="section narrow">
+            <h2 class="section__title">What Flipd offers today</h2>
+            <p>Flipd's website calls it the place "where the productivity community meets". It lists customizable task timers for solo or group studying, break tracking, live public and private study rooms, free background music and sounds, activity tags, historical stats, milestone badges, and friendly competition in groups. It runs on iOS and Android.</p>
+            <p>App blocking works differently on each platform. Flipd says that on Android "you can lock your distracting apps by turning on Focus Lock mode inside of the Flipd Android app", while on iOS hiding apps moved to a separate app called Focus Lock after a change in Apple's developer policies.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title narrow">One study session, stage by stage</h2>
+            <p class="narrow">Each column is a moment in a typical evening of studying. The dashed tags mark limits on Flipd's free Basic plan, taken from its pricing page.</p>
+            <div class="session" tabindex="0" aria-label="A study session compared between Flipd and Curbox">
+                <div class="session__grid">
+                    <div class="rowhead"></div>
+                    <div class="stage">Stage 1<strong>Set the timer</strong></div>
+                    <div class="stage">Stage 2<strong>Lock distractions</strong></div>
+                    <div class="stage">Stage 3<strong>Take a break</strong></div>
+                    <div class="stage">Stage 4<strong>Want to quit early</strong></div>
+                    <div class="stage">Stage 5<strong>Review the week</strong></div>
+
+                    <div class="rowhead">Flipd</div>
+                    <div>Pick a timer or shortcut. Premium adds custom Pomodoro timers and sessions up to 24 hours.<br><span class="tag-limit">Basic: up to 40 min</span></div>
+                    <div>On Android, turn on Focus Lock mode inside the app.</div>
+                    <div>Breaks are tracked within a session.<br><span class="tag-limit">Basic: 1 break per session</span></div>
+                    <div>Premium lists unlimited breaks and pausing.</div>
+                    <div>Historical stats, tags, milestones and group competition.<br><span class="tag-limit">Basic: 30-day history</span></div>
+
+                    <div class="rowhead row--curbox">Curbox</div>
+                    <div class="row--curbox">Set the length with the slider on the Focus tab and pick a Focus Group. Turn on Pomodoro for repeated rounds.</div>
+                    <div class="row--curbox">The Focus Group blocks its apps and websites, or everything except them with Block All Except Selected.</div>
+                    <div class="row--curbox">Pomodoro breaks last as long as you set. Breaks do not count as focus time.</div>
+                    <div class="row--curbox">Leave "Let me quit mid-sessions" off and the session cannot be ended early.</div>
+                    <div class="row--curbox">Focus Stats shows sessions, total time, average length, completion rate and day streak, filterable by group.</div>
+                </div>
+            </div>
+            <p class="scroll-hint">Scroll sideways on small screens →</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title narrow">Flipd Basic, Flipd Premium and Curbox</h2>
+            <div class="tiers">
+                <div class="tier">
+                    <h3>Flipd Basic</h3>
+                    <div class="price">$0</div>
+                    <ul>
+                        <li>1 break per session</li>
+                        <li>30-day stats history</li>
+                        <li>1 custom reminder</li>
+                        <li>Timers up to 40 minutes</li>
+                        <li>A selection of music tracks</li>
+                    </ul>
+                </div>
+                <div class="tier">
+                    <h3>Flipd Premium</h3>
+                    <div class="price">$5.99 <small>/ month or $42.99 / year</small></div>
+                    <ul>
+                        <li>Unlimited breaks and pausing</li>
+                        <li>Custom Pomodoro timers and 24-hour timers</li>
+                        <li>Unlimited stats history and reminders</li>
+                        <li>Premium music tracks, manual sessions</li>
+                    </ul>
+                </div>
+                <div class="tier tier--curbox">
+                    <h3>Curbox</h3>
+                    <div class="price">$0 <small>/ no paid tier</small></div>
+                    <ul>
+                        <li>Pomodoro rounds with breaks you set</li>
+                        <li>Focus Groups with block or allow lists</li>
+                        <li>Daily app limits and Reels / Shorts caps</li>
+                        <li>Unlock challenges, including NFC and QR</li>
+                        <li>No music, no study rooms</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="narrow" style="margin-top:1rem;font-size:0.88rem;color:var(--muted);">Flipd prices are from its pricing page in US dollars. Flipd notes that prices may differ by region or app store.</p>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">What you would miss from Flipd</h2>
+            <div class="miss">
+                <div><h3>Live study rooms</h3><p>Studying alongside others, in public or private rooms. Curbox has nothing social.</p></div>
+                <div><h3>Music and sounds</h3><p>Flipd's lofi library. Curbox only plays short sounds when a session or break starts and ends.</p></div>
+                <div><h3>Milestones and competition</h3><p>Badges and friendly group competition. Curbox shows a day streak, nothing more.</p></div>
+                <div><h3>iPhone support</h3><p>Flipd runs on iOS. Curbox is Android only, plus a browser extension.</p></div>
+                <div><h3>Activity tags</h3><p>Flipd lets you tag sessions by subject. Curbox's closest idea is separate Focus Groups, which stats can filter by.</p></div>
+                <div><h3>Manual sessions</h3><p>Flipd Premium can log sessions after the fact. Curbox only counts sessions it ran.</p></div>
+            </div>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Rebuild your Flipd routine in Curbox</h2>
+            <p>Install Curbox from the <a href="/download.html">downloads page</a>, finish onboarding, then:</p>
+            <div class="recipe">
+                <ol>
+                    <li>Open the <strong>Focus</strong> tab and tap <strong>Create Focus Group</strong>. Name it after the subject or task, such as "Revision".</li>
+                    <li>Tap <strong>Select Apps</strong> and choose your usual distractions. If you would rather allow only a few apps, such as a dictionary and your notes, use <strong>Block All Except Selected</strong> instead.</li>
+                    <li>Optionally <strong>Add Websites</strong>, for example <code>youtube.com</code>, so the browser does not become the way around.</li>
+                    <li>Turn on <strong>Pomodoro timer</strong>, set your break minutes and number of rounds. 25 minutes of focus with 5-minute breaks is a common start.</li>
+                    <li>Turn on <strong>Turn on do not disturb</strong> and leave <strong>Let me quit mid-sessions</strong> off. Tap <strong>Save Group</strong>.</li>
+                    <li>Set the slider, choose the group and start. Check <strong>Focus Stats</strong> from the bar-chart icon at the end of the week.</li>
+                </ol>
+            </div>
+            <p style="margin-top:1rem;">For more session ideas, see the <a href="/app-blocker-for-studying/">study setups guide</a> and the <a href="/pomodoro-app-blocker/">Pomodoro page</a>.</p>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">When Flipd is the better pick</h2>
+            <ul>
+                <li>Studying with others in live rooms is what keeps you at your desk.</li>
+                <li>You like built-in focus music and do not want a separate app for it.</li>
+                <li>You switch between an iPhone and an Android phone, or study with friends who use iPhones.</li>
+                <li>Badges, milestones and group competition motivate you more than a lock does.</li>
+            </ul>
+            <p>Curbox is the better fit if the problem is your phone pulling you away mid-session, if you want daily limits outside of study time too, or if you want all of it for free.</p>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Questions people ask</h2>
+            <div class="faq">
+                <details>
+                    <summary>Is there a free Flipd alternative for Android?</summary>
+                    <p>Curbox is free and open source. Its Focus Mode blocks the apps and websites you choose for a timed session, with a Pomodoro option, Do Not Disturb, and stats on sessions, total focus time and your day streak. There is no paid tier.</p>
+                </details>
+                <details>
+                    <summary>Does Flipd still block apps on Android?</summary>
+                    <p>According to Flipd's website, Android users can lock distracting apps by turning on Focus Lock mode inside the Flipd Android app. On iOS that feature moved to a separate app called Focus Lock.</p>
+                </details>
+                <details>
+                    <summary>Does Curbox have study rooms or lofi music like Flipd?</summary>
+                    <p>No. Curbox has no social features and no music. It focuses on blocking, focus sessions and usage stats. If studying alongside others or the built-in music keeps you going, Flipd covers that and Curbox does not.</p>
+                </details>
+                <details>
+                    <summary>Can Curbox do Pomodoro timers?</summary>
+                    <p>Yes. In a Focus Group you can turn on the Pomodoro timer, which repeats your focus time for a number of rounds with a break of the length you choose in between. Each round counts as a session in Focus Stats, and Curbox plays a sound when a session or break starts and ends.</p>
+                </details>
+                <details>
+                    <summary>Can I stop myself from quitting a focus session early in Curbox?</summary>
+                    <p>Yes. Leave the Let me quit mid-sessions option off in your Focus Group and the session runs until the timer ends.</p>
+                </details>
+            </div>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Sources (checked November 2026)</h2>
+            <ul class="sources">
+                <li><a href="https://www.flipdapp.co/" target="_blank" rel="noopener noreferrer">Flipd homepage</a>: features, platforms, Focus Lock on Android and iOS.</li>
+                <li><a href="https://www.flipdapp.co/pricing" target="_blank" rel="noopener noreferrer">Flipd pricing</a>: Basic limits, Premium monthly and annual prices.</li>
+                <li><a href="https://intercom.help/flipdapp/general/what-is-flipd-premium" target="_blank" rel="noopener noreferrer">Flipd help: what comes with the subscription</a>.</li>
+                <li>Curbox: <a href="/docs/focus/focus-mode/">Focus Mode docs</a> and <a href="/features.html">features</a>.</li>
+            </ul>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Related</h2>
+            <div class="related">
+                <a href="/comparison.html">Feature table</a>
+                <a href="/alternatives/forest/">Forest alternative</a>
+                <a href="/alternatives/stay-focused/">Stay Focused alternative</a>
+                <a href="/alternatives/freedom/">Freedom alternative</a>
+                <a href="/alternatives/opal/">Opal alternative</a>
+                <a href="/pomodoro-app-blocker/">Pomodoro app blocker</a>
+                <a href="/app-blocker-for-studying/">App blocker for studying</a>
+                <a href="/block-all-apps-except/">Block all apps except</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Regain App Alternative: Free Study Blocker · Curbox</title>
+    <meta
+      name="description"
+      content="Looking for a Regain app alternative? Compare Strict Mode, Study Mode and Pomodoro with Curbox, a free open source blocker with no subscription or account."
+    >
+    <link rel="canonical" href="https://curbox.app/alternatives/regain/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="A Regain app alternative with no Pro tier">
+    <meta property="og:description" content="Looking for a Regain app alternative? Compare Strict Mode, Study Mode and Pomodoro with Curbox, a free open source blocker with no subscription or account.">
+    <meta property="og:url" content="https://curbox.app/alternatives/regain/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Regain app alternative with no Pro tier">
+    <meta name="twitter:description" content="Looking for a Regain app alternative? Compare Strict Mode, Study Mode and Pomodoro with Curbox, a free open source blocker with no subscription or account.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--rg { max-width: 62rem; }
+      .page--rg .lead { max-width: 40rem; }
+      .page--rg .section > p, .page--rg .narrow { max-width: var(--measure); }
+
+      .receipts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; align-items: start; }
+      .receipt { position: relative; padding: 1.3rem 1.2rem 1.6rem; background: #f2f1ec; color: #111; font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.55; border-radius: 4px 4px 0 0; }
+      .receipt::after { content: ''; position: absolute; left: 0; right: 0; bottom: -10px; height: 10px; background: linear-gradient(-45deg, transparent 6px, #f2f1ec 0) 0 0 / 12px 12px, linear-gradient(45deg, transparent 6px, #f2f1ec 0) 0 0 / 12px 12px; }
+      .receipt h3 { font-family: var(--font-display); font-size: 1.15rem; text-align: center; margin-bottom: 0.2rem; }
+      .receipt .r-sub { text-align: center; color: #666; margin-bottom: 0.9rem; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+      .receipt .line { display: flex; justify-content: space-between; gap: 0.75rem; padding: 0.22rem 0; border-bottom: 1px dotted #bbb; }
+      .receipt .line span:last-child { text-align: right; white-space: nowrap; }
+      .receipt .total { display: flex; justify-content: space-between; margin-top: 0.8rem; padding-top: 0.5rem; border-top: 2px solid #111; font-weight: 700; font-size: 0.85rem; }
+      .receipt--curbox { background: var(--fg); }
+      .receipt--curbox::after { background: linear-gradient(-45deg, transparent 6px, var(--fg) 0) 0 0 / 12px 12px, linear-gradient(45deg, transparent 6px, var(--fg) 0) 0 0 / 12px 12px; }
+      .receipt-note { margin-top: 1.6rem; font-size: 0.85rem; color: var(--muted); max-width: var(--measure); }
+
+      .map { margin-top: 1.25rem; }
+      .map__row { display: grid; grid-template-columns: 11rem 1fr; gap: 1.25rem; padding: 1.1rem 0; border-top: 1px solid var(--line); }
+      .map__row:last-child { border-bottom: 1px solid var(--line); }
+      .map__them { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.25; }
+      .map__them small { display: block; margin-top: 0.3rem; font-family: var(--font-mono); font-weight: 400; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+      .map__us p { font-size: 0.95rem; }
+      .map__us .path { display: block; margin-top: 0.35rem; font-family: var(--font-mono); font-size: 0.76rem; color: var(--muted); }
+      .verdict-chip { display: inline-block; margin-bottom: 0.4rem; padding: 0.1rem 0.55rem; border-radius: 999px; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--fg); }
+      .verdict-chip--gap { border-style: dashed; color: var(--muted); border-color: var(--muted); }
+
+      .tonight { margin-top: 1.25rem; padding: 1.4rem; border: 1px solid var(--line); border-radius: 14px; max-width: var(--measure); }
+      .tonight ol { margin-left: 1.2rem; }
+      .tonight li { margin-top: 0.55rem; padding-left: 0.25rem; }
+      .tonight li::marker { font-family: var(--font-mono); color: var(--muted); }
+
+      @media (max-width: 50rem) { .receipts { grid-template-columns: 1fr; gap: 1.8rem; max-width: 24rem; } }
+      @media (max-width: 36rem) { .map__row { grid-template-columns: 1fr; gap: 0.5rem; } }
+
+      .faq__item { border-top: 1px solid var(--line); padding: 1rem 0; }
+      .faq__item:last-child { border-bottom: 1px solid var(--line); }
+      .faq__item summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.3; list-style: none; }
+      .faq__item summary::-webkit-details-marker { display: none; }
+      .faq__item summary::after { content: '+'; float: right; font-family: var(--font-mono); color: var(--muted); margin-left: 1rem; }
+      .faq__item[open] summary::after { content: '−'; }
+      .faq__item p { margin-top: 0.6rem; color: var(--muted); }
+      .related { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+      .related a { padding: 0.5rem 0.95rem; border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-mono); font-size: 0.75rem; text-decoration: none !important; }
+      .related a:hover { border-color: var(--fg); }
+      .sources li { font-size: 0.88rem; color: var(--muted); }
+    </style>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "headline": "A Regain app alternative with every lock included.", "description": "Looking for a Regain app alternative? Compare Strict Mode, Study Mode and Pomodoro with Curbox, a free open source blocker with no subscription or account.", "url": "https://curbox.app/alternatives/regain/", "datePublished": "2026-11-22", "dateModified": "2026-11-22", "author": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/"}, "publisher": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/"}, "about": [{"@type": "SoftwareApplication", "name": "Regain: Study Timer for Focus"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a good Regain app alternative on Android?", "acceptedAnswer": {"@type": "Answer", "text": "Curbox covers the core of what students use Regain for: blocking Reels and Shorts without blocking the whole app, Pomodoro focus sessions, sessions you cannot quit early, and website blocking. It is free with no paid tier, no account and no internet access. It does not have Regain's friend leaderboards, study music or iPhone app."}}, {"@type": "Question", "name": "How much does Regain Pro cost?", "acceptedAnswer": {"@type": "Answer", "text": "Regain's refund policy, last updated 4 December 2025, lists Regain Pro on Android at INR 199 a month and INR 999 a year, with offers that can bring those lower. The core app is free; Pro adds premium themes and extra strict-blocking options, according to Regain's FAQ."}}, {"@type": "Question", "name": "Can Curbox stop me quitting a focus session early?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. When you create a Focus Group, leave \"Let me quit mid-sessions\" turned off. A session set up that way also cannot be ended early with an NFC tag. For extra protection against uninstalling, the F-Droid variant has anti-uninstall protection, and you can add Curbox itself to a blocking group."}}, {"@type": "Question", "name": "Can Curbox allow only study channels on YouTube?", "acceptedAnswer": {"@type": "Answer", "text": "Not by channel. Curbox can block YouTube Shorts, block the youtube.com/shorts section in browsers, and in the F-Droid variant hide the YouTube home feed so only search results show. Searching for the lecture you need still works."}}, {"@type": "Question", "name": "Does Curbox need an account like Regain?", "acceptedAnswer": {"@type": "Answer", "text": "No. Curbox has no accounts at all. Regain's terms say you may be required to register to use its services."}}, {"@type": "Question", "name": "Does Curbox block adult websites?", "acceptedAnswer": {"@type": "Answer", "text": "Curbox blocks any site you add to a Keywords And Websites group, and you can import a ready-made list from a .txt file. It does not ship a built-in adult content filter."}}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Alternatives", "item": "https://curbox.app/alternatives/"}, {"@type": "ListItem", "position": 3, "name": "Regain alternative", "item": "https://curbox.app/alternatives/regain/"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Curbox", "operatingSystem": "Android", "applicationCategory": "LifestyleApplication", "license": "https://www.gnu.org/licenses/gpl-3.0.html", "url": "https://curbox.app/download.html", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--rg">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/alternatives/">← All alternatives</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Alternatives · Regain</span>
+            <h1 class="page__title">A Regain app alternative with every lock included.</h1>
+            <p class="lead">Regain, now sold as "Regain: Study Timer for Focus", is popular with students for a reason: it blocks Reels and Shorts without blocking the whole app, and its Strict Mode means you cannot quit early. If you want a Regain app alternative, the usual triggers are the Pro subscription, the account, or wanting a blocker that does not talk to a server. This page compares the two honestly and sets up a study session in Curbox.</p>
+        </header>
+
+        <section class="section">
+            <h2 class="section__title">What Regain gets right</h2>
+            <p>Regain is built by EPowerX Labs in Bengaluru and runs on Android and iPhone. Its site lists a Strict Mode where "you can't quit early or uninstall the app until your focus time ends", a YouTube Study Mode that blocks Shorts and the home feed while allowing study channels you choose, Reels and Shorts blocking that leaves the rest of the app working, website blocking including adult content, 25-minute Pomodoro rounds, focus music, and Focus Groups with leaderboards for friends or exam peers.</p>
+            <p>That is a well-chosen set of features for students. The leaderboard in particular is something Curbox does not try to do.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">What each version costs you</h2>
+            <p class="narrow">Regain's core app is free. Its FAQ says Regain Pro "unlocks advanced features like premium themes and additional strict-blocking options". Here are the three options side by side.</p>
+            <div class="receipts">
+                <div class="receipt">
+                    <h3>Regain Free</h3>
+                    <p class="r-sub">Android</p>
+                    <div class="line"><span>Focus timer</span><span>incl.</span></div>
+                    <div class="line"><span>App blocking</span><span>incl.</span></div>
+                    <div class="line"><span>Screen time insights</span><span>incl.</span></div>
+                    <div class="line"><span>Premium themes</span><span>Pro</span></div>
+                    <div class="line"><span>Extra strict options</span><span>Pro</span></div>
+                    <div class="total"><span>Price</span><span>Free</span></div>
+                </div>
+                <div class="receipt">
+                    <h3>Regain Pro</h3>
+                    <p class="r-sub">Google Play, auto-renewing</p>
+                    <div class="line"><span>Monthly</span><span>INR 199</span></div>
+                    <div class="line"><span>Offer range</span><span>84 to 199</span></div>
+                    <div class="line"><span>Annual</span><span>INR 999</span></div>
+                    <div class="line"><span>Offer range</span><span>299 to 999</span></div>
+                    <div class="total"><span>Per year</span><span>up to INR 999</span></div>
+                </div>
+                <div class="receipt receipt--curbox">
+                    <h3>Curbox</h3>
+                    <p class="r-sub">Android, GPL v3</p>
+                    <div class="line"><span>All blocking</span><span>incl.</span></div>
+                    <div class="line"><span>Every unlock challenge</span><span>incl.</span></div>
+                    <div class="line"><span>Focus and Pomodoro</span><span>incl.</span></div>
+                    <div class="line"><span>Account needed</span><span>none</span></div>
+                    <div class="line"><span>Internet permission</span><span>none</span></div>
+                    <div class="total"><span>Price</span><span>Free</span></div>
+                </div>
+            </div>
+            <p class="receipt-note">Regain prices are from its refund policy, last updated 4 December 2025, and apply to Android. Prices change, so check in the app. Curbox is supported by donations and has no paid tier.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Regain features, mapped to Curbox</h2>
+            <div class="map">
+                <div class="map__row">
+                    <div class="map__them">Strict Mode<small>Regain</small></div>
+                    <div class="map__us"><span class="verdict-chip">Same idea</span><p>Create a Focus Group and leave "Let me quit mid-sessions" off. A session like that cannot be ended early, not even with an NFC tag. To make uninstalling hard too, use anti-uninstall protection (F-Droid variant) and add Curbox itself to a blocking group.</p><span class="path">Focus tab → Create Focus Group → options</span></div>
+                </div>
+                <div class="map__row">
+                    <div class="map__them">Block Reels and Shorts only<small>Regain</small></div>
+                    <div class="map__us"><span class="verdict-chip">Same idea</span><p>The Short-Form Video Content reducer limits Instagram Reels, YouTube Shorts and Facebook Reels by time or by video count, combined across apps. During exams, set a very low count, or put Instagram and YouTube in your study Focus Group.</p><span class="path">Reducers → Short-Form Video Content</span></div>
+                </div>
+                <div class="map__row">
+                    <div class="map__them">YouTube Study Mode<small>Regain</small></div>
+                    <div class="map__us"><span class="verdict-chip">Close</span><p>Curbox blocks Shorts and, with the UI Hider in the F-Droid variant, can hide the YouTube feed so only search results show. It cannot allow specific channels; you search for the lecture instead. See <a href="/hide-youtube-recommendations/">hiding YouTube recommendations</a>.</p><span class="path">Reducers → UI Hider</span></div>
+                </div>
+                <div class="map__row">
+                    <div class="map__them">Pomodoro<small>Regain</small></div>
+                    <div class="map__us"><span class="verdict-chip">Same idea</span><p>Focus Mode has a Pomodoro option: set the focus length, the number of rounds and the break minutes. Each round counts in Focus Stats, and sounds mark each start and end. Try the <a href="/pomodoro-app-blocker/">Pomodoro planner</a>.</p><span class="path">Focus Group → Pomodoro timer</span></div>
+                </div>
+                <div class="map__row">
+                    <div class="map__them">Website blocking<small>Regain</small></div>
+                    <div class="map__us"><span class="verdict-chip">Close</span><p>Add sites, sections like <code>reddit.com/r/memes</code>, or paths like <code>/shorts</code> to a keyword group, or import a list from a .txt file. There is no built-in adult content filter. Works in the <a href="/block-websites-on-android/">supported browsers</a>.</p><span class="path">Reducers → Keywords And Websites</span></div>
+                </div>
+                <div class="map__row">
+                    <div class="map__them">Focus Groups leaderboard<small>Regain</small></div>
+                    <div class="map__us"><span class="verdict-chip verdict-chip--gap">Not in Curbox</span><p>Curbox has no social features and no accounts. You get your own Focus Stats: sessions, total time, average length, completion rate and day streak.</p></div>
+                </div>
+                <div class="map__row">
+                    <div class="map__them">Focus music and themes<small>Regain</small></div>
+                    <div class="map__us"><span class="verdict-chip verdict-chip--gap">Not in Curbox</span><p>Curbox plays a sound at the start and end of sessions and breaks, but has no music. Pair it with any music app you like and add that app to an allowlist Focus Group.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Set up tonight's study session in Curbox</h2>
+            <div class="tonight">
+                <ol>
+                    <li><a href="/download.html">Install Curbox</a> and grant overlay, notifications and the App Blocker accessibility service.</li>
+                    <li>On the Focus tab, tap Create Focus Group and name it "Study".</li>
+                    <li>Pick Block All Except Selected and choose only what you need: calculator, notes, dictionary, music. See <a href="/block-all-apps-except/">allowlist mode</a>.</li>
+                    <li>Leave "Let me quit mid-sessions" off. Turn on Do Not Disturb.</li>
+                    <li>Turn on the Pomodoro timer: 25 minutes, 4 rounds, 5-minute breaks.</li>
+                    <li>Save, set the slider and start.</li>
+                </ol>
+            </div>
+            <p class="narrow" style="margin-top:1rem;">For more recipes, including a QR code you keep in another room, see the <a href="/app-blocker-for-studying/">app blocker for studying</a> guide.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">When Regain is the better pick</h2>
+            <ul>
+                <li><strong>You study better with friends watching.</strong> Regain's leaderboards and Focus Groups have no Curbox equivalent.</li>
+                <li><strong>You need specific YouTube channels and nothing else.</strong> Regain's Study Mode allows chosen channels.</li>
+                <li><strong>You are on an iPhone.</strong> Regain has an iOS app; Curbox does not yet.</li>
+                <li><strong>You like an all-in-one study app</strong> with music and themes, and the Pro price is fine for you.</li>
+            </ul>
+            <p style="margin-top:1rem;">On the other side: Regain's privacy policy, last updated 5 November 2025, lists names, email addresses and device IDs among the data it collects, names Google Analytics, and lists ad networks and analytics services among the third parties it shares with. Its terms say users must be 18 or older. Curbox has no account, no analytics and no internet permission, and the source is public. Read both and decide.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Regain alternative FAQ</h2>
+                <details class="faq__item">
+                    <summary>What is a good Regain app alternative on Android?</summary>
+                    <p>Curbox covers the core of what students use Regain for: blocking Reels and Shorts without blocking the whole app, Pomodoro focus sessions, sessions you cannot quit early, and website blocking. It is free with no paid tier, no account and no internet access. It does not have Regain&#x27;s friend leaderboards, study music or iPhone app.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>How much does Regain Pro cost?</summary>
+                    <p>Regain&#x27;s refund policy, last updated 4 December 2025, lists Regain Pro on Android at INR 199 a month and INR 999 a year, with offers that can bring those lower. The core app is free; Pro adds premium themes and extra strict-blocking options, according to Regain&#x27;s FAQ.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Can Curbox stop me quitting a focus session early?</summary>
+                    <p>Yes. When you create a Focus Group, leave &quot;Let me quit mid-sessions&quot; turned off. A session set up that way also cannot be ended early with an NFC tag. For extra protection against uninstalling, the F-Droid variant has anti-uninstall protection, and you can add Curbox itself to a blocking group.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Can Curbox allow only study channels on YouTube?</summary>
+                    <p>Not by channel. Curbox can block YouTube Shorts, block the youtube.com/shorts section in browsers, and in the F-Droid variant hide the YouTube home feed so only search results show. Searching for the lecture you need still works.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Does Curbox need an account like Regain?</summary>
+                    <p>No. Curbox has no accounts at all. Regain&#x27;s terms say you may be required to register to use its services.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Does Curbox block adult websites?</summary>
+                    <p>Curbox blocks any site you add to a Keywords And Websites group, and you can import a ready-made list from a .txt file. It does not ship a built-in adult content filter.</p>
+                </details>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Sources (checked November 2026)</h2>
+            <ul class="sources">
+                <li><a href="https://regainapp.ai/" target="_blank" rel="noopener noreferrer">regainapp.ai</a>: features, platforms, free core and Pro description, EPowerX Labs Private Limited.</li>
+                <li><a href="https://regainapp.ai/legal/refund-policy/" target="_blank" rel="noopener noreferrer">Regain refund policy</a> (last updated 4 December 2025): Android Pro prices.</li>
+                <li><a href="https://regainapp.ai/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">Regain privacy policy</a> and <a href="https://regainapp.ai/legal/terms-of-use/" target="_blank" rel="noopener noreferrer">terms of use</a> (both last updated 5 November 2025): data collected, third parties, registration, age.</li>
+                <li><a href="/docs/focus/focus-mode/">Curbox Focus Mode docs</a> and <a href="/privacy.html">Curbox privacy policy</a>.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <div class="related">
+                <a href="/comparison.html">Feature table</a>
+                <a href="/alternatives/appblock/">AppBlock alternative</a>
+                <a href="/alternatives/stay-focused/">Stay Focused alternative</a>
+                <a href="/alternatives/yourhour/">YourHour alternative</a>
+                <a href="/alternatives/stayfree/">StayFree alternative</a>
+                <a href="/app-blocker-for-studying/">App blocker for studying</a>
+                <a href="/pomodoro-app-blocker/">Pomodoro app blocker</a>
+                <a href="/block-youtube-shorts/">Block YouTube Shorts</a>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

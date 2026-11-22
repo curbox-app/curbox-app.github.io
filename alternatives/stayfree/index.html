@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>StayFree Alternative: Open Source, Offline · Curbox</title>
+    <meta
+      name="description"
+      content="Looking for a StayFree alternative? See where StayFree&#x27;s usage data goes, what Curbox tracks offline, and how to rebuild your limits in five minutes."
+    >
+    <link rel="canonical" href="https://curbox.app/alternatives/stayfree/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="A StayFree alternative that keeps your data on your phone">
+    <meta property="og:description" content="Looking for a StayFree alternative? See where StayFree&#x27;s usage data goes, what Curbox tracks offline, and how to rebuild your limits in five minutes.">
+    <meta property="og:url" content="https://curbox.app/alternatives/stayfree/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A StayFree alternative that keeps your data on your phone">
+    <meta name="twitter:description" content="Looking for a StayFree alternative? See where StayFree&#x27;s usage data goes, what Curbox tracks offline, and how to rebuild your limits in five minutes.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--sf { max-width: 60rem; }
+      .page--sf .lead { max-width: 40rem; }
+      .page--sf .section > p, .page--sf .section > ul, .page--sf .section > ol, .page--sf .narrow { max-width: var(--measure); }
+
+      .lanes { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.75rem; }
+      .lane { border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem; background: #070707; }
+      .lane h3 { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+      .hop { position: relative; padding: 0.85rem 1rem; border-radius: 10px; background: #111; margin-bottom: 1.6rem; }
+      .hop:last-of-type { margin-bottom: 0; }
+      .hop:not(:last-of-type)::after { content: '↓'; position: absolute; left: 50%; bottom: -1.45rem; transform: translateX(-50%); font-family: var(--font-mono); color: var(--muted); }
+      .hop b { display: block; font-family: var(--font-display); font-size: 1.02rem; }
+      .hop span { display: block; font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+      .hop--end { background: var(--fg); color: var(--bg); }
+      .hop--end span { color: #333; }
+      .lane__note { margin-top: 1rem; font-size: 0.8rem; color: var(--muted); }
+
+      .parity { width: 100%; border-collapse: collapse; margin-top: 1.25rem; font-size: 0.93rem; }
+      .parity th, .parity td { padding: 0.75rem 0.6rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+      .parity thead th { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+      .parity td:first-child { font-weight: 500; }
+      .tag { display: inline-block; min-width: 4.6rem; padding: 0.15rem 0.5rem; border-radius: 999px; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-align: center; }
+      .tag--yes { background: var(--fg); color: var(--bg); }
+      .tag--part { border: 1px solid var(--fg); }
+      .tag--no { border: 1px dashed var(--muted); color: var(--muted); }
+      .parity small { display: block; margin-top: 0.3rem; color: var(--muted); font-size: 0.8rem; }
+
+      .rebuild { counter-reset: r; list-style: none; margin-top: 1.25rem; max-width: var(--measure); }
+      .rebuild li { counter-increment: r; position: relative; padding: 0 0 1.4rem 3rem; }
+      .rebuild li::before { content: counter(r, decimal-leading-zero); position: absolute; left: 0; top: 0.1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+      .rebuild li b { display: block; font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 0.2rem; }
+      .rebuild .path { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+
+      .stay { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+      .stay div { padding: 1rem 1.1rem; border-left: 2px solid var(--fg); background: #0b0b0b; }
+      .stay b { display: block; font-family: var(--font-display); margin-bottom: 0.3rem; }
+      .stay p { font-size: 0.92rem; color: var(--muted); }
+
+      @media (max-width: 44rem) {
+        .lanes { grid-template-columns: 1fr; }
+        .parity thead { display: none; }
+        .parity, .parity tbody, .parity tr, .parity td { display: block; width: 100%; }
+        .parity tr { padding: 0.8rem 0; border-bottom: 1px solid var(--line); }
+        .parity td { border: 0; padding: 0.2rem 0; }
+        .parity td:nth-child(2)::before { content: 'StayFree: '; color: var(--muted); font-size: 0.8rem; }
+        .parity td:nth-child(3)::before { content: 'Curbox: '; color: var(--muted); font-size: 0.8rem; }
+      }
+
+      .faq__item { border-top: 1px solid var(--line); padding: 1rem 0; }
+      .faq__item:last-child { border-bottom: 1px solid var(--line); }
+      .faq__item summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.3; list-style: none; }
+      .faq__item summary::-webkit-details-marker { display: none; }
+      .faq__item summary::after { content: '+'; float: right; font-family: var(--font-mono); color: var(--muted); margin-left: 1rem; }
+      .faq__item[open] summary::after { content: '−'; }
+      .faq__item p { margin-top: 0.6rem; color: var(--muted); }
+      .related { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+      .related a { padding: 0.5rem 0.95rem; border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-mono); font-size: 0.75rem; text-decoration: none !important; }
+      .related a:hover { border-color: var(--fg); }
+      .sources li { font-size: 0.88rem; color: var(--muted); }
+    </style>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "headline": "A StayFree alternative that keeps your usage data at home.", "description": "Looking for a StayFree alternative? See where StayFree's usage data goes, what Curbox tracks offline, and how to rebuild your limits in five minutes.", "url": "https://curbox.app/alternatives/stayfree/", "datePublished": "2026-11-22", "dateModified": "2026-11-22", "author": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/"}, "publisher": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/"}, "about": [{"@type": "SoftwareApplication", "name": "StayFree"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Curbox a good StayFree alternative?", "acceptedAnswer": {"@type": "Answer", "text": "If you use StayFree mainly on Android to see your screen time and cap a few apps, yes. Curbox covers per-app usage, website time in supported browsers, daily limits, schedules and blocking, and adds Reels and Shorts limits and unlock challenges. It does not cover Windows, Mac or iPhone, which StayFree does."}}, {"@type": "Question", "name": "Does StayFree send my usage data anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "StayFree is made by ST Pulse, a Sensor Tower company. Sensor Tower's Panel Privacy Policy, effective 18 November 2026, names StayFree and says the app asks for consent before sending Collected Data, including app usage and website usage, to Sensor Tower's servers. The policy says this data is pseudonymized and that de-identified, aggregated insights may be sold. Read the policy yourself for the full detail."}}, {"@type": "Question", "name": "Does Curbox send my usage data anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. The Curbox Android app has no internet permission in any variant, so it cannot send anything. Your usage history stays on your phone and is deleted when you uninstall."}}, {"@type": "Question", "name": "Can I export my screen time from Curbox like I could in StayFree?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. In the Usage tab, open the three-dot menu and choose Export. You can export a Daily Breakdown, a Total Summary, or both, as CSV."}}, {"@type": "Question", "name": "Does Curbox block apps by category like StayFree?", "acceptedAnswer": {"@type": "Answer", "text": "Curbox limits apps in groups that you build yourself rather than by store category. An App Pause group can be set to pick up apps you install later, which covers the most common reason for category limits."}}, {"@type": "Question", "name": "Is there a Curbox desktop app?", "acceptedAnswer": {"@type": "Answer", "text": "Not a desktop app. There is a Curbox browser extension for Chrome and Firefox that blocks websites with schedules and limits, tracks website time and runs focus mode."}}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Alternatives", "item": "https://curbox.app/alternatives/"}, {"@type": "ListItem", "position": 3, "name": "StayFree alternative", "item": "https://curbox.app/alternatives/stayfree/"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Curbox", "operatingSystem": "Android", "applicationCategory": "LifestyleApplication", "license": "https://www.gnu.org/licenses/gpl-3.0.html", "url": "https://curbox.app/download.html", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--sf">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/alternatives/">← All alternatives</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Alternatives · StayFree</span>
+            <h1 class="page__title">A StayFree alternative that keeps your usage data at home.</h1>
+            <p class="lead">StayFree is one of the most installed screen time trackers on Android, and it does the job well. People look for a StayFree alternative for one reason more than any other: they want to know where the record of every app and site they use ends up. This page shows that path for both apps, then helps you rebuild your StayFree setup in Curbox.</p>
+        </header>
+
+        <section class="section">
+            <h2 class="section__title">What StayFree does well</h2>
+            <p>Credit first. StayFree tracks and limits screen time on Android, iPhone and iPad, Windows, Mac and in the browser, and shows it in one dashboard with what its site calls "cross-device stats". It can block right now, block on a schedule, cap daily use for apps, sites or whole categories, cap a single session, and hide distracting parts of social media without blocking the whole site. It is free to download.</p>
+            <p>If you want one tracker across a laptop, a work PC and an iPhone, StayFree reaches further than Curbox does today. That is worth knowing before you switch.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Where does your StayFree data go?</h2>
+            <p class="narrow">A screen time tracker sees every app you open and, in supported browsers, every site. So the useful question is not whether it collects data (it has to, to work) but where that data travels afterwards. Here is the path each app describes in its own documents.</p>
+            <div class="lanes">
+                <div class="lane">
+                    <h3>StayFree</h3>
+                    <div class="hop"><b>Your phone</b><span>Usage access permission records app and website use.</span></div>
+                    <div class="hop"><b>You are asked for consent</b><span>The policy says the app asks before sending Collected Data.</span></div>
+                    <div class="hop"><b>Sensor Tower servers</b><span>Services Data: app usage, website usage, sites visited, ad context and interactions, commerce information. Pseudonymized with a random Generic ID.</span></div>
+                    <div class="hop hop--end"><b>Anonymized insights products</b><span>The policy says de-identified, aggregated information may be sold, and used to train models and for research.</span></div>
+                    <p class="lane__note">Source: Sensor Tower Panel Privacy Policy, effective 18 November 2026, which names StayFree and ActionDash among the apps it covers.</p>
+                </div>
+                <div class="lane">
+                    <h3>Curbox</h3>
+                    <div class="hop"><b>Your phone</b><span>The App Blocker accessibility service records which app is on screen and, in supported browsers, the site.</span></div>
+                    <div class="hop hop--end"><b>Stays on your phone</b><span>The Android app has no internet permission in any variant, so there is no second hop. Uninstalling deletes it.</span></div>
+                    <p class="lane__note">Source: the <a href="/privacy.html">Curbox privacy policy</a> and the public GPL v3 source code, which anyone can check.</p>
+                </div>
+            </div>
+            <p class="narrow" style="margin-top:1.5rem;">To be fair to StayFree: the policy asks for consent, says it will never sell personal information to advertising platforms or data brokers, and describes the data as pseudonymized. Whether that is acceptable is your call. Sensor Tower is a mobile market intelligence company, and the policy is open about the data feeding its products. If you would rather your app list never leaves the phone at all, a tracker without network access settles the question.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Tracker parity: StayFree vs Curbox</h2>
+            <p class="narrow">Most people use StayFree as a tracker first and a blocker second. Here is how the tracking side lines up.</p>
+            <div class="matrix-wrap">
+            <table class="parity">
+                <thead><tr><th>What you use</th><th>StayFree</th><th>Curbox</th></tr></thead>
+                <tbody>
+                    <tr><td>Per-app screen time</td><td><span class="tag tag--yes">Yes</span></td><td><span class="tag tag--yes">Yes</span><small>Usage tab, TOTAL TODAY plus per-app list</small></td></tr>
+                    <tr><td>Website time</td><td><span class="tag tag--yes">Yes</span></td><td><span class="tag tag--part">Partly</span><small>Per browser, in the supported browsers listed in the docs</small></td></tr>
+                    <tr><td>Daily and weekly history</td><td><span class="tag tag--yes">Yes</span></td><td><span class="tag tag--yes">Yes</span><small>Weekly chart, daily and weekly views</small></td></tr>
+                    <tr><td>When you use your phone</td><td><span class="tag tag--part">Graphs</span></td><td><span class="tag tag--yes">Yes</span><small>Usage heatmap by hour and day</small></td></tr>
+                    <tr><td>Export</td><td><span class="tag tag--no">Not checked</span></td><td><span class="tag tag--yes">Yes</span><small>CSV: Daily Breakdown, Total Summary, or both</small></td></tr>
+                    <tr><td>Home-screen widget</td><td><span class="tag tag--no">Not checked</span></td><td><span class="tag tag--yes">Yes</span><small>Screentime widget and Reels widget</small></td></tr>
+                    <tr><td>Short video count and attention span</td><td><span class="tag tag--no">Not listed</span></td><td><span class="tag tag--yes">Yes</span><small>Reels, Shorts and Facebook Reels counted together</small></td></tr>
+                    <tr><td>Ignore noisy background apps</td><td><span class="tag tag--no">Not checked</span></td><td><span class="tag tag--yes">Yes</span><small>Ignore List</small></td></tr>
+                    <tr><td>Cross-device dashboard</td><td><span class="tag tag--yes">Yes</span><small>Phone, computer, browser</small></td><td><span class="tag tag--part">Partly</span><small>Optional Curbox Sync companion app and browser extension</small></td></tr>
+                </tbody>
+            </table>
+            </div>
+            <p class="narrow" style="margin-top:1rem;font-size:0.88rem;color:var(--muted);">"Not checked" means StayFree's homepage did not mention it when we looked, not that it is missing. Check the app before you decide.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Rebuild your StayFree setup in Curbox</h2>
+            <p class="narrow">Most StayFree setups come down to a few limits and a schedule. This takes about five minutes after you <a href="/download.html">install Curbox</a> and grant the three onboarding permissions.</p>
+            <ol class="rebuild">
+                <li><b>Daily limits on your worst apps</b>Create an App Pause group in Usage Based mode with a minute cap. Add every app you limited in StayFree. Turn on auto-add if you want new installs covered too.<span class="path">Reducers → Apps → + → Usage Based</span></li>
+                <li><b>Scheduled blocks</b>A second group in Time Based mode allows apps only inside the hours you pick. One schedule cannot cross midnight, so split 11 PM to 7 AM into two blocks.<span class="path">Reducers → Apps → + → Time Based → Configure Allowed Schedule</span></li>
+                <li><b>Session limits</b>Curbox does not cap a single session directly. The closest match is a Mindful Message with <code>{live_session_duration}</code> so you see how long you have been in the app, or Sip &amp; Stretch, which enforces a break after a stretch of use.<span class="path">Reducers → Gentle Prompts</span></li>
+                <li><b>Block now</b>Focus Mode is the one-tap version. Pick a Focus Group, set the timer, start.<span class="path">Focus tab → slider → choose group → confirm</span></li>
+                <li><b>Website limits</b>Add sites to a Keywords And Websites group. You can block one part of a site, such as <code>youtube.com/shorts</code>, and leave the rest.<span class="path">Reducers → Keywords And Websites → +</span></li>
+                <li><b>Decide how hard the stop is</b>StayFree mostly reminds and blocks. Curbox lets you choose what the pause screen asks for: nothing, a wait, a typed sentence, a QR code in another room, an NFC tag, or adaptive math.<span class="path">Any group → Configure Warning Screen</span></li>
+            </ol>
+            <p class="narrow">Want only the tracking? Skip all of the above, pin the Screentime widget, and look at the <a href="/screen-time-tracker-android/">Usage tab guide</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">When StayFree is the better pick</h2>
+            <div class="stay">
+                <div><b>You track a computer too</b><p>StayFree has Windows and Mac apps. Curbox has a browser extension, not a desktop app.</p></div>
+                <div><b>You use an iPhone</b><p>StayFree is on iPhone and iPad. Curbox is not on iOS yet.</p></div>
+                <div><b>You want category limits</b><p>StayFree can cap a whole category of apps. In Curbox you build groups yourself.</p></div>
+                <div><b>The policy is fine by you</b><p>If you have read Sensor Tower's policy and are comfortable, StayFree's reach across devices is a real advantage.</p></div>
+            </div>
+            <p class="narrow" style="margin-top:1.5rem;">Note that the UI Hider, which hides feeds inside apps, and anti-uninstall protection are in the F-Droid variant of Curbox and not the Playstore variant. Every official build is on the <a href="/download.html">downloads page</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">StayFree alternative FAQ</h2>
+                <details class="faq__item">
+                    <summary>Is Curbox a good StayFree alternative?</summary>
+                    <p>If you use StayFree mainly on Android to see your screen time and cap a few apps, yes. Curbox covers per-app usage, website time in supported browsers, daily limits, schedules and blocking, and adds Reels and Shorts limits and unlock challenges. It does not cover Windows, Mac or iPhone, which StayFree does.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Does StayFree send my usage data anywhere?</summary>
+                    <p>StayFree is made by ST Pulse, a Sensor Tower company. Sensor Tower&#x27;s Panel Privacy Policy, effective 18 November 2026, names StayFree and says the app asks for consent before sending Collected Data, including app usage and website usage, to Sensor Tower&#x27;s servers. The policy says this data is pseudonymized and that de-identified, aggregated insights may be sold. Read the policy yourself for the full detail.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Does Curbox send my usage data anywhere?</summary>
+                    <p>No. The Curbox Android app has no internet permission in any variant, so it cannot send anything. Your usage history stays on your phone and is deleted when you uninstall.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Can I export my screen time from Curbox like I could in StayFree?</summary>
+                    <p>Yes. In the Usage tab, open the three-dot menu and choose Export. You can export a Daily Breakdown, a Total Summary, or both, as CSV.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Does Curbox block apps by category like StayFree?</summary>
+                    <p>Curbox limits apps in groups that you build yourself rather than by store category. An App Pause group can be set to pick up apps you install later, which covers the most common reason for category limits.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Is there a Curbox desktop app?</summary>
+                    <p>Not a desktop app. There is a Curbox browser extension for Chrome and Firefox that blocks websites with schedules and limits, tracks website time and runs focus mode.</p>
+                </details>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Sources (checked November 2026)</h2>
+            <ul class="sources">
+                <li><a href="https://stayfreeapps.com/" target="_blank" rel="noopener noreferrer">stayfreeapps.com</a>: platforms, blocking and limit features, "Download for Free", ST Pulse, a Sensor Tower company. The site's own privacy link returned an error when checked.</li>
+                <li><a href="https://sensortower.com/stayfree-privacy" target="_blank" rel="noopener noreferrer">Sensor Tower Panel Privacy Policy</a>, effective 18 November 2026: apps covered, Collected Data, consent, uses, de-identification.</li>
+                <li><a href="/screen-time-tracker-android/">Curbox Usage tab</a>, <a href="/privacy.html">Curbox privacy policy</a> and <a href="/docs/usage/usage-stats/">usage docs</a>.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <div class="related">
+                <a href="/comparison.html">Feature table</a>
+                <a href="/alternatives/actiondash/">ActionDash alternative</a>
+                <a href="/alternatives/yourhour/">YourHour alternative</a>
+                <a href="/alternatives/digital-wellbeing/">Digital Wellbeing alternative</a>
+                <a href="/alternatives/stay-focused/">Stay Focused alternative</a>
+                <a href="/screen-time-tracker-android/">Screen time tracker</a>
+                <a href="/screen-time-app-without-ads/">Screen time app without ads</a>
+                <a href="/download.html">Download Curbox</a>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

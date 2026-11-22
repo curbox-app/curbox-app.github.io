@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Screen Time Guides for Android · Curbox</title>
+    <meta
+      name="description"
+      content="Practical guides for blocking Instagram, Reels, YouTube Shorts and websites on Android, cutting doomscrolling, and picking an app blocker you can trust."
+    >
+    <link rel="canonical" href="https://curbox.app/guides/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="Screen time guides for Android">
+    <meta property="og:description" content="Step-by-step guides for blocking distracting apps, feeds and websites on Android, and for building calmer phone habits.">
+    <meta property="og:url" content="https://curbox.app/guides/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Screen time guides for Android">
+    <meta name="twitter:description" content="Step-by-step guides for blocking distracting apps, feeds and websites on Android, and for building calmer phone habits.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--hub { max-width: 64rem; }
+      .page--hub .lead { max-width: 40rem; }
+
+      .goal {
+        display: grid;
+        grid-template-columns: 14rem 1fr;
+        gap: 2rem;
+        margin-top: clamp(3rem, 8vh, 4.5rem);
+        padding-top: clamp(2rem, 5vh, 3rem);
+        border-top: 1px solid var(--line);
+      }
+      .goal__head .kicker { margin-bottom: 0.75rem; }
+      .goal__head h2 {
+        font-family: var(--font-display);
+        font-size: clamp(1.4rem, 1.15rem + 1vw, 1.9rem);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+      .goal__head p { margin-top: 0.75rem; color: var(--muted); font-size: 0.92rem; }
+
+      .rows { list-style: none; }
+      .rows li + li { border-top: 1px solid var(--line); }
+      .rows a.row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0.25rem 1.5rem;
+        padding: 1.1rem 0;
+        text-decoration: none !important;
+        color: var(--fg);
+      }
+      .row__title {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.15rem;
+        line-height: 1.25;
+      }
+      .row__query {
+        grid-column: 1;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+      }
+      .row__desc { grid-column: 1; color: var(--muted); font-size: 0.95rem; }
+      .row__arrow {
+        grid-column: 2;
+        grid-row: 1 / span 3;
+        align-self: center;
+        font-family: var(--font-mono);
+        color: var(--muted);
+        transition: transform 0.2s ease, color 0.2s ease;
+      }
+      .rows a.row:hover .row__arrow { transform: translateX(4px); color: var(--fg); }
+      .rows a.row:hover .row__title { text-decoration: underline; text-underline-offset: 0.2em; }
+
+      .switch-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 0.25rem;
+      }
+      .switch-strip a {
+        padding: 0.55rem 1rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        text-decoration: none !important;
+        transition: border-color 0.2s ease, background 0.2s ease;
+      }
+      .switch-strip a:hover { border-color: var(--fg); background: #111; }
+      .goal__body > p { margin-bottom: 1rem; }
+
+      @media (max-width: 44rem) {
+        .goal { grid-template-columns: 1fr; gap: 1rem; }
+      }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Screen time guides for Android",
+      "url": "https://curbox.app/guides/",
+      "description": "Practical guides for blocking distracting apps, feeds and websites on Android, and for building calmer phone habits.",
+      "publisher": { "@type": "Organization", "name": "Curbox", "url": "https://curbox.app/" },
+      "hasPart": [
+        { "@type": "Article", "name": "How to block Instagram on Android", "url": "https://curbox.app/block-instagram-on-android/" },
+        { "@type": "Article", "name": "How to block Instagram Reels", "url": "https://curbox.app/block-instagram-reels/" },
+        { "@type": "Article", "name": "How to block YouTube Shorts", "url": "https://curbox.app/block-youtube-shorts/" },
+        { "@type": "Article", "name": "How to block websites on Android", "url": "https://curbox.app/block-websites-on-android/" },
+        { "@type": "Article", "name": "How to stop doomscrolling", "url": "https://curbox.app/stop-doomscrolling/" },
+        { "@type": "Article", "name": "App blocker for studying", "url": "https://curbox.app/app-blocker-for-studying/" },
+        { "@type": "Article", "name": "App blocker for ADHD", "url": "https://curbox.app/app-blocker-for-adhd/" },
+        { "@type": "Article", "name": "Grayscale specific apps on Android", "url": "https://curbox.app/grayscale-apps-android/" },
+        { "@type": "Article", "name": "Batch notifications on Android", "url": "https://curbox.app/batch-notifications-android/" },
+        { "@type": "Article", "name": "Screen time app without ads", "url": "https://curbox.app/screen-time-app-without-ads/" },
+        { "@type": "Article", "name": "Open source app blockers for Android", "url": "https://curbox.app/open-source-app-blocker/" }
+      ]
+    }
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Screen Time Guides for Android", "item": "https://curbox.app/guides/"}]}
+    </script>
+</head>
+<body>
+    <main class="page page--hub">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/">← Home</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Guides · Android screen time</span>
+            <h1 class="page__title">Start with the thing that keeps pulling you back.</h1>
+            <p class="lead">Each guide answers one question properly: what Android can already do on its own, where that falls short, and the exact steps to set up something that holds. Pick the one closest to your problem.</p>
+        </header>
+
+        <section class="goal" aria-labelledby="g-block">
+            <div class="goal__head">
+                <span class="kicker">01</span>
+                <h2 id="g-block">Block one app, feed or site</h2>
+                <p>You know exactly what eats your time and want it gone, limited, or only allowed at certain hours.</p>
+            </div>
+            <ul class="rows">
+                <li><a class="row" href="/block-instagram-on-android/">
+                    <span class="row__title">How to block Instagram on Android</span>
+                    <span class="row__query">block instagram · limit instagram time</span>
+                    <span class="row__desc">Whole app, nights only, a daily allowance, or just the parts you hate. Recipes for each.</span>
+                    <span class="row__arrow" aria-hidden="true">→</span>
+                </a></li>
+                <li><a class="row" href="/block-instagram-reels/">
+                    <span class="row__title">How to block Instagram Reels and keep Instagram</span>
+                    <span class="row__query">disable reels · block reels</span>
+                    <span class="row__desc">Instagram has no switch for Reels. Here is how to cap them by time or by count instead.</span>
+                    <span class="row__arrow" aria-hidden="true">→</span>
+                </a></li>
+                <li><a class="row" href="/block-youtube-shorts/">
+                    <span class="row__title">How to block YouTube Shorts</span>
+                    <span class="row__query">remove shorts · block shorts android</span>
+                    <span class="row__desc">Stop Shorts in the app and the browser while subscriptions, search and normal videos keep working.</span>
+                    <span class="row__arrow" aria-hidden="true">→</span>
+                </a></li>
+                <li><a class="row" href="/block-websites-on-android/">
+                    <span class="row__title">How to block websites on Android</span>
+                    <span class="row__query">block a website on chrome android</span>
+                    <span class="row__desc">Whole sites, single sections, or one path everywhere. Includes a pattern tester you can try right on the page.</span>
+                    <span class="row__arrow" aria-hidden="true">→</span>
+                </a></li>
+            </ul>
+        </section>
+
+        <section class="goal" aria-labelledby="g-habit">
+            <div class="goal__head">
+                <span class="kicker">02</span>
+                <h2 id="g-habit">Change the habit, not just the app</h2>
+                <p>Blocking one thing often moves the scrolling somewhere else. These guides work on the pattern.</p>
+            </div>
+            <ul class="rows">
+                <li><a class="row" href="/stop-doomscrolling/">
+                    <span class="row__title">How to stop doomscrolling: a 4-week plan</span>
+                    <span class="row__query">stop scrolling on phone</span>
+                    <span class="row__desc">Notice first, then add friction, then limits, then something to do instead.</span>
+                    <span class="row__arrow" aria-hidden="true">→</span>
+                </a></li>
+                <li><a class="row" href="/app-blocker-for-studying/">
+                    <span class="row__title">An app blocker for studying</span>
+                    <span class="row__query">focus app for students</span>
+                    <span class="row__desc">Session recipes for exam week, Pomodoro evenings and library days, plus a 5-minute setup for tonight.</span>
+                    <span class="row__arrow" aria-hidden="true">→</span>
+                </a></li>
+                <li><a class="row" href="/app-blocker-for-adhd/">
+                    <span class="row__title">Using an app blocker with ADHD</span>
+                    <span class="row__query">screen time help adhd</span>
+                    <span class="row__desc">Outside structure for the hard moments: time blindness, impulse taps, and getting unstuck.</span>
+                    <span class="row__arrow" aria-hidden="true">→</span>
+                </a></li>
+                <li><a class="row" href="/grayscale-apps-android/">
+                    <span class="row__title">Make only certain apps grayscale</span>
+                    <span class="row__query">black and white mode for specific apps</span>
+                    <span class="row__desc">Android can turn the whole screen gray. Here is how to do it per app and keep your camera in colour.</span>
+                    <span class="row__arrow" aria-hidden="true">→</span>
+                </a></li>
+                <li><a class="row" href="/batch-notifications-android/">
+                    <span class="row__title">Batch your notifications on Android</span>
+                    <span class="row__query">schedule notifications · notification summary</span>
+                    <span class="row__desc">Get notifications three times a day instead of three hundred, without missing calls or alarms.</span>
+                    <span class="row__arrow" aria-hidden="true">→</span>
+                </a></li>
+            </ul>
+        </section>
+
+        <section class="goal" aria-labelledby="g-trust">
+            <div class="goal__head">
+                <span class="kicker">03</span>
+                <h2 id="g-trust">Pick an app you can trust</h2>
+                <p>A blocker sees everything on your screen. These help you judge any app, not only ours.</p>
+            </div>
+            <ul class="rows">
+                <li><a class="row" href="/screen-time-app-without-ads/">
+                    <span class="row__title">Screen time apps without ads: how to check</span>
+                    <span class="row__query">app blocker no ads no subscription</span>
+                    <span class="row__desc">A 5-minute audit for permissions, trackers, paywalls and accounts.</span>
+                    <span class="row__arrow" aria-hidden="true">→</span>
+                </a></li>
+                <li><a class="row" href="/open-source-app-blocker/">
+                    <span class="row__title">Open source app blockers for Android</span>
+                    <span class="row__query">foss app blocker</span>
+                    <span class="row__desc">A field guide to the real options, and how to confirm an app is actually open source.</span>
+                    <span class="row__arrow" aria-hidden="true">→</span>
+                </a></li>
+            </ul>
+        </section>
+
+        <section class="goal" aria-labelledby="g-switch">
+            <div class="goal__head">
+                <span class="kicker">04</span>
+                <h2 id="g-switch">Switching from another app</h2>
+                <p>Honest notes on what carries over, what is different, and when your current app is the better fit.</p>
+            </div>
+            <div class="goal__body">
+                <p>Each page maps the other app's features to Curbox and walks you through rebuilding your setup.</p>
+                <div class="switch-strip">
+                    <a href="/alternatives/stay-focused/">Stay Focused</a>
+                    <a href="/alternatives/lock-me-out/">Lock Me Out</a>
+                    <a href="/alternatives/appblock/">AppBlock</a>
+                    <a href="/alternatives/opal/">Opal</a>
+                    <a href="/alternatives/freedom/">Freedom</a>
+                    <a href="/alternatives/blocksite/">BlockSite</a>
+                    <a href="/alternatives/blockerx/">BlockerX</a>
+                    <a href="/alternatives/screenzen/">ScreenZen</a>
+                    <a href="/alternatives/one-sec/">one sec</a>
+                    <a href="/alternatives/clearspace/">Clearspace</a>
+                    <a href="/alternatives/digital-wellbeing/">Digital Wellbeing</a>
+                    <a href="/alternatives/stayfree/">StayFree</a>
+                    <a href="/alternatives/actiondash/">ActionDash</a>
+                    <a href="/alternatives/yourhour/">YourHour</a>
+                    <a href="/alternatives/social-fever/">Social Fever</a>
+                    <a href="/alternatives/forest/">Forest</a>
+                    <a href="/alternatives/flipd/">Flipd</a>
+                    <a href="/alternatives/regain/">Regain</a>
+                    <a href="/alternatives/brick/">Brick</a>
+                    <a href="/alternatives/unpluq/">Unpluq</a>
+                    <a href="/alternatives/minimalist-phone/">Minimalist Phone</a>
+                    <a href="/alternatives/detoxdroid/">DetoxDroid</a>
+                    <a href="/alternatives/">All alternatives</a>
+                    <a href="/comparison.html">Feature table</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="goal" aria-labelledby="g-feat">
+            <div class="goal__head">
+                <span class="kicker">05</span>
+                <h2 id="g-feat">One feature, explained properly</h2>
+                <p>Already know the tool you want? Each page covers one Curbox feature from setup to edge cases.</p>
+            </div>
+            <div class="goal__body">
+                <div class="switch-strip">
+                    <a href="/qr-code-app-blocker/">QR code unlock</a>
+                    <a href="/nfc-app-blocker/">NFC tags</a>
+                    <a href="/math-unlock-app-blocker/">Math unlock</a>
+                    <a href="/urge-surfing-app/">Urge Surfing</a>
+                    <a href="/block-all-apps-except/">Allowlist mode</a>
+                    <a href="/pomodoro-app-blocker/">Pomodoro</a>
+                    <a href="/hide-youtube-recommendations/">Hide YouTube feed</a>
+                    <a href="/hide-instagram-feed/">Hide Instagram feed</a>
+                    <a href="/prevent-app-blocker-uninstall/">Uninstall protection</a>
+                    <a href="/screen-time-tracker-android/">Screen time tracker</a>
+                    <a href="/reels-counter/">Reels counter</a>
+                    <a href="/mindful-reminder-when-opening-apps/">Mindful reminders</a>
+                    <a href="/break-reminder-app-android/">Break reminders</a>
+                    <a href="/auto-do-not-disturb-schedule/">Auto DND</a>
+                    <a href="/location-based-app-blocker/">Location blocking</a>
+                    <a href="/website-blocker-extension/">Browser extension</a>
+                    <a href="/app-blocker-api/">Curbox API</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Want the full manual instead?</h2>
+            <p>The guides above are built around problems. The <a href="/docs">Curbox docs</a> are built around features, with every setting explained. Ready to try it? Every official download is on the <a href="/download.html">downloads page</a>.</p>
+        </section>
+    </main>
+</body>
+</html>

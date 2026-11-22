@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Stay Focused Alternative: Open Source, Offline · Curbox</title>
+    <meta
+      name="description"
+      content="Looking for a Stay Focused alternative on Android? See how each Stay Focused setup maps to Curbox, an open-source blocker with no ads and no internet access."
+    >
+    <link rel="canonical" href="https://curbox.app/alternatives/stay-focused/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="A Stay Focused alternative that keeps your data on your phone">
+    <meta property="og:description" content="Looking for a Stay Focused alternative on Android? See how each Stay Focused setup maps to Curbox, an open-source blocker with no ads and no internet access.">
+    <meta property="og:url" content="https://curbox.app/alternatives/stay-focused/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Stay Focused alternative that keeps your data on your phone">
+    <meta name="twitter:description" content="Looking for a Stay Focused alternative on Android? See how each Stay Focused setup maps to Curbox, an open-source blocker with no ads and no internet access.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--sf { max-width: 52rem; }
+      .page--sf .lead { max-width: 38rem; }
+      .sf-prose { max-width: var(--measure); }
+
+      /* Quick verdict strip under the header */
+      .sf-verdict {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        margin-top: 2.5rem;
+        background: var(--line);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .sf-verdict > div { background: var(--bg); padding: 1.25rem 1.35rem; }
+      .sf-verdict h2 {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.6rem;
+      }
+      .sf-verdict p { font-size: 0.95rem; line-height: 1.5; }
+
+      /* Scenario cards: "If you used Stay Focused to..." */
+      .scenario {
+        margin-top: 1.75rem;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .scenario__head {
+        display: flex;
+        gap: 1rem;
+        align-items: baseline;
+        padding: 1.1rem 1.35rem;
+        background: #0d0d0d;
+        border-bottom: 1px solid var(--line);
+      }
+      .scenario__num {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--muted);
+        flex: none;
+      }
+      .scenario__head h3 {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        line-height: 1.25;
+        letter-spacing: -0.01em;
+      }
+      .scenario__body {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+      }
+      .scenario__then,
+      .scenario__now { padding: 1.1rem 1.35rem 1.3rem; font-size: 0.95rem; }
+      .scenario__then { color: var(--muted); border-right: 1px solid var(--line); }
+      .scenario__label {
+        display: block;
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+      }
+      .scenario__now ol { margin: 0.25rem 0 0 1.1rem; }
+      .scenario__now li { margin-top: 0.35rem; padding-left: 0.2rem; }
+      .scenario__now li::before { content: none; }
+      .scenario__note {
+        margin-top: 0.75rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .scenario--gap .scenario__head { background: #120e0e; }
+
+      /* Data ledger: what leaves the phone */
+      .ledger {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+      .ledger__col { border-top: 2px solid var(--fg); padding-top: 1rem; }
+      .ledger__col--muted { border-top-color: var(--muted); }
+      .ledger__col h3 {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        margin-bottom: 0.6rem;
+      }
+      .ledger__col ul li { font-size: 0.93rem; }
+      .ledger__src { margin-top: 1rem; font-size: 0.85rem; color: var(--muted); max-width: var(--measure); }
+
+      /* Fair-play box */
+      .fair {
+        margin-top: 1.25rem;
+        padding: 1.35rem 1.5rem;
+        border-left: 3px solid var(--fg);
+        background: #0b0b0b;
+        max-width: var(--measure);
+      }
+
+      .faq__item { border-bottom: 1px solid var(--line); padding: 1rem 0; max-width: var(--measure); }
+      .faq__item summary { cursor: pointer; font-weight: 500; list-style-position: outside; }
+      .faq__item p { margin-top: 0.6rem; color: var(--muted); }
+
+      .related { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+      .related a:not(.btn) {
+        text-decoration: none !important;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.4rem 0.9rem;
+        font-size: 0.85rem;
+      }
+      .related a:hover { border-color: var(--fg); }
+
+      .sf-cta {
+        display: inline-block;
+        margin-top: 1.5rem;
+        padding: 0.85rem 1.8rem;
+        border-radius: 999px;
+        background: var(--fg);
+        color: var(--bg);
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 40rem) {
+        .sf-verdict,
+        .scenario__body,
+        .ledger { grid-template-columns: 1fr; }
+        .scenario__then { border-right: 0; border-bottom: 1px solid var(--line); }
+      }
+    </style>
+
+    <script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "A Stay Focused alternative that never phones home.",
+    "description": "Looking for a Stay Focused alternative on Android? See how each Stay Focused setup maps to Curbox, an open-source blocker with no ads and no internet access.",
+    "url": "https://curbox.app/alternatives/stay-focused/",
+    "dateModified": "2026-11-22",
+    "datePublished": "2026-11-22",
+    "author": {
+      "@type": "Organization",
+      "name": "Curbox",
+      "url": "https://curbox.app/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Curbox",
+      "url": "https://curbox.app/"
+    },
+    "about": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Stay Focused"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Curbox",
+        "operatingSystem": "Android",
+        "applicationCategory": "UtilitiesApplication",
+        "license": "https://www.gnu.org/licenses/gpl-3.0.html"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Curbox a free alternative to Stay Focused?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Curbox is free and open source under the GPL v3. There is no premium tier, no subscription and no account. Every blocking mode, unlock challenge and Focus Mode option described on this page is available to everyone."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Curbox work on iPhone like Stay Focused does?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Curbox is Android only, plus a browser extension for Chrome and Firefox. If you need the same blocker on an iPhone, Stay Focused covers iOS and Curbox does not yet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can Curbox block YouTube Shorts and Instagram Reels without blocking the whole app?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The Short-Form Video Content reducer blocks Instagram Reels, YouTube Shorts and Facebook Reels after a daily time limit or a video count, and the rest of each app keeps working. It does not cover Snapchat Spotlight or Instagram Stories."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Curbox block apps by location?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not by itself. A separate open-source add-on, the Curbox location blocker, uses the Curbox API to add location-based unlocks. If location blocking is central to how you use Stay Focused, test the add-on before you switch."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my Stay Focused profiles import into Curbox?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. There is no importer between the two apps, so you rebuild your profiles by hand. Most people only have two or three, and the scenarios on this page show the matching Curbox setup for the common ones."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which browsers does Curbox website blocking support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Chrome, Brave, Firefox, Fennec, Opera, Cromite, Vanadium, Helium, CalyxOS Chromium, the /e/OS Browser and Waterfox. Samsung Internet, Edge and other browsers are not supported for keyword blocking, so block those browsers as apps with App Pause instead."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can Curbox stop me from uninstalling it, like Strict Mode?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The F-Droid and GitHub builds include anti-uninstall protection that uses device administrator access. The Playstore build does not. On some phones, turning off device administrator access needs a restart into safe mode."
+        }
+      }
+    ]
+  }
+]
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Alternatives", "item": "https://curbox.app/alternatives/"}, {"@type": "ListItem", "position": 3, "name": "Stay Focused Alternative: Open Source, Offline", "item": "https://curbox.app/alternatives/stay-focused/"}]}
+    </script>
+</head>
+<body>
+    <main class="page page--sf">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/alternatives/">← All alternatives</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Alternatives · Stay Focused</span>
+            <h1 class="page__title">A Stay Focused alternative that never phones home.</h1>
+            <p class="lead">Stay Focused is a capable blocker. If you are leaving it, the reason is usually not missing features. It is the ad and analytics code its privacy policy lists, a premium wall, or how much of your browsing gets sent off your phone. This page shows how to rebuild each common Stay Focused setup in Curbox, and where Curbox falls short.</p>
+
+            <div class="sf-verdict">
+                <div>
+                    <h2>Switch to Curbox if</h2>
+                    <p>You only use Android, you want every feature without paying, and you would rather use a blocker whose code you can read and which has no internet permission at all.</p>
+                </div>
+                <div>
+                    <h2>Stay with Stay Focused if</h2>
+                    <p>You need the same blocker on an iPhone, you rely on location blocking or Strict Alarm, or you browse mainly in Samsung Internet or Edge.</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section__title">Why people look for something else</h2>
+            <div class="sf-prose">
+                <p>Stay Focused's own documents explain most of the reasons people switch. Its Play Store privacy policy, last modified 30 September 2026, lists the data it collects: your installed apps, your app usage, and your website usage, including the "Package Name, Full url and time of visit". That data goes to servers hosted with Linode in the United States. The policy names AdMob and Firebase Analytics as third-party services. It also says de-identified product data is shared with "certain third parties for their market intelligence analytics purposes."</p>
+                <p>That is not unusual for a free app. It is still worth thinking about for an app blocker. On Android, Stay Focused uses the Accessibility permission, as every app blocker does, and that permission can see everything on your screen. An app with that access plus an analytics and ad stack has to be taken on trust.</p>
+                <p>The second reason is the paywall. Stay Focused is free to download. Its FAQ mentions premium features, subscriptions and older one-time purchases, so some of the app sits behind a payment. Curbox has no paid tier.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Where your data goes</h2>
+            <p class="sf-prose">These lists come from each app's published privacy documents, not from guesses.</p>
+            <div class="ledger">
+                <div class="ledger__col ledger__col--muted">
+                    <h3>Stay Focused (per its policy)</h3>
+                    <ul>
+                        <li>Installed app list and app usage data</li>
+                        <li>Website usage: package name, full URL and time of visit (query strings discarded)</li>
+                        <li>A masked IP address and a random unique identifier</li>
+                        <li>Third-party services: Google Play Services, AdMob, Firebase Analytics</li>
+                        <li>De-identified product data shared for market intelligence</li>
+                        <li>Location for geofences is handled on the device and not sent to its servers</li>
+                    </ul>
+                </div>
+                <div class="ledger__col">
+                    <h3>Curbox Android app</h3>
+                    <ul>
+                        <li>No internet permission in any variant, so it cannot send anything</li>
+                        <li>No accounts and nothing to log in to</li>
+                        <li>No analytics, ad or tracking libraries</li>
+                        <li>Usage history stays in the app on your phone</li>
+                        <li>Full source on GitHub under the GPL v3, so you can check the above yourself</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="ledger__src">The Curbox browser extension can optionally pair with your phone through Curbox Sync. Sync is off until you set it up and goes straight to your own phone, with no Curbox server in between. See the <a href="/privacy.html">privacy policy</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Rebuild your Stay Focused setup, one scenario at a time</h2>
+            <p class="sf-prose">Find the thing you used Stay Focused for. Each card shows the closest Curbox setup, with the real menu path. There is no importer, so plan on ten minutes to rebuild two or three profiles.</p>
+
+            <article class="scenario">
+                <div class="scenario__head"><span class="scenario__num">01</span><h3>If you used a "Work" or "Study" profile to block a set of apps during certain hours</h3></div>
+                <div class="scenario__body">
+                    <div class="scenario__then"><span class="scenario__label">In Stay Focused</span>A profile groups apps and sites and blocks them during chosen hours.</div>
+                    <div class="scenario__now"><span class="scenario__label">In Curbox: App Pause, Time Based</span>
+                        <ol>
+                            <li>Open Reducers, then Apps, and tap the + button.</li>
+                            <li>Name the group "Work" and tap Select Apps.</li>
+                            <li>Pick the Time Based mode and set the hours the apps are allowed, for example 6 PM to 11 PM.</li>
+                            <li>Tap Configure Warning Screen to decide how hard it is to get past (see scenario 4), then Done.</li>
+                        </ol>
+                        <p class="scenario__note">One quirk: a single schedule cannot cross midnight. For an 11 PM to 2 AM block, add two ranges, 11 PM to 12 AM and 12 AM to 2 AM.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="scenario">
+                <div class="scenario__head"><span class="scenario__num">02</span><h3>If you used a daily time limit on Instagram, TikTok or similar</h3></div>
+                <div class="scenario__body">
+                    <div class="scenario__then"><span class="scenario__label">In Stay Focused</span>Block an app once you have used up a daily limit.</div>
+                    <div class="scenario__now"><span class="scenario__label">In Curbox: App Pause, Usage Based</span>
+                        <ol>
+                            <li>Reducers, then Apps, then +. Choose Usage Based.</li>
+                            <li>Set the daily minutes. Turn off the uniform setting if you want different limits per weekday, for example 15 minutes on weekdays and 60 on weekends.</li>
+                            <li>The counter resets at midnight.</li>
+                        </ol>
+                        <p class="scenario__note">You can stack one Time Based and one Usage Based group on the same app. "Only 6 PM to 9 PM, and only an hour of it" is two groups.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="scenario">
+                <div class="scenario__head"><span class="scenario__num">03</span><h3>If you used Stay Focused to block Reels and Shorts but keep the app</h3></div>
+                <div class="scenario__body">
+                    <div class="scenario__then"><span class="scenario__label">In Stay Focused</span>Hides YouTube Shorts, Instagram Reels and Stories, or Snapchat Spotlight.</div>
+                    <div class="scenario__now"><span class="scenario__label">In Curbox: Short-Form Video Content</span>
+                        <ol>
+                            <li>Reducers, then Short-Form Video Content. Flip the main switch at the top right.</li>
+                            <li>Choose Time Based (minutes a day) or Reel Count Based (videos a day).</li>
+                            <li>Limits are combined across Instagram Reels, YouTube Shorts and Facebook Reels, so 10 Reels plus 10 Shorts counts as 20.</li>
+                        </ol>
+                        <p class="scenario__note">Curbox does not handle Snapchat Spotlight or Instagram Stories. It does add things Stay Focused does not list: a live Reels counter on screen and an average attention span figure in your usage stats.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="scenario">
+                <div class="scenario__head"><span class="scenario__num">04</span><h3>If you relied on Strict Mode so you could not switch blocks off</h3></div>
+                <div class="scenario__body">
+                    <div class="scenario__then"><span class="scenario__label">In Stay Focused</span>Locks your blocks until a timer runs out.</div>
+                    <div class="scenario__now"><span class="scenario__label">In Curbox: Warning Screen plus anti-uninstall</span>
+                        <ol>
+                            <li>On any group, open Configure Warning Screen and set the Unlock Challenge to Never Unlock. The pause screen then has no way past.</li>
+                            <li>For softer days, pick Require effort instead: scan a QR code you keep in another room, tap an NFC tag, solve adaptive math or type a sentence.</li>
+                            <li>Add Proceed Limits to cap how many times you can get through in a window.</li>
+                            <li>In the F-Droid or GitHub build, turn on anti-uninstall so Curbox cannot be removed in a weak moment.</li>
+                        </ol>
+                        <p class="scenario__note">Anti-uninstall is not in the Playstore build. On some phones, removing its device administrator access later needs a restart into safe mode.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="scenario">
+                <div class="scenario__head"><span class="scenario__num">05</span><h3>If you used Take a Break or Pomodoro with a few apps left open</h3></div>
+                <div class="scenario__body">
+                    <div class="scenario__then"><span class="scenario__label">In Stay Focused</span>Focus sessions with planned breaks and only chosen apps available.</div>
+                    <div class="scenario__now"><span class="scenario__label">In Curbox: Focus Mode</span>
+                        <ol>
+                            <li>Open the Focus tab and tap Create Focus Group.</li>
+                            <li>Select the apps you want to keep, then choose Block All Except Selected.</li>
+                            <li>Turn on Pomodoro timer, set the number of rounds and the break minutes. Optionally turn on do not disturb.</li>
+                            <li>Leave "Let me quit mid-sessions" off if you want the session to hold.</li>
+                        </ol>
+                        <p class="scenario__note">Curbox plays a sound when a session or break starts and ends, but it has no ambient focus sounds like rain or brown noise.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="scenario">
+                <div class="scenario__head"><span class="scenario__num">06</span><h3>If you blocked websites and keywords in your browser</h3></div>
+                <div class="scenario__body">
+                    <div class="scenario__then"><span class="scenario__label">In Stay Focused</span>Blocks sites and keywords in a long list of Android browsers.</div>
+                    <div class="scenario__now"><span class="scenario__label">In Curbox: Keywords And Websites</span>
+                        <ol>
+                            <li>Reducers, then Keywords And Websites, then +.</li>
+                            <li>Add entries like <code>reddit.com</code> for a whole site, <code>youtube.com/shorts</code> for one section, or <code>/reels</code> for that path on every site.</li>
+                            <li>Have a long list? Put one keyword per line in a .txt file and import it from the group's three-dot menu.</li>
+                        </ol>
+                        <p class="scenario__note">Supported browsers: Chrome, Brave, Firefox, Fennec, Opera, Cromite, Vanadium, Helium, CalyxOS Chromium, /e/OS Browser and Waterfox. Samsung Internet, Edge, Kiwi and others are not, so block them as apps with App Pause.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="scenario">
+                <div class="scenario__head"><span class="scenario__num">07</span><h3>If you checked hour-by-hour usage</h3></div>
+                <div class="scenario__body">
+                    <div class="scenario__then"><span class="scenario__label">In Stay Focused</span>Screen time by the hour, top apps, launches and browsing.</div>
+                    <div class="scenario__now"><span class="scenario__label">In Curbox: Usage tab</span>
+                        <ol>
+                            <li>The Usage tab shows today's total, a weekly chart, a per-app list and website time per browser.</li>
+                            <li>Advanced analytics adds a heatmap of when in the day and week you use your phone most.</li>
+                            <li>The three-dot menu exports CSV and pins a screen-time or Reels widget to your home screen.</li>
+                        </ol>
+                    </div>
+                </div>
+            </article>
+
+            <article class="scenario scenario--gap">
+                <div class="scenario__head"><span class="scenario__num">08</span><h3>If you used location blocking, Strict Alarm or the iPhone app</h3></div>
+                <div class="scenario__body">
+                    <div class="scenario__then"><span class="scenario__label">In Stay Focused</span>Block at or away from a place, an alarm you turn off by solving a challenge, and an iOS version.</div>
+                    <div class="scenario__now"><span class="scenario__label">In Curbox: partly or not at all</span>
+                        <p>Curbox has no built-in location blocking. The separate, open-source <a href="https://github.com/curbox-app/location-blocker">location blocker</a> app connects through the Curbox API and adds location-based unlocks, so try it before you switch. There is no alarm feature and no iPhone app. If those matter to you, Stay Focused is the better fit today.</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">When Stay Focused is the better pick</h2>
+            <div class="fair">
+                <p>Be honest with yourself about what you actually use. Stay Focused runs on both Android and iPhone, so a household with mixed phones can share one tool. It blocks by location out of the box, supports Samsung Internet and Edge for website blocking, covers Snapchat Spotlight and Instagram Stories, and has extras like focus sounds and Strict Alarm. If any of those are why you open the app every day, switching will cost you something.</p>
+                <p>Curbox makes sense when you are on Android, you mostly need app limits, Reels and Shorts control and website blocking, and you care more about what the app can do with your data than about the last few features.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">What you get in Curbox that Stay Focused does not list</h2>
+            <ul class="sf-prose">
+                <li><strong>Unlock challenges with real friction:</strong> QR or barcode scans, NFC tags, adaptive math where wrong answers add a wait, typing a sentence, or writing down why you want in.</li>
+                <li><strong>Urge Surfing:</strong> an "I'm struggling" button that walks you through a three-minute break when a craving hits.</li>
+                <li><strong>Scheduled Notifications:</strong> hold notifications and get them in batches at up to 12 times a day.</li>
+                <li><strong>Grayscale per app</strong> (needs the free Shizuku helper) and <strong>Mindful Messages</strong> that show your own reminder over an app.</li>
+                <li><strong>UI Hider</strong> in the F-Droid and GitHub builds, which hides the YouTube feed or Instagram's home feed while keeping the app usable.</li>
+            </ul>
+            <a class="btn sf-cta" href="/download.html">Get Curbox</a>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Questions</h2>
+                <details class="faq__item">
+                    <summary>Is Curbox a free alternative to Stay Focused?</summary>
+                    <p>Yes. Curbox is free and open source under the GPL v3. There is no premium tier, no subscription and no account. Every blocking mode, unlock challenge and Focus Mode option described on this page is available to everyone.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Does Curbox work on iPhone like Stay Focused does?</summary>
+                    <p>No. Curbox is Android only, plus a browser extension for Chrome and Firefox. If you need the same blocker on an iPhone, Stay Focused covers iOS and Curbox does not yet.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Can Curbox block YouTube Shorts and Instagram Reels without blocking the whole app?</summary>
+                    <p>Yes. The Short-Form Video Content reducer blocks Instagram Reels, YouTube Shorts and Facebook Reels after a daily time limit or a video count, and the rest of each app keeps working. It does not cover Snapchat Spotlight or Instagram Stories.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Does Curbox block apps by location?</summary>
+                    <p>Not by itself. A separate open-source add-on, the Curbox location blocker, uses the Curbox API to add location-based unlocks. If location blocking is central to how you use Stay Focused, test the add-on before you switch.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Will my Stay Focused profiles import into Curbox?</summary>
+                    <p>No. There is no importer between the two apps, so you rebuild your profiles by hand. Most people only have two or three, and the scenarios on this page show the matching Curbox setup for the common ones.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Which browsers does Curbox website blocking support?</summary>
+                    <p>Chrome, Brave, Firefox, Fennec, Opera, Cromite, Vanadium, Helium, CalyxOS Chromium, the /e/OS Browser and Waterfox. Samsung Internet, Edge and other browsers are not supported for keyword blocking, so block those browsers as apps with App Pause instead.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Can Curbox stop me from uninstalling it, like Strict Mode?</summary>
+                    <p>The F-Droid and GitHub builds include anti-uninstall protection that uses device administrator access. The Playstore build does not. On some phones, turning off device administrator access needs a restart into safe mode.</p>
+                </details>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Sources (checked November 2026)</h2>
+            <ul class="sf-prose">
+                <li><a href="https://www.stayfocused.me/" target="_blank" rel="noopener noreferrer">Stay Focused homepage</a>: features, platforms, "Free to download"</li>
+                <li><a href="https://www.stayfocused.me/faq" target="_blank" rel="noopener noreferrer">Stay Focused FAQ</a>: Accessibility use, supported browsers, premium and subscriptions</li>
+                <li><a href="https://www.stayfocused.me/privacy-policy-play-store" target="_blank" rel="noopener noreferrer">Stay Focused Play Store privacy policy</a> (last modified 30 September 2026): data collected, AdMob, Firebase Analytics</li>
+                <li>Curbox: <a href="/privacy.html">privacy policy</a>, <a href="/docs/reducers/app-pause/">App Pause</a>, <a href="/docs/reducers/short-form-video/">Short-Form Video</a>, <a href="/docs/reducers/keyword-blocker/">Keywords and Websites</a>, <a href="/docs/unlock-challenges/overview/">Unlock Challenges</a>, <a href="/docs/focus/focus-mode/">Focus Mode</a></li>
+            </ul>
+            <p class="ledger__src">Features change. If something here is out of date, tell us on <a href="https://github.com/curbox-app/curbox-android">GitHub</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <div class="related">
+                <a href="/comparison.html">Full comparison table</a>
+                <a href="/alternatives/lock-me-out/">Lock Me Out alternative</a>
+                <a href="/alternatives/appblock/">AppBlock alternative</a>
+                <a href="/alternatives/screenzen/">ScreenZen alternative</a>
+                <a href="/alternatives/digital-wellbeing/">Digital Wellbeing alternative</a>
+                <a href="/alternatives/one-sec/">one sec alternative</a>
+                <a href="/block-youtube-shorts/">Block YouTube Shorts</a>
+                <a href="/block-instagram-reels/">Block Instagram Reels</a>
+                <a href="/block-websites-on-android/">Block websites on Android</a>
+                <a href="/screen-time-app-without-ads/">Screen time app without ads</a>
+                <a href="/open-source-app-blocker/">Open source app blocker</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

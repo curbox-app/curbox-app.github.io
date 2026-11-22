@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>An App Blocker for ADHD Brains: Structure Without Shame</title>
+    <meta
+      name="description"
+      content="How Curbox gives ADHD brains outside structure on Android: time cues, pauses before impulses, gentle transitions and stats without lectures. Free, no ads."
+    >
+    <link rel="canonical" href="https://curbox.app/app-blocker-for-adhd/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="An app blocker for ADHD: structure without shame">
+    <meta property="og:description" content="How Curbox gives ADHD brains outside structure on Android: time cues, pauses before impulses, gentle transitions and stats without lectures. Free, no ads.">
+    <meta property="og:url" content="https://curbox.app/app-blocker-for-adhd/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="An app blocker for ADHD: structure without shame">
+    <meta name="twitter:description" content="How Curbox gives ADHD brains outside structure on Android: time cues, pauses before impulses, gentle transitions and stats without lectures. Free, no ads.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "An app blocker for ADHD: external structure for the hard moments",
+    "description": "How Curbox gives ADHD brains outside structure on Android: time cues, pauses before impulses, gentle transitions and stats without lectures. Free, no ads.",
+    "url": "https://curbox.app/app-blocker-for-adhd/",
+    "mainEntityOfPage": "https://curbox.app/app-blocker-for-adhd/",
+    "datePublished": "2026-11-22",
+    "dateModified": "2026-11-22",
+    "author": {
+      "@type": "Organization",
+      "name": "Curbox",
+      "url": "https://curbox.app/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Curbox",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://curbox.app/icons/android-chrome-512x512.png"
+      }
+    },
+    "image": "https://curbox.app/icons/android-chrome-512x512.png"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can an app blocker treat ADHD?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. An app blocker is not a treatment and is not a substitute for care from a doctor, therapist or ADHD coach. It is a tool for external structure: it moves a decision out of the moment of impulse and into a calmer moment beforehand. Many people find that useful alongside whatever other support they have."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the simplest way to start?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pick the one app that costs you the most time and give it a single limit in App Pause, with a short wait on the warning screen. Then stop. You can use Curbox like that for weeks and never touch anything else."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can a parent or caregiver set Curbox up for someone else?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Rules can use the Never Unlock warning screen and Proceed Limits so they cannot be skipped easily. The F-Droid variant also has anti-uninstall protection through device administrator access, which the Playstore variant does not have. Set up rules together with the person whenever you can."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will Curbox make me feel bad about my screen time?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is designed not to. Usage stats show plain numbers with no streak shaming or lectures, and Urge Surfing treats a craving as something to ride out, not a failure. You decide which reminders you see and what they say."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Curbox collect data about me?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The Android app has no internet permission, no accounts and no trackers, so your usage stays on your phone. The code is open source under the GPL v3, so anyone can check what it does."
+        }
+      }
+    ]
+  }
+]
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+
+    <style>
+      .adhd-note {
+        margin-top: 2rem;
+        padding: 1rem 1.15rem;
+        border: 1px dashed var(--muted);
+        border-radius: 10px;
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+      .adhd-note strong { color: var(--fg); }
+      .prose p + p { margin-top: 1rem; }
+
+      /* Mapping rows: hard moment on the left, tools on the right. */
+      .map { margin-top: 2rem; }
+      .map__row {
+        display: grid;
+        grid-template-columns: 13rem 1fr;
+        gap: 1.75rem;
+        padding: 1.75rem 0;
+        border-top: 1px solid var(--line);
+      }
+      .map__row:last-child { border-bottom: 1px solid var(--line); }
+      .map__moment {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 1.45rem;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+      }
+      .map__moment em {
+        display: block;
+        margin-top: 0.6rem;
+        font-family: var(--font-body);
+        font-style: italic;
+        font-weight: 400;
+        font-size: 0.92rem;
+        line-height: 1.45;
+        letter-spacing: 0;
+        color: var(--muted);
+      }
+      .map__helps { position: relative; }
+      .map__helps::before {
+        content: '→';
+        position: absolute;
+        left: -1.35rem;
+        top: 0;
+        color: var(--muted);
+        font-family: var(--font-mono);
+      }
+      .map__helps dl { display: grid; gap: 1rem; }
+      .map__helps dt { font-weight: 500; }
+      .map__helps dd { color: var(--muted); font-size: 0.95rem; margin-top: 0.2rem; }
+
+      /* The low-setup path, a single large statement. */
+      .one-rule {
+        margin-top: 1.5rem;
+        padding: clamp(1.5rem, 4vw, 2.25rem);
+        background: var(--fg);
+        color: var(--bg);
+        border-radius: 16px;
+      }
+      .one-rule h3 {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.2rem);
+        line-height: 1.05;
+        letter-spacing: -0.025em;
+        margin-bottom: 1rem;
+      }
+      .one-rule ol { padding-left: 1.2rem; }
+      .one-rule li { margin-top: 0.5rem; }
+      .one-rule a { color: var(--bg) !important; text-decoration-color: var(--bg) !important; }
+      .one-rule p { margin-top: 1rem; font-size: 0.95rem; }
+
+      .care {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+        gap: 1rem;
+        margin-top: 1.25rem;
+      }
+      .care div { border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.1rem; }
+      .care h3 { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+      .care p { font-size: 0.93rem; color: var(--muted); }
+
+      .faq dl > div { padding: 1.1rem 0; border-bottom: 1px solid var(--line); }
+      .faq__item summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
+      .faq__item { padding: 0.9rem 0; border-bottom: 1px solid var(--line); }
+      .faq__item p { margin-top: 0.6rem; color: var(--muted); }
+
+      .adhd-cta {
+        display: inline-block;
+        margin-top: 1.5rem;
+        padding: 0.85rem 1.8rem;
+        border-radius: 999px;
+        background: var(--fg);
+        color: var(--bg) !important;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-decoration: none !important;
+      }
+      .rel { list-style: none; counter-reset: rel; }
+      .rel li { counter-increment: rel; padding: 0.55rem 0; border-bottom: 1px solid var(--line); }
+      .rel li::before { content: counter(rel, decimal-leading-zero) '  '; font-family: var(--font-mono); color: var(--muted); font-size: 0.8rem; }
+
+      @media (max-width: 40rem) {
+        .map__row { grid-template-columns: 1fr; gap: 0.9rem; }
+        .map__helps { padding-left: 1.35rem; }
+        .map__helps::before { left: 0; }
+      }
+
+    </style>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://curbox.app/guides/"}, {"@type": "ListItem", "position": 3, "name": "An App Blocker for ADHD Brains: Structure Without Shame", "item": "https://curbox.app/app-blocker-for-adhd/"}]}
+    </script>
+</head>
+<body>
+    <main class="page">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/guides/">← All guides</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Guide · ADHD and screen time</span>
+            <h1 class="page__title">Structure for the moments willpower can't reach.</h1>
+            <p class="lead">If you have ADHD, "just put the phone down" is not advice, it is the problem. This guide maps the specific moments that go wrong to small pieces of outside structure that can help, using a free app blocker for Android.</p>
+        </header>
+
+        <p class="adhd-note"><strong>A quick, honest note.</strong> Curbox is not a treatment and it is not a replacement for a doctor, therapist or coach. It is a tool. What it does is move a decision away from the moment of impulse and into a calmer moment beforehand, when you are better placed to make it. Plenty of people, with and without a diagnosis, find that kind of structure helpful.</p>
+
+        <section class="section prose">
+            <h2 class="section__title">Why ordinary screen time tools often don't stick</h2>
+            <p>Most screen time features assume the hard part is knowing. Show people a daily total, the thinking goes, and they will adjust. But many people with ADHD already know. The hard part is the gap between knowing and doing, right in the moment, when an app is one tap away and the boring task in front of you feels physically uncomfortable.</p>
+            <p>Hard limits can backfire too. A rigid all-day block gets turned off in frustration on day two, and then you are back where you started, plus a small dose of shame. What tends to work better is structure that is flexible, visible and kind: cues that show up when you need them, pauses that interrupt autopilot, and limits you can adjust without feeling like you failed.</p>
+            <p>That is the idea Curbox is built around: a pause screen, a cooldown or a small task before you can keep going, instead of a lecture. You can read more <a href="/about.html">about the project</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">The hard moment, and what helps</h2>
+            <p>You do not need all of these. Read down the left column, find the one or two that sound painfully familiar, and start there.</p>
+
+            <div class="map">
+                <div class="map__row">
+                    <div class="map__moment">Time disappears<em>"I opened it for a second and it's been an hour."</em></div>
+                    <div class="map__helps">
+                        <dl>
+                            <div><dt>A live session timer</dt><dd>Curbox can show a live timer of how long you have been in the current app. Time you can see is time you can feel.</dd></div>
+                            <div><dt>A message that tells you the time</dt><dd>Mindful Messages (Reducers, then Gentle Prompts) puts a note you wrote over a chosen app. Add the <code>{live_session_duration}</code> placeholder and it updates live, for example: <code>You've been here {live_session_duration}. What were you looking for?</code></dd></div>
+                            <div><dt>The total, on your home screen</dt><dd>Pin the Screentime Widget from the Usage tab's three-dot menu. Awareness without any blocking is sometimes enough.</dd></div>
+                        </dl>
+                    </div>
+                </div>
+
+                <div class="map__row">
+                    <div class="map__moment">The impulse wins<em>"My thumb opened it before I decided anything."</em></div>
+                    <div class="map__helps">
+                        <dl>
+                            <div><dt>A delay before the choice</dt><dd>Any warning screen can add a countdown before the unlock option appears. The screen brightens and the phone vibrates, a physical cue that a choice is coming. Even a short delay breaks a lot of autopilot opens.</dd></div>
+                            <div><dt>A QR code in another room</dt><dd>Set Require effort to unlock, then QR or Barcode Scan, and register any code, even one on a product box. Leave it somewhere you have to walk to. If you still want the app after the walk, that is a real decision, not a reflex.</dd></div>
+                            <div><dt>State your intent</dt><dd>Type what you plan to do before continuing. Your reasons are saved so you can read them back later without judgement.</dd></div>
+                        </dl>
+                    </div>
+                </div>
+
+                <div class="map__row">
+                    <div class="map__moment">Switching is hard<em>"I can't stop, and I can't start the next thing."</em></div>
+                    <div class="map__helps">
+                        <dl>
+                            <div><dt>Sip &amp; Stretch</dt><dd>After a set amount of use in apps you pick, your phone takes a short break: all apps are blocked so you can drink water and move. You choose the Break after and Break length times. It works as a built-in transition point when hyperfocus would otherwise run for hours.</dd></div>
+                            <div><dt>Auto DND</dt><dd>Silence notifications on a schedule (Reducers, then Auto DND, then +), so your work blocks are protected without having to remember to switch anything on.</dd></div>
+                            <div><dt>Scheduled Notifications</dt><dd>Hold notifications and get them in batches at times you pick, up to 12 a day. Calls, alarms and apps you allow still come straight through, so nothing urgent is lost.</dd></div>
+                        </dl>
+                    </div>
+                </div>
+
+                <div class="map__row">
+                    <div class="map__moment">Shame spiral<em>"I blew it again, so why bother."</em></div>
+                    <div class="map__helps">
+                        <dl>
+                            <div><dt>Numbers, not lectures</dt><dd>Usage stats show your daily total, a weekly chart and a per-app list. No guilt trips, no red warnings, no scolding notifications.</dd></div>
+                            <div><dt>Urge Surfing</dt><dd>Tap "I'm struggling" on a block screen. You rate the craving from 0 to 10, spend three minutes on a calm puzzle with no score or a bit of movement, then rate it again. A craving usually rises, peaks and fades, and your history shows how much yours dropped on average. Curbox also offers this after three unlocks in a row.</dd></div>
+                        </dl>
+                    </div>
+                </div>
+
+                <div class="map__row">
+                    <div class="map__moment">Too many choices<em>"I spent an hour configuring it and then gave up."</em></div>
+                    <div class="map__helps">
+                        <dl>
+                            <div><dt>Few rules, on purpose</dt><dd>Everything in Curbox sits in three tabs (Usage, Focus, Reducers), and each reducer is a separate card you can ignore. Features you never open stay out of your way.</dd></div>
+                            <div><dt>Start with one app</dt><dd>Seriously, one. See the box below.</dd></div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">The low-setup path</h2>
+            <p>If setting things up is exactly the kind of task you put off, this is for you. It takes a few minutes and you can stop after step 4.</p>
+            <div class="one-rule">
+                <h3>One rule. Then stop.</h3>
+                <ol>
+                    <li>Install Curbox from the <a href="/download.html">download page</a> and grant the three permissions it asks for.</li>
+                    <li>Go to Reducers, then Apps, and tap +.</li>
+                    <li>Name it after your biggest time sink, select that one app, and pick Usage Based with a daily limit a bit below what you use now.</li>
+                    <li>Under Configure Warning Screen, choose Wait to unlock with a short wait. Tap Done.</li>
+                </ol>
+                <p>That's the whole setup. Live with it for a week or two. If it feels fine, maybe add one more thing. If it doesn't, change the number, not yourself.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Setting it up for someone you support</h2>
+            <p>Caregivers and parents sometimes set up a phone for a person who needs firmer outside structure. A few settings matter here. Whenever you can, decide the rules together; rules someone helped choose are far more likely to be accepted.</p>
+            <div class="care">
+                <div>
+                    <h3>Never Unlock</h3>
+                    <p>A warning screen option with no way past. Good for an app that should be off-limits during school hours or at night, combined with a Time Based schedule.</p>
+                </div>
+                <div>
+                    <h3>Proceed Limits</h3>
+                    <p>Cap how many times someone can continue through a block within a time window. When the cap is reached, the proceed button disappears until the window resets.</p>
+                </div>
+                <div>
+                    <h3>Anti-uninstall</h3>
+                    <p>The F-Droid variant can use device administrator access to make Curbox harder to remove on impulse. The Playstore variant does not have this. Deactivating it later may require restarting into safe mode on some phones.</p>
+                </div>
+                <div>
+                    <h3>Back up the setup</h3>
+                    <p>Save your rules with Back up settings. A backup can be restored during setup on a new phone; uninstall protection needs to be turned on again afterwards.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section prose">
+            <h2 class="section__title">Why it matters that Curbox is open source</h2>
+            <p>Every app blocker on Android needs an accessibility permission that can see your whole screen. If you or someone you care for is going to rely on one every day, it is fair to want to know what it does with that access. Curbox is open source under the GPL v3, and the Android app has no internet permission, no accounts and no trackers. Your usage data stays on the phone, and anyone can read the code to confirm it.</p>
+            <a class="adhd-cta" href="/download.html">Try Curbox, free</a>
+        </section>
+
+        <section class="section faq">
+            <h2 class="section__title">Questions people ask</h2>
+                <details class="faq__item">
+                    <summary>Can an app blocker treat ADHD?</summary>
+                    <p>No. An app blocker is not a treatment and is not a substitute for care from a doctor, therapist or ADHD coach. It is a tool for external structure: it moves a decision out of the moment of impulse and into a calmer moment beforehand. Many people find that useful alongside whatever other support they have.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>What is the simplest way to start?</summary>
+                    <p>Pick the one app that costs you the most time and give it a single limit in App Pause, with a short wait on the warning screen. Then stop. You can use Curbox like that for weeks and never touch anything else.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Can a parent or caregiver set Curbox up for someone else?</summary>
+                    <p>Yes. Rules can use the Never Unlock warning screen and Proceed Limits so they cannot be skipped easily. The F-Droid variant also has anti-uninstall protection through device administrator access, which the Playstore variant does not have. Set up rules together with the person whenever you can.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Will Curbox make me feel bad about my screen time?</summary>
+                    <p>It is designed not to. Usage stats show plain numbers with no streak shaming or lectures, and Urge Surfing treats a craving as something to ride out, not a failure. You decide which reminders you see and what they say.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Does Curbox collect data about me?</summary>
+                    <p>No. The Android app has no internet permission, no accounts and no trackers, so your usage stays on your phone. The code is open source under the GPL v3, so anyone can check what it does.</p>
+                </details>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related guides</h2>
+            <ol class="rel">
+                <li><a href="/stop-doomscrolling/">How to stop doomscrolling: a 4-week plan</a></li>
+                <li><a href="/app-blocker-for-studying/">App blocker for studying</a></li>
+                <li><a href="/batch-notifications-android/">Batch notifications on Android</a></li>
+                <li><a href="/grayscale-apps-android/">Turn specific apps grayscale</a></li>
+                <li><a href="/docs/unlock-challenges/overview/">Unlock challenges, in detail</a></li>
+            </ol>
+        </section>
+    </main>
+
+</body>
+</html>

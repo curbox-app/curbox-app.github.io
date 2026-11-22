@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>DetoxDroid Alternative: Open Source vs Open Source · Curbox</title>
+    <meta
+      name="description"
+      content="Comparing DetoxDroid alternatives? DetoxDroid and Curbox are both GPL v3 and offline. See what each does best, where they overlap, and which fits you."
+    >
+    <link rel="canonical" href="https://curbox.app/alternatives/detoxdroid/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="DetoxDroid alternative: two open-source blockers, compared fairly">
+    <meta property="og:description" content="Comparing DetoxDroid alternatives? DetoxDroid and Curbox are both GPL v3 and offline. See what each does best, where they overlap, and which fits you.">
+    <meta property="og:url" content="https://curbox.app/alternatives/detoxdroid/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DetoxDroid alternative: two open-source blockers, compared fairly">
+    <meta name="twitter:description" content="Comparing DetoxDroid alternatives? DetoxDroid and Curbox are both GPL v3 and offline. See what each does best, where they overlap, and which fits you.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--oss { max-width: 60rem; }
+      .page--oss .lead { max-width: 42rem; }
+
+      /* Manifest cards: two terminal-like panels. */
+      .manifests { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+      .mf { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; font-family: var(--font-mono); font-size: 0.8rem; background: #060606; }
+      .mf__bar { display: flex; align-items: center; gap: 0.4rem; padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 0.7rem; }
+      .mf__bar i { width: 8px; height: 8px; border-radius: 50%; background: #2a2a2a; display: inline-block; }
+      .mf__bar b { margin-left: 0.4rem; font-weight: 400; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .mf dl { padding: 0.9rem 1rem; display: grid; grid-template-columns: 8.5rem 1fr; gap: 0.45rem 0.8rem; }
+      .mf dt { color: var(--muted); }
+      .mf dd { color: var(--fg); overflow-wrap: anywhere; }
+
+      /* Overlap map: three columns, the middle one wider and lit. */
+      .venn { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 0; margin-top: 1.5rem; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+      .venn > div { padding: 1.2rem 1.1rem; }
+      .venn > div + div { border-left: 1px solid var(--line); }
+      .venn .both { background: #121212; }
+      .venn h3 { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+      .venn ul { list-style: none; }
+      .venn li { padding: 0.4rem 0; border-bottom: 1px dashed var(--line); font-size: 0.92rem; }
+      .venn li:last-child { border-bottom: 0; }
+
+      .credit { margin-top: 1.25rem; padding: 1.3rem 1.4rem; border-radius: 12px; border: 1px solid var(--fg); }
+      .credit p + p { margin-top: 0.75rem; }
+
+      .gray-steps { margin-top: 1.25rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .gray-steps > div { padding: 1rem; border-radius: 10px; background: #0b0b0b; }
+      .gray-steps h3 { font-family: var(--font-display); font-size: 1.02rem; margin-bottom: 0.4rem; }
+      .gray-steps p, .gray-steps li { font-size: 0.92rem; color: var(--muted); }
+      .gray-steps ul { list-style: none; }
+      .gray-steps li { padding-left: 1rem; position: relative; margin-top: 0.3rem; }
+      .gray-steps li::before { content: '›'; position: absolute; left: 0; color: var(--fg); }
+
+      .both-run { counter-reset: br; list-style: none; margin-top: 1rem; }
+      .both-run li { counter-increment: br; display: grid; grid-template-columns: 2rem 1fr; gap: 0.6rem; padding: 0.7rem 0; border-bottom: 1px solid var(--line); }
+      .both-run li::before { content: counter(br); font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; color: var(--muted); }
+
+      .faq__item { margin-top: 0.6rem; border: 1px solid var(--line); border-radius: 8px; padding: 0 1rem; }
+      .faq__item summary { cursor: pointer; padding: 0.85rem 0; font-weight: 500; }
+      .faq__a { padding-bottom: 0.9rem; color: var(--muted); }
+
+      .sources { font-size: 0.85rem; color: var(--muted); }
+      .rel { list-style: none; margin-top: 0.75rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 0.5rem; }
+      .rel a { display: block; padding: 0.75rem 0.9rem; border: 1px solid var(--line); border-radius: 8px; text-decoration: none !important; font-size: 0.9rem; }
+      .rel a:hover { border-color: var(--fg); }
+
+      @media (max-width: 46rem) {
+        .manifests, .gray-steps { grid-template-columns: 1fr; }
+        .venn { grid-template-columns: 1fr; }
+        .venn > div + div { border-left: 0; border-top: 1px solid var(--line); }
+        .mf dl { grid-template-columns: 7rem 1fr; }
+      }
+    </style>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "headline": "DetoxDroid alternative: two open-source blockers, side by side", "description": "Comparing DetoxDroid alternatives? DetoxDroid and Curbox are both GPL v3 and offline. See what each does best, where they overlap, and which fits you.", "url": "https://curbox.app/alternatives/detoxdroid/", "mainEntityOfPage": "https://curbox.app/alternatives/detoxdroid/", "datePublished": "2026-11-22", "dateModified": "2026-11-22", "inLanguage": "en", "author": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/"}, "publisher": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/", "logo": {"@type": "ImageObject", "url": "https://curbox.app/icons/android-chrome-512x512.png"}}, "about": [{"@type": "SoftwareApplication", "name": "DetoxDroid"}, {"@type": "SoftwareApplication", "name": "Curbox"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is DetoxDroid open source?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. DetoxDroid is licensed GPL-3.0-only, with source on GitHub, and it is distributed on F-Droid. Curbox is also GPL v3."}}, {"@type": "Question", "name": "Does DetoxDroid need a computer for grayscale?", "acceptedAnswer": {"@type": "Answer", "text": "Not for its overlay, which works right after install. For true system grayscale and Extra Dim it needs a special permission, granted over adb from a computer, through Shizuku, or with root. Curbox's Grayscale Filter also needs Shizuku, which on Android 11 and newer can run without a computer."}}, {"@type": "Question", "name": "Does Curbox block TikTok short videos?", "acceptedAnswer": {"@type": "Answer", "text": "Curbox's short-form video limits and counter support Instagram Reels, YouTube Shorts, and Facebook Reels. TikTok is not on that list, so block or limit the TikTok app as a whole with App Pause."}}, {"@type": "Question", "name": "Can I use DetoxDroid and Curbox together?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, both are free and offline. Give each a separate job, for example DetoxDroid for grayscale and Curbox for limits and unlock challenges, and switch off features that overlap."}}, {"@type": "Question", "name": "Do either of them connect to the internet?", "acceptedAnswer": {"@type": "Answer", "text": "The Curbox Android app has no internet permission in any variant. DetoxDroid's F-Droid permission list does not include internet access either."}}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Alternatives", "item": "https://curbox.app/alternatives/"}, {"@type": "ListItem", "position": 3, "name": "DetoxDroid alternative", "item": "https://curbox.app/alternatives/detoxdroid/"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Curbox", "operatingSystem": "Android", "applicationCategory": "LifestyleApplication", "url": "https://curbox.app/download.html", "license": "https://www.gnu.org/licenses/gpl-3.0.html", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--oss">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/alternatives/">← All alternatives</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Alternatives · DetoxDroid</span>
+            <h1 class="page__title">DetoxDroid alternative: two open-source blockers, side by side.</h1>
+            <p class="lead">DetoxDroid is one of the best free, open-source digital detox apps on Android, and we mean that. If you are searching for a DetoxDroid alternative, it is probably because you want something it does not do, not because it does its job badly. Curbox and DetoxDroid share a license, an offline design, and a lot of goals. This page shows where they differ so you can pick the right one, or run both.</p>
+        </header>
+
+        <div class="manifests" aria-label="Project facts">
+            <div class="mf">
+                <div class="mf__bar"><i></i><i></i><i></i><b>com.flx_apps.digitaldetox</b></div>
+                <dl>
+                    <dt>name</dt><dd>DetoxDroid</dd>
+                    <dt>license</dt><dd>GPL-3.0-only</dd>
+                    <dt>latest</dt><dd>3.0.1, added to F-Droid 27 Oct 2026</dd>
+                    <dt>min_android</dt><dd>8.0</dd>
+                    <dt>internet</dt><dd>Not in its permission list</dd>
+                    <dt>price</dt><dd>Free, donations welcome</dd>
+                    <dt>focus</dt><dd>Grayscale, doomscroll breaker, app budgets</dd>
+                </dl>
+            </div>
+            <div class="mf">
+                <div class="mf__bar"><i></i><i></i><i></i><b>neth.iecal.curbox</b></div>
+                <dl>
+                    <dt>name</dt><dd>Curbox</dd>
+                    <dt>license</dt><dd>GPL v3</dd>
+                    <dt>install</dt><dd>Google Play, F-Droid, GitHub releases</dd>
+                    <dt>extra</dt><dd>Browser extension for Chrome and Firefox</dd>
+                    <dt>internet</dt><dd>No internet permission in any variant</dd>
+                    <dt>price</dt><dd>Free, donations welcome</dd>
+                    <dt>focus</dt><dd>Limits, unlock challenges, feed control, focus sessions</dd>
+                </dl>
+            </div>
+        </div>
+
+        <section class="section">
+            <h2 class="section__title">What DetoxDroid does well</h2>
+            <div class="credit">
+                <p>DetoxDroid's headline idea is to make your phone less colorful and less sticky by default. Its overlay turns apps gray, dims, and on Android 12 and newer blurs them, "from the minute you install DetoxDroid. No computer, no root, nothing to grant." For true system grayscale and an Extra Dim below normal minimum brightness, it needs the <code>WRITE_SECURE_SETTINGS</code> permission, granted over adb from a computer, through Shizuku, or with root.</p>
+                <p>Its <strong>doomscroll breaker</strong> detects long scrolling sessions, interrupts them, and locks that feed for a cooldown, and it counts the short videos you swipe through on Reels, Shorts, and TikTok. <strong>Emergency Brake</strong> switches every feature to its strictest setting, with a ten-minute wait to end early. Apps can be delayed, put behind a warning screen, or deactivated outright, including their icon and notifications. Daily time budgets can be set per day or per clock hour, websites can be blocked by category in Chrome, Firefox, and most browsers built on them, and a <strong>commitment password</strong> locks chosen settings. It also has usage stats with widgets, Do Not Disturb while it runs, a pause button, and a minimal text launcher widget.</p>
+                <p>That is a strong feature set from a fellow open-source project, and it is free with no paid tier.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Where they overlap, and where they don't</h2>
+            <p>Based on each project's own documentation. The middle column is shared ground, even where the details differ.</p>
+            <div class="venn">
+                <div>
+                    <h3>DetoxDroid only</h3>
+                    <ul>
+                        <li>Gray overlay with no setup at all</li>
+                        <li>Blur and Extra Dim</li>
+                        <li>Counts TikTok videos</li>
+                        <li>Website category lists</li>
+                        <li>Commitment password</li>
+                        <li>Deactivate an app outright</li>
+                        <li>Per clock hour budgets</li>
+                        <li>Emergency Brake</li>
+                    </ul>
+                </div>
+                <div class="both">
+                    <h3>Both</h3>
+                    <ul>
+                        <li>GPL v3, no internet permission</li>
+                        <li>Per-app limits and warning screens</li>
+                        <li>Interrupting Reels and Shorts</li>
+                        <li>Website blocking in supported browsers</li>
+                        <li>True grayscale via Shizuku</li>
+                        <li>Automatic Do Not Disturb</li>
+                        <li>Usage stats and home-screen widgets</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Curbox only</h3>
+                    <ul>
+                        <li>QR, NFC, adaptive math, typing, and intent unlocks</li>
+                        <li>Count-based Reels limits across apps</li>
+                        <li>UI Hider for feeds (F-Droid variant)</li>
+                        <li>Focus Mode with Pomodoro and stats</li>
+                        <li>Scheduled Notifications</li>
+                        <li>Mindful Messages, Sip &amp; Stretch, Urge Surfing</li>
+                        <li>CSV export and a developer API</li>
+                        <li>Browser extension</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Grayscale: the honest comparison</h2>
+            <p>Grayscale is DetoxDroid's signature feature, so it deserves a careful answer. Neither app can turn on Android's real grayscale with a simple permission dialog, because the setting needs special access.</p>
+            <div class="gray-steps">
+                <div>
+                    <h3>DetoxDroid</h3>
+                    <ul>
+                        <li>Works out of the box as an overlay that paints over the screen</li>
+                        <li>Real grayscale and Extra Dim need adb from a computer, Shizuku, or root</li>
+                        <li>You can exclude apps such as the camera or gallery</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Curbox</h3>
+                    <ul>
+                        <li>Grayscale Filter turns chosen apps gray, leaving the rest in color</li>
+                        <li>Needs the free Shizuku helper</li>
+                        <li>On Android 11 and newer, Shizuku can start through Wireless Debugging, no computer needed</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top:1rem">If you want grayscale with zero setup, DetoxDroid's overlay is the easier start. If you already use Shizuku, both reach the real thing. Our <a href="/grayscale-apps-android/">per-app grayscale guide</a> covers every route, including Android's built-in options.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Moving your DetoxDroid setup to Curbox</h2>
+            <ol class="both-run">
+                <li><div><strong>Daily budgets.</strong> Reducers → Apps → <strong>+</strong> → Usage Based, set minutes per day. Turn off the uniform setting to give weekdays and weekends different limits.</div></li>
+                <li><div><strong>Doomscroll breaker.</strong> Reducers → Short-Form Video Content, then pick Time Based or Reel Count Based. Limits are shared across Instagram Reels, YouTube Shorts, and Facebook Reels. Curbox does not list TikTok, so <a href="/docs/reducers/app-pause/">block TikTok as a whole app</a> with App Pause.</div></li>
+                <li><div><strong>Warning screen and delays.</strong> In any group, Configure Warning Screen → <strong>Wait to unlock</strong>, and add the delay timer. For a harder lock, choose <strong>Never Unlock</strong>.</div></li>
+                <li><div><strong>Commitment password.</strong> There is no settings password. The closest options are adding Curbox itself to an app blocking group, an effort challenge such as a QR code kept in another room, and anti-uninstall protection in the F-Droid variant.</div></li>
+                <li><div><strong>Websites.</strong> Reducers → Keywords And Websites → <strong>+</strong>. There are no built-in category lists, but you can import a <code>.txt</code> list, and the community Discord shares lists. See the <a href="/block-websites-on-android/">website blocking guide</a>.</div></li>
+                <li><div><strong>Grayscale.</strong> Reducers → Grayscale Filter → Grant Permission on the Shizuku card → <strong>+</strong> and choose apps.</div></li>
+            </ol>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Running both</h2>
+            <p>Because both are offline and open source, some people use DetoxDroid for its gray overlay and Curbox for limits and unlock challenges. Both rely on Android's Accessibility Service and draw over other apps, so give each tool a separate job, test that their screens do not fight, and turn off duplicate features such as Do Not Disturb in one of them. We have not tested every combination, so start small.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">When DetoxDroid is the better pick</h2>
+            <p>Choose DetoxDroid if grayscale, dimming, and blur are what help you most, if you need TikTok covered by a doomscroll limit, if you want a password on your settings, or if you like the idea of everything going strict at once with Emergency Brake. Choose Curbox if you want unlock challenges that make you get up, count-based limits on short videos, focus sessions with Pomodoro, batched notifications, feed hiding inside apps, or the same tool in your desktop browser.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">DetoxDroid alternative FAQ</h2>
+                <details class="faq__item">
+                    <summary>Is DetoxDroid open source?</summary>
+                    <div class="faq__a"><p>Yes. DetoxDroid is licensed GPL-3.0-only, with source on GitHub, and it is distributed on F-Droid. Curbox is also GPL v3.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Does DetoxDroid need a computer for grayscale?</summary>
+                    <div class="faq__a"><p>Not for its overlay, which works right after install. For true system grayscale and Extra Dim it needs a special permission, granted over adb from a computer, through Shizuku, or with root. Curbox's Grayscale Filter also needs Shizuku, which on Android 11 and newer can run without a computer.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Does Curbox block TikTok short videos?</summary>
+                    <div class="faq__a"><p>Curbox's short-form video limits and counter support Instagram Reels, YouTube Shorts, and Facebook Reels. TikTok is not on that list, so block or limit the TikTok app as a whole with App Pause.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Can I use DetoxDroid and Curbox together?</summary>
+                    <div class="faq__a"><p>Yes, both are free and offline. Give each a separate job, for example DetoxDroid for grayscale and Curbox for limits and unlock challenges, and switch off features that overlap.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Do either of them connect to the internet?</summary>
+                    <div class="faq__a"><p>The Curbox Android app has no internet permission in any variant. DetoxDroid's F-Droid permission list does not include internet access either.</p></div>
+                </details>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Sources (checked November 2026)</h2>
+            <ul class="sources">
+                <li><a href="https://f-droid.org/en/packages/com.flx_apps.digitaldetox/" rel="noopener noreferrer" target="_blank">DetoxDroid on F-Droid</a>: version 3.0.1, Android 8.0+, license, permissions</li>
+                <li><a href="https://github.com/flxapps/DetoxDroid" rel="noopener noreferrer" target="_blank">DetoxDroid on GitHub</a>: feature list, grayscale setup routes, donation links</li>
+                <li>Curbox: <a href="/docs/reducers/short-form-video/">Short-Form Video Content</a>, <a href="/docs/reducers/grayscale/">Grayscale Filter</a>, <a href="/privacy.html">privacy policy</a></li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <ul class="rel">
+                <li><a href="/open-source-app-blocker/">Open source app blockers</a></li>
+                <li><a href="/grayscale-apps-android/">Grayscale specific apps</a></li>
+                <li><a href="/reels-counter/">Reels counter</a></li>
+                <li><a href="/alternatives/minimalist-phone/">Minimalist Phone alternative</a></li>
+                <li><a href="/alternatives/digital-wellbeing/">Digital Wellbeing alternative</a></li>
+                <li><a href="/alternatives/one-sec/">one sec alternative</a></li>
+                <li><a href="/comparison.html">Feature comparison</a></li>
+                <li><a href="/download.html">Download Curbox</a></li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

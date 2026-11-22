@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Opal Alternative for Android: Free and Open Source</title>
+    <meta
+      name="description"
+      content="Looking for an Opal alternative on Android? Rebuild your Opal rules, Hard Mode and Allow Only setup in Curbox, a free, open source app blocker."
+    >
+    <link rel="canonical" href="https://curbox.app/alternatives/opal/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="An Opal alternative for Android">
+    <meta property="og:description" content="Looking for an Opal alternative on Android? Rebuild your Opal rules, Hard Mode and Allow Only setup in Curbox, a free, open source app blocker.">
+    <meta property="og:url" content="https://curbox.app/alternatives/opal/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="An Opal alternative for Android">
+    <meta name="twitter:description" content="Looking for an Opal alternative on Android? Rebuild your Opal rules, Hard Mode and Allow Only setup in Curbox, a free, open source app blocker.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+
+      .faq__item { border-top: 1px solid var(--line); }
+      .faq__item:last-child { border-bottom: 1px solid var(--line); }
+      .faq__item summary {
+        cursor: pointer; list-style: none; padding: 1rem 2rem 1rem 0; position: relative;
+        font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.3;
+      }
+      .faq__item summary::-webkit-details-marker { display: none; }
+      .faq__item summary::after {
+        content: '+'; position: absolute; right: 0; top: 0.95rem;
+        font-family: var(--font-mono); color: var(--muted);
+      }
+      .faq__item[open] summary::after { content: '\2212'; }
+      .faq__a { padding: 0 0 1.1rem; color: var(--fg); }
+      .faq__a p + p { margin-top: 0.75rem; }
+      .related { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+      .related a {
+        padding: 0.5rem 0.95rem; border: 1px solid var(--line); border-radius: 999px;
+        font-family: var(--font-mono); font-size: 0.76rem; text-decoration: none !important;
+      }
+      .related a:hover { border-color: var(--fg); }
+      .sources li { font-size: 0.88rem; color: var(--muted); }
+      .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+      .cta {
+        display: inline-block; padding: 0.85rem 1.6rem; border-radius: 999px;
+        background: var(--fg); color: var(--bg) !important; text-decoration: none !important;
+        font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700;
+        letter-spacing: 0.1em; text-transform: uppercase;
+      }
+      .cta--ghost { background: transparent; color: var(--fg) !important; border: 1px solid var(--line); }
+
+
+      .page--opal { max-width: 62rem; }
+      .page--opal .lead { max-width: 40rem; }
+      .page--opal .section > p, .page--opal .section > ul, .page--opal .narrow { max-width: var(--measure); }
+
+      .cost { margin-top: 1.5rem; border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem 1.25rem 1.1rem; }
+      .cost__head { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+        font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+      .cost__row { display: grid; grid-template-columns: 9.5rem 1fr; gap: 1rem; align-items: center; margin-top: 1.1rem; }
+      .cost__label { font-size: 0.9rem; line-height: 1.3; }
+      .cost__label small { display: block; color: var(--muted); font-family: var(--font-mono); font-size: 0.68rem; }
+      .cost__track { position: relative; height: 1.9rem; background: #0b0b0b; border-radius: 6px; overflow: hidden; }
+      .cost__bar { position: absolute; inset: 0 auto 0 0; background: var(--fg); border-radius: 6px; display: flex; align-items: center; justify-content: flex-end; padding-right: 0.5rem; }
+      .cost__bar span { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: var(--bg); white-space: nowrap; }
+      .cost__bar--zero { background: transparent; border: 1px dashed var(--muted); width: 0.4rem; }
+      .cost__zero { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; }
+      .cost__note { margin-top: 1rem; font-size: 0.8rem; color: var(--muted); }
+
+      .rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+      .rule { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+      .rule__top { padding: 1rem 1.1rem; background: #0e0e0e; border-bottom: 1px solid var(--line); }
+      .rule__tag { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+      .rule__name { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; margin-top: 0.2rem; }
+      .rule__body { padding: 1rem 1.1rem 1.2rem; font-size: 0.93rem; }
+      .rule__body ol { margin: 0.6rem 0 0 1.1rem; }
+      .rule__body li { margin-top: 0.35rem; }
+      .rule__fit { margin-top: auto; padding: 0.7rem 1.1rem; border-top: 1px dashed var(--line); font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); }
+      .rule__fit b { color: var(--fg); }
+
+      .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.25rem; }
+      .split h3 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 0.5rem; }
+      .split p { font-size: 0.95rem; }
+      .stay { margin-top: 1.25rem; padding: 1.25rem 1.3rem; border-left: 3px solid var(--fg); background: #0b0b0b; max-width: var(--measure); }
+      .stay ul { margin-top: 0.4rem; }
+
+      @media (max-width: 40rem) {
+        .cost__row { grid-template-columns: 1fr; gap: 0.4rem; }
+        .split { grid-template-columns: 1fr; gap: 1.25rem; }
+      }
+
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "An Opal alternative for Android that costs nothing",
+      "description": "Looking for an Opal alternative on Android? Rebuild your Opal rules, Hard Mode and Allow Only setup in Curbox, a free, open source app blocker.",
+      "url": "https://curbox.app/alternatives/opal/",
+      "mainEntityOfPage": "https://curbox.app/alternatives/opal/",
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "author": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://curbox.app/icons/android-chrome-512x512.png"
+        }
+      },
+      "image": "https://curbox.app/icons/android-chrome-512x512.png",
+      "about": "Opal screen time app"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Opal available on Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Opal runs on iPhone, Android and Mac. Its Android app is on Google Play, and Opal says Android prices depend on your country."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a free Opal alternative for Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Curbox is free with no paid tier. It covers Opal-style schedules, app limits, open limits, focus sessions and an allow-only mode, and adds Reels and Shorts limits and effort-based unlocks. It is open source under the GPL v3."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What replaces Opal Hard Mode in Curbox?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Turn off \"Let me quit mid-sessions\" in a Focus Group so a session cannot be ended early, or set an App Pause group's unlock challenge to Never Unlock. The F-Droid variant can also add anti-uninstall protection."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Curbox show an Opal Score?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Curbox does not turn your week into a single score. It shows daily and weekly screen time, per-app usage, a heatmap and Focus Stats, and you can export the data to CSV."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need an account to use Curbox?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The Android app has no accounts and no internet permission. Your rules and usage history stay on your phone."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Curbox work on iPhone like Opal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not yet. Curbox is Android only, plus a browser extension for Chrome and Firefox. If you need iPhone support, Opal is the better choice for now."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://curbox.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Alternatives",
+          "item": "https://curbox.app/alternatives/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Opal alternative",
+          "item": "https://curbox.app/alternatives/opal/"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Curbox",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "url": "https://curbox.app/download.html",
+      "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  ]
+}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--opal">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/alternatives/">← All alternatives</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Alternatives · Opal</span>
+            <h1 class="page__title">An Opal alternative for Android that costs nothing.</h1>
+            <p class="lead">Opal is a polished screen time app, and since its Android release you can use it on a Pixel or a Galaxy as well as an iPhone. If you are searching for an Opal alternative on Android, it is usually because of the price of Pro, or because you want Hard Mode and Allow Only style blocking without a subscription. This page shows what each Opal rule becomes in Curbox, and when Opal is still the better buy.</p>
+        </header>
+
+        <section class="section">
+            <h2 class="section__title">What Opal costs over three years</h2>
+            <p>Opal has a free plan that never expires, with three rules and basic app blocking. The features most people sign up for, such as unlimited rules, Hard Mode and Allow Only, are part of Opal Pro. These are the US prices listed on Opal's pricing page in November 2026. On Android, Opal says prices depend on your country and show in Google Play before you pay.</p>
+            <div class="cost" role="img" aria-label="Three-year cost: Opal Pro yearly about 300 dollars, Opal Pro lifetime 399 dollars, Curbox 0 dollars.">
+                <div class="cost__head"><span>Cost after 3 years</span><span>USD, list prices</span></div>
+                <div class="cost__row">
+                    <span class="cost__label">Opal Pro, yearly<small>$99.99 a year × 3</small></span>
+                    <span class="cost__track"><span class="cost__bar" style="width:75%"><span>$299.97</span></span></span>
+                </div>
+                <div class="cost__row">
+                    <span class="cost__label">Opal Pro, lifetime<small>one payment</small></span>
+                    <span class="cost__track"><span class="cost__bar" style="width:100%"><span>$399</span></span></span>
+                </div>
+                <div class="cost__row">
+                    <span class="cost__label">Opal free plan<small>3 rules, no Hard Mode</small></span>
+                    <span class="cost__track"><span class="cost__bar cost__bar--zero"></span><span class="cost__zero">$0</span></span>
+                </div>
+                <div class="cost__row">
+                    <span class="cost__label">Curbox<small>every feature</small></span>
+                    <span class="cost__track"><span class="cost__bar cost__bar--zero"></span><span class="cost__zero">$0</span></span>
+                </div>
+                <p class="cost__note">Opal also lists a monthly plan and offers student discounts of up to 50% through an application form. Curbox is funded by donations and has no paid tier.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Rebuild your Opal rules in Curbox</h2>
+            <p>Opal organises blocking around rules: Schedules, App Limits and Open Limits, plus Focus Sessions you start by hand. Curbox has a counterpart for each. Every card below is a real setup path in the Curbox app.</p>
+            <div class="rules">
+                <article class="rule">
+                    <div class="rule__top"><span class="rule__tag">Opal rule</span><div class="rule__name">Schedule</div></div>
+                    <div class="rule__body">
+                        <p>In Curbox this is an <strong>App Pause</strong> group in <strong>Time Based</strong> mode, which allows apps only inside a time window.</p>
+                        <ol>
+                            <li>Reducers → <strong>Apps</strong> → tap <strong>+</strong></li>
+                            <li>Name it and <strong>Select Apps</strong></li>
+                            <li>Choose <strong>Time Based</strong>, then <strong>Configure Allowed Schedule</strong></li>
+                        </ol>
+                    </div>
+                    <div class="rule__fit"><b>Note:</b> one window cannot cross midnight. Split 11 PM to 2 AM into two.</div>
+                </article>
+                <article class="rule">
+                    <div class="rule__top"><span class="rule__tag">Opal rule</span><div class="rule__name">App Limit</div></div>
+                    <div class="rule__body">
+                        <p>An App Pause group in <strong>Usage Based</strong> mode. It blocks once you reach a daily time cap, and the counter resets at midnight.</p>
+                        <ol>
+                            <li>Reducers → <strong>Apps</strong> → <strong>+</strong></li>
+                            <li>Choose <strong>Usage Based</strong> and set the minutes</li>
+                            <li>Optional: turn off the uniform setting to give weekdays and weekends different limits</li>
+                        </ol>
+                    </div>
+                    <div class="rule__fit"><b>Bonus:</b> stack it with a Time Based group on the same app.</div>
+                </article>
+                <article class="rule">
+                    <div class="rule__top"><span class="rule__tag">Opal rule</span><div class="rule__name">Open Limit</div></div>
+                    <div class="rule__body">
+                        <p>Use <strong>On Each Open</strong> mode, so the pause screen appears every launch. Then cap how often you can get through with <strong>Proceed Limits</strong>.</p>
+                        <ol>
+                            <li>Create a group in <strong>On Each Open</strong> mode</li>
+                            <li><strong>Configure Warning Screen</strong> → set a Proceed Limit, for example 5 times a day</li>
+                        </ol>
+                    </div>
+                    <div class="rule__fit"><b>Close match:</b> it limits passes through the block, not raw opens.</div>
+                </article>
+                <article class="rule">
+                    <div class="rule__top"><span class="rule__tag">Opal session</span><div class="rule__name">Focus Session</div></div>
+                    <div class="rule__body">
+                        <p>Curbox <strong>Focus Mode</strong>. Pick a length on the slider, pick a Focus Group, and start. A Pomodoro option repeats rounds with breaks.</p>
+                        <ol>
+                            <li>Focus tab → <strong>Create Focus Group</strong></li>
+                            <li>Add apps and, if you like, websites</li>
+                            <li>Set the timer and confirm</li>
+                        </ol>
+                    </div>
+                    <div class="rule__fit"><b>Stats:</b> Focus Stats tracks sessions, completion rate and streaks.</div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Hard Mode and Allow Only, without Pro</h2>
+            <div class="split">
+                <div>
+                    <h3>Opal Hard Mode → Curbox Never Unlock</h3>
+                    <p>Opal describes Hard Mode as having no way out of a session. In Curbox, the matching tools are free. For Focus Mode, turn off <strong>Let me quit mid-sessions</strong> in the Focus Group. For App Pause groups, set the warning screen's unlock challenge to <strong>Never Unlock</strong>. If you want something in between, pick an effort challenge such as a QR code kept in another room, or adaptive math.</p>
+                    <p>The F-Droid variant also has anti-uninstall protection, so removing Curbox in a weak moment takes real effort. The Playstore variant does not include it.</p>
+                </div>
+                <div>
+                    <h3>Opal Allow Only → Block All Except Selected</h3>
+                    <p>Opal Pro's Allow Only blocks everything except chosen apps. In Curbox, open the Focus tab, create a Focus Group, and pick the block mode <strong>Block All Except Selected</strong>. Add the apps you need during the session, such as Phone, Messages, Maps and your music app. Everything else waits until the timer ends. The <a href="/block-all-apps-except/">allowlist guide</a> has ready-made lists.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">What you give up by leaving Opal</h2>
+            <p>Curbox is a different kind of project, and some of Opal's strengths do not carry over.</p>
+            <ul>
+                <li><strong>iPhone and Mac.</strong> Opal runs on iPhone, Android and Mac with one account. Curbox is Android only, plus a browser extension for Chrome and Firefox. There is no iOS version yet.</li>
+                <li><strong>Opal Score and weekly reports.</strong> Opal wraps your week into a single score and a report. Curbox shows the raw numbers instead: daily and weekly usage, a per-app list, a usage heatmap and Focus Stats, with CSV export.</li>
+                <li><strong>Gems and streak rewards.</strong> Opal awards milestone badges. Curbox has a focus day streak but no badge system.</li>
+                <li><strong>Polish and support.</strong> Opal is a company with a help centre and a team. Curbox is maintained in the open with help from its community and a Discord.</li>
+            </ul>
+            <p>In return you get things Opal does not offer: <a href="/block-instagram-reels/">limits on Reels and Shorts</a> inside the apps, effort-based unlocks such as <a href="/qr-code-app-blocker/">QR codes</a> and <a href="/nfc-app-blocker/">NFC tags</a>, website blocking in many Android browsers, an app with no internet permission, and source code anyone can read.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">When Opal is the better pick</h2>
+            <div class="stay">
+                <p>Stay with Opal if any of these describe you:</p>
+                <ul>
+                    <li>You use an iPhone, or switch between iPhone, Android and Mac and want one setup on all of them.</li>
+                    <li>You like having one score that sums up your week, and the badges keep you going.</li>
+                    <li>The free plan's three rules already cover what you need.</li>
+                    <li>You already bought the lifetime plan and it works for you.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Opal alternative FAQ</h2>
+            <div class="narrow">
+                <details class="faq__item">
+                    <summary>Is Opal available on Android?</summary>
+                    <div class="faq__a"><p>Yes. Opal runs on iPhone, Android and Mac. Its Android app is on Google Play, and Opal says Android prices depend on your country.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Is there a free Opal alternative for Android?</summary>
+                    <div class="faq__a"><p>Curbox is free with no paid tier. It covers Opal-style schedules, app limits, open limits, focus sessions and an allow-only mode, and adds Reels and Shorts limits and effort-based unlocks. It is open source under the GPL v3.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>What replaces Opal Hard Mode in Curbox?</summary>
+                    <div class="faq__a"><p>Turn off "Let me quit mid-sessions" in a Focus Group so a session cannot be ended early, or set an App Pause group's unlock challenge to Never Unlock. The F-Droid variant can also add anti-uninstall protection.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Can Curbox show an Opal Score?</summary>
+                    <div class="faq__a"><p>No. Curbox does not turn your week into a single score. It shows daily and weekly screen time, per-app usage, a heatmap and Focus Stats, and you can export the data to CSV.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Do I need an account to use Curbox?</summary>
+                    <div class="faq__a"><p>No. The Android app has no accounts and no internet permission. Your rules and usage history stay on your phone.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Does Curbox work on iPhone like Opal?</summary>
+                    <div class="faq__a"><p>Not yet. Curbox is Android only, plus a browser extension for Chrome and Firefox. If you need iPhone support, Opal is the better choice for now.</p></div>
+                </details>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Try Curbox</h2>
+            <p>Setup takes under five minutes. Start with one Usage Based limit on the app you open most, and add more only if you need to.</p>
+            <div class="cta-row">
+                <a class="cta" href="/download.html">Download Curbox</a>
+                <a class="cta cta--ghost" href="/comparison.html">Full comparison table</a>
+            </div>
+            <p class="label">Related</p>
+            <div class="related">
+                <a href="/alternatives/freedom/">Freedom alternative</a>
+                <a href="/alternatives/one-sec/">one sec alternative</a>
+                <a href="/alternatives/screenzen/">ScreenZen alternative</a>
+                <a href="/alternatives/forest/">Forest alternative</a>
+                <a href="/block-all-apps-except/">Block all apps except</a>
+                <a href="/pomodoro-app-blocker/">Pomodoro app blocker</a>
+                <a href="/screen-time-tracker-android/">Screen time tracker</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Sources</h2>
+            <p>Checked November 2026. Prices and features change, so confirm on Opal's own pages before deciding.</p>
+            <ul class="sources">
+                <li><a href="https://opalapp.com/pricing" target="_blank" rel="noopener noreferrer">Opal pricing</a>: free plan, Pro yearly, monthly and lifetime prices, Hard Mode, Allow Only, student discount</li>
+                <li><a href="https://opalapp.com/android" target="_blank" rel="noopener noreferrer">Opal for Android</a>: Android availability, Focus Sessions, regional Google Play pricing</li>
+                <li><a href="https://opalapp.com/help" target="_blank" rel="noopener noreferrer">Opal help centre</a>: Android launch, sign-in options</li>
+                <li><a href="/features.html">Curbox features</a>, <a href="/docs/reducers/app-pause/">App Pause guide</a>, <a href="/docs/unlock-challenges/overview/">unlock challenges</a></li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

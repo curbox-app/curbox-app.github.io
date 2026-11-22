@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Hide YouTube Recommendations on Android · Curbox</title>
+    <meta
+      name="description"
+      content="Remove the YouTube home feed and recommendations on Android while search, subscriptions and the video you came for keep working. Free and open source."
+    >
+    <link rel="canonical" href="https://curbox.app/hide-youtube-recommendations/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="Hide YouTube recommendations on Android">
+    <meta property="og:description" content="Remove the YouTube home feed and recommendations on Android while search, subscriptions and the video you came for keep working. Free and open source.">
+    <meta property="og:url" content="https://curbox.app/hide-youtube-recommendations/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hide YouTube recommendations on Android">
+    <meta name="twitter:description" content="Remove the YouTube home feed and recommendations on Android while search, subscriptions and the video you came for keep working. Free and open source.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--yt { max-width: 62rem; }
+      .page--yt .lead { max-width: 40rem; }
+      .page--yt .page__title { font-size: clamp(2.1rem, 0.9rem + 5.4vw, 5rem); overflow-wrap: anywhere; }
+      .yt-prose { max-width: var(--measure); }
+
+      /* Anatomy: a mock YouTube home screen with numbered callouts. */
+      .anatomy {
+        display: grid;
+        grid-template-columns: minmax(15rem, 19rem) 1fr;
+        gap: clamp(1.5rem, 4vw, 3.5rem);
+        align-items: start;
+        margin-top: 2rem;
+      }
+      .mock {
+        position: relative;
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        padding: 0.9rem 0.8rem 0.6rem;
+        background: #070707;
+      }
+      .mock__bar {
+        display: flex; align-items: center; gap: 0.5rem;
+        padding: 0.35rem 0.4rem 0.7rem;
+        font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted);
+      }
+      .mock__search { flex: 1; height: 1.4rem; border-radius: 999px; background: #161616; border: 1px solid var(--line); }
+      .zone { position: relative; border-radius: 10px; margin-bottom: 0.6rem; }
+      .zone--hidden { background: repeating-linear-gradient(135deg, #111 0 8px, #0a0a0a 8px 16px); border: 1px dashed #3a3a3a; }
+      .zone--kept { border: 1px solid var(--fg); }
+      .tile { height: 4.6rem; border-radius: 8px; background: #1b1b1b; margin: 0.5rem; }
+      .tile + .line { height: 0.45rem; width: 70%; background: #222; border-radius: 4px; margin: 0 0.5rem 0.6rem; }
+      .zone--hidden .tile, .zone--hidden .line { opacity: 0.18; }
+      .mock__nav { display: flex; justify-content: space-around; padding: 0.5rem 0 0.2rem; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 0.6rem; color: var(--muted); }
+      .pin {
+        position: absolute; top: -0.6rem; right: -0.6rem; z-index: 2;
+        display: grid; place-items: center;
+        width: 1.5rem; height: 1.5rem; border-radius: 50%;
+        background: var(--fg); color: var(--bg);
+        font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+      }
+      .zone--hidden .pin { background: #000; color: var(--fg); border: 1px solid var(--fg); }
+
+      .callouts { list-style: none; counter-reset: c; }
+      .callouts li { position: relative; padding: 0 0 1.25rem 2.5rem; counter-increment: c; }
+      .callouts li::before {
+        content: counter(c);
+        position: absolute; left: 0; top: 0.1rem;
+        display: grid; place-items: center;
+        width: 1.6rem; height: 1.6rem; border-radius: 50%;
+        border: 1px solid var(--fg);
+        font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+      }
+      .callouts h3 { font-family: var(--font-display); font-size: 1.1rem; line-height: 1.2; margin-bottom: 0.25rem; }
+      .callouts p { color: var(--muted); font-size: 0.95rem; }
+      .tag { display: inline-block; margin-left: 0.4rem; padding: 0.05rem 0.45rem; border-radius: 4px; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; vertical-align: middle; }
+      .tag--gone { border: 1px dashed var(--muted); color: var(--muted); }
+      .tag--kept { background: var(--fg); color: var(--bg); }
+
+      /* Two built-in rules as a pair of switches. */
+      .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+      .rule { border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem; }
+      .rule__top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 0.75rem; }
+      .rule__name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.25; }
+      .switch { flex: none; width: 2.4rem; height: 1.35rem; border-radius: 999px; background: var(--fg); position: relative; }
+      .switch::after { content: ''; position: absolute; right: 0.2rem; top: 0.2rem; width: 0.95rem; height: 0.95rem; border-radius: 50%; background: var(--bg); }
+      .rule dl { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.9rem; font-size: 0.92rem; }
+      .rule dt { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 0.2rem; }
+
+      /* Annotated script: code on the left, notes on the right. */
+      .annot { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-top: 1.5rem; }
+      .annot pre { margin: 0; padding: 1.1rem 1.2rem; background: #0b0b0b; overflow-x: auto; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.7; }
+      .annot pre code { background: none; padding: 0; font-size: inherit; word-break: normal; white-space: pre; }
+      .annot ol { margin: 0; padding: 1.1rem 1.2rem 1.1rem 2.4rem; font-size: 0.9rem; color: var(--muted); border-left: 1px solid var(--line); }
+      .annot li + li { margin-top: 0.6rem; }
+      .annot li strong { color: var(--fg); font-weight: 500; }
+      .warn { margin-top: 0.9rem; font-size: 0.88rem; color: var(--muted); }
+
+      .steps-inline { counter-reset: s; list-style: none; margin-top: 1rem; }
+      .steps-inline li { counter-increment: s; display: grid; grid-template-columns: 2.2rem 1fr; padding: 0.55rem 0; border-bottom: 1px solid var(--line); }
+      .steps-inline li::before { content: counter(s, decimal-leading-zero); font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); padding-top: 0.2rem; }
+
+      .faq--yt details { border-bottom: 1px solid var(--line); padding: 1rem 0; }
+      .faq--yt summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+      .faq--yt summary::-webkit-details-marker { display: none; }
+      .faq--yt summary::after { content: '+'; font-family: var(--font-mono); color: var(--muted); }
+      .faq--yt details[open] summary::after { content: '−'; }
+      .faq--yt p { margin-top: 0.6rem; color: var(--muted); }
+
+      .next { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 1rem; font-size: 0.95rem; }
+
+      @media (max-width: 48rem) {
+        .anatomy, .rules, .annot { grid-template-columns: 1fr; }
+        .mock { max-width: 19rem; }
+        .annot ol { border-left: 0; border-top: 1px solid var(--line); }
+      }
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How to hide YouTube recommendations on Android",
+      "description": "Remove the YouTube home feed and recommendations on Android while search, subscriptions and the video you came for keep working. Free and open source.",
+      "url": "https://curbox.app/hide-youtube-recommendations/",
+      "mainEntityOfPage": "https://curbox.app/hide-youtube-recommendations/",
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "image": "https://curbox.app/icons/android-chrome-512x512.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://curbox.app/icons/android-chrome-512x512.png"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can you turn off YouTube recommendations in the YouTube app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not fully. YouTube lets you pause or clear your watch history, which can leave the home feed mostly empty, and you can tell it you are not interested in individual videos. There is no switch that removes recommendations from the home screen and the side of the player. Hiding them on Android takes an outside tool that can draw over the app, like Curbox's UI Hider."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will hiding the YouTube home feed break search or subscriptions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The \"hide the feed so only search results are visible\" rule covers the recommendation feed and leaves the search bar working. With \"hide everything except the video\", recommendations, comments and the description are removed from the watch screen, and the video itself plays as normal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the UI Hider in the Google Play version of Curbox?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The UI Hider is part of the F-Droid variant of Curbox. The Playstore variant does not include it. Both variants can still limit YouTube Shorts and set time limits on the YouTube app. Every official download is listed on the downloads page."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this work on YouTube in a browser?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The UI Hider works inside Android apps. In a supported browser on Android you can use Curbox's keyword blocker to block sections such as youtube.com/shorts, but there is no documented keyword for only the home feed. On a computer, the Curbox browser extension filters feeds such as Shorts with keyword and pattern matching."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why did the hidden feed come back after a YouTube update?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "UI Hider rules find parts of the screen by their view ids and labels. When YouTube changes those in an update, a rule can stop matching until it is updated. The feature is marked experimental for this reason. If you write your own script, re-check the ids after an update."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://curbox.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Features",
+          "item": "https://curbox.app/features.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Hide YouTube recommendations",
+          "item": "https://curbox.app/hide-youtube-recommendations/"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Curbox",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "url": "https://curbox.app/download.html",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  ]
+}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--yt">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/features.html">← All features</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Feature · UI Hider · YouTube</span>
+            <h1 class="page__title">Hide YouTube recommendations on Android.</h1>
+            <p class="lead">You open YouTube to look up one tutorial, and the home feed has other plans. Curbox can hide YouTube recommendations and remove the YouTube home feed on Android, so search, your subscriptions and the video you came for keep working while the rabbit hole disappears.</p>
+        </header>
+
+        <section class="section">
+            <div class="yt-prose">
+                <h2 class="section__title">Why the YouTube home feed is the problem</h2>
+                <p>Most people do not have a YouTube problem. They have a recommendations problem. Search is useful. A channel you follow for cooking or guitar lessons is useful. What eats the evening is the grid of suggested videos on the home screen and the column of "up next" picks beside every video, each one tuned to be the thing you click next.</p>
+                <p>YouTube itself does not give you a switch to turn that off. You can pause or clear your watch history, which can leave the home feed mostly empty, and you can mark single videos as "not interested". Neither removes the recommendations next to the video you are watching, and both are one tap away from being undone. Deleting the app works, but then you lose the useful part too.</p>
+                <p>Curbox takes a different route. Its <strong>UI Hider</strong> covers specific parts of an app's screen while the rest stays usable. Here is what that looks like on YouTube.</p>
+            </div>
+
+            <div class="anatomy">
+                <div class="mock" aria-hidden="true">
+                    <div class="mock__bar"><span>YouTube</span><span class="mock__search"></span></div>
+                    <div class="zone zone--kept"><span class="pin">1</span><div style="height:0.3rem"></div><div class="line" style="width:55%;margin:0.5rem"></div></div>
+                    <div class="zone zone--hidden"><span class="pin">2</span><div class="tile"></div><div class="line"></div><div class="tile"></div><div class="line"></div></div>
+                    <div class="zone zone--hidden"><span class="pin">3</span><div class="tile" style="height:2.6rem"></div><div class="line"></div></div>
+                    <div class="mock__nav"><span>Home</span><span>Shorts</span><span>Subs</span><span>You</span></div>
+                </div>
+                <ol class="callouts">
+                    <li><h3>Search bar <span class="tag tag--kept">Stays</span></h3><p>You can still type exactly what you came for. With the feed rule on, search results are what you see.</p></li>
+                    <li><h3>Home feed recommendations <span class="tag tag--gone">Hidden</span></h3><p>The endless grid of suggested videos is covered, so opening the app no longer drops you straight into it.</p></li>
+                    <li><h3>Up next, comments, description <span class="tag tag--gone">Hidden</span></h3><p>On the watch screen, the stricter rule removes everything except the video player itself.</p></li>
+                    <li><h3>The video you chose <span class="tag tag--kept">Stays</span></h3><p>Playback works as normal. The point is to watch what you meant to watch, then leave.</p></li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">The two built-in YouTube rules</h2>
+            <p class="yt-prose">Curbox ships ready-made UI Hider scripts for YouTube. You do not need to write anything to use them; each one is a toggle, and you can turn them on independently.</p>
+            <div class="rules">
+                <div class="rule">
+                    <div class="rule__top"><span class="rule__name">Hide the feed, show only search results</span><span class="switch" aria-hidden="true"></span></div>
+                    <dl>
+                        <dt>Hides</dt><dd>The recommendation feed</dd>
+                        <dt>Keeps</dt><dd>Search and its results</dd>
+                        <dt>Good for</dt><dd>People who use YouTube as a search engine for how-tos, music or lectures</dd>
+                    </dl>
+                </div>
+                <div class="rule">
+                    <div class="rule__top"><span class="rule__name">Hide everything except the video</span><span class="switch" aria-hidden="true"></span></div>
+                    <dl>
+                        <dt>Hides</dt><dd>Recommendations, comments and the description</dd>
+                        <dt>Keeps</dt><dd>The video player</dd>
+                        <dt>Good for</dt><dd>Stopping the "one more" chain that starts beside the video you are watching</dd>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="yt-prose">
+                <h2 class="section__title">How to remove the YouTube home feed with Curbox</h2>
+                <p>Setup takes a couple of minutes once Curbox is installed and its accessibility permission is granted.</p>
+                <ol class="steps-inline">
+                    <li><span>Install Curbox from the <a href="/download.html">downloads page</a> and finish onboarding.</span></li>
+                    <li><span>Open <strong>Reducers</strong> and tap <strong>UI Hider</strong>.</span></li>
+                    <li><span>Turn on <strong>Enable UI Hider</strong>.</span></li>
+                    <li><span>Toggle on one or both YouTube rules.</span></li>
+                    <li><span>Open YouTube. The hidden parts are covered as soon as they appear on screen.</span></li>
+                </ol>
+                <p style="margin-top:1.25rem"><strong>Which version has it?</strong> The UI Hider is part of the F-Droid variant of Curbox. The Playstore variant does not include it. It is also marked <strong>experimental</strong>: rules find parts of YouTube's screen by their ids and labels, and when YouTube changes those in an update a rule can stop matching for a while. Full details are in the <a href="/docs/reducers/hide-ui-elements/">UI Hider docs</a>.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="yt-prose">
+                <h2 class="section__title">Write your own rule</h2>
+                <p>The built-in rules are written in a small scripting language that you can use too. A script is tied to one app package, runs only while that app is on screen, and re-runs when the screen changes. Every run is sandboxed with strict limits on time and work, so a broken script is stopped instead of freezing your phone.</p>
+                <p>Below is an <strong>illustrative example</strong> that hides the main scrolling list while the Home tab is selected. It uses the documented functions, but YouTube's labels and ids differ between versions and languages, so treat it as a starting point to adapt, not a tested rule.</p>
+            </div>
+            <div class="annot">
+<pre><code>if app != "com.google.android.youtube" { return }
+
+home = find(desc="Home", selected=true)
+if home == null { return }
+
+feed = find(scrollable=true)
+if feed != null {
+    hide(feed)
+}</code></pre>
+                <ol>
+                    <li><strong>Check the app.</strong> Stop straight away if YouTube is not in the foreground. Cheap early returns keep scripts fast.</li>
+                    <li><strong>Find the Home tab.</strong> <code>find()</code> returns the first node matching every selector, here a node described as "Home" that is currently selected.</li>
+                    <li><strong>Only act on Home.</strong> If the Home tab is not selected, return. Search and Subscriptions are left alone.</li>
+                    <li><strong>Find the feed.</strong> The first scrollable node on the Home screen is usually the recommendation list.</li>
+                    <li><strong>Hide it.</strong> Always null-check before using a node. The overlay is redrawn on every run and clears itself when you leave the app.</li>
+                </ol>
+            </div>
+            <p class="warn">To add it: Reducers → UI Hider → turn on the master switch → <strong>Add script</strong> → enter <code>com.google.android.youtube</code> as the package → paste the script → <strong>Save</strong>. Syntax errors are reported when you save. If you need a localized label, <code>appString("resource_name")</code> resolves the app's own string.</p>
+        </section>
+
+        <section class="section">
+            <div class="yt-prose">
+                <h2 class="section__title">YouTube in a browser, and on a computer</h2>
+                <p><strong>In a browser on Android.</strong> The UI Hider works inside apps, not web pages. What Curbox can do in supported browsers (Chrome, Brave, Firefox, Opera and several others) is block parts of a site by address. <code>youtube.com/shorts</code> blocks only Shorts and leaves normal videos alone. There is no documented keyword for "only the home page", so if the website's home feed is your weak spot, the YouTube app with the UI Hider is the stronger setup. The <a href="/block-websites-on-android/">website blocking guide</a> covers the keyword syntax.</p>
+                <p><strong>On a computer.</strong> The Curbox <a href="/website-blocker-extension/">browser extension</a> for Chrome, Brave and Firefox tracks the time you spend on sites, blocks them by schedule or usage, and filters feeds such as Shorts with keyword and pattern matching while the rest of the site stays usable.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="yt-prose">
+                <h2 class="section__title">Pair it with a limit</h2>
+                <p>Hiding the feed removes the trigger. A limit catches the habit if it finds another way in. Two combinations work well:</p>
+                <ul>
+                    <li><strong>Hide the feed and cap Shorts.</strong> Use the Short-Form Video reducer to stop Shorts after a number of videos or minutes. See <a href="/block-youtube-shorts/">how to block YouTube Shorts</a>.</li>
+                    <li><strong>Hide the feed and add a daily allowance.</strong> An App Pause group with a Usage Based limit (say 45 minutes) blocks YouTube once you have had your time, with whatever <a href="/docs/unlock-challenges/overview/">unlock challenge</a> you choose.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Questions</h2>
+<div class="faq faq--yt">
+<details><summary>Can you turn off YouTube recommendations in the YouTube app?</summary><p>Not fully. YouTube lets you pause or clear your watch history, which can leave the home feed mostly empty, and you can tell it you are not interested in individual videos. There is no switch that removes recommendations from the home screen and the side of the player. Hiding them on Android takes an outside tool that can draw over the app, like Curbox's UI Hider.</p></details>
+<details><summary>Will hiding the YouTube home feed break search or subscriptions?</summary><p>No. The "hide the feed so only search results are visible" rule covers the recommendation feed and leaves the search bar working. With "hide everything except the video", recommendations, comments and the description are removed from the watch screen, and the video itself plays as normal.</p></details>
+<details><summary>Is the UI Hider in the Google Play version of Curbox?</summary><p>No. The UI Hider is part of the F-Droid variant of Curbox. The Playstore variant does not include it. Both variants can still limit YouTube Shorts and set time limits on the YouTube app. Every official download is listed on the <a href="/download.html">downloads page</a>.</p></details>
+<details><summary>Does this work on YouTube in a browser?</summary><p>The UI Hider works inside Android apps. In a supported browser on Android you can use Curbox's keyword blocker to block sections such as youtube.com/shorts, but there is no documented keyword for only the home feed. On a computer, the Curbox browser extension filters feeds such as Shorts with keyword and pattern matching.</p></details>
+<details><summary>Why did the hidden feed come back after a YouTube update?</summary><p>UI Hider rules find parts of the screen by their view ids and labels. When YouTube changes those in an update, a rule can stop matching until it is updated. The feature is marked experimental for this reason. If you write your own script, re-check the ids after an update.</p></details>
+</div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <div class="next">
+                <a href="/hide-instagram-feed/">Hide the Instagram feed</a>
+                <a href="/block-youtube-shorts/">Block YouTube Shorts</a>
+                <a href="/reels-counter/">Reels and Shorts counter</a>
+                <a href="/mindful-reminder-when-opening-apps/">A reminder when you open an app</a>
+                <a href="/features.html">All Curbox features</a>
+                <a href="/download.html">Download Curbox</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

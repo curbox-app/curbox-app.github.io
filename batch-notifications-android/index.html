@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>How to Batch Notifications on Android · Curbox</title>
+    <meta
+      name="description"
+      content="Android has no built-in notification digest. Compare DND, snoozing, cooldown and channels, then set up scheduled delivery a few times a day for free."
+    >
+    <link rel="canonical" href="https://curbox.app/batch-notifications-android/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="Batch notifications on Android: get them a few times a day">
+    <meta property="og:description" content="Android has no built-in notification digest. Compare DND, snoozing, cooldown and channels, then set up scheduled delivery a few times a day for free.">
+    <meta property="og:url" content="https://curbox.app/batch-notifications-android/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Batch notifications on Android: get them a few times a day">
+    <meta name="twitter:description" content="Android has no built-in notification digest. Compare DND, snoozing, cooldown and channels, then set up scheduled delivery a few times a day for free.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Batch notifications on Android: get them a few times a day",
+  "description": "Android has no built-in notification digest. Compare DND, snoozing, cooldown and channels, then set up scheduled delivery a few times a day for free.",
+  "datePublished": "2026-11-22",
+  "dateModified": "2026-11-22",
+  "mainEntityOfPage": "https://curbox.app/batch-notifications-android/",
+  "author": {
+    "@type": "Organization",
+    "name": "Curbox",
+    "url": "https://curbox.app/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Curbox",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://curbox.app/icons/android-chrome-512x512.png"
+    }
+  },
+  "image": "https://curbox.app/icons/android-chrome-512x512.png"
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does Android have a scheduled notification summary like iPhone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not in stock Android. Do Not Disturb, snoozing, per-app channels and notification cooldown can quiet or delay notifications, but none of them collects notifications and hands them back together at set times. You need an app for that, such as Curbox's Scheduled Notifications."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will I miss calls or alarms if I batch notifications?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not with Curbox. Calls, alarms and ongoing notifications such as music or navigation always come through right away, as do any apps you add to the always-notify list."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Curbox read my notifications?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Curbox needs notification access to hold notifications, which it does by snoozing them until your next delivery time. It does not read, save or send notification content anywhere, and the Android app has no internet permission at all."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to held notifications if I turn the feature off?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They are not lost. Anything already held still comes back at the next delivery time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many delivery times can I set?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Up to 12 a day. The default is three: 9 AM, 1 PM and 6 PM."
+      }
+    }
+  ]
+}
+    </script>
+
+    <style>
+      .page--notif { max-width: 58rem; }
+      .page--notif .lead { max-width: 40rem; }
+      .narrow { max-width: var(--measure); }
+
+      /* 24-hour timeline. Positions are % of the day. */
+      .day { margin-top: 3rem; padding: clamp(1rem, 3vw, 1.75rem); border: 1px solid var(--line); border-radius: 14px; background: #070707; }
+      .day__legend { display: flex; flex-wrap: wrap; gap: 1.25rem; font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); margin-bottom: 1.25rem; }
+      .day__legend span::before { content: ''; display: inline-block; width: 0.6rem; height: 0.6rem; border-radius: 50%; margin-right: 0.4rem; vertical-align: -0.05rem; background: var(--fg); }
+      .day__legend .l-held::before { background: transparent; border: 1px dashed var(--muted); }
+      .day__legend .l-call::before { background: transparent; border: 2px solid var(--fg); }
+      .lane { position: relative; margin-top: 0.5rem; }
+      .lane__label { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; }
+      .lane__sub { font-size: 0.8rem; color: var(--muted); }
+      .track { position: relative; height: 4.25rem; margin: 0.6rem 0 1.5rem; border-bottom: 1px solid var(--line); background: repeating-linear-gradient(90deg, transparent 0, transparent calc(100% / 24 - 1px), rgba(255,255,255,0.05) calc(100% / 24 - 1px), rgba(255,255,255,0.05) calc(100% / 24)); }
+      .n { position: absolute; bottom: 0.4rem; width: 0.55rem; height: 0.55rem; margin-left: -0.275rem; border-radius: 50%; background: var(--fg); }
+      .n::after { content: ''; position: absolute; left: 50%; bottom: 0.55rem; width: 1px; height: 1.6rem; background: rgba(255,255,255,0.25); }
+      .n--held { background: transparent; border: 1px dashed #666; }
+      .n--held::after { display: none; }
+      .n--call { width: 0.8rem; height: 0.8rem; margin-left: -0.4rem; background: transparent; border: 2px solid var(--fg); }
+      .drop { position: absolute; bottom: 0; width: 2px; height: 100%; margin-left: -1px; background: var(--fg); }
+      .drop b { position: absolute; top: -0.2rem; left: 0.35rem; font-family: var(--font-mono); font-size: 0.66rem; white-space: nowrap; padding: 0.1rem 0.35rem; border-radius: 3px; background: var(--fg); color: var(--bg); }
+      .axis { position: relative; height: 1.2rem; font-family: var(--font-mono); font-size: 0.62rem; color: var(--muted); }
+      .axis span { position: absolute; transform: translateX(-50%); }
+      .day__stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 0.75rem; margin-top: 1.25rem; }
+      .day__stats div { padding: 0.8rem; border-radius: 8px; background: #111; }
+      .day__stats b { display: block; font-family: var(--font-display); font-size: 1.6rem; line-height: 1; }
+      .day__stats span { font-size: 0.78rem; color: var(--muted); }
+      @media (max-width: 34rem) { .drop b { font-size: 0.56rem; } .drop:nth-of-type(1) b { left: auto; right: 0.35rem; } .axis span:nth-child(even) { display: none; } }
+
+      .opts { width: 100%; border-collapse: collapse; margin-top: 1.25rem; font-size: 0.93rem; }
+      .opts th, .opts td { text-align: left; vertical-align: top; padding: 0.85rem 0.6rem; border-bottom: 1px solid var(--line); }
+      .opts thead th { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+      .opts tbody th { font-family: var(--font-display); white-space: nowrap; }
+      .opts td.v { font-family: var(--font-mono); font-size: 0.75rem; white-space: nowrap; }
+      .opts .path { display: block; margin-top: 0.35rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+      .opts tr.us th, .opts tr.us td { background: #121212; }
+      @media (max-width: 40rem) {
+        .opts thead { display: none; }
+        .opts, .opts tbody, .opts tr, .opts th, .opts td { display: block; width: 100%; }
+        .opts tr { padding: 0.75rem 0; border-bottom: 1px solid var(--line); }
+        .opts th, .opts td { border: 0; padding: 0.2rem 0; }
+        .opts td.v::before { content: 'Batches? '; color: var(--muted); }
+      }
+
+      .setup { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.25rem; }
+      .setup ol { padding-left: 1.2rem; }
+      .setup li { margin-top: 0.6rem; }
+      .setup li::marker { font-family: var(--font-mono); color: var(--muted); }
+      .through { padding: 1.25rem; border: 1px solid var(--fg); border-radius: 12px; }
+      .through h3 { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.6rem; }
+      .through ul { list-style: none; }
+      .through li { padding: 0.35rem 0; border-top: 1px solid var(--line); font-size: 0.93rem; }
+      @media (max-width: 44rem) { .setup { grid-template-columns: 1fr; } }
+
+      .recipes { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+      .recipe { padding: 1.1rem; border-radius: 10px; background: #0d0d0d; }
+      .recipe h3 { font-family: var(--font-display); font-size: 1.05rem; }
+      .recipe .times { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0.6rem 0; }
+      .recipe .times span { font-family: var(--font-mono); font-size: 0.7rem; padding: 0.15rem 0.45rem; border: 1px solid var(--line); border-radius: 3px; }
+      .recipe p { font-size: 0.9rem; color: var(--muted); }
+      .faq { margin-top: 3.5rem; max-width: var(--measure); }
+
+      /* Shared bits for this page: FAQ disclosure and related links. */
+      .faq__item { border-top: 1px solid var(--line); padding: 1rem 0; }
+      .faq__item:last-child { border-bottom: 1px solid var(--line); }
+      .faq__item summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; list-style: none; }
+      .faq__item summary::-webkit-details-marker { display: none; }
+      .faq__item summary::after { content: '+'; float: right; font-family: var(--font-mono); color: var(--muted); }
+      .faq__item[open] summary::after { content: '-'; }
+      .faq__item p { margin-top: 0.75rem; color: var(--muted); }
+      .related { margin-top: clamp(3rem, 8vh, 4.5rem); padding-top: 2rem; border-top: 1px solid var(--line); }
+      .related ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+      .related li a { display: inline-block; padding: 0.45rem 0.9rem; border: 1px solid var(--line); border-radius: 999px; font-size: 0.9rem; text-decoration: none !important; }
+      .related li a:hover { border-color: var(--fg); }
+    </style>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://curbox.app/guides/"}, {"@type": "ListItem", "position": 3, "name": "How to Batch Notifications on Android", "item": "https://curbox.app/batch-notifications-android/"}]}
+    </script>
+</head>
+<body>
+    <main class="page page--notif">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/guides/">← All guides</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Guide · Notifications</span>
+            <h1 class="page__title">Get your notifications three times a day, not three hundred.</h1>
+            <p class="lead">Every buzz is an invitation to pick up your phone, and most of them can wait. Here is what Android can do on its own, where it falls short, and how to batch notifications into a few deliveries a day.</p>
+        </header>
+
+        <figure class="day" aria-labelledby="day-cap">
+            <div class="day__legend" aria-hidden="true">
+                <span>Interrupts you</span>
+                <span class="l-held">Held quietly</span>
+                <span class="l-call">Call or alarm, always rings</span>
+            </div>
+
+            <div class="lane">
+                <div class="lane__label">A normal day</div>
+                <div class="lane__sub">Every notification arrives the moment it is sent.</div>
+                <div class="track" aria-hidden="true">
+                    <i class="n n--call" style="left:29.2%"></i>
+                    <i class="n" style="left:31%"></i><i class="n" style="left:33.5%"></i><i class="n" style="left:35%"></i><i class="n" style="left:36.4%"></i>
+                    <i class="n" style="left:39%"></i><i class="n" style="left:41.2%"></i><i class="n" style="left:43%"></i><i class="n" style="left:45.5%"></i><i class="n" style="left:47.8%"></i><i class="n" style="left:50.6%"></i><i class="n" style="left:52.5%"></i>
+                    <i class="n" style="left:56%"></i><i class="n" style="left:58.4%"></i><i class="n" style="left:60%"></i><i class="n n--call" style="left:62.5%"></i><i class="n" style="left:64.8%"></i><i class="n" style="left:68%"></i><i class="n" style="left:72.6%"></i>
+                    <i class="n" style="left:77%"></i><i class="n" style="left:81.5%"></i><i class="n" style="left:86%"></i><i class="n" style="left:90.4%"></i>
+                </div>
+            </div>
+
+            <div class="lane">
+                <div class="lane__label">With Scheduled Notifications</div>
+                <div class="lane__sub">Held until 9 AM, 1 PM and 6 PM. Calls still ring.</div>
+                <div class="track" aria-hidden="true">
+                    <i class="n n--call" style="left:29.2%"></i>
+                    <i class="n n--held" style="left:31%"></i><i class="n n--held" style="left:33.5%"></i><i class="n n--held" style="left:35%"></i><i class="n n--held" style="left:36.4%"></i>
+                    <span class="drop" style="left:37.5%"><b>9:00 · 4</b></span>
+                    <i class="n n--held" style="left:39%"></i><i class="n n--held" style="left:41.2%"></i><i class="n n--held" style="left:43%"></i><i class="n n--held" style="left:45.5%"></i><i class="n n--held" style="left:47.8%"></i><i class="n n--held" style="left:50.6%"></i><i class="n n--held" style="left:52.5%"></i>
+                    <span class="drop" style="left:54.17%"><b>13:00 · 7</b></span>
+                    <i class="n n--held" style="left:56%"></i><i class="n n--held" style="left:58.4%"></i><i class="n n--held" style="left:60%"></i><i class="n n--call" style="left:62.5%"></i><i class="n n--held" style="left:64.8%"></i><i class="n n--held" style="left:68%"></i><i class="n n--held" style="left:72.6%"></i>
+                    <span class="drop" style="left:75%"><b>18:00 · 6</b></span>
+                    <i class="n n--held" style="left:77%"></i><i class="n n--held" style="left:81.5%"></i><i class="n n--held" style="left:86%"></i><i class="n n--held" style="left:90.4%"></i>
+                </div>
+                <div class="axis" aria-hidden="true"><span style="left:0">00</span><span style="left:12.5%">03</span><span style="left:25%">06</span><span style="left:37.5%">09</span><span style="left:50%">12</span><span style="left:62.5%">15</span><span style="left:75%">18</span><span style="left:87.5%">21</span><span style="left:100%">24</span></div>
+            </div>
+
+            <div class="day__stats">
+                <div><b>23</b><span>interruptions on a normal day</span></div>
+                <div><b>3 + 2</b><span>deliveries plus two calls with batching</span></div>
+                <div><b>4</b><span>evening ones wait for the next delivery</span></div>
+            </div>
+            <figcaption id="day-cap" class="lane__sub" style="margin-top:1rem;">An illustrative day. The same 21 notifications and 2 calls, delivered two ways. Anything that arrives after your last delivery time waits for the next one, so add a later time if you want evening messages the same day.</figcaption>
+        </figure>
+
+        <section class="section narrow">
+            <h2 class="section__title">Why batching helps</h2>
+            <p>One notification is harmless. The problem is the pattern: the phone lights up, you check it, and while you are there you open something else. Switching your attention back to what you were doing takes time, and dozens of small interruptions a day add up to a lot of it.</p>
+            <p>Batching keeps the information and drops the interruptions. You still see every message, just at times you chose, when you were going to look at your phone anyway. It is the same idea as checking email at set times instead of keeping the inbox open all day.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title narrow">What Android can do on its own</h2>
+            <p class="narrow">Stock Android has several tools for quieter notifications. They are all useful, but none of them collects notifications and hands them back together on a schedule. Menu names below are for Pixel and near-stock phones; other brands have similar settings in slightly different places.</p>
+            <table class="opts">
+                <thead><tr><th>Tool</th><th>What it does</th><th>Batches?</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Do Not Disturb</th>
+                        <td>Silences everything except the people, apps and alarms you allow, manually or on a schedule. Notifications still pile up in the shade, so the pull to check is still there when it ends. Newer Pixel versions call this Modes.<span class="path">Settings › Notifications › Do Not Disturb</span></td>
+                        <td class="v">No, silences</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Snooze</th>
+                        <td>Push one notification back by 15 minutes up to 2 hours. Useful for a single reminder, tedious for every message. You may need to switch it on first.<span class="path">Settings › Notifications › Notification snoozing</span></td>
+                        <td class="v">One at a time</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Per-app categories</th>
+                        <td>Long-press any notification to make that app or category silent, or turn it off entirely. The best first step: most apps send promotional notifications you never wanted.<span class="path">Long-press notification › Settings</span></td>
+                        <td class="v">No, filters</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Notification cooldown</th>
+                        <td>On Android 15 and later, lowers the volume of a quick burst of notifications from the same app, like a busy group chat. Every notification still arrives right away.<span class="path">Settings › Notifications › Notification cooldown</span></td>
+                        <td class="v">No, softens</td>
+                    </tr>
+                    <tr class="us">
+                        <th scope="row">Curbox Scheduled Notifications</th>
+                        <td>Holds notifications as they arrive and delivers them together at times you pick, up to 12 a day. Calls, alarms and chosen apps still come through.<span class="path">Curbox › Reducers › Scheduled Notifications</span></td>
+                        <td class="v">Yes</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="narrow" style="margin-top:1.25rem;">These work well together. Turn off the categories you never wanted first, then batch what is left.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Set up scheduled delivery in Curbox</h2>
+            <div class="setup">
+                <div>
+                    <ol>
+                        <li>Install Curbox from the <a href="/download.html">downloads page</a> and finish the short setup.</li>
+                        <li>Go to <strong>Reducers › Scheduled Notifications</strong>.</li>
+                        <li>Turn on <strong>Enable Scheduled Notifications</strong>. Curbox asks for notification access; this is the only extra permission the feature needs.</li>
+                        <li>Under <strong>Delivery times</strong>, keep the default 9 AM, 1 PM and 6 PM, or add and remove times. You can have up to 12.</li>
+                        <li>Under <strong>Apps that can always notify</strong>, add anything that truly cannot wait, such as a work chat on call days or a family messenger.</li>
+                    </ol>
+                    <p style="margin-top:1rem;">At each delivery time, a single Curbox notification tells you how many notifications were waiting, and they reappear in your shade.</p>
+                </div>
+                <div class="through">
+                    <h3>Always comes through right away</h3>
+                    <ul>
+                        <li>Phone calls</li>
+                        <li>Alarms</li>
+                        <li>Ongoing notifications, like music, maps or a timer</li>
+                        <li>Any app on your always-notify list</li>
+                    </ul>
+                    <p style="margin-top:0.85rem;font-size:0.88rem;color:var(--muted);">A held notification may make a brief sound before Curbox catches it.</p>
+                </div>
+            </div>
+            <div class="narrow" style="margin-top:2rem;">
+                <h3 class="label">What notification access is used for</h3>
+                <p>Curbox holds notifications by snoozing them until your next delivery time, which means Android itself keeps them safe and nothing is lost even if Curbox is closed. It does not read, save or send notification content anywhere. The Android app has no internet permission in any variant, so it could not send them even if it wanted to. If you switch the feature off, anything already held still arrives at the next delivery time. More in the <a href="/privacy.html">privacy policy</a>.</p>
+                <h3 class="label">Pair it with Auto DND</h3>
+                <p>Scheduled Notifications decides <em>when</em> notifications arrive. <a href="/docs/reducers/auto-dnd/">Auto DND</a> decides when your phone stays silent altogether, for example overnight or during a weekly meeting. Set it up in Reducers › Auto DND › +, name the group, choose a time schedule and tap Done. One schedule cannot cross midnight, so for 11 PM to 7 AM create two: 11 PM to 12 AM and 12 AM to 7 AM.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Delivery times that work</h2>
+            <p class="narrow">Start with three and adjust after a week. If you keep reaching for your phone between deliveries, look at which app you are worried about and add only that one to the always-notify list.</p>
+            <div class="recipes">
+                <div class="recipe">
+                    <h3>Office hours</h3>
+                    <div class="times"><span>08:30</span><span>12:30</span><span>17:30</span><span>20:00</span></div>
+                    <p>Catch up before work, at lunch, and when you leave, with one evening round so nothing waits overnight.</p>
+                </div>
+                <div class="recipe">
+                    <h3>Study days</h3>
+                    <div class="times"><span>10:00</span><span>13:00</span><span>16:00</span><span>19:00</span></div>
+                    <p>Each delivery lands in a break between study blocks. Pair with a <a href="/app-blocker-for-studying/">focus session</a> for the blocks themselves.</p>
+                </div>
+                <div class="recipe">
+                    <h3>Quiet weekend</h3>
+                    <div class="times"><span>11:00</span><span>18:00</span></div>
+                    <p>Two check-ins a day. Keep family chat on the always-notify list so plans still reach you.</p>
+                </div>
+                <div class="recipe">
+                    <h3>On-call shifts</h3>
+                    <div class="times"><span>Hourly</span></div>
+                    <p>Up to 12 times a day gives you roughly hourly deliveries across a working day, with the paging or work app allowed through.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq">
+            <h2 class="section__title">Questions</h2>
+            <details class="faq__item">
+                <summary>Does Android have a scheduled notification summary like iPhone?</summary>
+                <p>Not in stock Android. Do Not Disturb, snoozing, per-app channels and notification cooldown can quiet or delay notifications, but none of them collects notifications and hands them back together at set times. You need an app for that, such as Curbox's Scheduled Notifications.</p>
+            </details>
+            <details class="faq__item">
+                <summary>Will I miss calls or alarms if I batch notifications?</summary>
+                <p>Not with Curbox. Calls, alarms and ongoing notifications such as music or navigation always come through right away, as do any apps you add to the always-notify list.</p>
+            </details>
+            <details class="faq__item">
+                <summary>Can Curbox read my notifications?</summary>
+                <p>Curbox needs notification access to hold notifications, which it does by snoozing them until your next delivery time. It does not read, save or send notification content anywhere, and the Android app has no internet permission at all.</p>
+            </details>
+            <details class="faq__item">
+                <summary>What happens to held notifications if I turn the feature off?</summary>
+                <p>They are not lost. Anything already held still comes back at the next delivery time.</p>
+            </details>
+            <details class="faq__item">
+                <summary>How many delivery times can I set?</summary>
+                <p>Up to 12 a day. The default is three: 9 AM, 1 PM and 6 PM.</p>
+            </details>
+        </section>
+
+        <nav class="related narrow" aria-label="Related guides">
+            <h2 class="section__title">Keep reading</h2>
+            <ul>
+                <li><a href="/app-blocker-for-studying/">App blocker for studying</a></li>
+                <li><a href="/stop-doomscrolling/">How to stop doomscrolling</a></li>
+                <li><a href="/grayscale-apps-android/">Grayscale for specific apps</a></li>
+                <li><a href="/screen-time-app-without-ads/">Screen time apps without ads</a></li>
+            </ul>
+        </nav>
+    </main>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Hide the Instagram Feed on Android · Curbox</title>
+    <meta
+      name="description"
+      content="Hide the Instagram home feed and Explore on Android and keep a Following-only feed, DMs and Stories. How Curbox&#x27;s UI Hider works, line by line."
+    >
+    <link rel="canonical" href="https://curbox.app/hide-instagram-feed/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="Hide the Instagram feed on Android">
+    <meta property="og:description" content="Hide the Instagram home feed and Explore on Android and keep a Following-only feed, DMs and Stories. How Curbox&#x27;s UI Hider works, line by line.">
+    <meta property="og:url" content="https://curbox.app/hide-instagram-feed/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hide the Instagram feed on Android">
+    <meta name="twitter:description" content="Hide the Instagram home feed and Explore on Android and keep a Following-only feed, DMs and Stories. How Curbox&#x27;s UI Hider works, line by line.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--ig { max-width: 56rem; }
+      .page--ig .lead { max-width: 38rem; }
+      .ig-prose { max-width: var(--measure); }
+
+      /* Tab map: Instagram's bottom bar with a verdict under each tab. */
+      .tabmap {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        margin-top: 1.75rem;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .tabmap__cell { padding: 1.1rem 0.8rem 1rem; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 0.45rem; }
+      .tabmap__cell:last-child { border-right: 0; }
+      .tabmap__name { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+      .tabmap__verdict { align-self: flex-start; padding: 0.1rem 0.45rem; border-radius: 4px; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; }
+      .v-hide { border: 1px dashed var(--muted); color: var(--muted); }
+      .v-keep { background: var(--fg); color: var(--bg); }
+      .v-limit { border: 1px solid var(--fg); }
+      .tabmap__note { font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+      .tabmap__cell--hide { background: repeating-linear-gradient(135deg, #0c0c0c 0 7px, #060606 7px 14px); }
+
+      /* Line by line: big line numbers, code, then plain English. */
+      .lbl { margin-top: 1.75rem; border-top: 1px solid var(--fg); }
+      .lbl__row {
+        display: grid;
+        grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1rem;
+        padding: 1.1rem 0;
+        border-bottom: 1px solid var(--line);
+        align-items: start;
+      }
+      .lbl__n { font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; line-height: 1; color: #3d3d3b; }
+      .lbl__code { overflow-x: auto; }
+      .lbl__code code { display: block; white-space: pre; word-break: normal; padding: 0.55rem 0.7rem; font-size: 0.78rem; line-height: 1.6; background: #0e0e0e; border: 1px solid var(--line); border-radius: 6px; }
+      .lbl__say { font-size: 0.94rem; }
+      .lbl__say em { color: var(--muted); font-style: normal; }
+
+      .full-script { margin-top: 1.25rem; }
+      .full-script summary { cursor: pointer; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+      .full-script pre { margin-top: 0.75rem; padding: 1rem; background: #0b0b0b; border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.6; }
+      .full-script pre code { background: none; padding: 0; white-space: pre; word-break: normal; }
+
+      /* Setup as a short ticket-like strip. */
+      .ticket { margin-top: 1.25rem; border: 1px dashed var(--muted); border-radius: 12px; padding: 1.25rem 1.4rem; }
+      .ticket ol { margin: 0.5rem 0 0 1.2rem; }
+      .ticket li + li { margin-top: 0.4rem; }
+      .ticket .kicker { margin-bottom: 0.25rem; }
+
+      .combo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+      .combo div { padding-top: 0.9rem; border-top: 2px solid var(--fg); }
+      .combo h3 { font-family: var(--font-display); font-size: 1.02rem; line-height: 1.25; margin-bottom: 0.35rem; }
+      .combo p { font-size: 0.9rem; color: var(--muted); }
+
+      .faq--ig { margin-top: 0.5rem; }
+      .faq--ig details { padding: 0.9rem 1rem; margin-top: 0.6rem; border-radius: 10px; background: #0c0c0c; }
+      .faq--ig summary { cursor: pointer; font-weight: 500; }
+      .faq--ig p { margin-top: 0.55rem; color: var(--muted); font-size: 0.95rem; }
+
+      .related-ig { columns: 2; column-gap: 2rem; margin-top: 0.75rem; }
+      .related-ig a { display: block; padding: 0.35rem 0; break-inside: avoid; }
+
+      @media (max-width: 46rem) {
+        .tabmap { grid-template-columns: 1fr; }
+        .tabmap__cell { border-right: 0; border-bottom: 1px solid var(--line); flex-direction: row; flex-wrap: wrap; align-items: baseline; }
+        .tabmap__cell:last-child { border-bottom: 0; }
+        .tabmap__note { flex-basis: 100%; }
+        .lbl__row { grid-template-columns: 2.2rem minmax(0, 1fr); }
+        .lbl__say { grid-column: 2; }
+        .combo { grid-template-columns: 1fr; }
+        .related-ig { columns: 1; }
+      }
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How to hide the Instagram feed on Android and keep Following only",
+      "description": "Hide the Instagram home feed and Explore on Android and keep a Following-only feed, DMs and Stories. How Curbox's UI Hider works, line by line.",
+      "url": "https://curbox.app/hide-instagram-feed/",
+      "mainEntityOfPage": "https://curbox.app/hide-instagram-feed/",
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "image": "https://curbox.app/icons/android-chrome-512x512.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://curbox.app/icons/android-chrome-512x512.png"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I make Instagram show only posts from people I follow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Instagram has a Following view, reached by tapping the Instagram logo text at the top of the home screen, but the app opens on the suggested home feed every time. Curbox's built-in Instagram rule hides the home feed except the Following tab, so the feed you land in is only accounts you chose."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you hide the Explore page on Instagram?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not from Instagram's own settings. Curbox ships a separate built-in rule that hides the Explore tab, and you can turn it on with or without the home feed rule."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will I still be able to send messages and see Stories?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The rules hide specific parts of the screen. Direct messages keep working, and you can still reach Following from the cursive Instagram text at the top."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does hiding the feed also block Reels?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not by itself. Reels have their own tab and show up in DMs. To limit them, use Curbox's Short-Form Video reducer, which stops Reels after a set number of videos or minutes a day. See the guide to blocking Instagram Reels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the UI Hider available in every version of Curbox?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The UI Hider is part of the F-Droid variant of Curbox. The Playstore variant does not include it. Both variants include Reels limits, app time limits and unlock challenges. Official downloads are on the downloads page."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://curbox.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Features",
+          "item": "https://curbox.app/features.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Hide the Instagram feed",
+          "item": "https://curbox.app/hide-instagram-feed/"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Curbox",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "url": "https://curbox.app/download.html",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  ]
+}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--ig">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/features.html">← All features</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Feature · UI Hider · Instagram</span>
+            <h1 class="page__title">Hide the Instagram feed. Keep your friends.</h1>
+            <p class="lead">If you want to hide the Instagram feed on Android but still message people and see what your friends post, you need more than a time limit. Curbox can hide the suggested home feed and the Explore tab, leaving a Following-only feed, your DMs and Stories.</p>
+        </header>
+
+        <section class="section">
+            <div class="ig-prose">
+                <h2 class="section__title">What changes when you hide the Instagram feed</h2>
+                <p>Instagram opens on a home feed that mixes people you follow with suggested posts and Reels from accounts you have never heard of. It has a Following view, but you have to go looking for it each time, and the app does not remember the choice. Explore sits one tap away with more of the same.</p>
+                <p>Curbox's <strong>UI Hider</strong> covers those parts of the screen while the rest of Instagram keeps working. Here is the result, tab by tab.</p>
+            </div>
+            <div class="tabmap" role="list">
+                <div class="tabmap__cell tabmap__cell--hide" role="listitem">
+                    <span class="tabmap__name">Home feed</span>
+                    <span class="tabmap__verdict v-hide">Hidden</span>
+                    <span class="tabmap__note">Suggested posts and the mixed feed are covered.</span>
+                </div>
+                <div class="tabmap__cell" role="listitem">
+                    <span class="tabmap__name">Following</span>
+                    <span class="tabmap__verdict v-keep">Kept</span>
+                    <span class="tabmap__note">Tap the cursive "Instagram" text at the top to reach it.</span>
+                </div>
+                <div class="tabmap__cell tabmap__cell--hide" role="listitem">
+                    <span class="tabmap__name">Explore</span>
+                    <span class="tabmap__verdict v-hide">Hidden</span>
+                    <span class="tabmap__note">A separate rule, so you can keep Explore if you want it.</span>
+                </div>
+                <div class="tabmap__cell" role="listitem">
+                    <span class="tabmap__name">Reels</span>
+                    <span class="tabmap__verdict v-limit">Limit it</span>
+                    <span class="tabmap__note">Handled by the Reels limit, not the UI Hider. See below.</span>
+                </div>
+                <div class="tabmap__cell" role="listitem">
+                    <span class="tabmap__name">DMs and Stories</span>
+                    <span class="tabmap__verdict v-keep">Kept</span>
+                    <span class="tabmap__note">Messaging friends works as before.</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="ig-prose">
+                <h2 class="section__title">Turn on the Instagram Following-only feed</h2>
+                <p>You do not need to write anything. Curbox ships two Instagram rules that you switch on independently: <strong>hide the home feed except the Following tab</strong>, and <strong>hide the Explore tab</strong>.</p>
+                <div class="ticket">
+                    <span class="kicker">Setup · about two minutes</span>
+                    <ol>
+                        <li>Install Curbox from the <a href="/download.html">downloads page</a> and finish onboarding, which grants the accessibility permission the UI Hider uses.</li>
+                        <li>Open <strong>Reducers</strong> → <strong>UI Hider</strong> and turn on <strong>Enable UI Hider</strong>.</li>
+                        <li>Toggle on the Instagram home feed rule, the Explore rule, or both.</li>
+                        <li>Open Instagram. To see posts from people you follow, tap the cursive <strong>Instagram</strong> text at the top and pick Following.</li>
+                    </ol>
+                </div>
+                <p style="margin-top:1.25rem">Two honest caveats. The UI Hider is part of the F-Droid variant of Curbox; the Playstore variant does not include it. And it is marked <strong>experimental</strong>: rules find parts of Instagram's screen by their ids, so an Instagram update can stop a rule matching until it is updated. The <a href="/docs/reducers/hide-ui-elements/">UI Hider docs</a> track the details.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="ig-prose">
+                <h2 class="section__title">How hiding the feed works, line by line</h2>
+                <p>The built-in rules are scripts written in a small language you can read and write yourself. The Curbox docs include a simple example that hides Instagram's home feed. It is short enough to walk through completely, and it shows how every UI Hider rule works: find two landmarks on screen, then cover what sits between them.</p>
+            </div>
+            <div class="lbl">
+                <div class="lbl__row">
+                    <span class="lbl__n">1</span>
+                    <div class="lbl__code"><code>if app != "com.instagram.android" { return }</code></div>
+                    <p class="lbl__say">If the app on screen is not Instagram, stop. Scripts are tied to one app anyway, but returning early keeps every run cheap.</p>
+                </div>
+                <div class="lbl__row">
+                    <span class="lbl__n">2</span>
+                    <div class="lbl__code"><code>top = find(id="com.instagram.android:id/action_bar_container")</code></div>
+                    <p class="lbl__say">Find the bar at the top of the screen by its view id. <code>find()</code> returns the first matching node, or <code>null</code> if there is none.</p>
+                </div>
+                <div class="lbl__row">
+                    <span class="lbl__n">3</span>
+                    <div class="lbl__code"><code>nav = find(id="com.instagram.android:id/tab_bar")</code></div>
+                    <p class="lbl__say">Find the tab bar at the bottom. These two bars are the landmarks. <em>Ids like these can change between Instagram versions.</em></p>
+                </div>
+                <div class="lbl__row">
+                    <span class="lbl__n">4</span>
+                    <div class="lbl__code"><code>if top != null and nav != null {</code></div>
+                    <p class="lbl__say">Only continue if both landmarks are on screen. Skipping this check is the most common reason a script misbehaves.</p>
+                </div>
+                <div class="lbl__row">
+                    <span class="lbl__n">5</span>
+                    <div class="lbl__code"><code>    y = top.bottom</code></div>
+                    <p class="lbl__say">The covered area starts where the top bar ends. Every node exposes its geometry: <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code>, width and height.</p>
+                </div>
+                <div class="lbl__row">
+                    <span class="lbl__n">6</span>
+                    <div class="lbl__code"><code>    height = nav.top - y</code></div>
+                    <p class="lbl__say">It ends where the tab bar begins. The difference is how tall the feed area is.</p>
+                </div>
+                <div class="lbl__row">
+                    <span class="lbl__n">7</span>
+                    <div class="lbl__code"><code>    if height &gt; 0 { draw(0, y, screen.width, height) }</code></div>
+                    <p class="lbl__say">Draw an overlay across the full width of the screen over the feed. Overlays are redrawn on every run and clear themselves when you leave the app, so you never have to remove them.</p>
+                </div>
+                <div class="lbl__row">
+                    <span class="lbl__n">8</span>
+                    <div class="lbl__code"><code>}</code></div>
+                    <p class="lbl__say">Done. Because the script re-runs when you scroll or navigate, the overlay follows the live screen.</p>
+                </div>
+            </div>
+            <div class="ig-prose">
+                <p style="margin-top:1.25rem">This documented example is deliberately simple: it covers whatever sits between the two bars whenever both are visible. The built-in rule goes further and leaves the Following tab reachable. If you adapt the example, a natural next step is to check which tab is selected before drawing, using selectors such as <code>selected=true</code>.</p>
+                <details class="full-script">
+                    <summary>Show the whole script</summary>
+<pre><code>if app != "com.instagram.android" { return }
+top = find(id="com.instagram.android:id/action_bar_container")
+nav = find(id="com.instagram.android:id/tab_bar")
+if top != null and nav != null {
+    y = top.bottom
+    height = nav.top - y
+    if height &gt; 0 { draw(0, y, screen.width, height) }
+}</code></pre>
+                </details>
+                <p style="margin-top:1rem">To add your own: Reducers → UI Hider → turn on the master switch → <strong>Add script</strong> → enter <code>com.instagram.android</code> → paste → <strong>Save</strong>. Scripts run sandboxed with limits on time and work, so a mistake is stopped instead of freezing the phone.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Hiding the feed is half the job</h2>
+            <p class="ig-prose">The feed is one way in. Reels are the other, and they reach you through DMs as well as their own tab. These pairings close the gaps.</p>
+            <div class="combo">
+                <div>
+                    <h3>Feed hidden + Reels capped</h3>
+                    <p>Use the Short-Form Video reducer to stop Reels after, say, 15 videos a day. You can still allow Reels opened from DMs. Read <a href="/block-instagram-reels/">how to block Instagram Reels</a>.</p>
+                </div>
+                <div>
+                    <h3>Feed hidden + a counter</h3>
+                    <p>The <a href="/reels-counter/">Reels counter</a> shows a live number on screen as you scroll, which makes "just one more" harder to believe.</p>
+                </div>
+                <div>
+                    <h3>Feed hidden + evenings only</h3>
+                    <p>An App Pause group with a Time Based window allows Instagram only when you choose. See <a href="/block-instagram-on-android/">blocking Instagram on Android</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Questions people ask</h2>
+<div class="faq faq--ig">
+<details><summary>Can I make Instagram show only posts from people I follow?</summary><p>Instagram has a Following view, reached by tapping the Instagram logo text at the top of the home screen, but the app opens on the suggested home feed every time. Curbox's built-in Instagram rule hides the home feed except the Following tab, so the feed you land in is only accounts you chose.</p></details>
+<details><summary>Can you hide the Explore page on Instagram?</summary><p>Not from Instagram's own settings. Curbox ships a separate built-in rule that hides the Explore tab, and you can turn it on with or without the home feed rule.</p></details>
+<details><summary>Will I still be able to send messages and see Stories?</summary><p>Yes. The rules hide specific parts of the screen. Direct messages keep working, and you can still reach Following from the cursive Instagram text at the top.</p></details>
+<details><summary>Does hiding the feed also block Reels?</summary><p>Not by itself. Reels have their own tab and show up in DMs. To limit them, use Curbox's Short-Form Video reducer, which stops Reels after a set number of videos or minutes a day. See the guide to <a href="/block-instagram-reels/">blocking Instagram Reels</a>.</p></details>
+<details><summary>Is the UI Hider available in every version of Curbox?</summary><p>The UI Hider is part of the F-Droid variant of Curbox. The Playstore variant does not include it. Both variants include Reels limits, app time limits and unlock challenges. Official downloads are on the <a href="/download.html">downloads page</a>.</p></details>
+</div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <div class="related-ig">
+                <a href="/hide-youtube-recommendations/">Hide YouTube recommendations</a>
+                <a href="/block-instagram-reels/">Block Instagram Reels</a>
+                <a href="/reels-counter/">Reels and Shorts counter</a>
+                <a href="/mindful-reminder-when-opening-apps/">A reminder when you open an app</a>
+                <a href="/features.html">All Curbox features</a>
+                <a href="/download.html">Download Curbox</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

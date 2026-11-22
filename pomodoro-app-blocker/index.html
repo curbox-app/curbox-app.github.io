@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Pomodoro App with App Blocker for Android · Curbox</title>
+    <meta
+      name="description"
+      content="A Pomodoro timer that actually blocks apps: Curbox runs focus rounds and breaks on Android, locks distracting apps during focus, and counts every round."
+    >
+    <link rel="canonical" href="https://curbox.app/pomodoro-app-blocker/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="A Pomodoro timer that blocks apps on Android">
+    <meta property="og:description" content="A Pomodoro timer that actually blocks apps: Curbox runs focus rounds and breaks on Android, locks distracting apps during focus, and counts every round.">
+    <meta property="og:url" content="https://curbox.app/pomodoro-app-blocker/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Pomodoro timer that blocks apps on Android">
+    <meta name="twitter:description" content="A Pomodoro timer that actually blocks apps: Curbox runs focus rounds and breaks on Android, locks distracting apps during focus, and counts every round.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--pomo { max-width: 52rem; }
+      .page--pomo .lead { max-width: 38rem; }
+
+      /* Planner: a compact instrument panel. */
+      .planner {
+        margin-top: 2.5rem;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #070707;
+        overflow: hidden;
+      }
+      .planner__bar {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.8rem 1.2rem;
+        border-bottom: 1px solid var(--line);
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .planner__inputs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--line);
+      }
+      .knob {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: 1rem 1.2rem 1.1rem;
+        background: #070707;
+      }
+      .knob label {
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .knob input {
+        width: 100%;
+        min-width: 0;
+        padding: 0.2rem 0;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        background: transparent;
+        color: var(--fg);
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 2rem;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+      .knob input:focus { outline: none; border-bottom-color: var(--fg); }
+      .knob input[type="time"] { font-size: 1.6rem; color-scheme: dark; }
+      .strip {
+        display: flex;
+        height: 2.6rem;
+        margin: 1.4rem 1.2rem 0.6rem;
+        border-radius: 6px;
+        overflow: hidden;
+        gap: 2px;
+      }
+      .strip span { display: block; min-width: 2px; }
+      .strip .f { background: var(--fg); }
+      .strip .b { background: repeating-linear-gradient(135deg, #2a2a2a 0 4px, #151515 4px 8px); }
+      .strip__legend {
+        display: flex;
+        gap: 1.25rem;
+        padding: 0 1.2rem;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--muted);
+      }
+      .strip__legend i { display: inline-block; width: 0.7rem; height: 0.7rem; margin-right: 0.4rem; vertical-align: -1px; border-radius: 2px; }
+      .readout {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        margin-top: 1.2rem;
+        background: var(--line);
+        border-top: 1px solid var(--line);
+      }
+      .readout div { padding: 1rem 1.2rem; background: #070707; }
+      .readout b { display: block; font-family: var(--font-display); font-size: 1.5rem; line-height: 1.1; }
+      .readout span { font-size: 0.78rem; color: var(--muted); }
+      .schedule {
+        max-height: 14rem;
+        overflow-y: auto;
+        margin: 0;
+        padding: 0.5rem 1.2rem 1rem;
+        list-style: none;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        border-top: 1px solid var(--line);
+      }
+      .schedule li { display: flex; gap: 1rem; padding: 0.35rem 0; border-bottom: 1px dashed #1c1c1c; }
+      .schedule li span:first-child { min-width: 7.5rem; color: var(--muted); }
+      .schedule li.b span:last-child { color: var(--muted); }
+      .planner__note { padding: 0.9rem 1.2rem; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--line); }
+
+      /* Spec sheet: label column + description column. */
+      .spec { margin-top: 1.25rem; border-top: 1px solid var(--line); }
+      .spec__row {
+        display: grid;
+        grid-template-columns: 12rem 1fr;
+        gap: 1.5rem;
+        padding: 1.1rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .spec__row h3 { font-family: var(--font-display); font-size: 1.05rem; line-height: 1.25; }
+      .spec__row h3 small { display: block; margin-top: 0.3rem; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+      .spec__row p { font-size: 0.97rem; }
+      .spec__row p + p { margin-top: 0.6rem; }
+
+      .steps-inline { counter-reset: s; list-style: none; margin-top: 1rem; }
+      .steps-inline li { counter-increment: s; position: relative; padding: 0.55rem 0 0.55rem 2.6rem; }
+      .steps-inline li::before {
+        content: counter(s, decimal-leading-zero);
+        position: absolute; left: 0; top: 0.6rem;
+        font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted);
+      }
+
+      .faq__dl { margin-top: 1rem; }
+      .faq__dl dt { margin-top: 1.4rem; font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; }
+      .faq__dl dd { margin-top: 0.4rem; color: #cfcfcc; }
+
+      .related { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 1rem; font-size: 0.95rem; }
+
+      @media (max-width: 40rem) {
+        .planner__inputs { grid-template-columns: 1fr 1fr; }
+        .readout { grid-template-columns: 1fr; }
+        .spec__row { grid-template-columns: 1fr; gap: 0.4rem; }
+        .planner__bar span:last-child { display: none; }
+      }
+
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "A Pomodoro timer that blocks apps on Android",
+      "description": "A Pomodoro timer that actually blocks apps: Curbox runs focus rounds and breaks on Android, locks distracting apps during focus, and counts every round.",
+      "url": "https://curbox.app/pomodoro-app-blocker/",
+      "mainEntityOfPage": "https://curbox.app/pomodoro-app-blocker/",
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "author": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://curbox.app/icons/android-chrome-512x512.png"
+        }
+      },
+      "image": "https://curbox.app/icons/android-chrome-512x512.png",
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Curbox",
+        "operatingSystem": "Android",
+        "applicationCategory": "LifestyleApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "url": "https://curbox.app/download.html"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is there a Pomodoro app that blocks apps on Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Curbox's Focus Mode has a Pomodoro option. It blocks the apps and websites in your chosen Focus Group during each focus round, lets you take a short break between rounds, and starts the next round on its own. It is free and open source."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are apps blocked during the Pomodoro break?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Breaks are for resting, so your phone works normally until the next focus round starts. Curbox plays a sound when a break starts and ends, and break time is not counted as focus time in your stats."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many Pomodoro rounds can I set?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You choose the number of focus rounds for the cycle, from 2 up to 12, and you set the break length in minutes. The focus length is whatever you pick on the session slider, for example 25 minutes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I stop a Pomodoro session early?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only if you allow it. Each Focus Group has a \"Let me quit mid-sessions\" option. Leave it off and the session cannot be ended until the timer runs out, which is the point when you know you will be tempted."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the Pomodoro timer work on my laptop too?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Curbox browser extension for Chrome, Firefox and other browsers has the same Focus Mode with a Pomodoro timer, and with Sync turned on a focus session started on one device can run on the other."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do Pomodoro rounds show up in my stats?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Each Pomodoro round counts as one session in Focus Stats, next to your total focus time, average session length, completion rate and day streak."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://curbox.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Features",
+          "item": "https://curbox.app/features.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Pomodoro app blocker",
+          "item": "https://curbox.app/pomodoro-app-blocker/"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Curbox",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "url": "https://curbox.app/download.html"
+    }
+  ]
+}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--pomo">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/features.html">← All features</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Feature · Pomodoro + app blocking</span>
+            <h1 class="page__title">A Pomodoro timer that blocks apps.</h1>
+            <p class="lead">Most Pomodoro apps only time you. Curbox is a Pomodoro app with an app blocker built in: during each focus round the apps and websites you picked are locked, during the break your phone is yours again, and the next round starts by itself. It runs on Android and in your browser, free and open source.</p>
+        </header>
+
+        <section class="planner" aria-labelledby="planner-title">
+            <div class="planner__bar"><span id="planner-title">Pomodoro planner</span><span>A planning aid, not the app</span></div>
+            <div class="planner__inputs">
+                <div class="knob"><label for="pf">Focus (min)</label><input id="pf" type="number" min="1" max="240" value="25" inputmode="numeric"></div>
+                <div class="knob"><label for="pb">Break (min)</label><input id="pb" type="number" min="1" max="120" value="5" inputmode="numeric"></div>
+                <div class="knob"><label for="pr">Rounds</label><input id="pr" type="number" min="2" max="12" value="4" inputmode="numeric"></div>
+                <div class="knob"><label for="ps">Start</label><input id="ps" type="time" value="09:00"></div>
+            </div>
+            <div class="strip" id="strip" aria-hidden="true"></div>
+            <div class="strip__legend"><span><i style="background:var(--fg)"></i>Focus, apps blocked</span><span><i style="background:#2a2a2a"></i>Break, apps open</span></div>
+            <div class="readout">
+                <div><b id="o-focus">1 h 40 min</b><span>blocked, focused time</span></div>
+                <div><b id="o-total">1 h 55 min</b><span>from first round to last</span></div>
+                <div><b id="o-end">10:55</b><span>when the cycle ends</span></div>
+            </div>
+            <ol class="schedule" id="sched" aria-live="polite"></ol>
+            <p class="planner__note">Curbox puts a break between rounds, not after the last one, and takes 2 to 12 rounds. Breaks here can go up to 120 minutes. Use this to pick numbers, then set them in the app.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Why a Pomodoro timer needs an app blocker</h2>
+            <p>The Pomodoro technique is simple: work for a fixed block, usually 25 minutes, take a short break, repeat. The weak spot is the middle of a round. A notification lands, you pick up the phone "for a second", and the round is gone. A timer on its own cannot stop that. It just keeps counting while you scroll.</p>
+            <p>Pairing the timer with a blocker closes that gap. When the round starts, the apps that usually steal it stop opening. You try Instagram out of habit, see a pause screen instead, and go back to work. When the break comes, everything opens again, so the break feels like a real reward rather than a loophole.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">How Curbox's Pomodoro mode works</h2>
+            <p>The Pomodoro timer lives inside <a href="/docs/focus/focus-mode/">Focus Mode</a>, and each setting below belongs to a Focus Group, the saved list of apps and websites a session blocks.</p>
+            <div class="spec">
+                <div class="spec__row">
+                    <h3>Focus length<small>Session slider</small></h3>
+                    <p>Set on the Focus tab with the slider before you start. Every round uses this length. 25 minutes is the classic choice and a good first try.</p>
+                </div>
+                <div class="spec__row">
+                    <h3>Rounds and breaks<small>Pomodoro timer option</small></h3>
+                    <p>Turn on <strong>Pomodoro timer</strong> in the Focus Group, choose how many focus rounds to repeat, and set the break minutes. Curbox advances from focus to break to focus on its own.</p>
+                </div>
+                <div class="spec__row">
+                    <h3>Sounds<small>Start and end</small></h3>
+                    <p>A sound plays when a session, a round or a break starts and ends, so you can leave the phone face down and still know where you are.</p>
+                </div>
+                <div class="spec__row">
+                    <h3>What gets blocked<small>Block mode</small></h3>
+                    <p><strong>Block Selected</strong> blocks only the apps and websites in the group. <strong>Block All Except Selected</strong> flips it into an allow-list: everything is blocked except, say, your notes app, dictionary and music.</p>
+                    <p>Websites are added as addresses or keywords, so <code>youtube.com/shorts</code> can be blocked while lecture videos stay reachable.</p>
+                </div>
+                <div class="spec__row">
+                    <h3>Quitting early<small>Let me quit mid-sessions</small></h3>
+                    <p>On, you can end a session before the timer. Off, you cannot. Leave it off for the sessions that matter most.</p>
+                </div>
+                <div class="spec__row">
+                    <h3>Silence<small>Turn on do not disturb</small></h3>
+                    <p>Switches Do Not Disturb on for the session, so notifications stop pulling you out of a round. It needs Do Not Disturb access, which Curbox asks for only when you turn this on.</p>
+                </div>
+                <div class="spec__row">
+                    <h3>Stats<small>Focus Stats</small></h3>
+                    <p>Each Pomodoro round counts as one session. Breaks are not counted as focus time. Tap the bar-chart icon next to the slider to see total sessions, total focus time, average length, completion rate and your day streak, filtered by group if you like.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Set up your first Pomodoro session</h2>
+            <ol class="steps-inline">
+                <li><a href="/download.html">Install Curbox</a> and finish the short onboarding. It takes under five minutes.</li>
+                <li>Open the <strong>Focus</strong> tab and tap <strong>Create Focus Group</strong>. Name it, for example "Deep work".</li>
+                <li>Tap <strong>Select Apps</strong> and pick the apps that break your rounds. Optionally tap <strong>Add Websites</strong>.</li>
+                <li>Choose <strong>Block Selected</strong> or <strong>Block All Except Selected</strong>.</li>
+                <li>Turn on <strong>Pomodoro timer</strong>, set the rounds and break minutes, and decide about quitting and Do Not Disturb. Tap <strong>Save Group</strong>.</li>
+                <li>Set the slider to 25 minutes, pick the group, and confirm. The first round has started.</li>
+            </ol>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Ways to make the Pomodoro habit stick</h2>
+            <p><strong>Start it without opening your phone.</strong> Curbox can write a Focus Mode action to a writable NFC tag. Stick the tag on your desk and tap your phone on it to start a session with a chosen group and length. A session marked as not quittable cannot be ended early with a tag. More in the <a href="/nfc-app-blocker/">NFC app blocker guide</a>.</p>
+            <p><strong>Earn your scrolling.</strong> Any blocked app's pause screen can be linked to Focus Mode, for example no Instagram unlocks until you have focused for an hour today. Your Pomodoro rounds become the key. The <a href="/docs/unlock-challenges/overview/">unlock challenges guide</a> covers the setting.</p>
+            <p><strong>Keep the laptop honest too.</strong> The <a href="/website-blocker-extension/">Curbox browser extension</a> has the same Focus Mode and Pomodoro timer, with 2 to 12 rounds and sites that unblock during breaks. With Sync paired, a session started on one device can run on the other, so the round you start on your phone also blocks YouTube on your laptop.</p>
+            <p><strong>Pick a rhythm that fits the task.</strong> 25 and 5 suits admin and revision. Writing and coding often go better at 50 and 10 with fewer rounds. Try the planner above before you commit, and see the <a href="/app-blocker-for-studying/">study session recipes</a> for more.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Pomodoro app blocker FAQ</h2>
+            <dl class="faq__dl"><dt>Is there a Pomodoro app that blocks apps on Android?</dt><dd>Yes. Curbox's Focus Mode has a Pomodoro option. It blocks the apps and websites in your chosen Focus Group during each focus round, lets you take a short break between rounds, and starts the next round on its own. It is free and open source.</dd><dt>Are apps blocked during the Pomodoro break?</dt><dd>No. Breaks are for resting, so your phone works normally until the next focus round starts. Curbox plays a sound when a break starts and ends, and break time is not counted as focus time in your stats.</dd><dt>How many Pomodoro rounds can I set?</dt><dd>You choose the number of focus rounds for the cycle, from 2 up to 12, and you set the break length in minutes. The focus length is whatever you pick on the session slider, for example 25 minutes.</dd><dt>Can I stop a Pomodoro session early?</dt><dd>Only if you allow it. Each Focus Group has a "Let me quit mid-sessions" option. Leave it off and the session cannot be ended until the timer runs out, which is the point when you know you will be tempted.</dd><dt>Does the Pomodoro timer work on my laptop too?</dt><dd>Yes. The Curbox browser extension for Chrome, Firefox and other browsers has the same Focus Mode with a Pomodoro timer, and with Sync turned on a focus session started on one device can run on the other.</dd><dt>Do Pomodoro rounds show up in my stats?</dt><dd>Yes. Each Pomodoro round counts as one session in Focus Stats, next to your total focus time, average session length, completion rate and day streak.</dd></dl>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <p class="related">
+                <a href="/app-blocker-for-studying/">App blocker for studying</a>
+                <a href="/block-all-apps-except/">Block all apps except a few</a>
+                <a href="/nfc-app-blocker/">NFC app blocker</a>
+                <a href="/auto-do-not-disturb-schedule/">Auto Do Not Disturb</a>
+                <a href="/break-reminder-app-android/">Break reminders</a>
+                <a href="/features.html">All features</a>
+            </p>
+            <p style="margin-top:1.25rem;">Ready? Every official download is on the <a href="/download.html">downloads page</a>.</p>
+        </section>
+    </main>
+
+    <script>
+      (function () {
+        var $ = function (id) { return document.getElementById(id); };
+        function clamp(v, lo, hi, d) { v = parseInt(v, 10); if (isNaN(v)) return d; return Math.min(hi, Math.max(lo, v)); }
+        function dur(m) { var h = Math.floor(m / 60), r = m % 60; return h ? (h + ' h' + (r ? ' ' + r + ' min' : '')) : (r + ' min'); }
+        function clock(t) { var d = Math.floor(t / 1440), m = ((t % 1440) + 1440) % 1440; var s = String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); return d > 0 ? s + ' (+' + d + 'd)' : s; }
+        function render() {
+          var f = clamp($('pf').value, 1, 240, 25), b = clamp($('pb').value, 1, 120, 5), r = clamp($('pr').value, 2, 12, 4);
+          var st = ($('ps').value || '09:00').split(':'), start = parseInt(st[0], 10) * 60 + parseInt(st[1], 10);
+          var total = r * f + (r - 1) * b, strip = $('strip'), sched = $('sched');
+          strip.innerHTML = ''; sched.innerHTML = '';
+          var t = start;
+          for (var i = 1; i <= r; i++) {
+            var s = document.createElement('span'); s.className = 'f'; s.style.flex = f; strip.appendChild(s);
+            var li = document.createElement('li'); li.innerHTML = '<span>' + clock(t) + ' to ' + clock(t + f) + '</span><span>Round ' + i + ': focus, apps blocked</span>'; sched.appendChild(li);
+            t += f;
+            if (i < r) {
+              var bs = document.createElement('span'); bs.className = 'b'; bs.style.flex = b; strip.appendChild(bs);
+              var lb = document.createElement('li'); lb.className = 'b'; lb.innerHTML = '<span>' + clock(t) + ' to ' + clock(t + b) + '</span><span>Break ' + i + ': apps open</span>'; sched.appendChild(lb);
+              t += b;
+            }
+          }
+          $('o-focus').textContent = dur(r * f);
+          $('o-total').textContent = dur(total);
+          $('o-end').textContent = clock(start + total);
+        }
+        ['pf', 'pb', 'pr', 'ps'].forEach(function (id) { $(id).addEventListener('input', render); });
+        render();
+      })();
+    </script>
+
+</body>
+</html>

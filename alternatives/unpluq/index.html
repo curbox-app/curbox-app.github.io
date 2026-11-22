@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Unpluq Alternative: Tag Unlock, No Subscription · Curbox</title>
+    <meta
+      name="description"
+      content="Want an Unpluq alternative? Curbox lets any writable NFC tag or an existing barcode act as the key to your blocked apps, with no account or subscription."
+    >
+    <link rel="canonical" href="https://curbox.app/alternatives/unpluq/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="An Unpluq alternative where any NFC tag or barcode is the key">
+    <meta property="og:description" content="Want an Unpluq alternative? Curbox lets any writable NFC tag or an existing barcode act as the key to your blocked apps, with no account or subscription.">
+    <meta property="og:url" content="https://curbox.app/alternatives/unpluq/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="An Unpluq alternative where any NFC tag or barcode is the key">
+    <meta name="twitter:description" content="Want an Unpluq alternative? Curbox lets any writable NFC tag or an existing barcode act as the key to your blocked apps, with no account or subscription.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--uq { max-width: 66rem; }
+      .page--uq .lead { max-width: 40rem; }
+      .page--uq .narrow { max-width: var(--measure); }
+
+      .keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 1.75rem; }
+      .key { border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
+      .key__art { height: 9rem; display: grid; place-items: center; background: #0d0d0d; border-bottom: 1px solid var(--line); }
+      .key__body { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; gap: 0.35rem; }
+      .key__label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+      .key h3 { font-family: var(--font-display); font-size: 1.25rem; line-height: 1.15; }
+      .key dl { margin-top: 0.5rem; display: grid; grid-template-columns: 1fr; gap: 0.6rem; }
+      .key dt { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+      .key dd { font-size: 0.9rem; }
+
+      .fob { width: 4.6rem; height: 6.2rem; border-radius: 1.6rem; background: #1c1c1c; border: 2px solid #3a3a3a; position: relative; }
+      .fob::before { content: ''; position: absolute; top: 0.55rem; left: 50%; width: 0.9rem; height: 0.9rem; margin-left: -0.45rem; border-radius: 50%; border: 2px solid #555; }
+      .fob::after { content: ''; position: absolute; inset: 2rem 1.1rem 1.1rem; border-radius: 0.8rem; border: 1px dashed #555; }
+      .sticker { width: 5.2rem; height: 5.2rem; border-radius: 50%; background: #eee; display: grid; place-items: center; box-shadow: 0 0 0 8px rgba(255,255,255,0.05), 0 0 0 16px rgba(255,255,255,0.03); }
+      .sticker span { width: 2.8rem; height: 2.8rem; border-radius: 50%; border: 2px solid #999; }
+      .barcode { display: flex; gap: 3px; height: 4.2rem; align-items: stretch; }
+      .barcode i { display: block; background: var(--fg); }
+
+      .compare { margin-top: 1.25rem; overflow-x: auto; }
+      .compare table { width: 100%; min-width: 34rem; border-collapse: collapse; font-size: 0.9rem; }
+      .compare th, .compare td { text-align: left; vertical-align: top; padding: 0.75rem 0.6rem; border-bottom: 1px solid var(--line); }
+      .compare thead th { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+      .compare tbody th { font-family: var(--font-display); font-weight: 700; width: 28%; }
+
+      .walk { margin-top: 1rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+      .walk div { padding: 1rem; border-radius: 12px; background: #0e0e0e; border: 1px solid var(--line); }
+      .walk b { display: block; font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); margin-bottom: 0.35rem; }
+      .walk p { font-size: 0.9rem; }
+
+      .setup { list-style: none; margin-top: 1rem; border-left: 1px solid var(--line); }
+      .setup li { position: relative; padding: 0 0 1.1rem 1.5rem; }
+      .setup li::before {
+        content: '' !important; position: absolute; left: -0.36rem !important; top: 0.55rem;
+        width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--fg);
+      }
+      .setup h3 { font-family: var(--font-display); font-size: 1.02rem; }
+
+      @media (max-width: 52rem) {
+        .keys { grid-template-columns: 1fr; }
+        .walk { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 30rem) {
+        .walk { grid-template-columns: 1fr; }
+      }
+
+      .faq details { border-top: 1px solid var(--line); padding: 1rem 0; }
+      .faq details:last-child { border-bottom: 1px solid var(--line); }
+      .faq summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.3; list-style: none; }
+      .faq summary::-webkit-details-marker { display: none; }
+      .faq summary::after { content: '+'; float: right; margin-left: 1rem; font-family: var(--font-mono); color: var(--muted); }
+      .faq details[open] summary::after { content: '-'; }
+      .faq details p { margin-top: 0.6rem; color: var(--muted); }
+      .sources li { font-size: 0.9rem; color: var(--muted); }
+      .related { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+      .related a { padding: 0.5rem 0.9rem; border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-mono); font-size: 0.75rem; text-decoration: none !important; }
+      .related a:hover { border-color: var(--fg); }
+    </style>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "headline": "An Unpluq alternative where any NFC tag or barcode is the key", "description": "Want an Unpluq alternative? Curbox lets any writable NFC tag or an existing barcode act as the key to your blocked apps, with no account or subscription.", "datePublished": "2026-11-22", "dateModified": "2026-11-22", "mainEntityOfPage": "https://curbox.app/alternatives/unpluq/", "author": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/"}, "publisher": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/", "logo": {"@type": "ImageObject", "url": "https://curbox.app/icons/android-chrome-512x512.png"}}, "image": "https://curbox.app/icons/android-chrome-512x512.png"}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is there an Unpluq alternative without a subscription?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Curbox is free and open source. Its NFC Tag unlock challenge works with a writable NFC tag you register yourself, and its QR or Barcode Scan challenge can use a code you already own, such as the barcode on a product box. There is no subscription and no account."}}, {"@type": "Question", "name": "Can I use my own NFC tag with Curbox?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. You register a physical NFC tag in Curbox and tapping it against the phone becomes the way past the pause screen. Writable NFC stickers and key fobs are widely sold. Check that your phone has NFC turned on."}}, {"@type": "Question", "name": "What if my phone does not have NFC?", "acceptedAnswer": {"@type": "Answer", "text": "Use the QR or Barcode Scan challenge instead. It uses the camera, so any code you can scan works, and you can place it in another room to add the same kind of physical distance."}}, {"@type": "Question", "name": "Can an NFC tag start a focus session in Curbox?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Besides unlocking, Curbox can write a Focus Mode action to a writable tag: start focus, stop focus, or toggle it, with a Focus Group and duration you choose. A session marked as not quittable cannot be ended early with a tag."}}, {"@type": "Question", "name": "Does Unpluq work on iPhone?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Unpluq lists compatibility with iPhones on iOS 16 or later and with Android devices. Curbox is Android only, plus a browser extension for Chrome and Firefox."}}, {"@type": "Question", "name": "Does Curbox need an account like Unpluq?", "acceptedAnswer": {"@type": "Answer", "text": "No. Unpluq's privacy policy says users are required to create an account. Curbox has no accounts, and the Android app has no internet permission in any variant."}}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Alternatives", "item": "https://curbox.app/alternatives/"}, {"@type": "ListItem", "position": 3, "name": "Unpluq alternative", "item": "https://curbox.app/alternatives/unpluq/"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Curbox", "operatingSystem": "Android", "applicationCategory": "LifestyleApplication", "url": "https://curbox.app/download.html", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+
+    <main class="page page--uq">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/alternatives/">← All alternatives</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Alternatives · Unpluq</span>
+            <h1 class="page__title">An Unpluq alternative where any NFC tag or barcode is the key.</h1>
+            <p class="lead">Unpluq is built around a nice idea: your distracting apps stay locked until you tap a physical tag against your phone. Leave the tag in another room and every unlock becomes a short walk. If you want that idea as an Unpluq alternative without buying a specific tag or paying a subscription, Curbox can turn a tag you already own, or a barcode on any box in your kitchen, into the key.</p>
+        </header>
+
+        <section class="section narrow">
+            <h2 class="section__title">How Unpluq works</h2>
+            <p>Unpluq sells the Unpluq Tag, a keychain-sized tag that uses NFC, together with the Unpluq app. You choose which apps to block, set custom schedules, and track screen time. To open a blocked app, you need "your physical Unpluq Tag (or one of the digital barriers)". The site puts it simply: "Your Tag is your key."</p>
+            <p>The tag needs a Premium subscription, which Unpluq says is "required for use". Its shop sells subscriptions of 3, 6 or 12 months, with or without a tag, and offers a 30-day money-back guarantee. It works on iPhones running iOS 16 or later and on Android. Unpluq's privacy policy says you need to create an account.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title narrow">Three kinds of key, side by side</h2>
+            <div class="keys">
+                <article class="key">
+                    <div class="key__art" aria-hidden="true"><div class="fob"></div></div>
+                    <div class="key__body">
+                        <span class="key__label">Unpluq</span>
+                        <h3>The Unpluq Tag</h3>
+                        <dl>
+                            <div><dt>What it is</dt><dd>A keychain-sized NFC tag sold by Unpluq</dd></div>
+                            <div><dt>What you pay</dt><dd>A bundle with a Premium subscription, which the tag needs to work</dd></div>
+                            <div><dt>Other ways through</dt><dd>Unpluq's digital barriers</dd></div>
+                            <div><dt>Account</dt><dd>Required</dd></div>
+                        </dl>
+                    </div>
+                </article>
+                <article class="key">
+                    <div class="key__art" aria-hidden="true"><div class="sticker"><span></span></div></div>
+                    <div class="key__body">
+                        <span class="key__label">Curbox</span>
+                        <h3>Your own NFC tag</h3>
+                        <dl>
+                            <div><dt>What it is</dt><dd>Any NFC tag you register, such as a sticker, card or key fob</dd></div>
+                            <div><dt>What you pay</dt><dd>Only the tag. Curbox itself is free</dd></div>
+                            <div><dt>Other ways through</dt><dd>Whatever you allow: none, a wait, or another challenge on a different group</dd></div>
+                            <div><dt>Account</dt><dd>None</dd></div>
+                        </dl>
+                    </div>
+                </article>
+                <article class="key">
+                    <div class="key__art" aria-hidden="true"><div class="barcode"><i style="width:3px"></i><i style="width:1px"></i><i style="width:2px"></i><i style="width:1px"></i><i style="width:4px"></i><i style="width:1px"></i><i style="width:1px"></i><i style="width:3px"></i><i style="width:2px"></i><i style="width:1px"></i><i style="width:3px"></i><i style="width:1px"></i><i style="width:2px"></i><i style="width:4px"></i><i style="width:1px"></i><i style="width:2px"></i><i style="width:1px"></i><i style="width:3px"></i><i style="width:1px"></i><i style="width:2px"></i></div></div>
+                    <div class="key__body">
+                        <span class="key__label">Curbox</span>
+                        <h3>A barcode you already own</h3>
+                        <dl>
+                            <div><dt>What it is</dt><dd>Any QR code or barcode, like the one on a cereal box, registered with QR or Barcode Scan</dd></div>
+                            <div><dt>What you pay</dt><dd>Nothing. No printing needed</dd></div>
+                            <div><dt>Bonus</dt><dd>A QR can grant a preset amount of time, or let you choose how long when you scan</dd></div>
+                            <div><dt>Account</dt><dd>None</dd></div>
+                        </dl>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Why a physical key works at all</h2>
+            <p>Most phone habits run on autopilot. The thumb finds the icon before you have decided anything. A key that lives somewhere else breaks that loop, because you have to stand up and go and get it. By the time you are holding it, you have had twenty or thirty seconds to notice what you were about to do. Some people go back to the sofa without the key.</p>
+            <div class="walk">
+                <div><b>01</b><p>You tap Instagram out of habit.</p></div>
+                <div><b>02</b><p>The pause screen asks for your key.</p></div>
+                <div><b>03</b><p>The key is on the shelf in the hall.</p></div>
+                <div><b>04</b><p>You decide whether the walk is worth it.</p></div>
+            </div>
+            <p style="margin-top:1rem;">Unpluq and Curbox both use this idea. The difference is what the key is, what it costs, and what else surrounds it.</p>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Unpluq features in Curbox terms</h2>
+            <div class="compare">
+                <table>
+                    <thead><tr><th>Unpluq</th><th>Curbox equivalent</th></tr></thead>
+                    <tbody>
+                        <tr><th>Tag to unlock blocked apps</th><td><strong>NFC Tag</strong> unlock challenge, set per group under Configure Warning Screen</td></tr>
+                        <tr><th>Digital barriers</th><td>Delay timer, Type a Sentence, State Your Intent, Adaptive Math, Wait to unlock, QR or Barcode Scan</td></tr>
+                        <tr><th>Choose apps to block</th><td>App Pause groups under <strong>Reducers → Apps</strong>, plus Reels and Shorts limits inside apps</td></tr>
+                        <tr><th>Custom schedules</th><td>Time Based groups with <strong>Configure Allowed Schedule</strong>, or Usage Based daily limits</td></tr>
+                        <tr><th>Screen time stats</th><td>The <strong>Usage</strong> tab, website stats, heatmap and CSV export</td></tr>
+                        <tr><th>Not in Unpluq's description</th><td>Tag-triggered focus sessions: start, stop or toggle Focus Mode by tapping a tag</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Set up a tag-unlock in Curbox</h2>
+            <p>Install Curbox from the <a href="/download.html">downloads page</a> and finish onboarding. Then:</p>
+            <ol class="setup">
+                <li><h3>Pick the apps</h3><p>Go to <strong>Reducers → Apps</strong>, tap <strong>+</strong>, name the group and select the apps the key should guard. Choose <strong>On Each Open</strong> if you want the key every time, or <strong>Time Based</strong> to need it only outside certain hours.</p></li>
+                <li><h3>Choose the key</h3><p>Tap <strong>Configure Warning Screen</strong>, set the challenge to <strong>Require effort to unlock</strong>, and pick <strong>NFC Tag</strong> or <strong>QR or Barcode Scan</strong>. Register your tag or scan your code.</p></li>
+                <li><h3>Put the key somewhere awkward</h3><p>Another room works better than a drawer next to the sofa. A shelf by the front door, a kitchen cupboard or your bag in the hall are common choices.</p></li>
+                <li><h3>Optional: add a pause first</h3><p>A short delay timer before the challenge appears makes the phone vibrate and the screen brighten, which is often enough on its own.</p></li>
+                <li><h3>Optional: a focus tag</h3><p>Write a Focus Mode action to a second tag and stick it on your desk. Tap to start a session when you sit down.</p></li>
+            </ol>
+            <p>More detail on tags, including what kind to buy, is on the <a href="/nfc-app-blocker/">NFC app blocker page</a>. For the barcode route, see <a href="/qr-code-app-blocker/">QR code unlock</a>.</p>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">When Unpluq is the better pick</h2>
+            <ul>
+                <li>You use an iPhone, or want the same setup on iPhone and Android.</li>
+                <li>You want a finished product that arrives in a box, ready to go, with a money-back guarantee.</li>
+                <li>You would rather pay than spend ten minutes configuring groups and challenges.</li>
+                <li>You like Unpluq's digital barriers and the way its app is designed.</li>
+            </ul>
+            <p>Curbox fits better if you want no subscription and no account, if you already have an NFC tag or would rather use a barcode, or if you also want limits for Reels and Shorts, focus sessions and usage stats in the same free app.</p>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Questions people ask</h2>
+            <div class="faq">
+                <details>
+                    <summary>Is there an Unpluq alternative without a subscription?</summary>
+                    <p>Yes. Curbox is free and open source. Its NFC Tag unlock challenge works with a writable NFC tag you register yourself, and its QR or Barcode Scan challenge can use a code you already own, such as the barcode on a product box. There is no subscription and no account.</p>
+                </details>
+                <details>
+                    <summary>Can I use my own NFC tag with Curbox?</summary>
+                    <p>Yes. You register a physical NFC tag in Curbox and tapping it against the phone becomes the way past the pause screen. Writable NFC stickers and key fobs are widely sold. Check that your phone has NFC turned on.</p>
+                </details>
+                <details>
+                    <summary>What if my phone does not have NFC?</summary>
+                    <p>Use the QR or Barcode Scan challenge instead. It uses the camera, so any code you can scan works, and you can place it in another room to add the same kind of physical distance.</p>
+                </details>
+                <details>
+                    <summary>Can an NFC tag start a focus session in Curbox?</summary>
+                    <p>Yes. Besides unlocking, Curbox can write a Focus Mode action to a writable tag: start focus, stop focus, or toggle it, with a Focus Group and duration you choose. A session marked as not quittable cannot be ended early with a tag.</p>
+                </details>
+                <details>
+                    <summary>Does Unpluq work on iPhone?</summary>
+                    <p>Yes. Unpluq lists compatibility with iPhones on iOS 16 or later and with Android devices. Curbox is Android only, plus a browser extension for Chrome and Firefox.</p>
+                </details>
+                <details>
+                    <summary>Does Curbox need an account like Unpluq?</summary>
+                    <p>No. Unpluq's privacy policy says users are required to create an account. Curbox has no accounts, and the Android app has no internet permission in any variant.</p>
+                </details>
+            </div>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Sources (checked November 2026)</h2>
+            <ul class="sources">
+                <li><a href="https://www.unpluq.com/" target="_blank" rel="noopener noreferrer">Unpluq homepage and shop</a>: how the tag works, Premium requirement, subscription lengths, money-back guarantee, device compatibility.</li>
+                <li><a href="https://www.unpluq.com/pages/privacy-policy" target="_blank" rel="noopener noreferrer">Unpluq privacy policy</a>: account requirement and data collected.</li>
+                <li>Curbox: <a href="/docs/unlock-challenges/overview/">unlock challenges docs</a>, <a href="/docs/focus/focus-mode/">Focus Mode docs</a> and the <a href="/privacy.html">privacy policy</a>.</li>
+            </ul>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Related</h2>
+            <div class="related">
+                <a href="/comparison.html">Feature table</a>
+                <a href="/alternatives/brick/">Brick alternative</a>
+                <a href="/alternatives/one-sec/">one sec alternative</a>
+                <a href="/alternatives/opal/">Opal alternative</a>
+                <a href="/alternatives/lock-me-out/">Lock Me Out alternative</a>
+                <a href="/nfc-app-blocker/">NFC app blocker</a>
+                <a href="/qr-code-app-blocker/">QR code unlock</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

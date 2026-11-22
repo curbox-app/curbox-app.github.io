@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Location-Based App Blocker for Android · Curbox</title>
+    <meta
+      name="description"
+      content="Block apps based on location on Android: only unlock Instagram at home, or never at the library. How Curbox&#x27;s open source Location Blocker add-on works."
+    >
+    <link rel="canonical" href="https://curbox.app/location-based-app-blocker/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="Block apps based on location on Android">
+    <meta property="og:description" content="Block apps based on location on Android: only unlock Instagram at home, or never at the library. How Curbox&#x27;s open source Location Blocker add-on works.">
+    <meta property="og:url" content="https://curbox.app/location-based-app-blocker/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Block apps based on location on Android">
+    <meta name="twitter:description" content="Block apps based on location on Android: only unlock Instagram at home, or never at the library. How Curbox&#x27;s open source Location Blocker add-on works.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--loc .lead { max-width: 36rem; }
+
+      /* Twin radius diagrams. */
+      .zones {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 2.5rem;
+      }
+      .zone {
+        padding: 1.25rem 1.1rem 1.1rem;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        text-align: center;
+      }
+      .zone svg { width: 100%; max-width: 12rem; height: auto; display: block; margin: 0 auto 0.9rem; }
+      .zone h3 { font-family: var(--font-display); font-size: 1.15rem; }
+      .zone p { margin-top: 0.4rem; font-size: 0.88rem; color: var(--muted); }
+      .zone code { font-size: 0.78rem; }
+
+      /* Console-style check log. */
+      .log {
+        margin-top: 1.25rem;
+        padding: 1rem 1.1rem;
+        border-radius: 10px;
+        background: #0a0a0a;
+        border: 1px solid var(--line);
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        line-height: 1.7;
+        overflow-x: auto;
+      }
+      .log div { white-space: pre-wrap; }
+      .log .t { color: var(--muted); }
+      .log .ok { color: var(--fg); font-weight: 700; }
+      .log .no { color: #9a9a97; text-decoration: line-through; }
+
+      .pairs { margin-top: 1.25rem; }
+      .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-top: 0.75rem; }
+      .pair > div { padding: 0.9rem 1rem; background: var(--bg); font-size: 0.92rem; }
+      .pair__k { font-family: var(--font-mono); font-size: 0.68rem !important; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 0.25rem; }
+
+      .install-steps { list-style: none; counter-reset: i; margin-top: 1rem; }
+      .install-steps li { counter-increment: i; display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.4rem; padding: 0.75rem 0; border-bottom: 1px solid var(--line); }
+      .install-steps li::before { content: counter(i); width: 1.8rem; height: 1.8rem; display: grid; place-items: center; border-radius: 50%; background: var(--fg); color: var(--bg); font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; }
+
+      .limits { margin-top: 1rem; }
+      .limits li { margin-top: 0.6rem; }
+
+      .faq__item { border-bottom: 1px solid var(--line); }
+      .faq__item summary { cursor: pointer; padding: 1rem 0; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; list-style: none; }
+      .faq__item summary::-webkit-details-marker { display: none; }
+      .faq__item summary::after { content: '+'; float: right; font-family: var(--font-mono); color: var(--muted); }
+      .faq__item[open] summary::after { content: '-'; }
+      .faq__item p { padding-bottom: 1rem; color: #cfcfcc; }
+      .src { margin-top: 1rem; font-size: 0.82rem; color: var(--muted); }
+      .related { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 1rem; }
+
+      @media (max-width: 36rem) {
+        .zones { grid-template-columns: 1fr; }
+        .pair { grid-template-columns: 1fr; }
+      }
+
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Block apps based on location on Android",
+      "description": "Block apps based on location on Android: only unlock Instagram at home, or never at the library. How Curbox's open source Location Blocker add-on works.",
+      "url": "https://curbox.app/location-based-app-blocker/",
+      "mainEntityOfPage": "https://curbox.app/location-based-app-blocker/",
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "author": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://curbox.app/icons/android-chrome-512x512.png"
+        }
+      },
+      "image": "https://curbox.app/icons/android-chrome-512x512.png",
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Curbox",
+        "operatingSystem": "Android",
+        "applicationCategory": "LifestyleApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "url": "https://curbox.app/download.html"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I block apps based on location on Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. With Curbox plus its free Location Blocker add-on, a blocked app can only be unlocked when you are at a saved place (\"Only here\") or only when you are away from it (\"Anywhere but here\"). The location is checked at the moment you try to unlock."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the location blocker track me in the background?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. According to its README, Location Blocker uses no background location, no foreground service, no network permission, no account and no location history. It checks your position only when Curbox asks during an unlock, and saved places stay in its private storage with Android backup disabled."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I leave the place after unlocking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The unlock you already got keeps running until it expires. The check happens at unlock time, not continuously. If you want frequent re-checks, use Curbox's On Each Open mode or a short unlock duration."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can someone fake their location to get past it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mock locations are rejected by default, but the README is clear that it does not defend against rooted devices or every kind of location spoofing. Android location is an estimate, not proof of where you are."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which permissions does it need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Precise location with location services turned on. Approximate-only permission is not enough and denies access. Curbox itself does not need any location permission; that belongs to the add-on."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do I get the Location Blocker app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is open source on GitHub at github.com/curbox-app/location-blocker. When this page was written the repository had no published releases, so you build it from source. It needs a Curbox build with API version 3 or newer."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://curbox.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Features",
+          "item": "https://curbox.app/features.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Location-based app blocker",
+          "item": "https://curbox.app/location-based-app-blocker/"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Curbox",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "url": "https://curbox.app/download.html"
+    }
+  ]
+}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--loc">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/features.html">← All features</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Feature · Location add-on</span>
+            <h1 class="page__title">Block apps based on location.</h1>
+            <p class="lead">Some apps are fine at home and a disaster at the library. Curbox can act as a location-based app blocker on Android through a small open source add-on: a blocked app only unlocks when you are at a place you saved, or only when you are away from it.</p>
+        </header>
+
+        <div class="zones">
+            <div class="zone">
+                <svg viewBox="0 0 160 120" aria-hidden="true">
+                    <rect x="1" y="1" width="158" height="118" rx="10" fill="#0b0b0b" stroke="rgba(255,255,255,.12)"/>
+                    <circle cx="80" cy="60" r="38" fill="#f5f5f3" fill-opacity=".9"/>
+                    <circle cx="80" cy="60" r="4" fill="#000"/>
+                    <text x="80" y="82" text-anchor="middle" font-family="Space Mono, monospace" font-size="8" fill="#000">unlock ok</text>
+                    <text x="16" y="18" font-family="Space Mono, monospace" font-size="8" fill="#8a8a87">stays blocked</text>
+                </svg>
+                <h3>Only here</h3>
+                <p>Unlocks pass only inside the circle. Example: Instagram can be unlocked at home and nowhere else.</p>
+            </div>
+            <div class="zone">
+                <svg viewBox="0 0 160 120" aria-hidden="true">
+                    <rect x="1" y="1" width="158" height="118" rx="10" fill="#f5f5f3" fill-opacity=".9" stroke="rgba(255,255,255,.12)"/>
+                    <circle cx="80" cy="60" r="38" fill="#0b0b0b"/>
+                    <circle cx="80" cy="60" r="4" fill="#f5f5f3"/>
+                    <text x="80" y="82" text-anchor="middle" font-family="Space Mono, monospace" font-size="8" fill="#8a8a87">stays blocked</text>
+                    <text x="16" y="18" font-family="Space Mono, monospace" font-size="8" fill="#000">unlock ok</text>
+                </svg>
+                <h3>Anywhere but here</h3>
+                <p>Unlocks pass everywhere except inside the circle. Example: no YouTube unlocks at the office or library.</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <h2 class="section__title">How location-based blocking works in Curbox</h2>
+            <p>Curbox itself does not use your location. The Android app has no location permission. Location support comes from a separate open source app, <a href="https://github.com/curbox-app/location-blocker">Location Blocker</a>, which plugs into Curbox through the <a href="/app-blocker-api/">Curbox API</a>.</p>
+            <p>The split of jobs is clean. Curbox does the blocking, shows the pause screen, and decides how long an unlock lasts. Location Blocker answers one question when asked: "Is this phone at the saved place right now?" Each saved place becomes an unlock requirement you can pick on a blocked group's pause screen, next to options like scanning a QR code or typing a sentence.</p>
+            <p>Location Blocker's README calls this "an unlock-time check, not continuous geofencing". Nothing watches you in the background. Here is roughly what happens when you tap to unlock a group set to "At Home":</p>
+            <div class="log" role="img" aria-label="Sequence of an unlock check">
+                <div><span class="t">00.0s</span>  Curbox pause screen: requirement "At Home"</div>
+                <div><span class="t">00.1s</span>  Location Blocker opens its check</div>
+                <div><span class="t">00.2s</span>  listening: GPS, network, fused (Android 12+)</div>
+                <div><span class="t">01.8s</span>  <span class="no">fix ±140 m  too vague</span></div>
+                <div><span class="t">03.4s</span>  fix ±9 m, 22 m from centre  <span class="ok">inside area → PASS</span></div>
+                <div><span class="t">03.4s</span>  Curbox unlocks for your configured duration</div>
+            </div>
+            <p style="margin-top:0.9rem;font-size:0.9rem;color:var(--muted);">The timings are illustrative. The rules behind them are from the README: only live fixes count, it approves on the first passing fix, otherwise it listens for up to 20 seconds and judges the most precise one. Fixes older than 30 seconds, a denied permission, location turned off, or no fix at all mean no unlock.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Location-based app blocker ideas</h2>
+            <div class="pairs">
+                <div class="pair"><div><span class="pair__k">Goal</span>Social apps only at home, never on the commute or at school</div><div><span class="pair__k">Setup</span>App Pause group for the social apps, pause screen requirement <strong>At Home</strong> ("Only here")</div></div>
+                <div class="pair"><div><span class="pair__k">Goal</span>No YouTube while studying at the library</div><div><span class="pair__k">Setup</span>Group with YouTube, requirement <strong>Away from Library</strong> ("Anywhere but here")</div></div>
+                <div class="pair"><div><span class="pair__k">Goal</span>Games only at home on weekends</div><div><span class="pair__k">Setup</span>A place with "Only here" plus a days-and-times schedule set in Location Blocker</div></div>
+                <div class="pair"><div><span class="pair__k">Goal</span>Keep Reels out of the office</div><div><span class="pair__k">Setup</span>Short-form video limit with an "Away from Office" requirement on its warning screen</div></div>
+            </div>
+            <p style="margin-top:1rem;">Requirements can be used by app blocker groups, and the Curbox API documents the same warning option for keyword and reel blockers. Several places can be saved and assigned to different groups; each group selects one requirement.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Set it up</h2>
+            <ol class="install-steps">
+                <li><span>Install <a href="/download.html">Curbox</a> and build Location Blocker from <a href="https://github.com/curbox-app/location-blocker">its source</a>. It needs Curbox API version 3 or newer.</span></li>
+                <li><span>In Location Blocker, under "Finish setting up", tap <strong>Connect</strong> and approve it in Curbox. Allow <strong>precise</strong> location and turn location on.</span></li>
+                <li><span>Tap <strong>Add a place</strong>. Choose <strong>Only here</strong> or <strong>Anywhere but here</strong>. Stand at the spot and tap <strong>Use where I am now</strong>, or type coordinates. Pick the area size and, if you like, days and times.</span></li>
+                <li><span>In Curbox, open the group you want to protect, then <strong>Warning Screen Configuration → Require effort to unlock → Require another app</strong>, and pick <strong>At [place]</strong> or <strong>Away from [place]</strong>.</span></li>
+                <li><span>Save, turn the group on, and make sure Curbox's App Blocker accessibility service is enabled.</span></li>
+                <li><span>Keep Location Blocker itself out of your blocked apps. Use its <strong>Test here</strong> button, then try the real pause screen.</span></li>
+            </ol>
+            <p style="margin-top:1rem;">Saved places cannot be edited. To move a place or change its size, add a replacement and select it again in Curbox. That stops a requirement you picked from quietly changing meaning.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Privacy and honest limits</h2>
+            <ul class="limits">
+                <li><strong>Minimal permissions.</strong> No account, no network permission, no background location, no foreground service, no location history. Coordinates stay in the add-on's private storage, with Android backup disabled.</li>
+                <li><strong>Accuracy is an estimate.</strong> The place's centre is averaged from several live fixes, and the required precision scales with the area size. Small areas indoors may take longer to pass.</li>
+                <li><strong>Not continuous.</strong> Leaving a place does not cancel an unlock you already have. Use On Each Open or short unlock durations for more frequent checks.</li>
+                <li><strong>Not tamper-proof.</strong> Mock locations are rejected by default, but rooted phones and some spoofing methods are out of scope. Changing the phone's clock affects day and time schedules.</li>
+                <li><strong>Trust.</strong> An approved API app can use the full Curbox API, not only location checks. Location Blocker's README says it only uses requirement registration, removal and listing, and its code is public to confirm that.</li>
+            </ul>
+            <p class="src">Sources: <a href="https://github.com/curbox-app/location-blocker">Location Blocker README</a> and the <a href="https://github.com/curbox-app/curbox-android/blob/main/CURBOX_API.md">Curbox API guide</a>, checked November 2026.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Location blocker FAQ</h2>
+            <details class="faq__item"><summary>Can I block apps based on location on Android?</summary><p>Yes. With Curbox plus its free Location Blocker add-on, a blocked app can only be unlocked when you are at a saved place ("Only here") or only when you are away from it ("Anywhere but here"). The location is checked at the moment you try to unlock.</p></details>
+<details class="faq__item"><summary>Does the location blocker track me in the background?</summary><p>No. According to its README, Location Blocker uses no background location, no foreground service, no network permission, no account and no location history. It checks your position only when Curbox asks during an unlock, and saved places stay in its private storage with Android backup disabled.</p></details>
+<details class="faq__item"><summary>What happens if I leave the place after unlocking?</summary><p>The unlock you already got keeps running until it expires. The check happens at unlock time, not continuously. If you want frequent re-checks, use Curbox's On Each Open mode or a short unlock duration.</p></details>
+<details class="faq__item"><summary>Can someone fake their location to get past it?</summary><p>Mock locations are rejected by default, but the README is clear that it does not defend against rooted devices or every kind of location spoofing. Android location is an estimate, not proof of where you are.</p></details>
+<details class="faq__item"><summary>Which permissions does it need?</summary><p>Precise location with location services turned on. Approximate-only permission is not enough and denies access. Curbox itself does not need any location permission; that belongs to the add-on.</p></details>
+<details class="faq__item"><summary>Where do I get the Location Blocker app?</summary><p>It is open source on GitHub at github.com/curbox-app/location-blocker. When this page was written the repository had no published releases, so you build it from source. It needs a Curbox build with API version 3 or newer.</p></details>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <p class="related">
+                <a href="/app-blocker-api/">Curbox API for developers</a>
+                <a href="/qr-code-app-blocker/">QR code app blocker</a>
+                <a href="/nfc-app-blocker/">NFC app blocker</a>
+                <a href="/math-unlock-app-blocker/">Math unlock</a>
+                <a href="/app-blocker-for-studying/">App blocker for studying</a>
+                <a href="/features.html">All features</a>
+            </p>
+        </section>
+    </main>
+
+</body>
+</html>

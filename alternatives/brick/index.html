@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Brick Alternative for Android Using NFC Tags · Curbox</title>
+    <meta
+      name="description"
+      content="Want a Brick alternative on Android? Pair a cheap NFC tag or a QR code with Curbox, a free open-source blocker. What you gain, what you give up, and setup."
+    >
+    <link rel="canonical" href="https://curbox.app/alternatives/brick/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="A Brick alternative for Android, built from an NFC sticker">
+    <meta property="og:description" content="Want a Brick alternative on Android? Pair a cheap NFC tag or a QR code with Curbox, a free open-source blocker. What you gain, what you give up, and setup.">
+    <meta property="og:url" content="https://curbox.app/alternatives/brick/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Brick alternative for Android, built from an NFC sticker">
+    <meta name="twitter:description" content="Want a Brick alternative on Android? Pair a cheap NFC tag or a QR code with Curbox, a free open-source blocker. What you gain, what you give up, and setup.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--kit { max-width: 52rem; }
+      .page--kit .lead { max-width: 40rem; }
+
+      /* Kit box: the header styled like the label on a parts box. */
+      .box {
+        margin-top: 2.5rem;
+        border: 1px solid var(--fg);
+        border-radius: 4px;
+        font-family: var(--font-mono);
+      }
+      .box__top {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.7rem 1rem;
+        border-bottom: 1px solid var(--fg);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .box__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .box__cell { padding: 1rem; border-right: 1px solid var(--line); }
+      .box__cell:last-child { border-right: 0; }
+      .box__k { display: block; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+      .box__v { display: block; margin-top: 0.35rem; font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; line-height: 1.05; }
+      .box__note { padding: 0.7rem 1rem; border-top: 1px dashed var(--line); font-size: 0.72rem; color: var(--muted); }
+
+      /* Bill of materials. */
+      .bom-wrap { overflow-x: auto; margin-top: 1.25rem; -webkit-overflow-scrolling: touch; }
+      .bom { width: 100%; min-width: 34rem; border-collapse: collapse; font-size: 0.92rem; }
+      .bom th, .bom td { padding: 0.8rem 0.7rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+      .bom thead th { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+      .bom tbody th { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 400; color: var(--muted); white-space: nowrap; }
+      .bom td:nth-child(3) { color: var(--fg); }
+      .bom td:nth-child(2) { color: var(--muted); }
+
+      /* Assembly steps: manual-style numbered panels. */
+      .assembly { counter-reset: step; list-style: none; margin-top: 1.5rem; display: grid; gap: 1rem; }
+      .assembly > li {
+        counter-increment: step;
+        position: relative;
+        padding: 1.1rem 1.1rem 1.1rem 4rem;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #070707;
+      }
+      .assembly > li::before {
+        content: counter(step, decimal-leading-zero);
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+      .assembly h3 { font-family: var(--font-display); font-size: 1.08rem; line-height: 1.25; margin-bottom: 0.35rem; }
+      .assembly p { color: var(--muted); font-size: 0.95rem; }
+      .assembly p + p { margin-top: 0.5rem; }
+      .assembly strong { color: var(--fg); font-weight: 500; }
+      .warn {
+        margin-top: 0.7rem;
+        padding: 0.6rem 0.8rem;
+        border-left: 2px solid var(--fg);
+        background: #111;
+        font-size: 0.88rem;
+        color: var(--fg);
+      }
+
+      .route { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 1.5rem; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+      .route > div { background: var(--bg); padding: 1.2rem; }
+      .route h3 { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+      .route p { font-size: 0.93rem; color: var(--muted); }
+      .route p + p { margin-top: 0.5rem; }
+
+      .honest { margin-top: 1.25rem; display: grid; gap: 0.75rem; }
+      .honest div { display: grid; grid-template-columns: 2.25rem 1fr; gap: 0.5rem; align-items: start; }
+      .honest b { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 0.15rem; }
+
+      .place { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+      .place span { padding: 0.45rem 0.8rem; border: 1px dashed var(--line); border-radius: 4px; font-family: var(--font-mono); font-size: 0.75rem; }
+
+      .faq__item { border-bottom: 1px solid var(--line); }
+      .faq__item summary { cursor: pointer; padding: 1rem 0; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; list-style: none; }
+      .faq__item summary::-webkit-details-marker { display: none; }
+      .faq__item summary::after { content: '+'; float: right; font-family: var(--font-mono); color: var(--muted); }
+      .faq__item[open] summary::after { content: '−'; }
+      .faq__a { padding-bottom: 1rem; color: var(--muted); }
+
+      .sources { font-size: 0.85rem; color: var(--muted); }
+      .rel { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.25rem 1.5rem; margin-top: 0.75rem; list-style: none; }
+      .rel li { padding: 0.5rem 0; border-bottom: 1px solid var(--line); }
+
+      @media (max-width: 40rem) {
+        .box__grid { grid-template-columns: 1fr; }
+        .box__cell { border-right: 0; border-bottom: 1px solid var(--line); }
+        .box__cell:last-child { border-bottom: 0; }
+        .route { grid-template-columns: 1fr; }
+        .assembly > li { padding-left: 3.2rem; }
+        .box__top { flex-direction: column; gap: 0.2rem; }
+      }
+    </style>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "headline": "A Brick alternative for Android, built from a sticker", "description": "Want a Brick alternative on Android? Pair a cheap NFC tag or a QR code with Curbox, a free open-source blocker. What you gain, what you give up, and setup.", "url": "https://curbox.app/alternatives/brick/", "mainEntityOfPage": "https://curbox.app/alternatives/brick/", "datePublished": "2026-11-22", "dateModified": "2026-11-22", "inLanguage": "en", "author": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/"}, "publisher": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/", "logo": {"@type": "ImageObject", "url": "https://curbox.app/icons/android-chrome-512x512.png"}}, "about": [{"@type": "SoftwareApplication", "name": "Brick"}, {"@type": "SoftwareApplication", "name": "Curbox"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does Brick work on Android?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Brick's FAQ says it works with Android 12 or later and with iOS 18 or later, and the Brick app is on Google Play."}}, {"@type": "Question", "name": "Can a cheap NFC sticker replace a Brick?", "acceptedAnswer": {"@type": "Answer", "text": "For the core idea, yes: Curbox can require a registered NFC tag to unlock an app, or start and stop Focus Mode when you tap a tag. What you give up is the finished product: the device itself, emergency unbricks, iPhone support, and Brick Night."}}, {"@type": "Question", "name": "Do I need NFC on my phone?", "acceptedAnswer": {"@type": "Answer", "text": "Only for the tag route. Curbox's QR or Barcode Scan challenge does the same job with the camera, and you can register a code you already have, such as the barcode on a product box."}}, {"@type": "Question", "name": "Is Brick a subscription?", "acceptedAnswer": {"@type": "Answer", "text": "Brick's product pages show a one-time $59 price for the device and do not list a subscription. Curbox is free with no paid tier."}}, {"@type": "Question", "name": "Can I end a Focus session early with my NFC tag?", "acceptedAnswer": {"@type": "Answer", "text": "Only if the session allows quitting. A session marked as not quittable cannot be ended early with a tag either. If you want the tag to be the only way out, use Route B and make the tag the unlock challenge for the app group."}}, {"@type": "Question", "name": "Is Curbox open source?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Curbox is licensed under GPL v3 and the full source is on GitHub. The Android app has no internet permission, so your blocking rules and usage stay on your phone."}}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Alternatives", "item": "https://curbox.app/alternatives/"}, {"@type": "ListItem", "position": 3, "name": "Brick alternative", "item": "https://curbox.app/alternatives/brick/"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Curbox", "operatingSystem": "Android", "applicationCategory": "LifestyleApplication", "url": "https://curbox.app/download.html", "license": "https://www.gnu.org/licenses/gpl-3.0.html", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--kit">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/alternatives/">← All alternatives</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Alternatives · Brick</span>
+            <h1 class="page__title">A Brick alternative for Android, built from a sticker.</h1>
+            <p class="lead">Brick is a small physical block: tap your phone on it and your distracting apps lock until you come back and tap again. If you want that on Android without buying the device, the closest Brick alternative is a writable NFC tag or a QR code paired with Curbox, a free, open-source app blocker. This page shows how to build it, and is straight about what a sticker cannot copy.</p>
+
+            <div class="box" aria-label="Kit summary">
+                <div class="box__top"><span>Kit: walk-to-unlock blocker</span><span>Android only</span></div>
+                <div class="box__grid">
+                    <div class="box__cell"><span class="box__k">Hardware</span><span class="box__v">1 NFC tag or a QR code</span></div>
+                    <div class="box__cell"><span class="box__k">Software</span><span class="box__v">Curbox, free</span></div>
+                    <div class="box__cell"><span class="box__k">Setup time</span><span class="box__v">About 10 min</span></div>
+                </div>
+                <div class="box__note">No account, no subscription, and the Curbox app has no internet permission.</div>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section__title">What Brick actually is</h2>
+            <p>Brick is made by Brick LLC. The device costs $59 on Brick's own store, and the company also sells Brick Night, a $129 Bluetooth version meant for the bedroom. Its product pages list no subscription. You choose apps in the Brick app, group them into modes (up to 10), then tap your phone to the device to start blocking. Unblocking needs another tap on the same device.</p>
+            <p>It works on Android 12 or newer and on iPhone with iOS 18 or newer. On Android it can block any app except Phone and the launcher, it uses the Accessibility Service to do so, and its Play listing describes the hardware as NFC powered. Schedules can start Brick for you, and you can even start a session remotely, but ending one still needs the device. A Strict Mode stops you from deleting the app or changing settings to escape. If the Brick goes missing, the app gives you five Emergency Unbricks, and you can email the company for more.</p>
+            <p>The idea works because the key lives somewhere other than your hand. That part costs nothing to copy.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Bill of materials: Brick vs a DIY Brick alternative</h2>
+            <p>Both routes rely on the same thing: a physical object you have to walk to. The difference is mostly in what surrounds it.</p>
+            <div class="bom-wrap" tabindex="0">
+                <table class="bom">
+                    <thead><tr><th scope="col">Part</th><th scope="col">Brick</th><th scope="col">NFC tag + Curbox</th></tr></thead>
+                    <tbody>
+                        <tr><th scope="row">The key</th><td>Brick device, $59</td><td>Any writable NFC sticker or card, or a QR code or barcode you already own</td></tr>
+                        <tr><th scope="row">Phone needs</th><td>Android 12+ or iOS 18+</td><td>Android. NFC for the tag route; a camera for the QR route</td></tr>
+                        <tr><th scope="row">Lock trigger</th><td>Tap to start, tap to end</td><td>Tap a tag to start or toggle Focus Mode, or require a tag or QR scan to open an app</td></tr>
+                        <tr><th scope="row">Lost key</th><td>5 Emergency Unbricks, more by email</td><td>Your own rules decide this; see step 05</td></tr>
+                        <tr><th scope="row">Escape-proofing</th><td>Strict Mode</td><td>Add Curbox to a blocking group; anti-uninstall in the F-Droid variant</td></tr>
+                        <tr><th scope="row">Your data</th><td>Brick's privacy policy says blocking data is stored on its servers</td><td>Stays on the phone; the app cannot reach the internet</td></tr>
+                        <tr><th scope="row">Source code</th><td>Not published</td><td>Open source, GPL v3</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Pick your route</h2>
+            <p>Curbox can copy Brick's tap in two ways. They feel different, so read both before you build.</p>
+            <div class="route">
+                <div>
+                    <h3>Route A · Tap to start a session</h3>
+                    <p>Write a <strong>Focus Mode</strong> action to an NFC tag. Tapping it starts a timed session that blocks a Focus Group of apps and websites. You can set the tag to Start, Stop, or Toggle.</p>
+                    <p>Closest to the Brick ritual. The catch: a session marked as not quittable cannot be ended with a tag either, so you trade strictness for a tap-to-stop.</p>
+                </div>
+                <div>
+                    <h3>Route B · Tap to unlock each app</h3>
+                    <p>Set an app limit, then make the pause screen's <strong>Unlock Challenge</strong> an NFC tag or a QR scan. The app stays blocked until you physically fetch the key.</p>
+                    <p>Stricter, and it works on a schedule with no tap needed to start. It is the true "walk across the room" version.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Assembly instructions</h2>
+            <ol class="assembly">
+                <li>
+                    <h3>Install Curbox and finish onboarding</h3>
+                    <p>Get it from the <a href="/download.html">downloads page</a>. Onboarding asks for the overlay, notification, and App Blocker accessibility permissions. Setup takes under five minutes.</p>
+                </li>
+                <li>
+                    <h3>Make the list of things to block</h3>
+                    <p>For Route A, open the <strong>Focus</strong> tab and tap <strong>Create Focus Group</strong>. Name it, pick apps, add websites if you want, and choose <strong>Block Selected</strong> or <strong>Block All Except Selected</strong>. The second option keeps only the apps you choose, much like a Brick mode that leaves calls, texts, and email.</p>
+                    <p>For Route B, go to <strong>Reducers → Apps</strong>, tap <strong>+</strong>, select apps, and pick a mode: <strong>Time Based</strong> to block outside certain hours, <strong>Usage Based</strong> for a daily cap, or <strong>On Each Open</strong> to block every launch.</p>
+                </li>
+                <li>
+                    <h3>Attach the key</h3>
+                    <p>Route A: write a Focus Mode action to your tag: pick the Focus Group, a duration, and Start, Stop, or Toggle. Route B: in the group, tap <strong>Configure Warning Screen</strong>, choose <strong>Require effort to unlock</strong>, then <strong>NFC Tag</strong> or <strong>QR or Barcode Scan</strong>, and register your tag or code.</p>
+                    <p>No NFC on your phone? A QR code or the barcode on a cereal box works the same way, and a QR can also grant a fixed amount of scrolling time. More in the <a href="/qr-code-app-blocker/">QR unlock guide</a> and the <a href="/nfc-app-blocker/">NFC guide</a>.</p>
+                </li>
+                <li>
+                    <h3>Close the obvious escape hatches</h3>
+                    <p>Add Curbox itself to an app blocking group so settings are not one tap away. Use <strong>Proceed Limits</strong> to cap how many times you can get through in a window. In the F-Droid variant, turn on anti-uninstall protection, which uses device administrator access. Turning that off later means deactivating device admin in Android settings, and on some phones that needs a restart into safe mode first.</p>
+                </li>
+                <li>
+                    <h3>Decide what happens if you lose the key</h3>
+                    <p>Brick gives you emergency unbricks. With a sticker, you write the fallback yourself, so do it now while you are calm. Some options: register a barcode on something you can always buy again, keep a timed <strong>Wait to unlock</strong> on less critical groups instead of a tag, or choose a Focus session length you can live with if the tag vanishes.</p>
+                    <p class="warn">Do not pair <strong>Never Unlock</strong> with anything you might need in an emergency. A blocker should hold back an impulse, not your bank app.</p>
+                </li>
+                <li>
+                    <h3>Put the key somewhere annoying</h3>
+                    <p>The whole trick is distance. A tag stuck next to your bed defeats the point.</p>
+                    <div class="place"><span>Inside a kitchen cupboard</span><span>By the front door</span><span>In your car</span><span>Taped under a desk at work</span><span>With a housemate</span></div>
+                </li>
+            </ol>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">What a sticker cannot copy</h2>
+            <p>It would be dishonest to call a cheap sticker the same product. Brick is a better pick if these matter to you:</p>
+            <div class="honest">
+                <div><b>01</b><p><strong>It is an object with a job.</strong> A weighty block on your desk is a visible commitment. A sticker inside a cupboard is easy to forget, which cuts both ways.</p></div>
+                <div><b>02</b><p><strong>It works on iPhone.</strong> Curbox is Android plus a browser extension. If your household mixes phones, Brick covers both.</p></div>
+                <div><b>03</b><p><strong>It is a finished product.</strong> Pairing, modes, emergency unbricks, and Brick Night for the bedroom are designed to work together. The DIY route asks you to make a few decisions yourself.</p></div>
+                <div><b>04</b><p><strong>Strict Mode on every phone.</strong> Curbox's anti-uninstall protection is only in the F-Droid variant; the Playstore variant relies on blocking Curbox's own settings.</p></div>
+            </div>
+            <p style="margin-top:1.25rem">What you get in return: no hardware to buy, no account, nothing leaving your phone, code anyone can read, and finer tools than whole-app blocking. Curbox can <a href="/block-instagram-reels/">limit just Reels</a>, <a href="/block-youtube-shorts/">just Shorts</a>, or <a href="/hide-instagram-feed/">hide the Instagram feed</a> while messages keep working.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Brick alternative FAQ</h2>
+                <details class="faq__item">
+                    <summary>Does Brick work on Android?</summary>
+                    <div class="faq__a"><p>Yes. Brick's FAQ says it works with Android 12 or later and with iOS 18 or later, and the Brick app is on Google Play.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Can a cheap NFC sticker replace a Brick?</summary>
+                    <div class="faq__a"><p>For the core idea, yes: Curbox can require a registered NFC tag to unlock an app, or start and stop Focus Mode when you tap a tag. What you give up is the finished product: the device itself, emergency unbricks, iPhone support, and Brick Night.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Do I need NFC on my phone?</summary>
+                    <div class="faq__a"><p>Only for the tag route. Curbox's QR or Barcode Scan challenge does the same job with the camera, and you can register a code you already have, such as the barcode on a product box.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Is Brick a subscription?</summary>
+                    <div class="faq__a"><p>Brick's product pages show a one-time $59 price for the device and do not list a subscription. Curbox is free with no paid tier.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Can I end a Focus session early with my NFC tag?</summary>
+                    <div class="faq__a"><p>Only if the session allows quitting. A session marked as not quittable cannot be ended early with a tag either. If you want the tag to be the only way out, use Route B and make the tag the unlock challenge for the app group.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Is Curbox open source?</summary>
+                    <div class="faq__a"><p>Yes. Curbox is licensed under GPL v3 and the full source is on GitHub. The Android app has no internet permission, so your blocking rules and usage stay on your phone.</p></div>
+                </details>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Sources (checked November 2026)</h2>
+            <ul class="sources">
+                <li><a href="https://getbrick.com/" rel="noopener noreferrer" target="_blank">Brick homepage</a>: $59 price, Brick Night, modes, schedules, remote activation</li>
+                <li><a href="https://getbrick.com/pages/faq" rel="noopener noreferrer" target="_blank">Brick FAQ</a>: Android 12+ and iOS 18+ support, up to 10 modes, five Emergency Unbricks, what can be blocked</li>
+                <li><a href="https://play.google.com/store/apps/details?id=com.brickllc.brick" rel="noopener noreferrer" target="_blank">Brick on Google Play</a>: NFC powered hardware, Strict Mode, Accessibility Service use</li>
+                <li><a href="https://getbrick.com/pages/privacy-policy" rel="noopener noreferrer" target="_blank">Brick privacy policy</a>: blocking data stored on Brick's servers</li>
+                <li>Curbox: <a href="/docs/focus/focus-mode/">Focus Mode</a>, <a href="/docs/unlock-challenges/overview/">Unlock Challenges</a>, <a href="/privacy.html">privacy policy</a></li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <ul class="rel">
+                <li><a href="/nfc-app-blocker/">NFC tags in Curbox</a></li>
+                <li><a href="/qr-code-app-blocker/">QR code unlock</a></li>
+                <li><a href="/block-all-apps-except/">Block all apps except a few</a></li>
+                <li><a href="/alternatives/lock-me-out/">Lock Me Out alternative</a></li>
+                <li><a href="/alternatives/appblock/">AppBlock alternative</a></li>
+                <li><a href="/alternatives/clearspace/">Clearspace alternative</a></li>
+                <li><a href="/alternatives/minimalist-phone/">Minimalist Phone alternative</a></li>
+                <li><a href="/comparison.html">Feature comparison table</a></li>
+                <li><a href="/download.html">Download Curbox</a></li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

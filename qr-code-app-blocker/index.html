@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>App Blocker with QR Code Unlock for Android · Curbox</title>
+    <meta
+      name="description"
+      content="Scan a QR code or barcode to unlock blocked apps on Android. Put the code in another room so every unlock takes a walk. Free and open source."
+    >
+    <link rel="canonical" href="https://curbox.app/qr-code-app-blocker/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="An app blocker you unlock by scanning a QR code">
+    <meta property="og:description" content="Scan a QR code or barcode to unlock blocked apps on Android. Put the code in another room so every unlock takes a walk. Free and open source.">
+    <meta property="og:url" content="https://curbox.app/qr-code-app-blocker/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="An app blocker you unlock by scanning a QR code">
+    <meta name="twitter:description" content="Scan a QR code or barcode to unlock blocked apps on Android. Put the code in another room so every unlock takes a walk. Free and open source.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+
+      .qr-hero { display: grid; grid-template-columns: 1fr 13rem; gap: 2.5rem; align-items: end; }
+      .qr-glyph {
+        aspect-ratio: 1; border: 1px solid var(--line); border-radius: 14px; padding: 1rem;
+        display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; background: #0b0b0b;
+      }
+      .qr-glyph i { background: var(--fg); border-radius: 2px; }
+      .qr-glyph i.o { background: transparent; }
+      @media (max-width: 40rem) { .qr-hero { grid-template-columns: 1fr; } .qr-glyph { width: 9rem; } }
+
+      .plan-wrap { overflow-x: auto; margin-top: 1.5rem; -webkit-overflow-scrolling: touch; }
+      .plan {
+        min-width: 34rem; display: grid; grid-template-columns: 1.2fr 1fr 1fr; grid-template-rows: auto auto;
+        border: 2px solid var(--fg); border-radius: 6px;
+      }
+      .room { position: relative; padding: 1.1rem 1rem 1.2rem; border: 1px solid var(--line); min-height: 9rem; }
+      .room h3 { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+      .room p { font-size: 0.88rem; margin-top: 0.5rem; }
+      .room .score { position: absolute; right: 0.8rem; top: 0.8rem; font-family: var(--font-mono); font-size: 0.7rem; }
+      .room--you { background: #141414; }
+      .room--you h3 { color: var(--fg); }
+      .room--good { background: repeating-linear-gradient(135deg, #0b0b0b 0 10px, #101010 10px 20px); }
+      .room--wide { grid-column: span 2; }
+      .plan-key { margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+
+      .branch { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 1.5rem; position: relative; }
+      .branch__root {
+        grid-column: 1 / -1; justify-self: center; padding: 0.6rem 1.2rem; border: 1px solid var(--fg); border-radius: 999px;
+        font-family: var(--font-mono); font-size: 0.8rem; margin-bottom: 1.5rem; position: relative;
+      }
+      .branch__root::after { content: ''; position: absolute; left: 50%; top: 100%; width: 1px; height: 1.5rem; background: var(--line); }
+      .branch__leg { padding: 1.25rem; border-top: 1px solid var(--line); }
+      .branch__leg + .branch__leg { border-left: 1px solid var(--line); }
+      .branch__leg b { font-family: var(--font-display); font-size: 1.15rem; display: block; margin-bottom: 0.4rem; }
+      .branch__leg span { color: var(--muted); font-size: 0.92rem; }
+      @media (max-width: 36rem) { .branch { grid-template-columns: 1fr; } .branch__leg + .branch__leg { border-left: 0; } }
+
+      .stack { counter-reset: s; list-style: none; margin-top: 1rem; }
+      .stack li { counter-increment: s; display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.75rem; padding: 0.9rem 0; border-bottom: 1px dashed var(--line); }
+      .stack li::before { content: counter(s, decimal-leading-zero); font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 0.2rem; }
+      .layer { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--line); }
+      .layer b { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+      @media (max-width: 36rem) { .layer { grid-template-columns: 1fr; gap: 0.3rem; } }
+
+      /* Shared FAQ + related (kept per page so each file stands alone). */
+      .faq__item { border-top: 1px solid var(--line); padding: 1rem 0; }
+      .faq__item:last-child { border-bottom: 1px solid var(--line); }
+      .faq__item summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; list-style: none; position: relative; padding-right: 2rem; }
+      .faq__item summary::-webkit-details-marker { display: none; }
+      .faq__item summary::after { content: '+'; position: absolute; right: 0; top: 0; font-family: var(--font-mono); color: var(--muted); }
+      .faq__item[open] summary::after { content: '\2212'; }
+      .faq__item p { margin-top: 0.6rem; color: var(--muted); }
+      .related { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+      .related a { padding: 0.5rem 0.9rem; border: 1px solid var(--line); border-radius: 999px; font-size: 0.85rem; text-decoration: none !important; }
+      .related a:hover { border-color: var(--fg); }
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "The app blocker you unlock by scanning a QR code",
+      "description": "Scan a QR code or barcode to unlock blocked apps on Android. Put the code in another room so every unlock takes a walk. Free and open source.",
+      "url": "https://curbox.app/qr-code-app-blocker/",
+      "mainEntityOfPage": "https://curbox.app/qr-code-app-blocker/",
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "inLanguage": "en",
+      "image": "https://curbox.app/icons/android-chrome-512x512.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://curbox.app/icons/android-chrome-512x512.png"
+        }
+      },
+      "about": {
+        "@id": "https://curbox.app/#app"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://curbox.app/#app",
+      "name": "Curbox",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "url": "https://curbox.app/download.html",
+      "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://curbox.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Features",
+          "item": "https://curbox.app/features.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "QR code unlock",
+          "item": "https://curbox.app/qr-code-app-blocker/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use a QR code to unlock blocked apps on Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. In Curbox, set the unlock challenge for an App Pause or Short-Form Video group to Require effort to unlock, then pick QR or Barcode Scan. The proceed button only appears after you scan the code you registered."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to print a special QR code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. You can register a code that already exists, such as the barcode on a cereal box, a book, or a product package. Any code you can scan reliably will do."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I lose the code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Treat the code like a key. Before you rely on it, take a photo of it and store the photo somewhere you cannot reach in a moment of impulse, or register a code from an item you are unlikely to throw away, such as a book on your shelf."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a QR scan give me a set amount of scrolling time?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. A QR code can grant a preset amount of time, for example 10 minutes, or let you choose the amount at the moment you scan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I just scan a photo of the code on my laptop?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If you keep a photo of the code within reach, you can. That defeats the point, so keep any backup photo somewhere inconvenient. The friction comes from the distance between you and the code."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the QR unlock free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Curbox is free and open source under GPL v3, and every unlock challenge, including QR and barcode scanning, is available without a subscription."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/features.html">← All features</a>
+        </nav>
+
+        <header class="qr-hero">
+            <div>
+                <span class="kicker">Feature · QR code unlock</span>
+                <h1 class="page__title">The app blocker you unlock with a QR code.</h1>
+                <p class="lead">Curbox is a free Android app blocker where the key to a blocked app can be a QR code or barcode in another room. To unlock Instagram, TikTok or YouTube, you have to get up, walk to the code and scan it. Most urges do not survive the walk.</p>
+            </div>
+            <div class="qr-glyph" aria-hidden="true">
+                <i></i><i></i><i></i><i class="o"></i><i></i><i class="o"></i><i></i>
+                <i></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i></i>
+                <i></i><i></i><i></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i>
+                <i class="o"></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i></i>
+                <i></i><i></i><i class="o"></i><i></i><i></i><i></i><i class="o"></i>
+                <i></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i></i><i></i>
+                <i></i><i></i><i></i><i class="o"></i><i></i><i></i><i></i>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section__title">How does a QR code unlock work in an app blocker?</h2>
+            <p>When you open a blocked app, Curbox shows a pause screen instead. With the <strong>QR or Barcode Scan</strong> challenge turned on, the pause screen opens your camera and waits. Scan the code you registered and the proceed button appears. Scan anything else and nothing happens.</p>
+            <p>That sounds like a small step, but it changes the shape of the decision. Tapping a button takes half a second and happens on autopilot. Standing up and walking to the kitchen takes thirty seconds and happens on purpose. You will still unlock sometimes, and that is fine. The point is that you decided to.</p>
+            <p>You do not need to print anything. Curbox lets you register a code that already exists: the barcode on a box of tea, the QR code on a parcel, the ISBN on the back of a book. If your phone camera can read it, it can be your key.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Where should you put the code?</h2>
+            <p>The code works best somewhere you have to move to, but not somewhere so awkward that you give up on the whole system. Think about where you usually scroll, then pick a spot that is a short, boring walk away.</p>
+            <div class="plan-wrap" tabindex="0" aria-label="Example floor plan showing good and bad places for the unlock code">
+                <div class="plan">
+                    <div class="room room--you"><span class="score">you scroll here</span><h3>Bedroom</h3><p>Bad spot for the code. If it is on your bedside table, the scan becomes part of the habit.</p></div>
+                    <div class="room room--good"><span class="score">good</span><h3>Kitchen</h3><p>Taped inside a cupboard door. Close enough that you will use it, far enough to break the loop.</p></div>
+                    <div class="room room--good"><span class="score">great at night</span><h3>Hallway</h3><p>On the back of the front door. Getting out of bed in the dark to scroll is a hard sell.</p></div>
+                    <div class="room room--wide"><span class="score">depends</span><h3>Desk / living room</h3><p>Fine for daytime limits if you scroll in bed at night. Useless if this is where you scroll.</p></div>
+                    <div class="room room--good"><span class="score">strongest</span><h3>Car or office</h3><p>For apps you only want on certain days. Leave the code where you are not.</p></div>
+                </div>
+            </div>
+            <p class="plan-key">Striped rooms are good places for the code. The shaded room is where you usually scroll.</p>
+            <p>A few placements that people find work well:</p>
+            <ul>
+                <li>The barcode on your toothpaste box, so the only way into Instagram at night is via the bathroom, where you may as well brush your teeth and go to bed.</li>
+                <li>A code taped inside a desk drawer at work, for apps you only want on your lunch break.</li>
+                <li>A book on a high shelf. Easy to find, annoying to reach.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">What does a scan give you?</h2>
+            <p>A scan is not all-or-nothing. You decide in advance what it unlocks.</p>
+            <div class="branch">
+                <div class="branch__root">You scan the code</div>
+                <div class="branch__leg"><b>A preset amount</b><span>The code always grants the same time, for example 10 minutes. Good when you know your own limits and do not want to bargain with yourself.</span></div>
+                <div class="branch__leg"><b>An amount you choose</b><span>You pick how long at the moment you scan. Good for apps you sometimes need for real, like a marketplace or a group chat inside a social app.</span></div>
+            </div>
+            <p style="margin-top:1.25rem;">When the time runs out, the block comes back and so does the walk. That is what makes the QR challenge different from a timer you can snooze: every extra session costs the same effort as the first.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">How to set up QR code unlock in Curbox</h2>
+            <p>This takes about two minutes once Curbox is installed and set up. If you do not have it yet, get it from the <a href="/download.html">downloads page</a>.</p>
+            <ol class="stack">
+                <li><span>Open <strong>Reducers → Apps</strong> and tap <strong>+</strong> to create a group, or open an existing one. The same setting exists on the <strong>Short-Form Video Content</strong> reducer if you want to lock Reels and Shorts instead of whole apps.</span></li>
+                <li><span>Name the group, tap <strong>Select Apps</strong> and choose the apps you want behind the code.</span></li>
+                <li><span>Choose a blocking mode. <strong>On Each Open</strong> asks for the code every time. <strong>Usage Based</strong> asks only after your daily limit. <strong>Time Based</strong> asks outside the hours you allow.</span></li>
+                <li><span>Tap <strong>Configure Warning Screen</strong>, set the <strong>Unlock Challenge</strong> to <strong>Require effort to unlock</strong> and pick <strong>QR or Barcode Scan</strong>.</span></li>
+                <li><span>Scan the code you want to use as your key, choose whether it grants a preset time or lets you pick, and save.</span></li>
+                <li><span>Put the code in its new home. Then try opening the app once, so you know the whole loop works before you need it.</span></li>
+            </ol>
+            <p>The full list of options is in the <a href="/docs/unlock-challenges/overview/">unlock challenges guide</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Make the QR challenge harder to dodge</h2>
+            <p>The walk is the main defence, but you can stack other settings on the same warning screen.</p>
+            <div class="layer"><b>Delay timer</b><span>A countdown before the scanner even appears. The screen brightens and the phone vibrates while you wait. Ten seconds is often enough to put the phone down.</span></div>
+            <div class="layer"><b>Proceed limits</b><span>Cap how many times you can get through in a time window. Scan three times today and the proceed button stops appearing, code or no code.</span></div>
+            <div class="layer"><b>Custom message</b><span>Show yourself a line you wrote on a better day, such as "You said you would read tonight." It appears before the scanner.</span></div>
+            <div class="layer"><b>Link to Focus Mode</b><span>Require a certain amount of focus time today before any unlock is possible, so the code only works after you have done the thing you meant to do.</span></div>
+            <div class="layer"><b>Anti-uninstall</b><span>In the F-Droid variant, uninstall protection makes it harder to delete Curbox in a weak moment. The Playstore variant does not include it. See <a href="/prevent-app-blocker-uninstall/">how uninstall protection works</a>.</span></div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Why physical distance works better than willpower</h2>
+            <p>Most phone habits run on very short loops: an itch of boredom, a thumb movement, a reward. A button on the pause screen, even one behind a countdown, is still part of that loop. Your thumb is already there.</p>
+            <p>A QR code in another room breaks the loop in a way your thumb cannot solve. You have to stand up, which brings your attention back to the room you are in. By the time you reach the kitchen you are often thinking about something else, and the craving has had time to fade. If it has not, you scan, you get your ten minutes, and nobody needs to feel guilty about it.</p>
+            <p>If a physical key appeals to you but you would rather tap than scan, an <a href="/nfc-app-blocker/">NFC tag</a> does the same job with a sticker. If you would rather think than walk, try <a href="/math-unlock-app-blocker/">math to unlock</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Questions about QR code unlock</h2>
+                <details class="faq__item">
+                    <summary>Can I use a QR code to unlock blocked apps on Android?</summary>
+                    <p>Yes. In Curbox, set the unlock challenge for an App Pause or Short-Form Video group to <strong>Require effort to unlock</strong>, then pick <strong>QR or Barcode Scan</strong>. The proceed button only appears after you scan the code you registered.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Do I need to print a special QR code?</summary>
+                    <p>No. You can register a code that already exists, such as the barcode on a cereal box, a book, or a product package. Any code you can scan reliably will do.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>What happens if I lose the code?</summary>
+                    <p>Treat the code like a key. Before you rely on it, take a photo of it and store the photo somewhere you cannot reach in a moment of impulse, or register a code from an item you are unlikely to throw away, such as a book on your shelf.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Can a QR scan give me a set amount of scrolling time?</summary>
+                    <p>Yes. A QR code can grant a preset amount of time, for example 10 minutes, or let you choose the amount at the moment you scan.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Can I just scan a photo of the code on my laptop?</summary>
+                    <p>If you keep a photo of the code within reach, you can. That defeats the point, so keep any backup photo somewhere inconvenient. The friction comes from the distance between you and the code.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Is the QR unlock free?</summary>
+                    <p>Yes. Curbox is free and open source under GPL v3, and every unlock challenge, including QR and barcode scanning, is available without a subscription.</p>
+                </details>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <div class="related">
+                <a href="/nfc-app-blocker/">NFC app blocker</a>
+                <a href="/math-unlock-app-blocker/">Math to unlock apps</a>
+                <a href="/urge-surfing-app/">Urge surfing</a>
+                <a href="/block-instagram-on-android/">Block Instagram on Android</a>
+                <a href="/stop-doomscrolling/">Stop doomscrolling</a>
+                <a href="/features.html">All features</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

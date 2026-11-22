@@ -1,6 +1,68 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'node:path';
 
+// Search-intent guides and competitor alternative pages. Each lives in its
+// own directory as index.html so it is served at a clean /<slug>/ URL.
+const guidePages = [
+  'guides',
+  'block-instagram-on-android',
+  'block-instagram-reels',
+  'block-youtube-shorts',
+  'block-websites-on-android',
+  'screen-time-app-without-ads',
+  'open-source-app-blocker',
+  'grayscale-apps-android',
+  'batch-notifications-android',
+  'stop-doomscrolling',
+  'app-blocker-for-studying',
+  'app-blocker-for-adhd',
+  'alternatives',
+  'alternatives/stay-focused',
+  'alternatives/lock-me-out',
+  'alternatives/appblock',
+  'alternatives/screenzen',
+  'alternatives/digital-wellbeing',
+  'alternatives/one-sec',
+  'alternatives/opal',
+  'alternatives/freedom',
+  'alternatives/blocksite',
+  'alternatives/forest',
+  'alternatives/stayfree',
+  'alternatives/actiondash',
+  'alternatives/regain',
+  'alternatives/yourhour',
+  'alternatives/social-fever',
+  'alternatives/blockerx',
+  'alternatives/flipd',
+  'alternatives/unpluq',
+  'alternatives/brick',
+  'alternatives/clearspace',
+  'alternatives/minimalist-phone',
+  'alternatives/detoxdroid',
+  // Feature landing pages, one per searched feature.
+  'qr-code-app-blocker',
+  'nfc-app-blocker',
+  'math-unlock-app-blocker',
+  'urge-surfing-app',
+  'hide-youtube-recommendations',
+  'hide-instagram-feed',
+  'prevent-app-blocker-uninstall',
+  'block-all-apps-except',
+  'screen-time-tracker-android',
+  'reels-counter',
+  'mindful-reminder-when-opening-apps',
+  'break-reminder-app-android',
+  'pomodoro-app-blocker',
+  'auto-do-not-disturb-schedule',
+  'location-based-app-blocker',
+  'website-blocker-extension',
+  'app-blocker-api',
+];
+
+const guideInputs = Object.fromEntries(
+  guidePages.map((slug) => [slug.replace(/\//g, '-'), resolve(__dirname, slug, 'index.html')]),
+);
+
 // The project root is this directory.
 export default defineConfig({
   // robots.txt and sitemap.xml are hand-maintained in public/ - they cover
@@ -36,6 +98,7 @@ export default defineConfig({
         deleteAccount: resolve(__dirname, 'delete-account.html'),
         privacy: resolve(__dirname, 'privacy.html'),
         terms: resolve(__dirname, 'terms.html'),
+        ...guideInputs,
       },
     },
   },

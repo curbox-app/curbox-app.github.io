@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>BlockerX Alternative: An Honest Fit Guide · Curbox</title>
+    <meta
+      name="description"
+      content="Thinking about a BlockerX alternative? See what Curbox can and cannot block, how the privacy differs, and a setup that holds up when urges hit on Android."
+    >
+    <link rel="canonical" href="https://curbox.app/alternatives/blockerx/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="Looking for a BlockerX alternative? Check the fit first">
+    <meta property="og:description" content="Thinking about a BlockerX alternative? See what Curbox can and cannot block, how the privacy differs, and a setup that holds up when urges hit on Android.">
+    <meta property="og:url" content="https://curbox.app/alternatives/blockerx/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Looking for a BlockerX alternative? Check the fit first">
+    <meta name="twitter:description" content="Thinking about a BlockerX alternative? See what Curbox can and cannot block, how the privacy differs, and a setup that holds up when urges hit on Android.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--bx .lead { max-width: 36rem; }
+
+      .scope {
+        margin-top: 1.5rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .scope > div { padding: 1.25rem 1.3rem; }
+      .scope > div + div { border-left: 1px solid var(--line); }
+      .scope h3 {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+      }
+      .scope__is { background: #0d0d0d; }
+      .scope ul { margin-top: 0 !important; }
+      .scope li { font-size: 0.93rem; }
+
+      .fit { list-style: none; margin-top: 1.25rem; counter-reset: q; }
+      .fit > li {
+        counter-increment: q;
+        padding: 1.2rem 0 1.2rem 3.25rem;
+        position: relative;
+        border-top: 1px solid var(--line);
+      }
+      .fit > li::before { display: none; }
+      .fit > li:last-child { border-bottom: 1px solid var(--line); }
+      .fit__q {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.1rem;
+        line-height: 1.3;
+      }
+      .fit__q::before {
+        content: 'Q' counter(q);
+        position: absolute; left: 0; top: 1.3rem;
+        font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted);
+      }
+      .fit__a { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.75rem; margin-top: 0.6rem; font-size: 0.93rem; }
+      .fit__a b {
+        font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+        padding: 0.2rem 0.5rem; border-radius: 4px; align-self: start; margin-top: 0.15rem; white-space: nowrap;
+      }
+      .fit__a .y { background: var(--fg); color: var(--bg); }
+      .fit__a .n { border: 1px solid #555; color: var(--muted); }
+
+      .flow { margin-top: 1.25rem; display: grid; gap: 1rem; }
+      .flow__row { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; align-items: start; }
+      .flow__who { font-family: var(--font-display); font-weight: 700; }
+      .flow__path { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; font-size: 0.85rem; }
+      .flow__path span { padding: 0.3rem 0.6rem; border: 1px solid var(--line); border-radius: 6px; }
+      .flow__path i { font-style: normal; color: var(--muted); font-family: var(--font-mono); }
+      .flow__path .end { border-style: dashed; color: var(--muted); }
+      .flow__path .stop { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+      .flow__note { font-size: 0.85rem; color: var(--muted); margin-top: 0.4rem; }
+
+      .kw { margin-top: 1rem; overflow-x: auto; }
+      .kw table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+      .kw th, .kw td { text-align: left; padding: 0.6rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+      .kw th { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+      .steps-bx { list-style: none; margin-top: 1rem; counter-reset: st; }
+      .steps-bx li { counter-increment: st; position: relative; padding: 0 0 1rem 2.4rem; }
+      .steps-bx li::before {
+        content: counter(st); position: absolute; left: 0; top: 0.05rem;
+        width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 1px solid var(--line);
+        display: grid; place-items: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg);
+      }
+
+      .care { margin-top: 1rem; padding: 1.1rem 1.3rem; border-left: 3px solid var(--fg); background: #0b0b0b; }
+
+      @media (max-width: 40rem) {
+        .scope { grid-template-columns: 1fr; }
+        .scope > div + div { border-left: 0; border-top: 1px solid var(--line); }
+        .flow__row { grid-template-columns: 1fr; gap: 0.4rem; }
+        .fit > li { padding-left: 2.5rem; }
+      }
+
+      .faq details { border-top: 1px solid var(--line); padding: 1rem 0; }
+      .faq details:last-child { border-bottom: 1px solid var(--line); }
+      .faq summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.3; list-style: none; }
+      .faq summary::-webkit-details-marker { display: none; }
+      .faq summary::after { content: '+'; float: right; margin-left: 1rem; font-family: var(--font-mono); color: var(--muted); }
+      .faq details[open] summary::after { content: '-'; }
+      .faq details p { margin-top: 0.6rem; color: var(--muted); }
+      .sources li { font-size: 0.9rem; color: var(--muted); }
+      .related { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+      .related a { padding: 0.5rem 0.9rem; border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-mono); font-size: 0.75rem; text-decoration: none !important; }
+      .related a:hover { border-color: var(--fg); }
+    </style>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "headline": "Looking for a BlockerX alternative? Check the fit first", "description": "Thinking about a BlockerX alternative? See what Curbox can and cannot block, how the privacy differs, and a setup that holds up when urges hit on Android.", "datePublished": "2026-11-22", "dateModified": "2026-11-22", "mainEntityOfPage": "https://curbox.app/alternatives/blockerx/", "author": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/"}, "publisher": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/", "logo": {"@type": "ImageObject", "url": "https://curbox.app/icons/android-chrome-512x512.png"}}, "image": "https://curbox.app/icons/android-chrome-512x512.png"}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Curbox a porn blocker like BlockerX?", "acceptedAnswer": {"@type": "Answer", "text": "Not in the same way. BlockerX is built as an adult content blocker with a large ready-made blocklist and accountability features. Curbox is a general app and website blocker. It blocks the words, domains, paths and patterns you add yourself in supported browsers, and any app you choose, but it does not ship a curated adult-site list or filter images."}}, {"@type": "Question", "name": "Can Curbox block websites by keyword?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Under Reducers, Keywords And Websites, you can add domains, paths, single words that match a domain, wildcards, and regular expressions starting with r:. It works in Chrome, Brave, Firefox, Opera and several other listed browsers. Browsers that are not supported can be blocked as whole apps with App Pause."}}, {"@type": "Question", "name": "Does Curbox have an accountability partner feature?", "acceptedAnswer": {"@type": "Answer", "text": "No. Curbox has no accounts and the Android app has no internet permission, so it cannot send reports to another person. If accountability matters to you, BlockerX or a separate arrangement with someone you trust may suit you better."}}, {"@type": "Question", "name": "Can Curbox stop me from uninstalling it?", "acceptedAnswer": {"@type": "Answer", "text": "The F-Droid variant has anti-uninstall protection that uses device administrator access. The Playstore variant does not include it. You can also add Curbox itself to an App Pause group and use Never Unlock, so its settings are harder to change in a weak moment."}}, {"@type": "Question", "name": "Is Curbox free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Curbox is free and open source under the GPL v3. There is no premium tier and no ads."}}, {"@type": "Question", "name": "Can I use Curbox and a content filter together?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Curbox works at the app and address-bar level, so it can sit alongside a network or DNS-level filter you already use. A filter for content and Curbox for habits and friction cover different gaps, so they can complement each other."}}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Alternatives", "item": "https://curbox.app/alternatives/"}, {"@type": "ListItem", "position": 3, "name": "BlockerX alternative", "item": "https://curbox.app/alternatives/blockerx/"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Curbox", "operatingSystem": "Android", "applicationCategory": "LifestyleApplication", "url": "https://curbox.app/download.html", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+
+    <main class="page page--bx">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/alternatives/">← All alternatives</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Alternatives · BlockerX</span>
+            <h1 class="page__title">Looking for a BlockerX alternative? Check the fit first.</h1>
+            <p class="lead">BlockerX is built mainly to block adult content, with accountability partners and community support on top. Curbox is a general app and website blocker. They overlap, but they are not the same kind of tool, and picking the wrong one for this particular goal can make things harder. This page is an honest look at when Curbox is a good BlockerX alternative and when it is not.</p>
+        </header>
+
+        <section class="section">
+            <h2 class="section__title">What BlockerX is built for</h2>
+            <p>BlockerX describes itself on its homepage as a porn blocker that can "block over 2 million adult sites". Around that core it lists keyword restrictions, safe search enforcement, a custom block list, image blocking, social media, gaming and dating app blockers, stats, articles and video courses, an accountability partner feature, alerts, a community, and uninstall protection on Android. It has apps for Android and iOS, a Chrome extension, and Windows and macOS applications.</p>
+            <p>On its premium page when we checked, BlockerX offered a 12-month plan and a lifetime plan, shown as discounted offers, with a one-day free trial on the yearly plan. It lists "No ads on BlockerX App" as a premium benefit, and notes that the premium features apply to the mobile apps only.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">What Curbox is, and what it is not</h2>
+            <p>Before anything else, here is the plain version.</p>
+            <div class="scope">
+                <div class="scope__is">
+                    <h3>Curbox is</h3>
+                    <ul>
+                        <li>An app blocker with daily limits, schedules and focus sessions</li>
+                        <li>A website blocker that reads the address bar in supported browsers and matches your own keywords, domains, paths and regex</li>
+                        <li>A set of pause screens you can make very hard to get past</li>
+                        <li>Offline, account-free and open source</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Curbox is not</h3>
+                    <ul>
+                        <li>A curated adult content blocklist</li>
+                        <li>An image or safe search filter</li>
+                        <li>A network, VPN or DNS filter that covers every app and browser</li>
+                        <li>An accountability service that sends reports to another person</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Four questions to decide if Curbox fits</h2>
+            <ol class="fit">
+                <li>
+                    <div class="fit__q">Do you need a list of sites someone else maintains?</div>
+                    <div class="fit__a">
+                        <b class="y">Yes</b><span>A dedicated filter like BlockerX does this. Curbox only blocks what you add, so you would be building the list yourself.</span>
+                        <b class="n">No</b><span>If a handful of keywords and patterns cover your triggers, Curbox's keyword syntax is flexible enough, especially with regex.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="fit__q">Does another person need to see reports?</div>
+                    <div class="fit__a">
+                        <b class="y">Yes</b><span>Stay with an accountability tool. Curbox has no accounts and cannot send anything off your phone.</span>
+                        <b class="n">No</b><span>Then the lack of a server is an advantage: nothing about your browsing leaves the device.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="fit__q">Is the hard part the moment of the urge?</div>
+                    <div class="fit__a">
+                        <b class="y">Yes</b><span>This is where Curbox is strongest: delay timers, Never Unlock, Proceed Limits, and Urge Surfing to ride a craving out instead of unlocking.</span>
+                        <b class="n">No</b><span>If you mainly want content kept out of reach in the background, a filter matters more than the pause screen.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="fit__q">Do you need it on an iPhone or computer too?</div>
+                    <div class="fit__a">
+                        <b class="y">Yes</b><span>BlockerX covers more platforms. Curbox is Android plus a browser extension for Chrome and Firefox.</span>
+                        <b class="n">No</b><span>On Android alone, Curbox can cover browsers and apps with one set of rules.</span>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Where your data goes in each app</h2>
+            <p>Any blocker that reads web addresses sees sensitive information. That makes it worth knowing where that information travels.</p>
+            <div class="flow">
+                <div>
+                    <div class="flow__row">
+                        <div class="flow__who">BlockerX</div>
+                        <div class="flow__path"><span>Your phone</span><i>→</i><span>Account on BlockerX servers</span><i>→</i><span class="end">Analytics and survey SDKs</span></div>
+                    </div>
+                    <p class="flow__note">Its privacy policy (updated September 2026) says account details are stored on its servers, names Google Play services, Firebase, Mixpanel and the Pollfish survey SDK, and says chats with its in-app AI assistant go to third-party AI providers and are stored.</p>
+                </div>
+                <div>
+                    <div class="flow__row">
+                        <div class="flow__who">Curbox</div>
+                        <div class="flow__path"><span>Your phone</span><i>→</i><span class="stop">Stops here</span></div>
+                    </div>
+                    <p class="flow__note">The Android app has no internet permission in any variant, no accounts and no trackers. Anyone can check this in the <a href="https://github.com/curbox-app/curbox-android">source code</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">If you switch: a Curbox setup that holds</h2>
+            <p>This setup leans on friction and on removing escape routes, since that is what Curbox does best. Install Curbox from the <a href="/download.html">downloads page</a> first.</p>
+            <ol class="steps-bx">
+                <li>Go to <strong>Reducers → Keywords And Websites</strong>, tap <strong>+</strong>, and add the words and domains you want blocked. Plain words match a domain segment, so one word can cover many regional sites. For several related words, one <code>r:</code> regex keeps the list short. Test patterns first: a broken regex silently does nothing.</li>
+                <li>Tap <strong>Configure Warning Screen</strong> and choose <strong>Never Unlock</strong> for this group, so there is no proceed button at all.</li>
+                <li>Close the gaps. Keyword blocking only works in the <a href="/block-websites-on-android/">listed browsers</a>, so put any other browser you have installed into an <strong>App Pause</strong> group with <strong>On Each Open</strong> and Never Unlock.</li>
+                <li>Set the App Pause group to automatically add apps you install later, so a new browser does not slip through.</li>
+                <li>Add Curbox itself to an App Pause group so its settings cannot be changed on impulse. If you use the F-Droid variant, turn on anti-uninstall protection as well.</li>
+                <li>Turn on Urge Surfing so the block screen offers an "I'm struggling" button for the moments that are hardest.</li>
+            </ol>
+            <div class="care">
+                <p>If you are working on a compulsive habit that feels out of your control, a blocker is one tool among several. Talking to someone you trust, or to a professional, can make a bigger difference than any setting on this page.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">When BlockerX is the better pick</h2>
+            <ul>
+                <li>You want a large blocklist maintained for you instead of writing your own.</li>
+                <li>You want an accountability partner to receive reports or alerts.</li>
+                <li>You want image blocking or safe search enforcement.</li>
+                <li>You need the same protection on iOS, Windows or macOS.</li>
+                <li>You value the courses and community that come with it.</li>
+            </ul>
+            <p>Curbox makes more sense if your main need is friction at the moment of the urge, if you want nothing leaving your phone, or if a free, open source tool matters to you. You can also use both: a filter for content and Curbox for habits.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Questions people ask</h2>
+            <div class="faq">
+                <details>
+                    <summary>Is Curbox a porn blocker like BlockerX?</summary>
+                    <p>Not in the same way. BlockerX is built as an adult content blocker with a large ready-made blocklist and accountability features. Curbox is a general app and website blocker. It blocks the words, domains, paths and patterns you add yourself in supported browsers, and any app you choose, but it does not ship a curated adult-site list or filter images.</p>
+                </details>
+                <details>
+                    <summary>Can Curbox block websites by keyword?</summary>
+                    <p>Yes. Under Reducers, Keywords And Websites, you can add domains, paths, single words that match a domain, wildcards, and regular expressions starting with r:. It works in Chrome, Brave, Firefox, Opera and several other listed browsers. Browsers that are not supported can be blocked as whole apps with App Pause.</p>
+                </details>
+                <details>
+                    <summary>Does Curbox have an accountability partner feature?</summary>
+                    <p>No. Curbox has no accounts and the Android app has no internet permission, so it cannot send reports to another person. If accountability matters to you, BlockerX or a separate arrangement with someone you trust may suit you better.</p>
+                </details>
+                <details>
+                    <summary>Can Curbox stop me from uninstalling it?</summary>
+                    <p>The F-Droid variant has anti-uninstall protection that uses device administrator access. The Playstore variant does not include it. You can also add Curbox itself to an App Pause group and use Never Unlock, so its settings are harder to change in a weak moment.</p>
+                </details>
+                <details>
+                    <summary>Is Curbox free?</summary>
+                    <p>Yes. Curbox is free and open source under the GPL v3. There is no premium tier and no ads.</p>
+                </details>
+                <details>
+                    <summary>Can I use Curbox and a content filter together?</summary>
+                    <p>Yes. Curbox works at the app and address-bar level, so it can sit alongside a network or DNS-level filter you already use. A filter for content and Curbox for habits and friction cover different gaps, so they can complement each other.</p>
+                </details>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Sources (checked November 2026)</h2>
+            <ul class="sources">
+                <li><a href="https://blockerx.net/" target="_blank" rel="noopener noreferrer">BlockerX homepage</a>: positioning, features and platforms.</li>
+                <li><a href="https://blockerx.net/premium/" target="_blank" rel="noopener noreferrer">BlockerX premium page</a>: plans, free trial, premium features, mobile-only note.</li>
+                <li><a href="https://blockerx.net/our-privacy-policy/" target="_blank" rel="noopener noreferrer">BlockerX privacy policy</a> (last updated 2 September 2026): data stored, named SDKs, AI assistant.</li>
+                <li>Curbox: <a href="/docs/reducers/keyword-blocker/">keyword blocker docs</a>, <a href="/docs/unlock-challenges/overview/">unlock challenges</a> and the <a href="/privacy.html">privacy policy</a>.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <div class="related">
+                <a href="/comparison.html">Feature table</a>
+                <a href="/alternatives/appblock/">AppBlock alternative</a>
+                <a href="/alternatives/blocksite/">BlockSite alternative</a>
+                <a href="/alternatives/lock-me-out/">Lock Me Out alternative</a>
+                <a href="/block-websites-on-android/">Block websites on Android</a>
+                <a href="/prevent-app-blocker-uninstall/">Uninstall protection</a>
+                <a href="/urge-surfing-app/">Urge Surfing</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

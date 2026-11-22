@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>App Blocker Alternatives for Android · Curbox</title>
+    <meta
+      name="description"
+      content="Honest switching guides for 22 Android screen time apps, from Opal, Freedom and AppBlock to Forest and Digital Wellbeing. What carries over, and when to stay."
+    >
+    <link rel="canonical" href="https://curbox.app/alternatives/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="App blocker alternatives for Android">
+    <meta property="og:description" content="Honest switching guides for 22 Android screen time apps, and when your current app is the better fit.">
+    <meta property="og:url" content="https://curbox.app/alternatives/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="App blocker alternatives for Android">
+    <meta name="twitter:description" content="Honest switching guides for 22 Android screen time apps, and when your current app is the better fit.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--alts { max-width: 70rem; }
+      .page--alts .lead { max-width: 42rem; }
+
+      .leaving {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+        gap: 1px;
+        margin-top: 1.75rem;
+        background: var(--line);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .leaving a.card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        padding: 1.6rem 1.5rem 1.4rem;
+        background: var(--bg);
+        color: var(--fg);
+        text-decoration: none !important;
+        transition: background 0.2s ease;
+      }
+      .leaving a.card:hover { background: #0e0e0e; }
+      .card__from {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .card__name {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 1.9rem;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+      .card__why { font-size: 0.95rem; }
+      .card__stay {
+        margin-top: auto;
+        padding-top: 0.9rem;
+        border-top: 1px dashed var(--line);
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      .card__stay strong { color: var(--fg); font-weight: 500; }
+      .card__go {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .group {
+        margin-top: 2.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .group + .leaving { margin-top: 0.9rem; }
+      .jump { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+      .jump a {
+        padding: 0.4rem 0.85rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        text-decoration: none !important;
+      }
+      .jump a:hover { border-color: var(--fg); }
+      .tradeoff {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        margin-top: 1.5rem;
+      }
+      .tradeoff h3 {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.25rem;
+      }
+      .page--alts .section { max-width: var(--measure); }
+      .page--alts .section.wide { max-width: none; }
+
+      @media (max-width: 44rem) {
+        .tradeoff { grid-template-columns: 1fr; gap: 1.5rem; }
+      }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "App blocker alternatives for Android",
+      "url": "https://curbox.app/alternatives/",
+      "publisher": { "@type": "Organization", "name": "Curbox", "url": "https://curbox.app/" },
+      "hasPart": [
+        {
+                "@type": "WebPage",
+                "name": "Stay Focused alternative",
+                "url": "https://curbox.app/alternatives/stay-focused/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "Lock Me Out alternative",
+                "url": "https://curbox.app/alternatives/lock-me-out/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "AppBlock alternative",
+                "url": "https://curbox.app/alternatives/appblock/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "Opal alternative",
+                "url": "https://curbox.app/alternatives/opal/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "Freedom alternative",
+                "url": "https://curbox.app/alternatives/freedom/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "BlockSite alternative",
+                "url": "https://curbox.app/alternatives/blocksite/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "BlockerX alternative",
+                "url": "https://curbox.app/alternatives/blockerx/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "ScreenZen alternative",
+                "url": "https://curbox.app/alternatives/screenzen/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "one sec alternative",
+                "url": "https://curbox.app/alternatives/one-sec/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "Clearspace alternative",
+                "url": "https://curbox.app/alternatives/clearspace/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "Digital Wellbeing alternative",
+                "url": "https://curbox.app/alternatives/digital-wellbeing/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "StayFree alternative",
+                "url": "https://curbox.app/alternatives/stayfree/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "ActionDash alternative",
+                "url": "https://curbox.app/alternatives/actiondash/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "YourHour alternative",
+                "url": "https://curbox.app/alternatives/yourhour/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "Social Fever alternative",
+                "url": "https://curbox.app/alternatives/social-fever/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "Forest alternative",
+                "url": "https://curbox.app/alternatives/forest/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "Flipd alternative",
+                "url": "https://curbox.app/alternatives/flipd/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "Regain alternative",
+                "url": "https://curbox.app/alternatives/regain/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "Brick alternative",
+                "url": "https://curbox.app/alternatives/brick/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "Unpluq alternative",
+                "url": "https://curbox.app/alternatives/unpluq/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "Minimalist Phone alternative",
+                "url": "https://curbox.app/alternatives/minimalist-phone/"
+        },
+        {
+                "@type": "WebPage",
+                "name": "DetoxDroid alternative",
+                "url": "https://curbox.app/alternatives/detoxdroid/"
+        }
+      ]
+    }
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "App Blocker Alternatives for Android", "item": "https://curbox.app/alternatives/"}]}
+    </script>
+</head>
+<body>
+    <main class="page page--alts">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/guides/">← All guides</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Alternatives · Switching to Curbox</span>
+            <h1 class="page__title">Leaving another blocker? Read this first.</h1>
+            <p class="lead">Every page here starts from the app you use now. It maps what you rely on to the closest thing in Curbox, shows you how to rebuild your setup, and says plainly when you would be better off staying put.</p>
+        </header>
+
+        <section class="section wide">
+            <h2 class="section__title">What are you switching from?</h2>
+            <nav class="jump" aria-label="Jump to a group"><a href="#grp-0">Blockers and lockdown apps</a><a href="#grp-1">Pause and friction apps</a><a href="#grp-2">Screen time trackers</a><a href="#grp-3">Focus and study timers</a><a href="#grp-4">Physical keys</a><a href="#grp-5">Launchers and open source</a></nav>
+            <h3 class="group" id="grp-0">Blockers and lockdown apps</h3>
+            <div class="leaving">
+                <a class="card" href="/alternatives/stay-focused/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">Stay Focused</span>
+                    <span class="card__why">For people who want the same kind of strict blocking from an app with no ad or analytics code, no data leaving the phone, and source anyone can check.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you rely on its location blocking or use it on an iPhone.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/lock-me-out/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">Lock Me Out</span>
+                    <span class="card__why">For people who like hard locks but want unlocks that take real effort, like a QR code in another room.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you depend on its built-in location rules.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/appblock/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">AppBlock</span>
+                    <span class="card__why">For people who want strong blocking without a subscription and with code they can read.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you also need the same blocker on an iPhone.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/opal/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">Opal</span>
+                    <span class="card__why">For people who want Opal-style rules, a hard mode and an allowlist without paying for Pro, plus limits on Reels.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you use an iPhone or Mac, or the Opal Score keeps you going.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/freedom/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">Freedom</span>
+                    <span class="card__why">For people who want more control on the phone itself: Reels limits, daily allowances and effort to unlock, with no account.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you need one blocklist across desktop apps, iPhone and Chromebook.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/blocksite/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">BlockSite</span>
+                    <span class="card__why">For people who want an offline, open source blocker instead of one whose policy lists ad and analytics partners.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you need iOS, Safari or Edge, an accountability partner, or category blocking.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/blockerx/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">BlockerX</span>
+                    <span class="card__why">For people whose hard part is the moment of the urge, and who want nothing leaving the phone. Curbox is not a dedicated adult-content filter.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you need a maintained blocklist, accountability reports or image filtering.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+            </div>
+            <h3 class="group" id="grp-1">Pause and friction apps</h3>
+            <div class="leaving">
+                <a class="card" href="/alternatives/screenzen/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">ScreenZen</span>
+                    <span class="card__why">For people who like pausing before an app opens and want more kinds of friction, plus control over feeds inside apps.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you use it on iOS as well as Android.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/one-sec/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">one sec</span>
+                    <span class="card__why">For people who like the breathing pause and want it paired with limits that actually end the session.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> a pause on its own is all you need.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/clearspace/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">Clearspace</span>
+                    <span class="card__why">For people who want the pause and the limits with no premium tier and no data leaving the phone.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you want push-ups to earn time, friend challenges or an iPhone app.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+            </div>
+            <h3 class="group" id="grp-2">Screen time trackers</h3>
+            <div class="leaving">
+                <a class="card" href="/alternatives/digital-wellbeing/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">Digital Wellbeing</span>
+                    <span class="card__why">For people whose app timers are too easy to dismiss, or who want grayscale for some apps and not the whole phone.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> a simple daily timer is enough and you want nothing extra installed.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/stayfree/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">StayFree</span>
+                    <span class="card__why">For people who want detailed usage stats without their app and site history going to a market research panel.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you need Windows, Mac, iPhone or category limits.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/actiondash/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">ActionDash</span>
+                    <span class="card__why">For people for whom reminders are not changing anything, and who want limits that take effort to unlock.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> unlock counts, notification counts or its Gmail tools are what you use.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/yourhour/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">YourHour</span>
+                    <span class="card__why">For people who want limits that actually hold, and an app with no ad code.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> unlock counts, addiction levels or challenges motivate you.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/social-fever/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">Social Fever</span>
+                    <span class="card__why">For people whose alerts and weekly reports have not changed anything, and who want real limits.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you want a light tracker with water and hobby reminders.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+            </div>
+            <h3 class="group" id="grp-3">Focus and study timers</h3>
+            <div class="leaving">
+                <a class="card" href="/alternatives/forest/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">Forest</span>
+                    <span class="card__why">For people who want blocking that keeps working between sessions, and a free allowlist.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> the trees, friends' forests or real tree planting keep you going.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/flipd/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">Flipd</span>
+                    <span class="card__why">For people who want stricter session locks and no limits on the free tier.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> study rooms, music, badges or iOS matter to you.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/regain/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">Regain</span>
+                    <span class="card__why">For people who would rather skip the Pro subscription, the account and the ad sharing.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you want friend leaderboards, a YouTube channel allowlist or an iPhone app.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+            </div>
+            <h3 class="group" id="grp-4">Physical keys</h3>
+            <div class="leaving">
+                <a class="card" href="/alternatives/brick/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">Brick</span>
+                    <span class="card__why">For people who want walk-to-unlock with a cheap NFC sticker or a QR code, free and offline.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you want the dedicated device, iPhone support or emergency unbricks.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/unpluq/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">Unpluq</span>
+                    <span class="card__why">For people who want to use their own NFC tag or a barcode, with no subscription or account.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you use an iPhone or want a ready-made boxed product.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+            </div>
+            <h3 class="group" id="grp-5">Launchers and open source</h3>
+            <div class="leaving">
+                <a class="card" href="/alternatives/minimalist-phone/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">Minimalist Phone</span>
+                    <span class="card__why">For people who want free blocking, stronger unlock friction and control over feeds. Many keep a launcher and add Curbox.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> the plain home screen is the whole point for you.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+                <a class="card" href="/alternatives/detoxdroid/">
+                    <span class="card__from">Switching from</span>
+                    <span class="card__name">DetoxDroid</span>
+                    <span class="card__why">For people who want unlock challenges, Reels limits by count, Focus Mode and batched notifications.</span>
+                    <span class="card__stay"><strong>Might stay if:</strong> you want its zero-setup gray overlay, TikTok coverage or Emergency Brake.</span>
+                    <span class="card__go">Read the switch guide →</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">The same trade every time</h2>
+            <p>Whichever app you leave, the changes look much the same. Here they are in one place so the individual pages can get on with the details.</p>
+            <div class="tradeoff">
+                <div>
+                    <h3>What you gain</h3>
+                    <ul>
+                        <li>Block part of an app, such as Reels or Shorts, while the rest keeps working</li>
+                        <li>Unlock challenges that take real effort: QR or barcode, NFC tag, adaptive math, typing, stated intent, or waiting</li>
+                        <li>An app with no internet permission, no accounts and no ads</li>
+                        <li>Open source code under GPL v3 that anyone can read and build</li>
+                        <li>No subscription, with no features held back for a paid tier</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>What you may lose</h3>
+                    <ul>
+                        <li>An iPhone app. Curbox is Android plus a browser extension for now</li>
+                        <li>Website blocking in every browser. On Android it works in a <a href="/block-websites-on-android/">listed set of browsers</a>; others can be blocked as apps</li>
+                        <li>Built-in location rules. These come from a separate <a href="https://github.com/curbox-app/location-blocker">location blocker add-on</a></li>
+                        <li>In the Playstore variant, the UI Hider and anti-uninstall protection. Both are in the F-Droid and GitHub builds</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Want the whole picture at once?</h2>
+            <p>The <a href="/comparison.html">feature comparison table</a> puts Curbox next to Digital Wellbeing, Reef, DetoxDroid, Freedom, AppBlock, Stay Focused, ScreenZen and Lock Me Out, with links to each product's own documentation. If you care most about code you can check, the <a href="/open-source-app-blocker/">open source app blocker guide</a> covers the other open options too.</p>
+            <p>Ready to try it? Every official download is on the <a href="/download.html">downloads page</a>. Setup takes under five minutes.</p>
+        </section>
+    </main>
+</body>
+</html>

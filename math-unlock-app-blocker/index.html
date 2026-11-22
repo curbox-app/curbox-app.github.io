@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Solve Math to Unlock Apps: Android App Blocker · Curbox</title>
+    <meta
+      name="description"
+      content="Make yourself solve math problems before a blocked app opens. Pick how many answers and a level from 1 to 10; wrong answers add a wait. Try a sample here."
+    >
+    <link rel="canonical" href="https://curbox.app/math-unlock-app-blocker/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="Solve math to unlock apps on Android">
+    <meta property="og:description" content="Make yourself solve math problems before a blocked app opens. Pick how many answers and a level from 1 to 10; wrong answers add a wait. Try a sample here.">
+    <meta property="og:url" content="https://curbox.app/math-unlock-app-blocker/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Solve math to unlock apps on Android">
+    <meta name="twitter:description" content="Make yourself solve math problems before a blocked app opens. Pick how many answers and a level from 1 to 10; wrong answers add a wait. Try a sample here.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+
+      .demo { margin-top: 2rem; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #070707; }
+      .demo__bar { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem 1rem; border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+      .demo__body { padding: 1.5rem 1.25rem; }
+      .demo__level { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.8rem; }
+      .demo__level input[type=range] { flex: 1; min-width: 10rem; accent-color: #f5f5f3; }
+      .demo__level output { font-weight: 700; min-width: 4.5rem; }
+      .demo__q { margin: 1.5rem 0 1rem; font-family: var(--font-display); font-weight: 800; font-size: clamp(1.6rem, 1.2rem + 2.5vw, 2.6rem); line-height: 1.15; letter-spacing: -0.02em; overflow-wrap: anywhere; }
+      .demo__row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+      .demo__row input { flex: 1; min-width: 8rem; padding: 0.75rem 0.9rem; border-radius: 10px; border: 1px solid var(--line); background: #000; color: var(--fg); font-family: var(--font-mono); font-size: 1rem; }
+      .demo__row button { padding: 0.75rem 1.1rem; border-radius: 10px; border: 1px solid var(--fg); background: var(--fg); color: var(--bg); font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
+      .demo__row button.ghost { background: transparent; color: var(--fg); }
+      .demo__row button:disabled { opacity: 0.4; cursor: not-allowed; }
+      .demo__msg { min-height: 1.6rem; margin-top: 0.9rem; font-size: 0.92rem; color: var(--muted); }
+      .demo__dots { display: flex; gap: 0.4rem; margin-top: 0.4rem; }
+      .demo__dots i { width: 0.7rem; height: 0.7rem; border-radius: 50%; border: 1px solid var(--muted); }
+      .demo__dots i.on { background: var(--fg); border-color: var(--fg); }
+      .demo__foot { padding: 0.8rem 1rem; border-top: 1px solid var(--line); font-size: 0.8rem; color: var(--muted); }
+
+      .ladder { list-style: none; margin-top: 1.25rem; display: grid; gap: 4px; }
+      .ladder li { display: grid; grid-template-columns: 3rem 1fr; align-items: center; gap: 0.75rem; }
+      .ladder .lv { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); text-align: right; }
+      .ladder .bar { padding: 0.55rem 0.8rem; background: #111; border-radius: 6px; font-size: 0.9rem; position: relative; overflow: hidden; }
+      .ladder .bar::before { content: ''; position: absolute; inset: 0 auto 0 0; width: var(--w); background: rgba(255,255,255,0.08); }
+      .ladder .bar span { position: relative; }
+
+      .knobs { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1px; margin-top: 1.25rem; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+      .knob { background: var(--bg); padding: 1.1rem; }
+      .knob b { display: block; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
+      .knob span { font-size: 0.9rem; color: var(--muted); }
+      .presets p { padding-left: 1rem; border-left: 1px solid var(--line); }
+      .presets p + p { margin-top: 1rem; }
+
+      /* Shared FAQ + related (kept per page so each file stands alone). */
+      .faq__item { border-top: 1px solid var(--line); padding: 1rem 0; }
+      .faq__item:last-child { border-bottom: 1px solid var(--line); }
+      .faq__item summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; list-style: none; position: relative; padding-right: 2rem; }
+      .faq__item summary::-webkit-details-marker { display: none; }
+      .faq__item summary::after { content: '+'; position: absolute; right: 0; top: 0; font-family: var(--font-mono); color: var(--muted); }
+      .faq__item[open] summary::after { content: '\2212'; }
+      .faq__item p { margin-top: 0.6rem; color: var(--muted); }
+      .related { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+      .related a { padding: 0.5rem 0.9rem; border: 1px solid var(--line); border-radius: 999px; font-size: 0.85rem; text-decoration: none !important; }
+      .related a:hover { border-color: var(--fg); }
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Solve math to unlock apps",
+      "description": "Make yourself solve math problems before a blocked app opens. Pick how many answers and a level from 1 to 10; wrong answers add a wait. Try a sample here.",
+      "url": "https://curbox.app/math-unlock-app-blocker/",
+      "mainEntityOfPage": "https://curbox.app/math-unlock-app-blocker/",
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "inLanguage": "en",
+      "image": "https://curbox.app/icons/android-chrome-512x512.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://curbox.app/icons/android-chrome-512x512.png"
+        }
+      },
+      "about": {
+        "@id": "https://curbox.app/#app"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://curbox.app/#app",
+      "name": "Curbox",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "url": "https://curbox.app/download.html",
+      "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://curbox.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Features",
+          "item": "https://curbox.app/features.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Math to unlock",
+          "item": "https://curbox.app/math-unlock-app-blocker/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is there an app that makes you solve math to unlock apps?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Curbox for Android has an Adaptive Math unlock challenge. When you open a blocked app, you have to answer a set number of math questions correctly before the proceed button appears."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How hard are the math problems?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You choose a starting level from 1 to 10. Level 1 is simple arithmetic. Level 10 combines decimals, fractions, roots, powers and order of operations. You also choose how many correct answers are required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I get a math problem wrong?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A wrong answer adds a wait before you can try again. Guessing quickly does not get you in faster; it slows you down."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I just use a calculator?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You could, but by the time you have found the calculator and typed the problem in, you have already spent the pause the challenge was designed to create. The point is the interruption, not a test you must pass unaided."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use math unlock for Reels and Shorts too?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The warning screen, including Adaptive Math, can be configured on App Pause groups and on the Short-Form Video Content reducer."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/features.html">← All features</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Feature · Adaptive math unlock</span>
+            <h1 class="page__title">Solve math to unlock apps.</h1>
+            <p class="lead">Curbox is a free Android app blocker that can make you solve math to unlock apps. Open Instagram during a block and you get a few problems first. You choose how hard they are, from simple sums to fractions and roots, and every wrong answer adds a wait.</p>
+        </header>
+
+        <div class="demo" id="demo">
+            <div class="demo__bar"><span>Try it · sample problems</span><span>Demo only, not the app's generator</span></div>
+            <div class="demo__body">
+                <div class="demo__level">
+                    <label for="lvl">Level</label>
+                    <input type="range" id="lvl" min="1" max="10" value="3">
+                    <output id="lvlOut" for="lvl">Level 3</output>
+                </div>
+                <div class="demo__q" id="q" aria-live="polite">7 + 5 = ?</div>
+                <div class="demo__row">
+                    <input id="ans" inputmode="decimal" autocomplete="off" placeholder="Your answer" aria-label="Your answer">
+                    <button id="check" type="button">Check</button>
+                    <button id="skip" type="button" class="ghost">New problem</button>
+                </div>
+                <div class="demo__dots" aria-hidden="true"><i></i><i></i><i></i></div>
+                <p class="demo__msg" id="msg">Get three right to "unlock". Fractions can be typed as 3/4 or 0.75.</p>
+            </div>
+            <div class="demo__foot">This page makes up its own problems so you can feel each level. The questions in Curbox may look different. Nothing you type here leaves your browser.</div>
+        </div>
+
+        <section class="section">
+            <h2 class="section__title">How does math unlock work in an app blocker?</h2>
+            <p>When you open an app that Curbox is blocking, you see a pause screen instead of the app. If the unlock challenge is set to <strong>Adaptive Math</strong>, that screen shows a problem. Answer it and the next one appears. Once you reach the number of correct answers you chose, the proceed button shows up and you can continue.</p>
+            <p>A wrong answer does not just let you try again. It adds a wait first. That one rule matters more than the difficulty, because it stops you from mashing in guesses until one sticks. The quickest way through is to actually think, which is the whole point: by the time you have worked out a fraction, you are thinking, not scrolling.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">What do the levels look like, from 1 to 10?</h2>
+            <p>You pick a starting level. The docs describe the two ends of the range: level 1 is simple arithmetic, and level 10 combines decimals, fractions, roots, powers and order of operations. In between, problems get steadily more involved. The bars below are a rough guide to how the effort grows, not an exact description of the app's problem set.</p>
+            <ol class="ladder">
+                <li><span class="lv">L1</span><div class="bar" style="--w:10%"><span>Simple arithmetic. A breather, not a barrier.</span></div></li>
+                <li><span class="lv">L2</span><div class="bar" style="--w:20%"><span>Still quick, slightly bigger numbers.</span></div></li>
+                <li><span class="lv">L3</span><div class="bar" style="--w:30%"><span>Enough to need a moment of focus.</span></div></li>
+                <li><span class="lv">L4</span><div class="bar" style="--w:40%"><span>Mental maths you have to hold in your head.</span></div></li>
+                <li><span class="lv">L5</span><div class="bar" style="--w:50%"><span>A good default for most people.</span></div></li>
+                <li><span class="lv">L6</span><div class="bar" style="--w:60%"><span>More steps per problem.</span></div></li>
+                <li><span class="lv">L7</span><div class="bar" style="--w:70%"><span>You will slow down. That is the idea.</span></div></li>
+                <li><span class="lv">L8</span><div class="bar" style="--w:80%"><span>Takes real attention to get right first time.</span></div></li>
+                <li><span class="lv">L9</span><div class="bar" style="--w:90%"><span>Close to a homework question.</span></div></li>
+                <li><span class="lv">L10</span><div class="bar" style="--w:100%"><span>Decimals, fractions, roots, powers and order of operations together.</span></div></li>
+            </ol>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">The three settings that decide how hard it is</h2>
+            <div class="knobs">
+                <div class="knob"><b>Correct answers</b><span>How many problems you must get right. One is a speed bump; five is a commitment.</span></div>
+                <div class="knob"><b>Starting level</b><span>From 1 to 10. Start lower than you think: a challenge you resent is one you will turn off.</span></div>
+                <div class="knob"><b>Wrong-answer wait</b><span>Built in. A wrong answer adds a wait before your next try, so guessing costs time.</span></div>
+            </div>
+            <p style="margin-top:1.25rem;">You can also add a <strong>delay timer</strong> before the first problem appears, a <strong>custom message</strong> on the pause screen, and <strong>proceed limits</strong> that cap how many times you can get through in a window, however good you are at maths.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">How to set up math unlock in Curbox</h2>
+            <ol>
+                <li>Install Curbox from the <a href="/download.html">downloads page</a> and finish the short onboarding.</li>
+                <li>Go to <strong>Reducers → Apps</strong>, tap <strong>+</strong>, name the group and tap <strong>Select Apps</strong>.</li>
+                <li>Pick a blocking mode: <strong>Usage Based</strong> for a daily limit, <strong>Time Based</strong> for allowed hours, or <strong>On Each Open</strong> for every launch.</li>
+                <li>Tap <strong>Configure Warning Screen</strong>. Set the <strong>Unlock Challenge</strong> to <strong>Require effort to unlock</strong> and choose <strong>Adaptive Math</strong>.</li>
+                <li>Choose the number of correct answers and the starting level, then tap <strong>Done</strong>.</li>
+            </ol>
+            <p>For Reels and Shorts, do the same from <strong>Reducers → Short-Form Video Content</strong>. All options are in the <a href="/docs/unlock-challenges/overview/">unlock challenges guide</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Why math works as an unlock challenge (and when it doesn't)</h2>
+            <p>Scrolling and arithmetic use your attention in opposite ways. A feed asks for nothing: it pulls you along one swipe at a time. A math problem asks you to hold numbers in your head and work something out. Switching from one to the other is enough to jolt you out of autopilot, and once you are thinking clearly again, you can decide whether you really want the app.</p>
+            <p>Math is also a challenge you can do anywhere. A <a href="/qr-code-app-blocker/">QR code</a> in another room is stronger at home but useless on a train. Problems on the screen go wherever your phone goes.</p>
+            <p>The weakness is that you get better at it. If level 4 starts to feel automatic after a few weeks, raise the level or the number of answers. And if maths makes you anxious rather than thoughtful, pick a different challenge. Friction should feel like a pause, not a punishment.</p>
+        </section>
+
+        <section class="section presets">
+            <h2 class="section__title">Settings that work for different people</h2>
+            <p><strong>"I just open apps without noticing."</strong> Level 2, one correct answer, On Each Open. You will barely be slowed down, but you will notice every open, and noticing is half the battle.</p>
+            <p><strong>"I keep going past my daily limit."</strong> Level 5, three correct answers, Usage Based. Past the limit, each extra session costs a minute of thought.</p>
+            <p><strong>"Late-night scrolling is the problem."</strong> Level 8, three answers, Time Based outside your evening window. Fractions at midnight are a strong argument for sleep.</p>
+            <p><strong>"I hate maths."</strong> Then this is the wrong challenge for you, and that is fine. Try <a href="/qr-code-app-blocker/">scanning a QR code</a>, an <a href="/nfc-app-blocker/">NFC tag</a>, or typing a sentence instead. If the goal is to sit with the urge rather than solve it, look at <a href="/urge-surfing-app/">urge surfing</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Math unlock questions</h2>
+                <details class="faq__item">
+                    <summary>Is there an app that makes you solve math to unlock apps?</summary>
+                    <p>Yes. Curbox for Android has an Adaptive Math unlock challenge. When you open a blocked app, you have to answer a set number of math questions correctly before the proceed button appears.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>How hard are the math problems?</summary>
+                    <p>You choose a starting level from 1 to 10. Level 1 is simple arithmetic. Level 10 combines decimals, fractions, roots, powers and order of operations. You also choose how many correct answers are required.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>What happens if I get a math problem wrong?</summary>
+                    <p>A wrong answer adds a wait before you can try again. Guessing quickly does not get you in faster; it slows you down.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Can I just use a calculator?</summary>
+                    <p>You could, but by the time you have found the calculator and typed the problem in, you have already spent the pause the challenge was designed to create. The point is the interruption, not a test you must pass unaided.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Can I use math unlock for Reels and Shorts too?</summary>
+                    <p>Yes. The warning screen, including Adaptive Math, can be configured on App Pause groups and on the Short-Form Video Content reducer.</p>
+                </details>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <div class="related">
+                <a href="/qr-code-app-blocker/">QR code unlock</a>
+                <a href="/nfc-app-blocker/">NFC app blocker</a>
+                <a href="/urge-surfing-app/">Urge surfing</a>
+                <a href="/app-blocker-for-adhd/">App blocker for ADHD</a>
+                <a href="/app-blocker-for-studying/">App blocker for studying</a>
+                <a href="/features.html">All features</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+    (function () {
+      var lvl = document.getElementById('lvl'), out = document.getElementById('lvlOut');
+      var q = document.getElementById('q'), ans = document.getElementById('ans');
+      var check = document.getElementById('check'), skip = document.getElementById('skip');
+      var msg = document.getElementById('msg'), dots = document.querySelectorAll('.demo__dots i');
+      var answer = 0, right = 0, timer = null;
+
+      function r(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+      function pick(list) { return list[Math.floor(Math.random() * list.length)]; }
+
+      // Each level returns [question text, numeric answer]. Purely illustrative.
+      var gen = {
+        1: function () { var a = r(1, 9), b = r(1, 9); return [a + ' + ' + b, a + b]; },
+        2: function () { var a = r(10, 30), b = r(1, 9); return pick([[a + ' + ' + b, a + b], [a + ' − ' + b, a - b]]); },
+        3: function () { var a = r(20, 99), b = r(11, 49); return pick([[a + ' + ' + b, a + b], [a + ' − ' + b, a - b]]); },
+        4: function () { var a = r(3, 12), b = r(3, 12); return [a + ' × ' + b, a * b]; },
+        5: function () { var b = r(3, 12), c = r(3, 12); return [(b * c) + ' ÷ ' + b, c]; },
+        6: function () { var a = r(2, 20), b = r(2, 9), c = r(2, 9); return [a + ' + ' + b + ' × ' + c, a + b * c]; },
+        7: function () { var a = r(11, 99) / 10, b = r(11, 99) / 10; return [a.toFixed(1) + ' + ' + b.toFixed(1), Math.round((a + b) * 10) / 10]; },
+        8: function () { var d = pick([2, 3, 4, 5, 8]), a = r(1, d - 1), b = r(1, d - 1); return [a + '/' + d + ' + ' + b + '/' + d, (a + b) / d]; },
+        9: function () { var s = r(2, 12), p = r(2, 9), k = r(2, 5); return pick([['√' + (s * s) + ' + ' + p + '²', s + p * p], [k + '³ − √' + (s * s), k * k * k - s]]); },
+        10: function () { var s = r(2, 9), d = pick([2, 4, 5]), a = r(1, d - 1), m = r(2, 6), x = r(11, 49) / 10;
+          return ['(√' + (s * s) + ' + ' + a + '/' + d + ') × ' + m + ' − ' + x.toFixed(1), Math.round(((s + a / d) * m - x) * 100) / 100]; }
+      };
+
+      function parse(v) {
+        v = v.replace(',', '.').trim();
+        if (/^-?\d+(\.\d+)?\s*\/\s*\d+(\.\d+)?$/.test(v)) { var p = v.split('/'); return parseFloat(p[0]) / parseFloat(p[1]); }
+        return v === '' ? NaN : Number(v);
+      }
+      function paint() { dots.forEach(function (d, i) { d.classList.toggle('on', i < right); }); }
+      function next() {
+        var g = gen[lvl.value](); q.textContent = g[0] + ' = ?'; answer = g[1]; ans.value = '';
+      }
+      function reset() { right = 0; paint(); next(); msg.textContent = 'Get three right to "unlock". Fractions can be typed as 3/4 or 0.75.'; }
+
+      lvl.addEventListener('input', function () { out.textContent = 'Level ' + lvl.value; reset(); });
+      skip.addEventListener('click', next);
+      ans.addEventListener('keydown', function (e) { if (e.key === 'Enter') check.click(); });
+      check.addEventListener('click', function () {
+        if (timer) return;
+        var v = parse(ans.value);
+        if (isNaN(v)) { msg.textContent = 'Type a number first.'; return; }
+        if (Math.abs(v - answer) < 0.011) {
+          right++; paint();
+          if (right >= 3) { msg.textContent = 'Unlocked. In the app, the proceed button would appear now. Took a moment, didn’t it?'; right = 0; setTimeout(paint, 1200); }
+          else { msg.textContent = 'Correct. ' + (3 - right) + ' to go.'; }
+          next();
+        } else {
+          var t = 5; check.disabled = true;
+          msg.textContent = 'Not quite. Wrong answers add a wait: ' + t + 's';
+          timer = setInterval(function () {
+            t--; if (t > 0) { msg.textContent = 'Not quite. Wrong answers add a wait: ' + t + 's'; return; }
+            clearInterval(timer); timer = null; check.disabled = false; msg.textContent = 'Try again.';
+          }, 1000);
+        }
+      });
+      next();
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Clearspace Alternative for Android, Free · Curbox</title>
+    <meta
+      name="description"
+      content="Looking for a Clearspace alternative on Android? Compare its breathing pause, push-ups and challenges with Curbox, a free open-source blocker. No account."
+    >
+    <link rel="canonical" href="https://curbox.app/alternatives/clearspace/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="A Clearspace alternative for Android with no subscription">
+    <meta property="og:description" content="Looking for a Clearspace alternative on Android? Compare its breathing pause, push-ups and challenges with Curbox, a free open-source blocker. No account.">
+    <meta property="og:url" content="https://curbox.app/alternatives/clearspace/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Clearspace alternative for Android with no subscription">
+    <meta name="twitter:description" content="Looking for a Clearspace alternative on Android? Compare its breathing pause, push-ups and challenges with Curbox, a free open-source blocker. No account.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--cs { max-width: 56rem; }
+      .page--cs .lead { max-width: 40rem; }
+
+      /* Quiz */
+      .quiz { margin-top: 2.25rem; padding: 1.4rem; border-radius: 16px; background: #0c0c0c; border: 1px solid var(--line); }
+      .quiz__title { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+      .quiz fieldset { border: 0; padding: 0.9rem 0; border-bottom: 1px solid var(--line); }
+      .quiz fieldset:last-of-type { border-bottom: 0; }
+      .quiz legend { font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; line-height: 1.3; padding: 0; margin-bottom: 0.6rem; }
+      .quiz__opts { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+      .quiz__opts label { cursor: pointer; }
+      .quiz__opts input { position: absolute; opacity: 0; pointer-events: none; }
+      .quiz__opts span {
+        display: inline-block; padding: 0.45rem 0.95rem; border: 1px solid var(--line); border-radius: 999px;
+        font-family: var(--font-mono); font-size: 0.78rem; transition: background 0.15s ease, color 0.15s ease;
+      }
+      .quiz__opts input:checked + span { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+      .quiz__opts input:focus-visible + span { outline: 2px solid var(--fg); outline-offset: 2px; }
+      .verdict-box { margin-top: 1rem; padding: 1rem 1.1rem; border-radius: 10px; background: var(--fg); color: var(--bg); }
+      .verdict-box[hidden] { display: none; }
+      .verdict-box strong { font-family: var(--font-display); font-size: 1.15rem; display: block; margin-bottom: 0.3rem; }
+      .verdict-box p { font-size: 0.93rem; }
+      .verdict-box a { color: var(--bg) !important; text-decoration-color: var(--bg) !important; }
+      .quiz__hint { margin-top: 0.75rem; font-size: 0.82rem; color: var(--muted); }
+
+      /* Mechanic cards: 2-up grid, each with a "them" chip and "us" chip */
+      .mech { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+      .mech article { padding: 1.15rem; border: 1px solid var(--line); border-radius: 12px; display: flex; flex-direction: column; gap: 0.6rem; }
+      .mech h3 { font-family: var(--font-display); font-size: 1.12rem; line-height: 1.2; }
+      .chip { align-self: flex-start; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 4px; }
+      .chip--them { border: 1px solid var(--line); color: var(--muted); }
+      .chip--us { background: var(--fg); color: var(--bg); }
+      .chip--gap { border: 1px dashed var(--muted); color: var(--muted); }
+      .mech p { font-size: 0.93rem; color: var(--muted); }
+      .mech p strong { color: var(--fg); font-weight: 500; }
+
+      /* Recipe as a single tall receipt-like strip */
+      .recipe { margin-top: 1.25rem; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+      .recipe div { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; padding: 0.85rem 1rem; border-bottom: 1px solid var(--line); }
+      .recipe div:last-child { border-bottom: 0; }
+      .recipe dt { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 0.2rem; }
+      .recipe dd { font-size: 0.95rem; }
+
+      .data { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.25rem; }
+      .data h3 { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+
+      .faq__item { border-top: 1px solid var(--line); }
+      .faq__item:last-child { border-bottom: 1px solid var(--line); }
+      .faq__item summary { cursor: pointer; padding: 0.95rem 0; font-weight: 500; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+      .faq__item summary::-webkit-details-marker { display: none; }
+      .faq__item summary::after { content: '↓'; font-family: var(--font-mono); color: var(--muted); }
+      .faq__item[open] summary::after { content: '↑'; }
+      .faq__a { padding-bottom: 1rem; color: var(--muted); font-size: 0.95rem; }
+
+      .sources { font-size: 0.85rem; color: var(--muted); }
+      .rel { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin-top: 0.75rem; }
+      .rel a { display: inline-block; padding: 0.5rem 0.9rem; border-radius: 8px; background: #111; text-decoration: none !important; font-size: 0.9rem; }
+      .rel a:hover { background: #1c1c1c; }
+
+      @media (max-width: 42rem) {
+        .mech, .data { grid-template-columns: 1fr; }
+        .recipe div { grid-template-columns: 1fr; gap: 0.2rem; }
+        .quiz { padding: 1.1rem; }
+      }
+    </style>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "headline": "A Clearspace alternative for Android, without the subscription", "description": "Looking for a Clearspace alternative on Android? Compare its breathing pause, push-ups and challenges with Curbox, a free open-source blocker. No account.", "url": "https://curbox.app/alternatives/clearspace/", "mainEntityOfPage": "https://curbox.app/alternatives/clearspace/", "datePublished": "2026-11-22", "dateModified": "2026-11-22", "inLanguage": "en", "author": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/"}, "publisher": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/", "logo": {"@type": "ImageObject", "url": "https://curbox.app/icons/android-chrome-512x512.png"}}, "about": [{"@type": "SoftwareApplication", "name": "Clearspace"}, {"@type": "SoftwareApplication", "name": "Curbox"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Clearspace available on Android?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Clearspace is on Google Play from clearspace technologies, inc., as well as on iPhone. Personal and Family are separate apps."}}, {"@type": "Question", "name": "Is Clearspace free?", "acceptedAnswer": {"@type": "Answer", "text": "It is free to download, with premium features sold as in-app purchases. Curbox is free with no paid tier and no subscription."}}, {"@type": "Question", "name": "Can Curbox make me do push-ups to unlock an app?", "acceptedAnswer": {"@type": "Answer", "text": "No. Curbox does not count exercise with the camera. It can make unlocking take effort in other ways: scanning a QR code or barcode, tapping an NFC tag, solving adaptive math, typing a sentence, or writing down your intent."}}, {"@type": "Question", "name": "Does Curbox have a breathing pause like Clearspace?", "acceptedAnswer": {"@type": "Answer", "text": "It has the building blocks: a Wait to unlock screen, a vibrating delay timer before the screen appears, and a custom message such as \"Breathe first.\" Together they recreate the pause, though there is no guided breathing animation."}}, {"@type": "Question", "name": "Does Curbox need an account?", "acceptedAnswer": {"@type": "Answer", "text": "No. There are no accounts, and the Android app has no internet permission, so usage data stays on your phone."}}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Alternatives", "item": "https://curbox.app/alternatives/"}, {"@type": "ListItem", "position": 3, "name": "Clearspace alternative", "item": "https://curbox.app/alternatives/clearspace/"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Curbox", "operatingSystem": "Android", "applicationCategory": "LifestyleApplication", "url": "https://curbox.app/download.html", "license": "https://www.gnu.org/licenses/gpl-3.0.html", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--cs">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/alternatives/">← All alternatives</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Alternatives · Clearspace</span>
+            <h1 class="page__title">A Clearspace alternative for Android, without the subscription.</h1>
+            <p class="lead">Clearspace puts a short pause in front of the apps that pull you in, then lets you earn time back with breathing or push-ups. It is on Android and iPhone, with premium features sold as in-app purchases. If you want a free Clearspace alternative on Android with no account and no data leaving your phone, Curbox covers most of the same ground. Answer five quick questions to see whether switching makes sense for you.</p>
+        </header>
+
+        <form class="quiz" id="quiz" aria-labelledby="quiz-title" onsubmit="return false">
+            <span class="quiz__title" id="quiz-title">Should you switch? Five questions</span>
+            <fieldset>
+                <legend>Do you need it on an iPhone too?</legend>
+                <div class="quiz__opts">
+                    <label><input type="radio" name="q1" value="stay"><span>Yes</span></label>
+                    <label><input type="radio" name="q1" value="switch"><span>No, Android only</span></label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Are friend challenges or push-ups the main reason you use it?</legend>
+                <div class="quiz__opts">
+                    <label><input type="radio" name="q2" value="stay"><span>Yes, that is the fun part</span></label>
+                    <label><input type="radio" name="q2" value="switch"><span>No, I just want the pause</span></label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Would you rather not pay for premium?</legend>
+                <div class="quiz__opts">
+                    <label><input type="radio" name="q3" value="switch"><span>Yes</span></label>
+                    <label><input type="radio" name="q3" value="neutral"><span>Paying is fine</span></label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Does it matter whether your usage data leaves the phone?</legend>
+                <div class="quiz__opts">
+                    <label><input type="radio" name="q4" value="switch"><span>Yes</span></label>
+                    <label><input type="radio" name="q4" value="neutral"><span>Not really</span></label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Is the whole app the problem, or one part of it, like Reels?</legend>
+                <div class="quiz__opts">
+                    <label><input type="radio" name="q5" value="switch"><span>One part</span></label>
+                    <label><input type="radio" name="q5" value="neutral"><span>The whole app</span></label>
+                </div>
+            </fieldset>
+            <div class="verdict-box" id="verdict" hidden aria-live="polite"><strong></strong><p></p></div>
+            <p class="quiz__hint" id="quiz-hint">Pick an answer for each question. Nothing is sent anywhere; it runs in your browser.</p>
+        </form>
+
+        <section class="section">
+            <h2 class="section__title">What Clearspace does</h2>
+            <p>Clearspace, from clearspace technologies, inc., is built around one idea: when you tap an app you chose, decide whether to go ahead after a deep breath or back out. Its website describes a short pause that shows your remaining uses for the day, and two ways to earn more time when you run out: <strong>Push-Up to Scroll</strong>, where a set of push-ups buys more minutes, and <strong>Breathe to Scroll</strong>, a guided breathing exercise. It also offers friend challenges with a leaderboard, focus schedules, daily streaks, screen time reporting, and accountability partners. Personal and Family are separate apps.</p>
+            <p>On Google Play it is listed as free with in-app purchases and more than 100,000 downloads. Its Data safety section says it may collect location, personal info, and other data types, and may share some of them with third parties. Data is encrypted in transit and you can request deletion.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Each Clearspace mechanic, and its Curbox counterpart</h2>
+            <div class="mech">
+                <article>
+                    <span class="chip chip--them">Clearspace</span>
+                    <h3>Pause before the app opens</h3>
+                    <span class="chip chip--us">Curbox</span>
+                    <p>Set the app's warning screen to <strong>Wait to unlock</strong>, with a fixed or unpredictable dynamic wait. Add the <strong>delay timer</strong>, a countdown during which the screen brightens and the phone vibrates, and a <strong>custom message</strong> such as "Breathe first."</p>
+                </article>
+                <article>
+                    <span class="chip chip--them">Clearspace</span>
+                    <h3>Limited uses per day</h3>
+                    <span class="chip chip--us">Curbox</span>
+                    <p><strong>Proceed Limits</strong> cap how many times you can get through a block within a time window. Once you hit the cap, the proceed button disappears until the window resets. Pair it with <strong>On Each Open</strong> mode so every launch counts.</p>
+                </article>
+                <article>
+                    <span class="chip chip--them">Clearspace</span>
+                    <h3>Breathe or do push-ups to earn time</h3>
+                    <span class="chip chip--gap">Curbox: different</span>
+                    <p>Curbox has no camera-counted exercise. The nearest ideas are effort challenges: <strong>QR or Barcode Scan</strong> can grant a set amount of scrolling time, and <strong>adaptive math</strong>, <strong>Type a Sentence</strong>, or <strong>State Your Intent</strong> make you work for it. <a href="/urge-surfing-app/">Urge Surfing</a> offers three minutes of movement, but to ride out a craving rather than to buy minutes.</p>
+                </article>
+                <article>
+                    <span class="chip chip--them">Clearspace</span>
+                    <h3>Challenges with friends</h3>
+                    <span class="chip chip--gap">Curbox: no</span>
+                    <p>Curbox has no accounts and no social features, so there is nothing to compare against friends. If a leaderboard keeps you honest, that is a real reason to stay.</p>
+                </article>
+                <article>
+                    <span class="chip chip--them">Clearspace</span>
+                    <h3>Focus schedules</h3>
+                    <span class="chip chip--us">Curbox</span>
+                    <p><strong>App Pause</strong> in Time Based mode blocks apps outside the hours you choose, and <strong>Focus Mode</strong> runs timed sessions with optional Pomodoro rounds and Do Not Disturb.</p>
+                </article>
+                <article>
+                    <span class="chip chip--them">Clearspace</span>
+                    <h3>Streaks and reports</h3>
+                    <span class="chip chip--us">Curbox</span>
+                    <p>Focus Stats show your day streak, completion rate, and total focus time. The Usage tab shows daily and weekly screen time, per-app and per-website stats, a heatmap, and CSV export.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Rebuild the Clearspace pause in Curbox</h2>
+            <p>This recipe recreates "pause, see what is left, then decide" for Instagram. Change the app and numbers to suit you.</p>
+            <dl class="recipe">
+                <div><dt>Where</dt><dd>Reducers → Apps → <strong>+</strong></dd></div>
+                <div><dt>Apps</dt><dd>Instagram, plus anything you open on reflex</dd></div>
+                <div><dt>Mode</dt><dd><strong>On Each Open</strong>, so the pause shows on every launch</dd></div>
+                <div><dt>Warning screen</dt><dd>Configure Warning Screen → <strong>Wait to unlock</strong>, fixed time</dd></div>
+                <div><dt>Delay timer</dt><dd>10 seconds. The vibration is the cue to take a breath</dd></div>
+                <div><dt>Message</dt><dd>"Is this on purpose?" Add a few lines and Curbox can pick one at random</dd></div>
+                <div><dt>Proceed Limit</dt><dd>A small number of proceeds per day, like a daily uses budget</dd></div>
+                <div><dt>Optional</dt><dd>A <a href="/mindful-reminder-when-opening-apps/">Mindful Message</a> showing <code>{app_usage_today}</code> while you scroll</dd></div>
+            </dl>
+            <p style="margin-top:1rem">If the pause is not enough, swap the wait for an effort challenge, or add a <a href="/block-instagram-reels/">Reels limit</a> so the rest of Instagram stays open.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Data and cost, side by side</h2>
+            <div class="data">
+                <div>
+                    <h3>Clearspace</h3>
+                    <ul>
+                        <li>Free download, premium via in-app purchases</li>
+                        <li>Play Data safety: may collect location and personal info, and may share some data types with third parties</li>
+                        <li>Source code not published</li>
+                        <li>Android and iPhone</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Curbox</h3>
+                    <ul>
+                        <li>Free, no paid tier</li>
+                        <li>No internet permission in the Android app, no accounts, no trackers</li>
+                        <li>Open source under GPL v3</li>
+                        <li>Android, plus a browser extension for Chrome and Firefox</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">When Clearspace is the better pick</h2>
+            <p>Stay with Clearspace if you use an iPhone, if the push-ups are what make it work for you, or if friend challenges and accountability partners keep you going. Curbox deliberately has no accounts, which means no social layer at all. Clearspace also has a separate Family app; Curbox is built for managing your own phone.</p>
+            <p>Switch if you want the pause and the limits without paying, if you would rather your usage never leave the phone, or if you need finer control, such as blocking only Reels or Shorts, or <a href="/hide-youtube-recommendations/">hiding YouTube recommendations</a> (UI Hider is in the F-Droid variant).</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Clearspace alternative FAQ</h2>
+                <details class="faq__item">
+                    <summary>Is Clearspace available on Android?</summary>
+                    <div class="faq__a"><p>Yes. Clearspace is on Google Play from clearspace technologies, inc., as well as on iPhone. Personal and Family are separate apps.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Is Clearspace free?</summary>
+                    <div class="faq__a"><p>It is free to download, with premium features sold as in-app purchases. Curbox is free with no paid tier and no subscription.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Can Curbox make me do push-ups to unlock an app?</summary>
+                    <div class="faq__a"><p>No. Curbox does not count exercise with the camera. It can make unlocking take effort in other ways: scanning a QR code or barcode, tapping an NFC tag, solving adaptive math, typing a sentence, or writing down your intent.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Does Curbox have a breathing pause like Clearspace?</summary>
+                    <div class="faq__a"><p>It has the building blocks: a Wait to unlock screen, a vibrating delay timer before the screen appears, and a custom message such as "Breathe first." Together they recreate the pause, though there is no guided breathing animation.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Does Curbox need an account?</summary>
+                    <div class="faq__a"><p>No. There are no accounts, and the Android app has no internet permission, so usage data stays on your phone.</p></div>
+                </details>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Sources (checked November 2026)</h2>
+            <ul class="sources">
+                <li><a href="https://www.getclearspace.com/" rel="noopener noreferrer" target="_blank">Clearspace homepage</a>: pause with remaining uses, Push-Up to Scroll, Breathe to Scroll, friend challenges, focus schedules, streaks, Personal and Family apps</li>
+                <li><a href="https://play.google.com/store/apps/details?id=com.clearspace.app" rel="noopener noreferrer" target="_blank">Clearspace on Google Play</a>: developer, in-app purchases, downloads, features, Data safety summary</li>
+                <li>Curbox: <a href="/docs/unlock-challenges/overview/">Unlock Challenges</a>, <a href="/docs/reducers/app-pause/">App Pause</a>, <a href="/privacy.html">privacy policy</a></li>
+            </ul>
+            <p class="sources" style="margin-top:0.5rem">We could not confirm Clearspace's current Android prices, so this page does not quote them. Check the Play listing for prices in your region.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <ul class="rel">
+                <li><a href="/alternatives/one-sec/">one sec alternative</a></li>
+                <li><a href="/alternatives/screenzen/">ScreenZen alternative</a></li>
+                <li><a href="/alternatives/brick/">Brick alternative</a></li>
+                <li><a href="/alternatives/digital-wellbeing/">Digital Wellbeing alternative</a></li>
+                <li><a href="/mindful-reminder-when-opening-apps/">Mindful reminders</a></li>
+                <li><a href="/math-unlock-app-blocker/">Math unlock</a></li>
+                <li><a href="/comparison.html">Feature comparison</a></li>
+                <li><a href="/download.html">Download Curbox</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+      (function () {
+        var form = document.getElementById('quiz');
+        var box = document.getElementById('verdict');
+        var hint = document.getElementById('quiz-hint');
+        form.addEventListener('change', function () {
+          var stay = 0, sw = 0, answered = 0;
+          for (var i = 1; i <= 5; i++) {
+            var c = form.querySelector('input[name="q' + i + '"]:checked');
+            if (!c) continue;
+            answered++;
+            if (c.value === 'stay') stay++;
+            if (c.value === 'switch') sw++;
+          }
+          if (answered < 5) { box.hidden = true; hint.hidden = false; return; }
+          hint.hidden = true;
+          box.hidden = false;
+          var t = box.querySelector('strong'), p = box.querySelector('p');
+          if (stay >= 1 && sw <= 2) {
+            t.textContent = 'Clearspace probably fits you better.';
+            p.innerHTML = 'You rely on something Curbox does not do: iPhone support or the social and exercise side. Staying put is a fine answer.';
+          } else if (stay >= 1) {
+            t.textContent = 'It is close.';
+            p.innerHTML = 'You would lose something you use, but gain privacy and finer controls. Try the pause recipe below in Curbox for a week before deciding.';
+          } else {
+            t.textContent = 'Curbox is worth a try.';
+            p.innerHTML = 'Everything you said points the same way. Follow the recipe below, then grab Curbox from the <a href="/download.html">downloads page</a>.';
+          }
+        });
+      })();
+    </script>
+</body>
+</html>

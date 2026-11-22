@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Reminder When Opening an App on Android · Curbox</title>
+    <meta
+      name="description"
+      content="Show a message to yourself when you open Instagram, TikTok or any app on Android, with live screen time inside it. Try the previewer and copy examples."
+    >
+    <link rel="canonical" href="https://curbox.app/mindful-reminder-when-opening-apps/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="Show yourself a reminder when you open an app">
+    <meta property="og:description" content="Show a message to yourself when you open Instagram, TikTok or any app on Android, with live screen time inside it. Try the previewer and copy examples.">
+    <meta property="og:url" content="https://curbox.app/mindful-reminder-when-opening-apps/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Show yourself a reminder when you open an app">
+    <meta name="twitter:description" content="Show a message to yourself when you open Instagram, TikTok or any app on Android, with live screen time inside it. Try the previewer and copy examples.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--remind { max-width: 66rem; }
+      .page--remind header, .page--remind .section { max-width: var(--measure); }
+      .page--remind .section.wide { max-width: none; }
+
+      .studio {
+        display: grid;
+        grid-template-columns: 1fr minmax(15rem, 18rem);
+        gap: 0;
+        margin-top: 2.25rem;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .studio__controls { padding: 1.25rem; border-right: 1px solid var(--line); }
+      .studio__label { display: block; margin: 1rem 0 0.4rem; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+      .studio__label:first-child { margin-top: 0; }
+      .studio textarea, .studio select {
+        width: 100%; background: #0b0b0b; color: var(--fg);
+        border: 1px solid var(--line); border-radius: 8px; padding: 0.7rem;
+        font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.5;
+      }
+      .studio textarea { min-height: 7.5rem; resize: vertical; }
+      .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+      .chips button, .lib button, .studio__next {
+        cursor: pointer; background: transparent; color: var(--fg);
+        border: 1px solid var(--line); border-radius: 999px; padding: 0.35rem 0.7rem;
+        font-family: var(--font-mono); font-size: 0.7rem;
+      }
+      .chips button:hover, .lib button:hover, .studio__next:hover { border-color: var(--fg); }
+      .knobs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+      .knobs input[type=range] { width: 100%; accent-color: #f5f5f3; }
+      .knobs input[type=color] { width: 100%; height: 2rem; border: 1px solid var(--line); border-radius: 6px; background: #0b0b0b; }
+      .studio__hint { margin-top: 1rem; font-size: 0.8rem; color: var(--muted); }
+
+      .studio__stage { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.9rem; padding: 1.5rem 1rem; background: #050505; }
+      .phone { position: relative; width: 12.5rem; aspect-ratio: 9 / 18.5; border: 1px solid #333; border-radius: 26px; overflow: hidden; background: linear-gradient(160deg, #262626, #0d0d0d 60%); }
+      .phone__app { position: absolute; top: 0.9rem; left: 0; right: 0; text-align: center; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: #777; text-transform: uppercase; }
+      .phone__feed { position: absolute; inset: 2.4rem 0.8rem 0.8rem; display: grid; gap: 0.5rem; grid-template-rows: 1fr 1fr 1fr; }
+      .phone__feed span { border-radius: 8px; background: #1d1d1d; }
+      .phone__msg { position: absolute; left: 0.7rem; right: 0.7rem; top: 42%; padding: 0.8rem; border-radius: 10px; text-align: center; line-height: 1.3; font-family: var(--font-display); font-weight: 700; color: #fff; overflow-wrap: anywhere; }
+      .studio__cap { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; color: var(--muted); text-align: center; text-transform: uppercase; }
+
+      .ph-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.92rem; }
+      .ph-table td { padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+      .ph-table td:first-child { white-space: nowrap; }
+
+      .lib { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
+      .lib section { padding: 1.1rem 1.1rem 0.6rem; border-radius: 12px; background: #0b0b0b; border: 1px solid var(--line); }
+      .lib h3 { font-family: var(--font-display); font-size: 1.1rem; }
+      .lib p.lib__when { font-size: 0.85rem; color: var(--muted); margin: 0.25rem 0 0.6rem; }
+      .lib ul { list-style: none; }
+      .lib li { display: flex; justify-content: space-between; gap: 0.75rem; align-items: flex-start; padding: 0.6rem 0 !important; margin: 0 !important; border-top: 1px solid var(--line); font-size: 0.9rem; }
+      .lib li::before { content: none !important; }
+      .lib li q { quotes: none; }
+      .lib button { flex: none; }
+
+      .two-places { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.25rem; }
+      .two-places div { padding-top: 0.9rem; border-top: 2px solid var(--fg); }
+      .two-places h3 { font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 0.4rem; }
+      .two-places p { font-size: 0.93rem; color: #cfcfcc; }
+
+      .faq__item { border-top: 1px solid var(--line); padding: 1rem 0; }
+      .faq__item summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
+      .faq__item p { margin-top: 0.6rem; color: #cfcfcc; }
+
+      @media (max-width: 46rem) {
+        .studio { grid-template-columns: 1fr; }
+        .studio__controls { border-right: 0; border-bottom: 1px solid var(--line); }
+        .two-places { grid-template-columns: 1fr; }
+        .ph-table td:first-child { white-space: normal; }
+      }
+      .steps-ol { list-style: decimal; padding-left: 1.25rem; margin: 1rem 0; }
+      .steps-ol li { padding-left: 0.35rem !important; }
+      .steps-ol li::before { content: none !important; }
+
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Show a reminder when you open an app on Android",
+      "description": "Show a message to yourself when you open Instagram, TikTok or any app on Android, with live screen time inside it. Try the previewer and copy examples.",
+      "url": "https://curbox.app/mindful-reminder-when-opening-apps/",
+      "mainEntityOfPage": "https://curbox.app/mindful-reminder-when-opening-apps/",
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "inLanguage": "en",
+      "image": "https://curbox.app/icons/android-chrome-512x512.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://curbox.app/icons/android-chrome-512x512.png"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I get a reminder when I open an app on Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Install Curbox, then go to Reducers, open Gentle Prompts, turn on Enable Mindful Messages, choose the apps, and write your message."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can the reminder show how long I've been on the app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Use the {live_session_duration} placeholder for the current session, or {app_usage_today} for the total in that app today. Both update live each time the message appears."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a mindful message block the app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Mindful Messages is a nudge: the app stays usable with your message on top. To block an app after a limit, use App Pause, which can show its own custom message on the pause screen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I have more than one message?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Write one message per line and each line shows separately. The warning screen can also pick a random message from your list."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I change how the message looks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can set the text size, text opacity and background color so the message is noticeable without covering what you need to see."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://curbox.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Features",
+          "item": "https://curbox.app/features.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Mindful reminders",
+          "item": "https://curbox.app/mindful-reminder-when-opening-apps/"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Curbox",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "url": "https://curbox.app/download.html",
+      "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  ]
+}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--remind">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/features.html">← All features</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Feature · Mindful Messages</span>
+            <h1 class="page__title">Show a reminder when you open an app.</h1>
+            <p class="lead">Curbox can show you a message you wrote yourself, right on top of Instagram, TikTok or any app you choose, as a reminder every time you open it. The message can include live numbers, like how long you have been scrolling, so the reminder is about today and not a generic slogan. Write one below and see how it looks.</p>
+        </header>
+
+        <section class="section wide" aria-labelledby="try">
+            <h2 class="section__title" id="try">Try a mindful message</h2>
+            <p style="max-width:var(--measure)">This preview runs in your browser and uses made-up sample numbers. In the app, the placeholders fill in with your real usage each time the message appears.</p>
+            <div class="studio">
+                <div class="studio__controls">
+                    <label class="studio__label" for="msg">Messages, one per line</label>
+                    <textarea id="msg" spellcheck="false">You've spent {app_usage_today} here today.
+Is this what you opened your phone for?
+{reel_count} videos so far. Enough?</textarea>
+                    <span class="studio__label">Insert a placeholder</span>
+                    <div class="chips" id="chips">
+                        <button type="button" data-ph="{app_usage_today}">{app_usage_today}</button>
+                        <button type="button" data-ph="{screentime_today}">{screentime_today}</button>
+                        <button type="button" data-ph="{live_session_duration}">{live_session_duration}</button>
+                        <button type="button" data-ph="{reel_count}">{reel_count}</button>
+                    </div>
+                    <label class="studio__label" for="app">Show it on</label>
+                    <select id="app">
+                        <option>Instagram</option><option>TikTok</option><option>YouTube</option><option>X</option><option>Reddit</option>
+                    </select>
+                    <span class="studio__label">Appearance</span>
+                    <div class="knobs">
+                        <label><span class="studio__label" style="margin:0 0 0.3rem">Size</span><input id="size" type="range" min="12" max="26" value="17"></label>
+                        <label><span class="studio__label" style="margin:0 0 0.3rem">Opacity</span><input id="opacity" type="range" min="30" max="100" value="100"></label>
+                        <label><span class="studio__label" style="margin:0 0 0.3rem">Background</span><input id="bg" type="color" value="#111111"></label>
+                    </div>
+                    <p class="studio__hint">Sample values: {app_usage_today} = 42 min, {screentime_today} = 3 h 05 min, {live_session_duration} = 11 min, {reel_count} = 37.</p>
+                </div>
+                <div class="studio__stage">
+                    <div class="phone" aria-live="polite">
+                        <div class="phone__app" id="appname">Instagram</div>
+                        <div class="phone__feed" aria-hidden="true"><span></span><span></span><span></span></div>
+                        <div class="phone__msg" id="out"></div>
+                    </div>
+                    <button type="button" class="studio__next" id="next">Next line →</button>
+                    <span class="studio__cap">Preview with sample numbers</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="how">
+            <h2 class="section__title" id="how">How the mindful message app feature works</h2>
+            <p>In Curbox this feature is called <strong>Mindful Messages</strong>, and it lives under <strong>Gentle Prompts</strong> in the Reducers tab. It is a nudge, not a block. The app opens as usual, and your message sits on top of it for the whole time you use it, so the question you wrote for yourself stays in view instead of flashing past.</p>
+            <ol class="steps-ol">
+                <li>Install Curbox from the <a href="/download.html">downloads page</a> and finish onboarding.</li>
+                <li>Open <strong>Reducers → Gentle Prompts</strong> and switch on <strong>Enable Mindful Messages</strong>.</li>
+                <li>Tap <strong>Select Apps</strong> and choose the apps that should show the reminder.</li>
+                <li>Write your messages in the <strong>MESSAGES</strong> area, one per line. Each line shows as its own message.</li>
+                <li>Insert placeholders where you want live numbers, then set the text size, text opacity and background color.</li>
+            </ol>
+            <p>A dark background with large text tends to be the most noticeable without feeling harsh. Full details are in the <a href="/docs/reducers/mindful-messages/">Mindful Messages docs</a>.</p>
+        </section>
+
+        <section class="section" aria-labelledby="ph">
+            <h2 class="section__title" id="ph">The four live placeholders</h2>
+            <p>Placeholders are what make a reminder hard to scroll past. A fixed "Put the phone down" stops working after a few days. A number that changes every time keeps telling you something new.</p>
+            <table class="ph-table">
+                <tbody>
+                    <tr><td><code>{app_usage_today}</code></td><td>Time spent in this app today.</td></tr>
+                    <tr><td><code>{screentime_today}</code></td><td>Total screen time across all apps today.</td></tr>
+                    <tr><td><code>{live_session_duration}</code></td><td>How long you have been in this app continuously, right now.</td></tr>
+                    <tr><td><code>{reel_count}</code></td><td>How many short-form videos you have watched today. See the <a href="/reels-counter/">reels counter</a>.</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section wide" aria-labelledby="lib">
+            <h2 class="section__title" id="lib">Example reminders, grouped by what you need</h2>
+            <p style="max-width:var(--measure)">Tap "Try" to load one into the previewer above. They are starting points; the ones you write in your own words will work better.</p>
+            <div class="lib">
+                <section>
+                    <h3>When you lose track of time</h3>
+                    <p class="lib__when">Best with the live session timer.</p>
+                    <ul>
+                        <li><q>You opened this {live_session_duration} ago.</q><button type="button" data-try>Try</button></li>
+                        <li><q>{app_usage_today} here today. Still the plan?</q><button type="button" data-try>Try</button></li>
+                        <li><q>Screen time today: {screentime_today}</q><button type="button" data-try>Try</button></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>When the feed has you</h3>
+                    <p class="lib__when">For Reels, Shorts and endless scrolling.</p>
+                    <ul>
+                        <li><q>{reel_count} videos today. Name one you remember.</q><button type="button" data-try>Try</button></li>
+                        <li><q>The next video won't be the good one either.</q><button type="button" data-try>Try</button></li>
+                        <li><q>Search for what you came for, then leave.</q><button type="button" data-try>Try</button></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>When you opened it on autopilot</h3>
+                    <p class="lib__when">Questions work better than orders.</p>
+                    <ul>
+                        <li><q>What did you open this for?</q><button type="button" data-try>Try</button></li>
+                        <li><q>Bored, tired, or avoiding something?</q><button type="button" data-try>Try</button></li>
+                        <li><q>Is this really important right now?</q><button type="button" data-try>Try</button></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>When you want to remember why</h3>
+                    <p class="lib__when">Tie the reminder to something you care about.</p>
+                    <ul>
+                        <li><q>You said tonight was for the guitar.</q><button type="button" data-try>Try</button></li>
+                        <li><q>Exam on Friday. {app_usage_today} here today.</q><button type="button" data-try>Try</button></li>
+                        <li><q>Text someone instead of watching strangers.</q><button type="button" data-try>Try</button></li>
+                    </ul>
+                </section>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="works">
+            <h2 class="section__title" id="works">When a reminder helps, and when it does not</h2>
+            <p>Most of the time you open a distracting app, you did not decide to. Your thumb did. A reminder works by putting a second of thinking back into that moment, which is often all it takes to close the app again. It is the gentlest tool Curbox has, and for many people it is the right first one, because nothing is taken away.</p>
+            <p>It works best when the message is yours. "Is this really important?" written in your own words reads like a note from a friend. The same line copied from somewhere else turns into wallpaper within a week. Changing the wording now and then, or using several lines, keeps it fresh.</p>
+            <p>It works less well on a bad day, when you have already decided to scroll and nothing will talk you out of it. That is not a failure of willpower; it just means you need something with more friction. Curbox lets you add that later without starting over: a daily limit in <a href="/docs/reducers/app-pause/">App Pause</a>, a count limit on Reels, or a <a href="/break-reminder-app-android/">break that actually happens</a>. Start with the reminder, see how far it gets you, and only then add more.</p>
+        </section>
+
+        <section class="section" aria-labelledby="where">
+            <h2 class="section__title" id="where">Two places a reminder can appear</h2>
+            <p>Curbox has two kinds of message, and they suit different moments.</p>
+            <div class="two-places">
+                <div>
+                    <h3>Inside the app: Mindful Messages</h3>
+                    <p>The app opens and stays usable. Your message overlays it the whole time. Good for apps you want to keep, like YouTube for tutorials, but use more mindfully.</p>
+                </div>
+                <div>
+                    <h3>Before the app: the warning screen</h3>
+                    <p>When an App Pause or short-form limit kicks in, the pause screen can show a <strong>Custom Message</strong>, or a random one from your list each time. Pair it with the vibrating delay timer and you get a few seconds to actually read it before deciding.</p>
+                </div>
+            </div>
+            <p style="margin-top:1.25rem">If a reminder on its own is not enough, the warning screen can also ask for effort before you continue, such as typing a sentence or stating your intent. See <a href="/docs/unlock-challenges/overview/">unlock challenges</a>.</p>
+        </section>
+
+        <section class="section" aria-labelledby="faq">
+            <h2 class="section__title" id="faq">Questions about app reminders</h2>
+            <details class="faq__item">
+                <summary>How do I get a reminder when I open an app on Android?</summary>
+                <p>Install Curbox, then go to Reducers, open Gentle Prompts, turn on Enable Mindful Messages, choose the apps, and write your message.</p>
+            </details>
+            <details class="faq__item">
+                <summary>Can the reminder show how long I've been on the app?</summary>
+                <p>Yes. Use the {live_session_duration} placeholder for the current session, or {app_usage_today} for the total in that app today. Both update live each time the message appears.</p>
+            </details>
+            <details class="faq__item">
+                <summary>Does a mindful message block the app?</summary>
+                <p>No. Mindful Messages is a nudge: the app stays usable with your message on top. To block an app after a limit, use App Pause, which can show its own custom message on the pause screen.</p>
+            </details>
+            <details class="faq__item">
+                <summary>Can I have more than one message?</summary>
+                <p>Yes. Write one message per line and each line shows separately. The warning screen can also pick a random message from your list.</p>
+            </details>
+            <details class="faq__item">
+                <summary>Can I change how the message looks?</summary>
+                <p>Yes. You can set the text size, text opacity and background color so the message is noticeable without covering what you need to see.</p>
+            </details>
+        </section>
+
+        <section class="section" aria-labelledby="rel">
+            <h2 class="section__title" id="rel">Related</h2>
+            <ul>
+                <li><a href="/reels-counter/">Reels counter and attention span</a></li>
+                <li><a href="/screen-time-tracker-android/">Screen time tracker for Android</a></li>
+                <li><a href="/break-reminder-app-android/">Break reminders that actually happen</a></li>
+                <li><a href="/app-blocker-for-adhd/">Using an app blocker with ADHD</a></li>
+                <li><a href="/features.html">All Curbox features</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+      (function () {
+        var sample = {
+          '{app_usage_today}': '42 min',
+          '{screentime_today}': '3 h 05 min',
+          '{live_session_duration}': '11 min',
+          '{reel_count}': '37'
+        };
+        var msg = document.getElementById('msg');
+        var out = document.getElementById('out');
+        var app = document.getElementById('app');
+        var appname = document.getElementById('appname');
+        var size = document.getElementById('size');
+        var opacity = document.getElementById('opacity');
+        var bg = document.getElementById('bg');
+        var idx = 0;
+
+        function lines() {
+          return msg.value.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+        }
+        function fill(text) {
+          return text.replace(/\{[a-z_]+\}/g, function (m) { return sample[m] || m; });
+        }
+        function render() {
+          var ls = lines();
+          if (!ls.length) { out.textContent = 'Write a message on the left'; }
+          else { idx = idx % ls.length; out.textContent = fill(ls[idx]); }
+          out.style.fontSize = (size.value / 16) + 'rem';
+          out.style.opacity = opacity.value / 100;
+          out.style.background = bg.value;
+          appname.textContent = app.value;
+        }
+        [msg, size, opacity, bg, app].forEach(function (el) { el.addEventListener('input', function () { if (el === msg) idx = 0; render(); }); });
+        app.addEventListener('change', render);
+        document.getElementById('next').addEventListener('click', function () { idx++; render(); });
+        document.getElementById('chips').addEventListener('click', function (e) {
+          var ph = e.target.getAttribute('data-ph');
+          if (!ph) return;
+          var s = msg.selectionStart, t = msg.selectionEnd;
+          msg.value = msg.value.slice(0, s) + ph + msg.value.slice(t);
+          msg.focus();
+          msg.selectionStart = msg.selectionEnd = s + ph.length;
+          render();
+        });
+        document.querySelectorAll('[data-try]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            msg.value = b.parentElement.querySelector('q').textContent;
+            idx = 0;
+            render();
+            document.getElementById('try').scrollIntoView({ behavior: 'smooth' });
+          });
+        });
+        render();
+      })();
+    </script>
+
+</body>
+</html>

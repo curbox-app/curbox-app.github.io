@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>How to Block Websites on Android (Chrome too) · Curbox</title>
+    <meta
+      name="description"
+      content="Block websites, or just one section of a site, in Chrome, Firefox and Brave on Android. Keyword cheatsheet, a live pattern tester and common mistakes."
+    >
+    <link rel="canonical" href="https://curbox.app/block-websites-on-android/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="Block websites on Android: cheatsheet and pattern tester">
+    <meta property="og:description" content="Block whole sites, one section of a site, or a path on every site in Chrome, Firefox and Brave on Android. Test your keywords live.">
+    <meta property="og:url" content="https://curbox.app/block-websites-on-android/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Block websites on Android: cheatsheet and pattern tester">
+    <meta name="twitter:description" content="Block whole sites, one section of a site, or a path on every site in Chrome, Firefox and Brave on Android. Test your keywords live.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "headline": "How to block websites on Android, including Chrome",
+          "description": "Block whole websites, sections of a site, or a path on every site in Android browsers with Curbox. Includes a keyword cheatsheet and a live pattern tester.",
+          "url": "https://curbox.app/block-websites-on-android/",
+          "dateModified": "2026-11-22",
+          "author": { "@type": "Organization", "name": "Curbox", "url": "https://curbox.app/" },
+          "publisher": { "@type": "Organization", "name": "Curbox", "url": "https://curbox.app/" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Can Chrome on Android block websites by itself?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Chrome for Android has no built-in website blocklist for your own use. Some phones let Digital Wellbeing set timers on sites in Chrome. For a real block, use an app such as Curbox that watches the address bar and shows a pause screen." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I block only part of a website?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Add the domain plus a path, for example youtube.com/shorts or reddit.com/r/gaming. Only matching pages are blocked and the rest of the site keeps working." }
+            },
+            {
+              "@type": "Question",
+              "name": "Which Android browsers does Curbox website blocking support?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Google Chrome, Brave, Firefox, Fennec, Opera, Cromite, Vanadium (GrapheneOS), Helium, CalyxOS Chromium, /e/OS Browser and Waterfox. For any other browser, block the browser app itself with App Pause." }
+            },
+            {
+              "@type": "Question",
+              "name": "Do I need to type https:// or www. in a keyword?",
+              "acceptedAnswer": { "@type": "Answer", "text": "No. Curbox strips https:// and www. for you, so youtube.com is enough. Adding them does no harm, it just is not needed." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I block websites on my computer too?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Curbox browser extension for Chrome and Firefox blocks websites with schedules and limits, tracks website usage, and has a focus mode." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+      .web-page { max-width: 60rem; }
+
+      /* The tester: a terminal-ish panel. */
+      .tester {
+        margin-top: 2.5rem;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #070707;
+        overflow: hidden;
+      }
+      .tester__bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        padding: 0.7rem 1rem;
+        border-bottom: 1px solid var(--line);
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .tester__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      .tester__grid > div { padding: 1rem; }
+      .tester__grid > div + div { border-left: 1px solid var(--line); }
+      @media (max-width: 40rem) {
+        .tester__grid { grid-template-columns: 1fr; }
+        .tester__grid > div + div { border-left: 0; border-top: 1px solid var(--line); }
+      }
+      .tester label {
+        display: block;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+      }
+      .tester textarea {
+        width: 100%;
+        min-height: 9.5rem;
+        resize: vertical;
+        background: #000;
+        color: var(--fg);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 0.7rem;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        line-height: 1.6;
+      }
+      .tester textarea:focus { outline: none; border-color: var(--fg); }
+      .presets { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0 1rem 1rem; }
+      .presets button {
+        background: none;
+        border: 1px solid var(--line);
+        color: var(--fg);
+        border-radius: 999px;
+        padding: 0.35rem 0.75rem;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        cursor: pointer;
+      }
+      .presets button:hover { border-color: var(--fg); }
+      .results { border-top: 1px solid var(--line); }
+      .results table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+      .results td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+      .results td:first-child { font-family: var(--font-mono); font-size: 0.8rem; overflow-wrap: anywhere; width: 55%; }
+      .results tr:last-child td { border-bottom: 0; }
+      .verdict-blocked { color: var(--fg); font-weight: 700; }
+      .verdict-allowed { color: var(--muted); }
+      .results .why { display: block; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); font-weight: 400; margin-top: 0.15rem; }
+      .tester__note { padding: 0.8rem 1rem; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--line); }
+
+      /* Cheatsheet cards. */
+      .cheats { display: grid; grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-top: 1.25rem; }
+      .cheat { background: var(--bg); padding: 1.1rem; }
+      .cheat code { font-size: 0.95rem; background: none; padding: 0; }
+      .cheat h3 { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 400; margin-bottom: 0.5rem; }
+      .cheat p { font-size: 0.88rem; margin-top: 0.5rem; color: #cfcfcc; }
+
+      .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1rem; }
+      .chips span { border: 1px solid var(--line); border-radius: 6px; padding: 0.3rem 0.6rem; font-size: 0.85rem; }
+
+      /* Mistakes: wrong vs right pairs. */
+      .mistake { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1rem; }
+      .mistake div { padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.9rem; }
+      .mistake .wrong { border: 1px dashed #4a4a48; color: var(--muted); }
+      .mistake .right { background: #121212; }
+      .mistake b { display: block; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem; }
+      @media (max-width: 34rem) { .mistake { grid-template-columns: 1fr; } }
+
+      .steps-inline { counter-reset: n; list-style: none; padding: 0; margin-top: 1rem; display: grid; gap: 0.5rem; }
+      .steps-inline li { counter-increment: n; display: flex; gap: 0.75rem; }
+      .steps-inline li::before { content: counter(n); flex: 0 0 1.6rem; height: 1.6rem; border: 1px solid var(--fg); border-radius: 4px; display: grid; place-items: center; font-family: var(--font-mono); font-size: 0.75rem; }
+
+      .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.25rem 2rem; margin-top: 1rem; }
+      .faq-grid h3 { font-family: var(--font-display); font-size: 1.02rem; line-height: 1.25; margin-bottom: 0.35rem; }
+      .faq-grid p { font-size: 0.93rem; color: #d0d0cd; }
+
+      .related-list { margin-top: 0.75rem; }
+      a.btn {
+        display: inline-block;
+        margin-top: 1.25rem;
+        padding: 0.85rem 1.6rem;
+        border-radius: 999px;
+        background: var(--fg);
+        color: var(--bg);
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+    </style>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://curbox.app/guides/"}, {"@type": "ListItem", "position": 3, "name": "How to Block Websites on Android (Chrome too)", "item": "https://curbox.app/block-websites-on-android/"}]}
+    </script>
+</head>
+<body>
+    <main class="page web-page">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/guides/">← All guides</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Reference · Website blocking · Android</span>
+            <h1 class="page__title">Block websites on Android.</h1>
+            <p class="lead">Chrome on Android has no blocklist of its own. Curbox adds one that works in Chrome, Firefox, Brave and other browsers, and it can block a whole site, one section of a site, or a path on every site. Write your keywords below and test them before you put them on your phone.</p>
+        </header>
+
+        <section class="tester" aria-labelledby="tester-title">
+            <div class="tester__bar"><span id="tester-title">Keyword tester</span><span>Approximation of Curbox's matching</span></div>
+            <div class="tester__grid">
+                <div>
+                    <label for="kw">Keywords, one per line</label>
+                    <textarea id="kw" spellcheck="false" autocapitalize="off" autocomplete="off">youtube.com/shorts
+/reels
+*.reddit.com</textarea>
+                </div>
+                <div>
+                    <label for="urls">URLs to test, one per line</label>
+                    <textarea id="urls" spellcheck="false" autocapitalize="off" autocomplete="off">https://www.youtube.com/shorts/abc123
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+https://www.instagram.com/reels/xyz/
+https://old.reddit.com/r/android
+https://reddit.com/r/android
+https://en.wikipedia.org/wiki/Attention_span</textarea>
+                </div>
+            </div>
+            <div class="presets" aria-label="Load an example">
+                <button type="button" data-kw="youtube.com">Whole site</button>
+                <button type="button" data-kw="youtube.com/shorts">One section</button>
+                <button type="button" data-kw="/shorts&#10;/reels&#10;/reel">Path on any site</button>
+                <button type="button" data-kw="*.reddit.com&#10;youtube.com/watch*">Wildcards</button>
+                <button type="button" data-kw="youtube">Domain word</button>
+                <button type="button" data-kw="r:(?:shorts|reels|reel)">Regex</button>
+            </div>
+            <div class="results" aria-live="polite"><table><tbody id="out"></tbody></table></div>
+            <p class="tester__note">This tester follows Curbox's documented keyword rules so you can sanity-check a list. It runs in your browser and sends nothing anywhere. It is not the app's own code, so treat edge cases as a guide and check them on your phone.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Set it up on your phone</h2>
+            <ol class="steps-inline">
+                <li><span><a href="/download.html">Install Curbox</a> and finish onboarding, which grants the App Blocker accessibility service it uses to read the address bar.</span></li>
+                <li><span>Open <strong>Reducers → Keywords And Websites</strong> and tap <strong>+</strong>.</span></li>
+                <li><span>Name the group, for example "Social sites".</span></li>
+                <li><span>Add keywords, one per entry.</span></li>
+                <li><span>Optional: tap <strong>Configure Warning Screen</strong> to choose what happens on a blocked page.</span></li>
+                <li><span>Tap <strong>Done</strong>. Open a matching page in a supported browser and the pause screen appears.</span></li>
+            </ol>
+            <p style="margin-top:1rem;">The pause screen works the same as for apps: no way through, a wait, or a task such as scanning a QR code, typing a sentence or writing down your reason. See the <a href="/docs/unlock-challenges/overview/">unlock challenges guide</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Keyword cheatsheet</h2>
+            <p>You never need <code>https://</code> or <code>www.</code>; Curbox strips them for you.</p>
+            <div class="cheats">
+                <div class="cheat"><h3>Whole site</h3><code>youtube.com</code><p>Every page on the domain.</p></div>
+                <div class="cheat"><h3>One section</h3><code>youtube.com/shorts</code><p>Only Shorts. Regular YouTube still works. Also <code>instagram.com/reels</code>, <code>reddit.com/r/gaming</code>, <code>facebook.com/reel</code>.</p></div>
+                <div class="cheat"><h3>A path on any site</h3><code>/shorts</code><p>Starts with a slash. Matches that path on every website at once.</p></div>
+                <div class="cheat"><h3>All subdomains</h3><code>*.reddit.com</code><p><code>*</code> matches any run of characters: old.reddit.com, m.reddit.com and so on.</p></div>
+                <div class="cheat"><h3>Any page under a path</h3><code>youtube.com/watch*</code><p>Every watch page. <code>?</code> matches exactly one character, rarely needed.</p></div>
+                <div class="cheat"><h3>Domain word</h3><code>youtube</code><p>No dots or slashes. Matches a part of the domain: youtube.com, m.youtube.com, youtube.co.uk.</p></div>
+                <div class="cheat"><h3>Raw regex</h3><code>r:(?:shorts|reels|reel)</code><p>Prefix with <code>r:</code>. A typo in a regex makes the keyword silently do nothing, so test it first.</p></div>
+            </div>
+            <p style="margin-top:1rem;">Full details are in the <a href="/docs/reducers/keyword-blocker/">Keywords and Websites docs</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Common mistakes</h2>
+            <div class="mistake">
+                <div class="wrong"><b>Too specific</b>youtube.com/shorts/Ab12Cd34 blocks one video.</div>
+                <div class="right"><b>Instead</b><code>youtube.com/shorts</code> blocks all of them.</div>
+            </div>
+            <div class="mistake">
+                <div class="wrong"><b>Too broad</b><code>com</code> tries to match every .com site.</div>
+                <div class="right"><b>Instead</b>Use the real domain or a domain word like <code>reddit</code>.</div>
+            </div>
+            <div class="mistake">
+                <div class="wrong"><b>Extra noise</b>https://www.twitter.com</div>
+                <div class="right"><b>Instead</b><code>twitter.com</code>. The prefix is stripped anyway.</div>
+            </div>
+            <div class="mistake">
+                <div class="wrong"><b>Broken regex</b><code>r:(shorts|reels</code> silently matches nothing.</div>
+                <div class="right"><b>Instead</b>Paste it into the tester above. If it shows an error, fix it first.</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Supported browsers</h2>
+            <p>Website blocking reads the address bar, so it only works in browsers Curbox knows how to read:</p>
+            <div class="chips">
+                <span>Google Chrome</span><span>Brave</span><span>Firefox</span><span>Fennec</span><span>Opera</span><span>Cromite</span><span>Vanadium (GrapheneOS)</span><span>Helium</span><span>CalyxOS Chromium</span><span>/e/OS Browser</span><span>Waterfox</span>
+            </div>
+            <p style="margin-top:1.25rem;"><strong>Using a different browser?</strong> Add that browser to an <a href="/docs/reducers/app-pause/">App Pause</a> group instead. That is also how you close the most common loophole: once your usual browser is locked down, installing a second one is the easy way around. Block every browser you do not use with App Pause, set to On Each Open. Support for more Chromium- or Firefox-based browsers can be contributed on GitHub.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">What this kind of blocking can and can't do</h2>
+            <p>Curbox does not filter your internet connection or change DNS settings. It looks at the address in the browser on screen, and when that address matches a keyword it puts the pause screen over the page. That design has trade-offs worth knowing before you rely on it.</p>
+            <ul>
+                <li><strong>It needs no internet access and no VPN slot.</strong> Your traffic never passes through Curbox, and the app has no internet permission at all. You can keep using a real VPN alongside it.</li>
+                <li><strong>It can block a path, not just a domain.</strong> A DNS or network blocker sees only "youtube.com"; it cannot tell Shorts from a cooking tutorial. Reading the address bar is what makes <code>youtube.com/shorts</code> possible.</li>
+                <li><strong>It only covers supported browsers.</strong> Pages opened inside other apps' built-in viewers, or in a browser not on the list, are not checked. Use App Pause for those apps.</li>
+                <li><strong>It can be always on, or only while you focus.</strong> A keyword group blocks whenever it is switched on. If you only want sites gone during work, add them to a Focus Group instead, and they are blocked just for the length of a focus session.</li>
+            </ul>
+            <p>If you just want to know where your browsing time goes first, the Usage tab shows website time per browser for the same supported browsers, with no blocking at all.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Import a long list</h2>
+            <p>Typing fifty domains on a phone keyboard is miserable. Put them in a plain <code>.txt</code> file, one keyword per line, then open the group's three-dot menu and choose <strong>Import</strong>. Blank lines are ignored and duplicates are skipped. The community <a href="https://discord.com/invite/Vs9mwUtuCN" target="_blank" rel="noopener noreferrer">Discord</a> shares ready-made lists.</p>
+            <p>Tip: build and test the list in the tester above, then copy the keywords box into a text file.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">On your computer</h2>
+            <p>The same habits follow you to a laptop. The <a href="/download.html#browser">Curbox browser extension</a> for Chrome and Firefox blocks websites with schedules and limits, tracks how long you spend on each site, and has a focus mode.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Questions</h2>
+            <div class="faq-grid">
+                <div><h3>Can Chrome on Android block websites by itself?</h3><p>Chrome for Android has no built-in website blocklist for your own use. Some phones let Digital Wellbeing set timers on sites in Chrome. For a real block, use an app such as Curbox that watches the address bar and shows a pause screen.</p></div>
+                <div><h3>Can I block only part of a website?</h3><p>Yes. Add the domain plus a path, for example <code>youtube.com/shorts</code> or <code>reddit.com/r/gaming</code>. Only matching pages are blocked and the rest of the site keeps working.</p></div>
+                <div><h3>Which Android browsers does Curbox website blocking support?</h3><p>Google Chrome, Brave, Firefox, Fennec, Opera, Cromite, Vanadium (GrapheneOS), Helium, CalyxOS Chromium, /e/OS Browser and Waterfox. For any other browser, block the browser app itself with App Pause.</p></div>
+                <div><h3>Do I need to type https:// or www. in a keyword?</h3><p>No. Curbox strips https:// and www. for you, so youtube.com is enough. Adding them does no harm, it just is not needed.</p></div>
+                <div><h3>Can I block websites on my computer too?</h3><p>Yes. The Curbox browser extension for Chrome and Firefox blocks websites with schedules and limits, tracks website usage, and has a focus mode.</p></div>
+            </div>
+            <a class="btn" href="/download.html">Get Curbox, free</a>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Related</h2>
+            <ul class="related-list">
+                <li><a href="/block-youtube-shorts/">Block YouTube Shorts in the app and the browser</a></li>
+                <li><a href="/block-instagram-on-android/">Block Instagram on Android</a></li>
+                <li><a href="/app-blocker-for-studying/">Block distractions while studying</a></li>
+                <li><a href="/open-source-app-blocker/">Why use an open-source blocker</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+      (function () {
+        var kwBox = document.getElementById('kw');
+        var urlBox = document.getElementById('urls');
+        var out = document.getElementById('out');
+
+        function stripPrefix(s) {
+          return s.trim().toLowerCase().replace(/^[a-z][a-z0-9+.-]*:\/\//, '').replace(/^www\./, '');
+        }
+
+        // Split a normalised URL into host and the rest (path, query, hash).
+        function splitUrl(u) {
+          var i = u.search(/[\/?#]/);
+          if (i === -1) return { host: u, rest: '/' };
+          var rest = u.slice(i);
+          if (rest.charAt(0) !== '/') rest = '/' + rest;
+          return { host: u.slice(0, i), rest: rest };
+        }
+
+        function globToRegex(g) {
+          return g.replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*').replace(/\?/g, '.');
+        }
+
+        function hostMatches(host, domain) {
+          return host === domain || host.slice(-(domain.length + 1)) === '.' + domain;
+        }
+
+        // Returns null when allowed, a reason string when blocked, or throws for bad regex.
+        function test(keyword, url) {
+          var raw = keyword.trim();
+          if (!raw) return null;
+          var u = stripPrefix(url);
+          var parts = splitUrl(u);
+
+          if (raw.slice(0, 2).toLowerCase() === 'r:') {
+            var re = new RegExp(raw.slice(2), 'i');
+            return re.test(u) ? 'regex' : null;
+          }
+
+          var k = stripPrefix(raw);
+
+          if (k.charAt(0) === '/') {
+            return parts.rest.indexOf(k) !== -1 ? 'path on any site' : null;
+          }
+
+          if (/[*?]/.test(k)) {
+            var slash = k.indexOf('/') !== -1;
+            var pattern = '^' + globToRegex(k) + (slash ? '' : '(?=[\\/?#]|$)');
+            return new RegExp(pattern).test(parts.host + (slash ? parts.rest : '')) ? 'wildcard' : null;
+          }
+
+          if (k.indexOf('.') === -1 && k.indexOf('/') === -1) {
+            return parts.host.split('.').indexOf(k) !== -1 ? 'domain word' : null;
+          }
+
+          var s = k.indexOf('/');
+          if (s === -1) {
+            return hostMatches(parts.host, k) ? 'whole site' : null;
+          }
+          var domain = k.slice(0, s);
+          var path = k.slice(s);
+          return hostMatches(parts.host, domain) && parts.rest.indexOf(path) === 0 ? 'site section' : null;
+        }
+
+        function cell(tr, text, cls) {
+          var td = document.createElement('td');
+          if (cls) td.className = cls;
+          td.textContent = text;
+          tr.appendChild(td);
+          return td;
+        }
+
+        function run() {
+          var kws = kwBox.value.split('\n').filter(function (l) { return l.trim(); });
+          var urls = urlBox.value.split('\n').filter(function (l) { return l.trim(); });
+          out.textContent = '';
+          urls.forEach(function (url) {
+            var tr = document.createElement('tr');
+            cell(tr, url.trim());
+            var hit = null, err = null;
+            for (var i = 0; i < kws.length; i++) {
+              try {
+                var why = test(kws[i], url);
+                if (why) { hit = { kw: kws[i].trim(), why: why }; break; }
+              } catch (e) {
+                err = kws[i].trim();
+              }
+            }
+            var td;
+            if (hit) {
+              td = cell(tr, 'Blocked', 'verdict-blocked');
+              var span = document.createElement('span');
+              span.className = 'why';
+              span.textContent = hit.kw + ' · ' + hit.why;
+              td.appendChild(span);
+            } else {
+              td = cell(tr, 'Allowed', 'verdict-allowed');
+              if (err) {
+                var e2 = document.createElement('span');
+                e2.className = 'why';
+                e2.textContent = 'Invalid regex skipped: ' + err;
+                td.appendChild(e2);
+              }
+            }
+            out.appendChild(tr);
+          });
+        }
+
+        kwBox.addEventListener('input', run);
+        urlBox.addEventListener('input', run);
+        Array.prototype.forEach.call(document.querySelectorAll('.presets button'), function (b) {
+          b.addEventListener('click', function () {
+            kwBox.value = b.getAttribute('data-kw');
+            run();
+          });
+        });
+        run();
+      })();
+    </script>
+</body>
+</html>

@@ -77,6 +77,67 @@ Recent releases added these features. Dedicated docs pages are still being writt
 
 - [Usage Stats](https://curbox.app/docs/usage/usage-stats/): Read your screen-time data - daily total, weekly chart, per-app breakdown, per-browser website stats - and ignore noisy apps, export to CSV, or pin home-screen widgets.
 
+## Guides (problem-first)
+
+- [All guides](https://curbox.app/guides/): Index of problem-first guides.
+- [Block Instagram on Android](https://curbox.app/block-instagram-on-android/): Block the whole app, allow it only at certain hours, cap daily time, or limit only Reels or the feed.
+- [Block Instagram Reels](https://curbox.app/block-instagram-reels/): Limit Reels by time or by video count while keeping the rest of Instagram.
+- [Block YouTube Shorts](https://curbox.app/block-youtube-shorts/): Stop Shorts in the YouTube app and in browsers while normal videos and search keep working.
+- [Block websites on Android](https://curbox.app/block-websites-on-android/): Keyword and URL pattern syntax, supported browsers, and an in-page pattern tester.
+- [How to stop doomscrolling](https://curbox.app/stop-doomscrolling/): A four-week plan: awareness, friction, limits, replacement.
+- [App blocker for studying](https://curbox.app/app-blocker-for-studying/): Focus session recipes for students.
+- [App blocker for ADHD](https://curbox.app/app-blocker-for-adhd/): Using Curbox as external structure for time blindness and impulsive opens.
+- [Grayscale specific apps on Android](https://curbox.app/grayscale-apps-android/): Per-app grayscale versus Android's whole-screen options.
+- [Batch notifications on Android](https://curbox.app/batch-notifications-android/): Deliver notifications at set times with Scheduled Notifications.
+- [Screen time app without ads](https://curbox.app/screen-time-app-without-ads/): How to audit any screen time app for ads, trackers, paywalls and accounts.
+- [Open source app blockers](https://curbox.app/open-source-app-blocker/): Field guide to open-source Android blockers and how to verify open-source claims.
+
+## Feature pages
+
+- [QR code unlock](https://curbox.app/qr-code-app-blocker/): Scan a QR code or barcode placed elsewhere to unlock a blocked app.
+- [NFC app blocker](https://curbox.app/nfc-app-blocker/): NFC tags as unlock keys and as Focus Mode start/stop/toggle triggers.
+- [Math unlock](https://curbox.app/math-unlock-app-blocker/): Adaptive math challenge, levels 1 to 10, wrong answers add a wait.
+- [Urge Surfing](https://curbox.app/urge-surfing-app/): Ride out a craving from the block screen instead of unlocking.
+- [Hide YouTube recommendations](https://curbox.app/hide-youtube-recommendations/): UI Hider rules for YouTube (F-Droid variant).
+- [Hide the Instagram feed](https://curbox.app/hide-instagram-feed/): UI Hider rules for Instagram's home feed and Explore (F-Droid variant).
+- [Uninstall protection](https://curbox.app/prevent-app-blocker-uninstall/): Anti-uninstall via device administrator (F-Droid variant) and how to turn it off.
+- [Block all apps except](https://curbox.app/block-all-apps-except/): Allowlist mode with Focus Groups.
+- [Screen time tracker](https://curbox.app/screen-time-tracker-android/): Usage stats, website stats, CSV export, widgets, heatmap.
+- [Reels counter](https://curbox.app/reels-counter/): Live short-form video count and attention span tracking.
+- [Reminder when opening apps](https://curbox.app/mindful-reminder-when-opening-apps/): Mindful Messages with live placeholders.
+- [Break reminder](https://curbox.app/break-reminder-app-android/): Sip & Stretch enforced breaks.
+- [Pomodoro app blocker](https://curbox.app/pomodoro-app-blocker/): Focus Mode with Pomodoro rounds.
+- [Auto Do Not Disturb](https://curbox.app/auto-do-not-disturb-schedule/): Scheduled DND compared with Android's built-in schedules.
+- [Location-based blocking](https://curbox.app/location-based-app-blocker/): The location blocker add-on built on the Curbox API.
+- [Browser extension](https://curbox.app/website-blocker-extension/): Website blocking, feed filtering and focus mode for Chrome and Firefox.
+- [Curbox API](https://curbox.app/app-blocker-api/): Developer integration overview.
+
+## Alternatives
+
+- [All alternatives](https://curbox.app/alternatives/): Switching notes for people leaving other blockers.
+- [Stay Focused alternative](https://curbox.app/alternatives/stay-focused/)
+- [Lock Me Out alternative](https://curbox.app/alternatives/lock-me-out/)
+- [AppBlock alternative](https://curbox.app/alternatives/appblock/)
+- [ScreenZen alternative](https://curbox.app/alternatives/screenzen/)
+- [one sec alternative](https://curbox.app/alternatives/one-sec/)
+- [Digital Wellbeing alternative](https://curbox.app/alternatives/digital-wellbeing/)
+- [Opal alternative](https://curbox.app/alternatives/opal/)
+- [Freedom alternative](https://curbox.app/alternatives/freedom/)
+- [BlockSite alternative](https://curbox.app/alternatives/blocksite/)
+- [Forest alternative](https://curbox.app/alternatives/forest/)
+- [StayFree alternative](https://curbox.app/alternatives/stayfree/)
+- [ActionDash alternative](https://curbox.app/alternatives/actiondash/)
+- [Regain alternative](https://curbox.app/alternatives/regain/)
+- [YourHour alternative](https://curbox.app/alternatives/yourhour/)
+- [Social Fever alternative](https://curbox.app/alternatives/social-fever/)
+- [BlockerX alternative](https://curbox.app/alternatives/blockerx/)
+- [Flipd alternative](https://curbox.app/alternatives/flipd/)
+- [Unpluq alternative](https://curbox.app/alternatives/unpluq/)
+- [Brick alternative](https://curbox.app/alternatives/brick/)
+- [Clearspace alternative](https://curbox.app/alternatives/clearspace/)
+- [Minimalist Phone alternative](https://curbox.app/alternatives/minimalist-phone/)
+- [DetoxDroid alternative](https://curbox.app/alternatives/detoxdroid/)
+
 ## Optional
 
 - [Full LLM corpus (llms-full.txt)](https://curbox.app/llms-full.txt): Every feature documented in depth in a single self-contained file, written for LLM ingestion.

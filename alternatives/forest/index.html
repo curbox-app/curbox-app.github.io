@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Forest App Alternative for Android · Curbox</title>
+    <meta
+      name="description"
+      content="Want a Forest app alternative? See where Forest&#x27;s tree timer shines, where Curbox goes further on Android, and how to rebuild a Forest-style session."
+    >
+    <link rel="canonical" href="https://curbox.app/alternatives/forest/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="A Forest app alternative for Android">
+    <meta property="og:description" content="Want a Forest app alternative? See where Forest&#x27;s tree timer shines, where Curbox goes further on Android, and how to rebuild a Forest-style session.">
+    <meta property="og:url" content="https://curbox.app/alternatives/forest/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Forest app alternative for Android">
+    <meta name="twitter:description" content="Want a Forest app alternative? See where Forest&#x27;s tree timer shines, where Curbox goes further on Android, and how to rebuild a Forest-style session.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+
+      .faq__item { border-top: 1px solid var(--line); }
+      .faq__item:last-child { border-bottom: 1px solid var(--line); }
+      .faq__item summary {
+        cursor: pointer; list-style: none; padding: 1rem 2rem 1rem 0; position: relative;
+        font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.3;
+      }
+      .faq__item summary::-webkit-details-marker { display: none; }
+      .faq__item summary::after {
+        content: '+'; position: absolute; right: 0; top: 0.95rem;
+        font-family: var(--font-mono); color: var(--muted);
+      }
+      .faq__item[open] summary::after { content: '\2212'; }
+      .faq__a { padding: 0 0 1.1rem; color: var(--fg); }
+      .faq__a p + p { margin-top: 0.75rem; }
+      .related { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+      .related a {
+        padding: 0.5rem 0.95rem; border: 1px solid var(--line); border-radius: 999px;
+        font-family: var(--font-mono); font-size: 0.76rem; text-decoration: none !important;
+      }
+      .related a:hover { border-color: var(--fg); }
+      .sources li { font-size: 0.88rem; color: var(--muted); }
+      .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+      .cta {
+        display: inline-block; padding: 0.85rem 1.6rem; border-radius: 999px;
+        background: var(--fg); color: var(--bg) !important; text-decoration: none !important;
+        font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700;
+        letter-spacing: 0.1em; text-transform: uppercase;
+      }
+      .cta--ghost { background: transparent; color: var(--fg) !important; border: 1px solid var(--line); }
+
+
+      .page--forest .lead { max-width: 37rem; }
+
+      .board { margin-top: 1.5rem; border-top: 1px solid var(--line); }
+      .q { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; padding: 1.05rem 0; border-bottom: 1px solid var(--line); }
+      .q__badge { align-self: start; text-align: center; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.35rem 0; border-radius: 6px; }
+      .q__badge--yes { background: var(--fg); color: var(--bg); }
+      .q__badge--part { border: 1px solid var(--fg); }
+      .q__badge--no { border: 1px dashed var(--muted); color: var(--muted); }
+      .q__text b { display: block; font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 0.2rem; }
+      .q__text span { font-size: 0.93rem; color: var(--fg); }
+
+      .motive { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; margin-top: 1.5rem; }
+      .motive__card { border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem; }
+      .motive__card h3 { font-family: var(--font-display); font-size: 1.2rem; margin: 0.4rem 0 0.5rem; }
+      .motive__card p { font-size: 0.93rem; }
+      .motive__vs { align-self: center; font-family: var(--font-mono); color: var(--muted); font-size: 0.8rem; }
+      .tree { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+      .recipe { margin-top: 1.5rem; padding: 1.4rem 1.3rem; border-radius: 14px; background: #0d0d0d; border: 1px solid var(--line); }
+      .recipe__title { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; }
+      .recipe__meta { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); margin-top: 0.2rem; letter-spacing: 0.06em; }
+      .recipe ol { margin: 1rem 0 0 1.2rem; }
+      .recipe li { margin-top: 0.55rem; font-size: 0.95rem; }
+      .recipe li::marker { font-family: var(--font-mono); color: var(--muted); }
+
+      @media (max-width: 42rem) {
+        .motive { grid-template-columns: 1fr; }
+        .motive__vs { text-align: center; }
+        .q { grid-template-columns: 4.6rem 1fr; gap: 0.75rem; }
+      }
+
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "A Forest app alternative for when a tree is not enough",
+      "description": "Want a Forest app alternative? See where Forest's tree timer shines, where Curbox goes further on Android, and how to rebuild a Forest-style session.",
+      "url": "https://curbox.app/alternatives/forest/",
+      "mainEntityOfPage": "https://curbox.app/alternatives/forest/",
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "author": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Curbox",
+        "url": "https://curbox.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://curbox.app/icons/android-chrome-512x512.png"
+        }
+      },
+      "image": "https://curbox.app/icons/android-chrome-512x512.png",
+      "about": "Forest focus timer app"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Forest free on Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Forest's core focus features are free, with occasional ads outside sessions. Forest Plus is a paid subscription whose price varies by region and platform."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a good Forest app alternative for Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If you want blocking that works all day, not only during sessions, Curbox is a free, open source option. It has focus sessions with an allowlist, plus daily app limits, Reels and Shorts limits and unlock challenges."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Curbox grow trees or give rewards?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Curbox has no trees, coins or badges. It tracks your focus sessions, completion rate and day streak, and relies on friction rather than rewards."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I stop myself from quitting a session early?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Leave \"Let me quit mid-sessions\" off in the Focus Group, and the session cannot be ended before the timer runs out."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there an allowlist mode like Forest's?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and it is free. Pick Block All Except Selected when you create a Focus Group, and only the apps you chose stay available during the session."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Curbox work with friends like Plant Together?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Curbox has no accounts or social features, and the Android app has no internet access, so it cannot connect to other people's phones."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://curbox.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Alternatives",
+          "item": "https://curbox.app/alternatives/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Forest alternative",
+          "item": "https://curbox.app/alternatives/forest/"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Curbox",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "url": "https://curbox.app/download.html",
+      "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  ]
+}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+    <main class="page page--forest">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/alternatives/">← All alternatives</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Alternatives · Forest</span>
+            <h1 class="page__title">A Forest app alternative for when a tree is not enough.</h1>
+            <p class="lead">Forest turned focus into something you can see: you plant a seed, it grows while you stay off your phone, and it dies if you leave. That works beautifully for some people. If you are looking for a Forest app alternative, it is often because the tree stopped mattering, or because your problem is not one study session but the scrolling in between.</p>
+        </header>
+
+        <section class="section">
+            <h2 class="section__title">What Forest is today</h2>
+            <p>Forest runs on iPhone, iPad and Android, with browser extensions for Chrome and Firefox. Its core is free: the focus timer, Deep Focus Mode, which blocks apps that are not allowed, focus tracking and planting together with friends, where if anyone gives up the whole forest falls. The free tier shows occasional ads, never during an active session.</p>
+            <p>A paid subscription called Forest Plus adds a custom app allowlist, time limits on more than one app, focus analytics, pausing during a session, an ad-free experience, and the option to spend coins planting real trees with Trees for the Future. Forest says Plus pricing varies by region and platform, and the old one-time Pro upgrade is no longer sold to new users.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Reward or friction?</h2>
+            <div class="motive">
+                <div class="motive__card">
+                    <span class="tree">Forest</span>
+                    <h3>Keep the tree alive</h3>
+                    <p>Forest motivates you with something to protect. A growing tree, a forest that fills up over weeks, coins and real trees planted. It is a carrot, and it is strongest during a session you chose to start.</p>
+                </div>
+                <span class="motive__vs" aria-hidden="true">vs</span>
+                <div class="motive__card">
+                    <span class="tree">Curbox</span>
+                    <h3>Make the tap cost something</h3>
+                    <p>Curbox works on the moment you reach for an app. A pause screen, a wait, a QR code in the kitchen, a sentence to type. It runs all day, not only in sessions, and it can limit Reels and Shorts without blocking the whole app.</p>
+                </div>
+            </div>
+            <p style="margin-top:1.25rem;">Neither approach is better for everyone. If you open Forest and genuinely care about the tree, keep it. If you have learned to let the tree die, a rule that makes you stand up and walk to another room is harder to ignore.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Does Curbox have what you use in Forest?</h2>
+            <div class="board">
+                <div class="q"><span class="q__badge q__badge--yes">Yes</span><span class="q__text"><b>A focus timer that blocks apps</b><span>Focus Mode. Set the length, pick a Focus Group of apps and websites, start. Free.</span></span></div>
+                <div class="q"><span class="q__badge q__badge--yes">Yes</span><span class="q__text"><b>An allowlist during focus</b><span>Choose <strong>Block All Except Selected</strong> for a Focus Group. Forest puts its custom allowlist in Plus; in Curbox it is free.</span></span></div>
+                <div class="q"><span class="q__badge q__badge--yes">Yes</span><span class="q__text"><b>Pomodoro rounds</b><span>Turn on the Pomodoro timer in the group: repeated focus rounds with breaks you set, and sounds at each start and end.</span></span></div>
+                <div class="q"><span class="q__badge q__badge--yes">Yes</span><span class="q__text"><b>Stats and streaks</b><span>Focus Stats shows total sessions, total focus time, average length, completion rate and your day streak, with a weekly chart.</span></span></div>
+                <div class="q"><span class="q__badge q__badge--yes">Yes</span><span class="q__text"><b>Time limits on apps</b><span>App Pause groups with daily allowances, time windows, or a pause on every open, for as many apps as you like.</span></span></div>
+                <div class="q"><span class="q__badge q__badge--part">Partly</span><span class="q__text"><b>Giving up has a cost</b><span>There is no tree to kill. Instead you can turn off quitting mid-session, so a session cannot end early. A failed session shows in your completion rate.</span></span></div>
+                <div class="q"><span class="q__badge q__badge--no">No</span><span class="q__text"><b>Planting with friends</b><span>Curbox has no social features and no accounts. It cannot see anyone else's phone.</span></span></div>
+                <div class="q"><span class="q__badge q__badge--no">No</span><span class="q__text"><b>Real trees and coins</b><span>No rewards system. If supporting a cause is part of why you focus, Forest offers something Curbox does not.</span></span></div>
+                <div class="q"><span class="q__badge q__badge--no">No</span><span class="q__text"><b>iPhone</b><span>Curbox is Android only, plus a browser extension for Chrome and Firefox.</span></span></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Build a Forest-style session in Curbox</h2>
+            <p>If you liked how Forest sessions felt, this recreates the shape of one, minus the tree.</p>
+            <div class="recipe">
+                <div class="recipe__title">The 25-minute seedling</div>
+                <div class="recipe__meta">Focus Mode · about 3 minutes to set up</div>
+                <ol>
+                    <li>Open the <strong>Focus</strong> tab and tap <strong>Create Focus Group</strong>. Name it "Study".</li>
+                    <li>Tap <strong>Select Apps</strong> and choose the few you need, such as a notes app, a dictionary and music.</li>
+                    <li>Set the block mode to <strong>Block All Except Selected</strong>, so every other app is off-limits.</li>
+                    <li>Leave <strong>Let me quit mid-sessions</strong> off. This is your "the tree dies" rule, except the session simply does not end.</li>
+                    <li>Optionally turn on <strong>Turn on do not disturb</strong> and the <strong>Pomodoro timer</strong>, for example four rounds with 5-minute breaks.</li>
+                    <li>Save the group, set the slider to 25 minutes, and confirm.</li>
+                    <li>Afterwards, tap the bar-chart icon by the slider to see the session in <strong>Focus Stats</strong>.</li>
+                </ol>
+            </div>
+            <p style="margin-top:1.25rem;">Want the session to start without opening the app? Write it to an <a href="/nfc-app-blocker/">NFC tag</a> on your desk and tap your phone against it. And to make your evening scrolling cost something too, add a rule like "no Instagram until I have focused for an hour today" with the warning screen's Link to Focus Mode option.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">The scrolling between sessions</h2>
+            <p>Forest is at its best inside a session. The hard part for many people is the rest of the day: the five minutes before a lecture, the bus ride, the hour after dinner that turns into three. A focus timer does nothing there, because you never started one.</p>
+            <p>That is where Curbox's standing rules come in. A <strong>Short-Form Video Content</strong> limit stops Reels and Shorts after a number of videos you choose, counted across Instagram, YouTube and Facebook together. A <strong>Usage Based</strong> App Pause group gives a social app 30 minutes a day and no more. A <strong>Mindful Messages</strong> overlay can show how long you have been in an app right now. None of these need you to remember to press start.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">When Forest is the better pick</h2>
+            <ul>
+                <li>A visible reward keeps you going, and you do care whether the tree lives.</li>
+                <li>You study with friends and like the shared forest.</li>
+                <li>Planting real trees is part of what motivates you.</li>
+                <li>You use an iPhone or iPad.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Forest app alternative FAQ</h2>
+                <details class="faq__item">
+                    <summary>Is Forest free on Android?</summary>
+                    <div class="faq__a"><p>Forest's core focus features are free, with occasional ads outside sessions. Forest Plus is a paid subscription whose price varies by region and platform.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>What is a good Forest app alternative for Android?</summary>
+                    <div class="faq__a"><p>If you want blocking that works all day, not only during sessions, Curbox is a free, open source option. It has focus sessions with an allowlist, plus daily app limits, Reels and Shorts limits and unlock challenges.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Does Curbox grow trees or give rewards?</summary>
+                    <div class="faq__a"><p>No. Curbox has no trees, coins or badges. It tracks your focus sessions, completion rate and day streak, and relies on friction rather than rewards.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Can I stop myself from quitting a session early?</summary>
+                    <div class="faq__a"><p>Yes. Leave "Let me quit mid-sessions" off in the Focus Group, and the session cannot be ended before the timer runs out.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Is there an allowlist mode like Forest's?</summary>
+                    <div class="faq__a"><p>Yes, and it is free. Pick Block All Except Selected when you create a Focus Group, and only the apps you chose stay available during the session.</p></div>
+                </details>
+                <details class="faq__item">
+                    <summary>Does Curbox work with friends like Plant Together?</summary>
+                    <div class="faq__a"><p>No. Curbox has no accounts or social features, and the Android app has no internet access, so it cannot connect to other people's phones.</p></div>
+                </details>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Try Curbox</h2>
+            <p>Free, open source and about a 3 MB download. Start with one focus group and see how it feels.</p>
+            <div class="cta-row">
+                <a class="cta" href="/download.html">Download Curbox</a>
+                <a class="cta cta--ghost" href="/comparison.html">Compare blockers</a>
+            </div>
+            <p class="label">Related</p>
+            <div class="related">
+                <a href="/alternatives/opal/">Opal alternative</a>
+                <a href="/alternatives/freedom/">Freedom alternative</a>
+                <a href="/alternatives/one-sec/">one sec alternative</a>
+                <a href="/pomodoro-app-blocker/">Pomodoro app blocker</a>
+                <a href="/app-blocker-for-studying/">App blocker for studying</a>
+                <a href="/block-all-apps-except/">Block all apps except</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title">Sources</h2>
+            <p>Checked November 2026.</p>
+            <ul class="sources">
+                <li><a href="https://www.forestapp.cc/" target="_blank" rel="noopener noreferrer">Forest homepage and FAQ</a>: platforms, free and Plus features, ads, Trees for the Future, Plant Together, Pro discontinued</li>
+                <li><a href="/docs/focus/focus-mode/">Curbox Focus Mode guide</a>, <a href="/features.html">Curbox features</a></li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

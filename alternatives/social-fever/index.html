@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Social Fever Alternative for Android · Curbox</title>
+    <meta
+      name="description"
+      content="Looking for a Social Fever alternative? Curbox keeps the usage tracking and adds real app limits, Reels caps and unlock challenges. Free and open source."
+    >
+    <link rel="canonical" href="https://curbox.app/alternatives/social-fever/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Curbox">
+    <meta property="og:title" content="A Social Fever alternative that does more than keep count">
+    <meta property="og:description" content="Looking for a Social Fever alternative? Curbox keeps the usage tracking and adds real app limits, Reels caps and unlock challenges. Free and open source.">
+    <meta property="og:url" content="https://curbox.app/alternatives/social-fever/">
+    <meta property="og:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Social Fever alternative that does more than keep count">
+    <meta name="twitter:description" content="Looking for a Social Fever alternative? Curbox keeps the usage tracking and adds real app limits, Reels caps and unlock challenges. Free and open source.">
+    <meta name="twitter:image" content="https://curbox.app/icons/android-chrome-512x512.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/content.css">
+
+    <style>
+      .page--sf { max-width: 60rem; }
+      .page--sf .lead { max-width: 40rem; }
+      .page--sf .narrow { max-width: var(--measure); }
+
+      .spectrum { margin-top: 1.75rem; }
+      .spectrum__scale {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .spectrum__scale span { padding: 0 0 0.6rem 0.75rem; border-left: 1px solid var(--line); }
+      .spectrum__bar {
+        height: 6px;
+        border-radius: 99px;
+        background: linear-gradient(90deg, #333 0%, #777 40%, #bbb 70%, var(--fg) 100%);
+      }
+      .lane { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 1.25rem; }
+      .lane__name {
+        grid-column: 1 / -1;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.05rem;
+        margin-bottom: 0.5rem;
+      }
+      .lane__cell { padding: 0 0.75rem; border-left: 1px solid var(--line); min-height: 3rem; }
+      .chip {
+        display: inline-block;
+        margin: 0 0.3rem 0.4rem 0;
+        padding: 0.25rem 0.55rem;
+        border-radius: 6px;
+        font-size: 0.78rem;
+        line-height: 1.3;
+        background: #141414;
+        border: 1px solid var(--line);
+      }
+      .lane--curbox .chip { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+      .lane__empty { font-family: var(--font-mono); font-size: 0.7rem; color: #555; }
+      .spectrum__note { margin-top: 1rem; font-size: 0.88rem; color: var(--muted); max-width: var(--measure); }
+
+      .swap { margin-top: 1.5rem; border-top: 1px solid var(--line); }
+      .swap__row {
+        display: grid;
+        grid-template-columns: 1fr 2.2rem 1fr;
+        gap: 0.75rem;
+        align-items: start;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .swap__row h3 { font-family: var(--font-display); font-size: 1rem; line-height: 1.25; }
+      .swap__row p { font-size: 0.9rem; color: var(--muted); margin-top: 0.25rem; }
+      .swap__arrow { font-family: var(--font-mono); color: var(--muted); text-align: center; padding-top: 0.1rem; }
+      .swap__row--none h3:last-of-type { color: var(--muted); }
+
+      .steps { counter-reset: s; list-style: none; margin-top: 1rem; }
+      .steps li { counter-increment: s; position: relative; padding: 0 0 1.1rem 2.75rem; }
+      .steps li::before {
+        content: counter(s, decimal-leading-zero);
+        position: absolute; left: 0; top: 0.1rem;
+        font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted);
+      }
+
+      .fair { margin-top: 1rem; padding: 1.25rem 1.4rem; border: 1px dashed #555; border-radius: 12px; }
+      .fair ul { margin-top: 0.5rem; }
+
+      @media (max-width: 40rem) {
+        .spectrum__scale, .lane { grid-template-columns: repeat(2, 1fr); }
+        .spectrum__scale span:nth-child(n+3) { display: none; }
+        .spectrum__bar { display: none; }
+        .lane__cell { padding: 0.4rem 0.6rem 0.6rem; border-top: 1px solid var(--line); }
+        .lane__cell::before {
+          display: block; margin-bottom: 0.35rem;
+          font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+        }
+        .lane__cell:nth-child(2)::before { content: 'Notice'; }
+        .lane__cell:nth-child(3)::before { content: 'Nudge'; }
+        .lane__cell:nth-child(4)::before { content: 'Slow down'; }
+        .lane__cell:nth-child(5)::before { content: 'Stop'; }
+        .spectrum__scale { display: none; }
+        .swap__row { grid-template-columns: 1fr; gap: 0.2rem; }
+        .swap__arrow { text-align: left; transform: rotate(90deg); width: 1rem; }
+      }
+
+      .faq details { border-top: 1px solid var(--line); padding: 1rem 0; }
+      .faq details:last-child { border-bottom: 1px solid var(--line); }
+      .faq summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.3; list-style: none; }
+      .faq summary::-webkit-details-marker { display: none; }
+      .faq summary::after { content: '+'; float: right; margin-left: 1rem; font-family: var(--font-mono); color: var(--muted); }
+      .faq details[open] summary::after { content: '-'; }
+      .faq details p { margin-top: 0.6rem; color: var(--muted); }
+      .sources li { font-size: 0.9rem; color: var(--muted); }
+      .related { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+      .related a { padding: 0.5rem 0.9rem; border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-mono); font-size: 0.75rem; text-decoration: none !important; }
+      .related a:hover { border-color: var(--fg); }
+    </style>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "headline": "A Social Fever alternative that does more than keep count", "description": "Looking for a Social Fever alternative? Curbox keeps the usage tracking and adds real app limits, Reels caps and unlock challenges. Free and open source.", "datePublished": "2026-11-22", "dateModified": "2026-11-22", "mainEntityOfPage": "https://curbox.app/alternatives/social-fever/", "author": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/"}, "publisher": {"@type": "Organization", "name": "Curbox", "url": "https://curbox.app/", "logo": {"@type": "ImageObject", "url": "https://curbox.app/icons/android-chrome-512x512.png"}}, "image": "https://curbox.app/icons/android-chrome-512x512.png"}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is there a free Social Fever alternative for Android?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Curbox is free and open source under the GPL v3, with no subscription and no paid tier. It tracks app usage like Social Fever does, and adds limits that actually block an app when you reach them."}}, {"@type": "Question", "name": "Does Curbox have water intake reminders like Social Fever?", "acceptedAnswer": {"@type": "Answer", "text": "Not a water log. The closest feature is Sip &amp; Stretch: after a set amount of use in the apps you choose, Curbox blocks apps for a short break so you can drink water and move. It enforces the break rather than logging glasses."}}, {"@type": "Question", "name": "Can Curbox just track my usage without blocking anything?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. You can install it, grant the permissions and only use the Usage tab, the Screentime widget and the Reels counter. Nothing is blocked until you set up a limit."}}, {"@type": "Question", "name": "Does Curbox send my usage data anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. The Android app has no internet permission in any variant, so your usage history stays on your phone. There is no account to create."}}, {"@type": "Question", "name": "Can I keep my Social Fever history when I switch?", "acceptedAnswer": {"@type": "Answer", "text": "Not directly. Curbox starts counting from the day you install it. If you want a record of your old numbers, note them down or export what Social Fever offers before you uninstall it."}}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Alternatives", "item": "https://curbox.app/alternatives/"}, {"@type": "ListItem", "position": 3, "name": "Social Fever alternative", "item": "https://curbox.app/alternatives/social-fever/"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Curbox", "operatingSystem": "Android", "applicationCategory": "LifestyleApplication", "url": "https://curbox.app/download.html", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    </script>
+
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Sn Cn init Hn Un Gn Yi zn Kn qn capture Vn kn calculateEventProperties es register register_once register_for_session unregister unregister_for_session os Bn ss getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset us shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rs Xn createPersonProfile is_capturing clear_opt_in_out_capturing Jn debug tr At getPageViewId captureTraceFeedback captureTraceMetric Ln".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_CoWQ2X7F68VxjSBEPr888kvU23pydNvcaMt7aLFz5uub', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only'
+      })
+    </script>
+</head>
+<body>
+
+    <main class="page page--sf">
+        <nav class="page__nav">
+            <a class="page__wordmark" href="/">Curbox</a>
+            <a class="page__back" href="/alternatives/">← All alternatives</a>
+        </nav>
+
+        <header>
+            <span class="kicker">Alternatives · Social Fever</span>
+            <h1 class="page__title">A Social Fever alternative that does more than keep count.</h1>
+            <p class="lead">Social Fever, made by Systweak, is an Android app that tracks how long you spend on your phone and nudges you with alerts, reports and healthy-habit reminders. If you are looking for a Social Fever alternative, it is usually because counting was not enough. This page shows where Curbox goes further, what you would give up, and how to move your setup across.</p>
+        </header>
+
+        <section class="section narrow">
+            <h2 class="section__title">What Social Fever does</h2>
+            <p>Systweak describes Social Fever as an app to "break phone addiction by monitoring phone usage". Its product page lists real-time app usage tracking, a "quality time" profile to restrict phone use, alerts and weekly reports, warnings when you look at the screen or listen to music for a long time, a water intake tracker with reminders, and a place to add hobbies you want to spend more time on. It runs on Android 4.0 and up.</p>
+            <p>That is a gentle, awareness-first approach, and for some people it is exactly right. The product page talks about alerts and reports. It does not describe blocking an app outright, blocking only part of an app such as Reels, or making you do anything before you can carry on.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section__title narrow">From noticing to stopping: where each app sits</h2>
+            <p class="narrow">Screen time tools sit somewhere on a scale. At one end they help you notice. At the other end they stop you. Most people who outgrow a tracker need something further along that scale, but not always all the way to a hard block.</p>
+            <div class="spectrum" role="group" aria-label="Notice, nudge, slow down and stop, compared for Social Fever and Curbox">
+                <div class="spectrum__scale" aria-hidden="true"><span>Notice</span><span>Nudge</span><span>Slow down</span><span>Stop</span></div>
+                <div class="spectrum__bar" aria-hidden="true"></div>
+                <div class="lane">
+                    <div class="lane__name">Social Fever</div>
+                    <div class="lane__cell"><span class="chip">App usage</span><span class="chip">Weekly reports</span></div>
+                    <div class="lane__cell"><span class="chip">Alerts</span><span class="chip">Water reminders</span><span class="chip">Long-use warnings</span></div>
+                    <div class="lane__cell"><span class="lane__empty">Not described</span></div>
+                    <div class="lane__cell"><span class="chip">Quality time profile</span></div>
+                </div>
+                <div class="lane lane--curbox">
+                    <div class="lane__name">Curbox</div>
+                    <div class="lane__cell"><span class="chip">Usage tab</span><span class="chip">Website stats</span><span class="chip">Reels counter</span><span class="chip">Heatmap</span><span class="chip">Widgets</span></div>
+                    <div class="lane__cell"><span class="chip">Mindful Messages</span><span class="chip">Grayscale</span><span class="chip">Scheduled Notifications</span></div>
+                    <div class="lane__cell"><span class="chip">Delay timer</span><span class="chip">QR / NFC unlock</span><span class="chip">Type a sentence</span><span class="chip">Adaptive math</span><span class="chip">Urge Surfing</span></div>
+                    <div class="lane__cell"><span class="chip">App Pause</span><span class="chip">Reels / Shorts limits</span><span class="chip">Focus Mode</span><span class="chip">Never Unlock</span></div>
+                </div>
+            </div>
+            <p class="spectrum__note">Social Fever's quality time profile is placed under "Stop" because Systweak says it can "restrict phone usage". Its page does not say how strict that restriction is, so try it yourself if that is the feature you rely on.</p>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Why people look for a Social Fever alternative</h2>
+            <p>The pattern is familiar. A tracker shows you a number, the number is bigger than you hoped, and an alert pops up while you are already deep in a feed. You dismiss it. Awareness is a real first step, but alerts compete with the very app that is holding your attention, and the app usually wins.</p>
+            <p>What tends to help next is friction at the moment of the tap: a pause screen, a short wait, a code you have to walk to, or a daily cap that ends the session for you. That is the part Curbox is built around. You decide in a calm moment how hard getting past a limit should be, and the pause screen holds you to it later.</p>
+            <p>The other common reason is short-form video. If the hours are going to Reels or Shorts rather than to Instagram or YouTube as a whole, a per-app timer is too blunt. Curbox can <a href="/block-instagram-reels/">limit Reels and Shorts</a> by time or by number of videos, counted across Instagram, YouTube and Facebook together, while messages and the rest of each app keep working.</p>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Social Fever features, and their Curbox equivalents</h2>
+            <div class="swap">
+                <div class="swap__row">
+                    <div><h3>Real-time app usage</h3><p>Time spent in each app.</p></div>
+                    <div class="swap__arrow" aria-hidden="true">→</div>
+                    <div><h3>Usage tab</h3><p>Total today, a weekly chart, per-app times, and which websites you visited in supported browsers.</p></div>
+                </div>
+                <div class="swap__row">
+                    <div><h3>Weekly reports</h3><p>A summary of the week.</p></div>
+                    <div class="swap__arrow" aria-hidden="true">→</div>
+                    <div><h3>Weekly view and CSV export</h3><p>Browse past weeks, see a heatmap of when you use your phone most, or export a daily breakdown to a spreadsheet.</p></div>
+                </div>
+                <div class="swap__row">
+                    <div><h3>Usage alerts</h3><p>A warning when you have used an app a lot.</p></div>
+                    <div class="swap__arrow" aria-hidden="true">→</div>
+                    <div><h3>Mindful Messages or App Pause</h3><p>A message overlaid on the app with live numbers like <code>{app_usage_today}</code>, or a daily limit that shows the pause screen.</p></div>
+                </div>
+                <div class="swap__row">
+                    <div><h3>Quality time profile</h3><p>Restricting phone use for a period.</p></div>
+                    <div class="swap__arrow" aria-hidden="true">→</div>
+                    <div><h3>Focus Mode and Auto DND</h3><p>A timed session that blocks a group of apps, optionally with Do Not Disturb, or DND on a schedule.</p></div>
+                </div>
+                <div class="swap__row">
+                    <div><h3>Water intake reminders</h3><p>Reminders to drink water.</p></div>
+                    <div class="swap__arrow" aria-hidden="true">→</div>
+                    <div><h3>Sip &amp; Stretch</h3><p>After a set amount of use, apps are blocked for a short break to drink water and move. No water log.</p></div>
+                </div>
+                <div class="swap__row swap__row--none">
+                    <div><h3>Hobbies</h3><p>A list of things to do instead.</p></div>
+                    <div class="swap__arrow" aria-hidden="true">→</div>
+                    <div><h3>No direct equivalent</h3><p>The nearest idea is State Your Intent on the pause screen, which asks what you planned to do before you continue.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Moving your setup to Curbox</h2>
+            <p>Plan on about fifteen minutes. Get the app from the <a href="/download.html">downloads page</a> first.</p>
+            <ol class="steps">
+                <li>Finish onboarding. Curbox asks for Screen Overlay, Notifications and the App Blocker accessibility service. Usage tracking starts as soon as the service is on.</li>
+                <li>Spend a day or two only watching. Open the <strong>Usage</strong> tab and pin the <strong>Screentime Widget</strong> from the three-dot menu so the number is on your home screen.</li>
+                <li>Replace your alert with a message. Go to <strong>Reducers → Gentle Prompts</strong>, turn on Mindful Messages, select your heaviest app and write something like <code>{app_usage_today} in here today. Still worth it?</code></li>
+                <li>When you are ready for a limit, go to <strong>Reducers → Apps</strong>, tap <strong>+</strong>, select the app and choose <strong>Usage Based</strong> with a daily allowance.</li>
+                <li>Tap <strong>Configure Warning Screen</strong>. A short delay timer, or <strong>Type a Sentence</strong>, is a good middle ground between an alert and a hard lock.</li>
+                <li>If you used Social Fever's water reminders, turn on <strong>Sip &amp; Stretch</strong> under Reducers and pick a break length.</li>
+            </ol>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">When Social Fever is the better pick</h2>
+            <div class="fair">
+                <p>Stay with Social Fever if:</p>
+                <ul>
+                    <li>You want a light tracker with healthy-habit extras, such as logging water and listing hobbies, and you do not want anything blocked.</li>
+                    <li>Alerts and a weekly report are already changing how you use your phone. If it works, there is no reason to add friction.</li>
+                    <li>You like having health-style reminders, such as long-screen and long-listening warnings, in the same app as your usage numbers.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Questions people ask</h2>
+            <div class="faq">
+                <details>
+                    <summary>Is there a free Social Fever alternative for Android?</summary>
+                    <p>Yes. Curbox is free and open source under the GPL v3, with no subscription and no paid tier. It tracks app usage like Social Fever does, and adds limits that actually block an app when you reach them.</p>
+                </details>
+                <details>
+                    <summary>Does Curbox have water intake reminders like Social Fever?</summary>
+                    <p>Not a water log. The closest feature is Sip &amp; Stretch: after a set amount of use in the apps you choose, Curbox blocks apps for a short break so you can drink water and move. It enforces the break rather than logging glasses.</p>
+                </details>
+                <details>
+                    <summary>Can Curbox just track my usage without blocking anything?</summary>
+                    <p>Yes. You can install it, grant the permissions and only use the Usage tab, the Screentime widget and the Reels counter. Nothing is blocked until you set up a limit.</p>
+                </details>
+                <details>
+                    <summary>Does Curbox send my usage data anywhere?</summary>
+                    <p>No. The Android app has no internet permission in any variant, so your usage history stays on your phone. There is no account to create.</p>
+                </details>
+                <details>
+                    <summary>Can I keep my Social Fever history when I switch?</summary>
+                    <p>Not directly. Curbox starts counting from the day you install it. If you want a record of your old numbers, note them down or export what Social Fever offers before you uninstall it.</p>
+                </details>
+            </div>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Sources (checked November 2026)</h2>
+            <ul class="sources">
+                <li><a href="https://www.systweak.com/social-fever" target="_blank" rel="noopener noreferrer">Systweak Social Fever product page</a>: features, Android 4.0 and up. Pricing, ads and account requirements were not stated there.</li>
+                <li>Curbox: <a href="/features.html">features</a>, <a href="/docs/usage/usage-stats/">usage stats docs</a>, <a href="/docs/reducers/mindful-messages/">Mindful Messages docs</a> and the <a href="/privacy.html">privacy policy</a>.</li>
+            </ul>
+        </section>
+
+        <section class="section narrow">
+            <h2 class="section__title">Related</h2>
+            <div class="related">
+                <a href="/comparison.html">Feature table</a>
+                <a href="/alternatives/stayfree/">StayFree alternative</a>
+                <a href="/alternatives/actiondash/">ActionDash alternative</a>
+                <a href="/alternatives/digital-wellbeing/">Digital Wellbeing alternative</a>
+                <a href="/alternatives/yourhour/">YourHour alternative</a>
+                <a href="/screen-time-tracker-android/">Screen time tracker</a>
+                <a href="/mindful-reminder-when-opening-apps/">Mindful reminders</a>
+                <a href="/break-reminder-app-android/">Break reminders</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
