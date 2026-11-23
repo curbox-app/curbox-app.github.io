@@ -21,7 +21,9 @@
         "wellKnown": "https://curbox.app/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
-        "url": "https://github.com/curbox-app/curbox-android"
+        "url": "https://github.com/curbox-app/curbox-android",
+        "wellKnown": "https://github.com/curbox-app/curbox-android/blob/kt-rewrite/.well-known/funding-manifest-urls"
+
       },
       "licenses": [
         "spdx:GPL-3.0-or-later"
@@ -45,7 +47,9 @@
         "wellKnown": "https://curbox.app/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
-        "url": "https://github.com/curbox-app/curbox-extension"
+        "url": "https://github.com/curbox-app/curbox-extension",
+        "wellKnown": "https://github.com/curbox-app/curbox-extension/blob/main/.well-known/funding-manifest-urls"
+
       },
       "licenses": [
         "spdx:GPL-3.0-or-later"
