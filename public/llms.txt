@@ -149,3 +149,7 @@ Recent releases added these features. Dedicated docs pages are still being writt
 - [Donate](https://curbox.app/donate.html): Support the project via Patreon, GitHub Sponsors, PayPal, UPI, or crypto.
 - [Contribute](https://github.com/curbox-app/curbox-android): How to translate, report bugs, write code, or otherwise help.
 - [Source code on GitHub](https://github.com/curbox-app/curbox-android): The complete, auditable source (GNU GPL v3).
+
+## Screen addiction guides
+
+- Screen addiction hub: https://curbox.app/screen-addiction/ (50 plain-language guides on phone addiction signs, causes, effects on sleep and mood, and how to reduce screen time)
