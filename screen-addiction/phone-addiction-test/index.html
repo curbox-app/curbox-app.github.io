@@ -124,6 +124,8 @@
       .section p + p { margin-top: 1rem; }
       .section ul, .section ol { padding-left: 1.25rem; margin-top: 0.9rem; }
       .section li { margin-top: 0.45rem; }
+      .section ol > li { padding-left: 0.2rem; }
+      .section ol > li::before { content: none; }
       .section h3 { font-family: var(--font-display); font-size: 1.2rem; margin: 1.6rem 0 0.6rem; }
       .note { margin-top: 1.25rem; padding: 1rem 1.1rem; border: 1px solid var(--line); border-left: 2px solid var(--fg); border-radius: 10px; color: var(--muted); font-size: 0.95rem; }
       .note strong { color: var(--fg); }
@@ -139,6 +141,51 @@
       .related a:hover { border-color: var(--fg); }
       .test li { margin-top: 0.7rem; }
       .score { margin-top: 1rem; border: 1px solid var(--line); border-radius: 10px; padding: 0.2rem 1.1rem 1rem; }
+      .quiz, .result { margin-top: 1.5rem; border: 1px solid var(--line); border-radius: 14px; padding: clamp(1.1rem, 4vw, 1.75rem); }
+      .quiz[hidden], .result[hidden], [hidden] { display: none !important; }
+      .quiz__top { display: flex; justify-content: space-between; align-items: center; }
+      .quiz__count, .result__kicker { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+      .quiz__back { background: none; border: 0; color: var(--muted); font-family: var(--font-mono); font-size: 0.78rem; cursor: pointer; padding: 0.3rem 0; }
+      .quiz__back:hover { color: var(--fg); }
+      .quiz__back:disabled { visibility: hidden; }
+      .quiz__bar { height: 2px; background: var(--line); margin: 0.8rem 0 1.6rem; overflow: hidden; }
+      .quiz__bar span { display: block; height: 100%; width: 0; background: var(--fg); transition: width 0.3s ease; }
+      .quiz__ask { color: var(--muted); font-size: 0.9rem; }
+      .quiz__q { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.35rem, 1.1rem + 1.2vw, 1.9rem); line-height: 1.2; letter-spacing: -0.015em; margin-top: 0.4rem !important; min-height: 4.6em; }
+      .quiz__q.is-in { animation: qin 0.28s ease; }
+      @keyframes qin { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+      .quiz__opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-top: 1.25rem; }
+      .quiz__opt { position: relative; text-align: left; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: 0.9rem 1rem; cursor: pointer; font: inherit; transition: border-color 0.15s ease, background 0.15s ease; }
+      .quiz__opt:focus-visible { border-color: var(--fg); outline: none; }
+      @media (hover: hover) { .quiz__opt:hover { border-color: var(--fg); } }
+      .quiz__opt.is-picked { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+      .quiz__opt.is-picked span, .quiz__opt.is-picked kbd { color: var(--bg); }
+      .quiz__opt b { display: block; font-family: var(--font-display); font-size: 1.05rem; }
+      .quiz__opt span { display: block; color: var(--muted); font-size: 0.85rem; margin-top: 0.15rem; }
+      .quiz__opt kbd { position: absolute; top: 0.6rem; right: 0.7rem; font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); }
+      .result__score { font-family: var(--font-display); font-weight: 800; font-size: clamp(3.2rem, 2.5rem + 3vw, 4.8rem); line-height: 1; margin-top: 0.4rem !important; }
+      .result__score small { font-size: 0.35em; color: var(--muted); font-weight: 400; }
+      .result__meter { position: relative; display: grid; grid-template-columns: 9fr 9fr 13fr; gap: 3px; margin-top: 1.25rem; }
+      .result__meter span { height: 6px; background: var(--line); border-radius: 3px; }
+      .result__meter span.is-on { background: var(--fg); }
+      .result__meter i { position: absolute; top: -5px; width: 2px; height: 16px; background: var(--fg); transform: translateX(-1px); transition: left 0.6s ease; }
+      .result__legend { display: grid; grid-template-columns: 9fr 9fr 13fr 0; font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); margin-top: 0.35rem; }
+      .result:focus { outline: none; }
+      .result__band { font-size: 1.5rem !important; margin-top: 1.4rem !important; }
+      .result__prev { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+      .result__areas li { margin-top: 0.8rem; }
+      .result__areas small { display: block; color: var(--muted); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; }
+      .result__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 0.5rem; }
+      .quiz__restart { margin-top: 1.5rem; padding: 0.85rem 1.5rem; border-radius: 999px; background: none; color: var(--fg); border: 1px solid var(--line); font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; }
+      .quiz__restart:hover { border-color: var(--fg); }
+      .result__fine { margin-top: 1rem !important; color: var(--muted); font-size: 0.85rem; }
+      .js-quiz .quiz-nojs { display: none; }
+      .allq { margin-top: 1.5rem; }
+      .js-quiz .allq summary { cursor: pointer; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+      .allq summary { list-style: none; }
+      .allq summary::-webkit-details-marker { display: none; }
+      .allq:not(.js) summary { display: none; }
+      @media (max-width: 34rem) { .quiz__opts { grid-template-columns: 1fr; } .quiz__opt kbd { display: none; } .quiz__q { min-height: 0; } }
     </style>
     <script type="application/ld+json">
     {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://curbox.app/"}, {"@type": "ListItem", "position": 2, "name": "Screen addiction", "item": "https://curbox.app/screen-addiction/"}, {"@type": "ListItem", "position": 3, "name": "Phone addiction test: a free 15-question self-check", "item": "https://curbox.app/screen-addiction/phone-addiction-test/"}]}
@@ -155,7 +202,7 @@
         <header>
             <span class="kicker">Screen addiction · Self-check</span>
             <h1 class="page__title">Phone addiction test: a 15-question self-check</h1>
-            <p class="lead">This phone addiction test is a short self-check with 15 statements. You score each one from 0 to 2, add up the points, and read what your total means. It takes about three minutes and you only need a pen or your memory.</p>
+            <p class="lead">This phone addiction test is a short self-check with 15 statements. You score each one from 0 to 2, add up the points, and read what your total means. Tap an answer for each statement. You get your score and a plan at the end. It takes about three minutes.</p>
         </header>
 
         <section class="section">
@@ -170,10 +217,46 @@
             </ul>
         </section>
 
-        <section class="section">
-            <h2 class="section__title">The 15 statements</h2>
-            <p>Read each statement. Write down 0, 1 or 2.</p>
-            <ol class="test">
+        <section class="section" id="test">
+            <h2 class="section__title">Take the phone addiction test</h2>
+            <p class="quiz-nojs">Read each statement. Write down 0, 1 or 2. Then add up your points. The lowest possible total is 0 and the highest is 30.</p>
+            <div class="quiz" id="quiz" hidden>
+                <div class="quiz__top">
+                    <span class="quiz__count" id="quiz-count">01 / 15</span>
+                    <button type="button" class="quiz__back" id="quiz-back">← Back</button>
+                </div>
+                <div class="quiz__bar" aria-hidden="true"><span id="quiz-bar"></span></div>
+                <p class="quiz__ask">In the last two weeks:</p>
+                <p class="quiz__q" id="quiz-q" aria-live="polite"></p>
+                <div class="quiz__opts" role="group" aria-label="How often?">
+                    <button type="button" class="quiz__opt" data-v="0"><b>Never</b><span>or almost never</span><kbd>1</kbd></button>
+                    <button type="button" class="quiz__opt" data-v="1"><b>Sometimes</b><span>a few times a week</span><kbd>2</kbd></button>
+                    <button type="button" class="quiz__opt" data-v="2"><b>Often</b><span>most days</span><kbd>3</kbd></button>
+                </div>
+            </div>
+            <div class="result" id="result" hidden tabindex="-1">
+                <span class="result__kicker">Your score</span>
+                <p class="result__score"><span id="r-score">0</span><small> / 30</small></p>
+                <div class="result__meter" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                    <i id="r-mark"></i>
+                </div>
+                <div class="result__legend" aria-hidden="true"><span>0</span><span>8</span><span>17</span><span>30</span></div>
+                <h3 class="result__band" id="r-band"></h3>
+                <p id="r-text"></p>
+                <p class="result__prev" id="r-prev" hidden></p>
+                <p class="note" id="r-safety" hidden><strong>Safety first.</strong> You use your phone when you drive, walk or cross the street. Change that habit before anything else. Put the phone out of reach or turn on a driving mode before you drive.</p>
+                <h3>Where to start</h3>
+                <ol class="result__areas" id="r-areas"></ol>
+                <div class="result__actions">
+                    <button type="button" class="quiz__restart" id="quiz-restart">Take the test again</button>
+                    <a class="ds-cta" href="/download.html">Get Curbox for free</a>
+                </div>
+                <p class="result__fine">Your answers stay in your browser. Nobody else sees them.</p>
+            </div>
+            <details class="allq" id="allq" open>
+                <summary>See all 15 statements</summary>
+                <ol class="test">
                 <li>I use my phone for longer than I planned.</li>
                 <li>I pick up my phone without a reason.</li>
                 <li>I check my phone within a few minutes of waking up.</li>
@@ -190,7 +273,7 @@
                 <li>I feel a strong urge to respond to every notification at once.</li>
                 <li>I use my phone instead of things I used to enjoy, such as hobbies, sport or reading.</li>
             </ol>
-            <p>Now add up your points. The lowest possible total is 0 and the highest is 30.</p>
+            </details>
         </section>
 
         <section class="section">
@@ -221,7 +304,7 @@
 
         <section class="section">
             <h2 class="section__title">Take the test again later</h2>
-            <p>A single score tells you where you are today. Two scores tell you if your changes work. Write down your total and the date.</p>
+            <p>A single score tells you where you are today. Two scores tell you if your changes work. This page remembers your last score in your browser, so you can compare the next time.</p>
             <ol>
                 <li>Choose one or two changes based on your high-scoring statements.</li>
                 <li>Keep the changes for two weeks.</li>
@@ -292,5 +375,123 @@
         </aside>
     </main>
 
+    <script>
+      (function () {
+        var list = document.querySelectorAll('#test .test li');
+        var qs = Array.prototype.map.call(list, function (li) { return li.textContent.trim(); });
+        if (!qs.length) return;
+        var $ = function (id) { return document.getElementById(id); }, $id = $;
+        document.documentElement.classList.add('js-quiz');
+        var allq = $id('allq'); allq.classList.add('js'); allq.removeAttribute('open');
+        
+        var quiz = $('quiz'), result = $('result'), qEl = $('quiz-q'), back = $('quiz-back');
+        var opts = quiz.querySelectorAll('.quiz__opt');
+        var answers = [], i = 0, locked = false;
+
+        var bands = [
+          { max: 8, title: 'Mostly in control', text: 'Your phone use seems to fit your life. You may still have one or two habits that you want to change, such as phone use in bed. Pick one and work on it.' },
+          { max: 17, title: 'Some loss of control', text: 'The phone takes more of your time and attention than you want. Small changes in your setup can make a large difference. Start with notifications and one app limit.' },
+          { max: 30, title: 'Strong loss of control', text: 'Your phone use probably affects your sleep, mood, work or relationships. This does not mean something is wrong with you. Apps are designed to hold attention. It is time for a clear plan, and maybe for support from other people.' }
+        ];
+        var areas = [
+          { name: 'Control', q: [1, 6, 12], tip: 'Hard limits and timers help most.', href: '/screen-addiction/how-to-break-phone-addiction/', link: 'How to break phone addiction' },
+          { name: 'Checking', q: [2, 3, 14], tip: 'Fewer notifications and a pause before apps open help most.', href: '/screen-addiction/compulsive-phone-checking/', link: 'Compulsive phone checking' },
+          { name: 'Mood', q: [5, 7, 11], tip: 'Learn which feelings send you to the phone.', href: '/screen-addiction/phone-addiction-and-anxiety/', link: 'Phone addiction and anxiety' },
+          { name: 'Sleep and safety', q: [4, 13], tip: 'Set fixed phone-free times, such as at night and when you drive.', href: '/screen-addiction/stop-using-phone-in-bed/', link: 'Stop using your phone in bed' },
+          { name: 'Life impact', q: [8, 9, 10, 15], tip: 'Talk with the people around you and agree on phone-free times together.', href: '/screen-addiction/phone-addiction-and-relationships/', link: 'Phone addiction in relationships' }
+        ];
+
+        function pad(n) { return (n < 10 ? '0' : '') + n; }
+        function show() {
+          $('quiz-count').textContent = pad(i + 1) + ' / ' + pad(qs.length);
+          $('quiz-bar').style.width = (i / qs.length * 100) + '%';
+          qEl.textContent = qs[i];
+          qEl.classList.remove('is-in'); void qEl.offsetWidth; qEl.classList.add('is-in');
+          back.disabled = i === 0;
+          opts.forEach(function (b) { b.classList.toggle('is-picked', Number(b.dataset.v) === answers[i]); });
+          locked = false;
+        }
+        function pick(v) {
+          if (locked) return;
+          if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+          locked = true;
+          answers[i] = v;
+          opts.forEach(function (b) { b.classList.toggle('is-picked', Number(b.dataset.v) === v); });
+          setTimeout(function () {
+            if (i < qs.length - 1) { i++; show(); } else { finish(); }
+          }, 220);
+        }
+        function finish() {
+          var total = answers.reduce(function (a, b) { return a + b; }, 0);
+          var band = bands.filter(function (b) { return total <= b.max; })[0];
+          var bi = bands.indexOf(band);
+          $('r-score').textContent = total;
+          $('r-band').textContent = band.title;
+          $('r-text').textContent = band.text;
+          result.querySelectorAll('.result__meter span').forEach(function (el, k) { el.classList.toggle('is-on', k <= bi); });
+          $('r-mark').style.left = (total / 30 * 100) + '%';
+          $('r-safety').hidden = !(answers[12] > 0);
+
+          var ranked = areas.map(function (a) {
+            var pts = a.q.reduce(function (s, n) { return s + answers[n - 1]; }, 0);
+            return { a: a, pts: pts, max: a.q.length * 2 };
+          }).filter(function (r) { return r.pts > 0; })
+            .sort(function (x, y) { return y.pts / y.max - x.pts / x.max; }).slice(0, 3);
+          var ol = $('r-areas');
+          ol.innerHTML = '';
+          if (!ranked.length) {
+            var li0 = document.createElement('li');
+            li0.textContent = 'You scored 0 in every area. Keep your current habits, and take the test again in a few months.';
+            ol.appendChild(li0);
+          }
+          ranked.forEach(function (r) {
+            var li = document.createElement('li');
+            var sm = document.createElement('small');
+            sm.textContent = r.a.name.toUpperCase() + ' · ' + r.pts + ' of ' + r.max + ' points';
+            var a = document.createElement('a');
+            a.href = r.a.href; a.textContent = r.a.link;
+            li.appendChild(sm);
+            li.appendChild(document.createTextNode(r.a.tip + ' Read: '));
+            li.appendChild(a);
+            li.appendChild(document.createTextNode('.'));
+            ol.appendChild(li);
+          });
+
+          var prev = null;
+          try { prev = JSON.parse(localStorage.getItem('curbox-phone-test') || 'null'); } catch (e) {}
+          var pEl = $('r-prev');
+          if (prev && typeof prev.score === 'number') {
+            var diff = total - prev.score;
+            pEl.textContent = 'Last time (' + prev.date + '): ' + prev.score + ' / 30. ' +
+              (diff < 0 ? 'Your score went down by ' + (-diff) + '.' : diff > 0 ? 'Your score went up by ' + diff + '.' : 'Your score did not change.');
+            pEl.hidden = false;
+          } else { pEl.hidden = true; }
+          try { localStorage.setItem('curbox-phone-test', JSON.stringify({ score: total, date: new Date().toISOString().slice(0, 10) })); } catch (e) {}
+          try { window.posthog && posthog.capture('phone_addiction_test_completed', { score: total, band: band.title }); } catch (e) {}
+
+          quiz.hidden = true;
+          result.hidden = false;
+          result.focus({ preventScroll: true });
+          result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        opts.forEach(function (b) { b.addEventListener('click', function () { pick(Number(b.dataset.v)); }); });
+        back.addEventListener('click', function () { if (i > 0) { i--; show(); } });
+        $('quiz-restart').addEventListener('click', function () {
+          answers = []; i = 0; result.hidden = true; quiz.hidden = false; show();
+          quiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        document.addEventListener('keydown', function (e) {
+          if (quiz.hidden || e.metaKey || e.ctrlKey || e.altKey) return;
+          var t = e.target && e.target.tagName;
+          if (t === 'INPUT' || t === 'TEXTAREA') return;
+          if (e.key === '1' || e.key === '2' || e.key === '3') { pick(Number(e.key) - 1); }
+          else if (e.key === 'Backspace' && i > 0) { e.preventDefault(); i--; show(); }
+        });
+
+        quiz.hidden = false;
+        show();
+      })();
+    </script>
 </body>
 </html>
